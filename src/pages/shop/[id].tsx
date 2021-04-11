@@ -220,12 +220,13 @@ export const getStaticPaths: GetStaticPaths = async ctx => {
 
     return {
         paths,
-        fallback: true
+        fallback: false
     }
 }
 
 export const getStaticProps: GetStaticProps = async ctx => {
     const { data: product } = await axios.get('/product/' + ctx.params.id)
+
     return {
         props: {
             product
