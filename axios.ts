@@ -10,7 +10,7 @@ const instance: Axios = axios.create({
 
 })
 
-instance.defaults.baseURL = 'http://localhost:3001'
+instance.defaults.baseURL = process.env.NEXT_BASE_URL
 instance.defaults.headers.common.Accept = 'application/json'
 instance.CancelToken = axios.CancelToken
 instance.isCancel = axios.isCancel
