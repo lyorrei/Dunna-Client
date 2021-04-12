@@ -21,20 +21,19 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps, router }) => {
     return (
         // <Elements stripe={stripePromise}>
         // {/* </Elements> */}
-            <CookiesProvider>
-                <UserProvider>
-                    <CartProvider>
-                        <ThemeProvider theme={theme}>
-                            <Page
-                                Component={Component}
-                                router={router}
-                                pageProps={pageProps}
-                            />
-                            <CookieConsent>This website uses cookies to enhance the user experience.</CookieConsent>
-                        </ThemeProvider>
-                    </CartProvider>
-                </UserProvider>
-            </CookiesProvider>
+        <CookiesProvider>
+            <UserProvider>
+                <CartProvider>
+                    <ThemeProvider theme={theme}>
+                        <Page
+                            Component={Component}
+                            router={router}
+                            pageProps={pageProps}
+                        />
+                    </ThemeProvider>
+                </CartProvider>
+            </UserProvider>
+        </CookiesProvider>
     )
 }
 
