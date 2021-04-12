@@ -2,7 +2,7 @@ const withImages = require('next-images')
 module.exports = withImages({
     esModule: true,
     images: {
-        domains: ['localhost']
+        domains: ['localhost', 'https://dunna.herokuapp.com']
     }
 })
 

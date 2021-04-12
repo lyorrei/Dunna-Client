@@ -109,13 +109,14 @@ const newProduct = ({ stones, shapes }: Props) => {
                     id: createdProduct._id,
                     url: createdProduct.url
                 })
-                router.replace('/products')
+
             } catch (e) {
                 updateFile(uploadedFiles[i].id, {
                     error: true
                 })
             }
         }
+        router.replace('/products')
     }
 
     const handleDelete = async (id: string) => {

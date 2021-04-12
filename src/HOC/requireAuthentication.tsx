@@ -18,6 +18,7 @@ const RequireAuthentication = (WrappedComponent, isAdmin?: boolean) => {
                     let { data } = await axios.get('/users/isadmin', {
                         headers: {
                             Cookie: `token=${token};`
+                            // Cookie: `token=${token};`
                         }
                     })
                     user = data
