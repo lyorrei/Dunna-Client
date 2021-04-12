@@ -6,18 +6,12 @@ export const Title = styled.h3`
     color: ${props => props.theme.colors.greyDark1};
     margin-bottom: 2rem;
 
-    @media only screen and (max-width: 37.5em) {
-        font-size: 3rem;
-    } //600px
 `
 
 export const Text = styled.p`
     font-size: 1.6rem;
     color: ${props => props.theme.colors.greyDark1};
 
-    @media only screen and (max-width: 37.5em) {
-        font-size: 1.5rem;
-    } //600px
 `
 
 export const ButtonsContainer = styled.div`

@@ -18,15 +18,6 @@ export const Container = styled.div`
         cursor: pointer;
         transition: all 0.2s;
 
-        @media only screen and (max-width: 56.25em) {
-            top: -5%;
-        } //900px
-
-        @media only screen and (max-width: 37.5em) {
-            width: 1rem;
-            height: 1.2rem;
-        } //600px
-
         &:hover {
             transform: scale(1.2);
         }
@@ -57,10 +48,6 @@ export const Name = styled.p`
     color: ${props => props.theme.colors.greyDark1};
     font-weight: 700;
     flex: 0 0 50%;
-
-    @media only screen and (max-width: 56.25em) {
-        font-size: 1.4rem;
-    } //900px
 `
 
 export const Price = styled.p`

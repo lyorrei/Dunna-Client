@@ -14,6 +14,7 @@ import product, { ProductInterface } from '../../components/product'
 import FilterProducts from '../../components/filterProducts'
 import { FormHandles } from '@unform/core'
 import withCart from '../../HOC/withCart'
+import { GetStaticProps } from 'next'
 
 const container = {
     hidden: { opacity: 1, scale: 0 },
@@ -143,7 +144,7 @@ const shop: React.FC<Props> = ({
     )
 }
 
-export async function getStaticProps(context) {
+export const getStaticProps: GetStaticProps = async context => {
     const { data: products } = await axios.get('/products')
     const { data: stones } = await axios.get('/stones')
     const { data: shapes } = await axios.get('/shapes')
@@ -152,7 +153,8 @@ export async function getStaticProps(context) {
             products,
             stones,
             shapes
-        } // will be passed to the page component as props
+        }, // will be passed to the page component as props
+        revalidate: 20
     }
 }
 

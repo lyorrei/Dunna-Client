@@ -57,11 +57,6 @@ export const AddressItem = styled.div`
         padding: 0.2rem 0;
         font-family: sans-serif;
 
-        @media only screen and (max-width: 56.25em) {
-            font-size: 1.2rem;
-        } //900px
-
-        
     }
 `
 

@@ -21,10 +21,6 @@ export const Title = styled(motion.h2)`
     font-size: 3.5rem;
     font-weight: 300;
     color: ${props => props.theme.colors.greyDark1};
-
-    @media only screen and (max-width: 37.5em) {
-        font-size: 3rem;
-    } //600px
 `
 
 export const Item = styled(motion.div)`
@@ -61,10 +57,6 @@ export const Item = styled(motion.div)`
         font-size: 3rem;
         margin-bottom: 0.5rem;
         color: ${props => props.theme.colors.greyDark1};
-
-        @media only screen and (max-width: 37.5em) {
-            font-size: 2.4rem;
-        } //600px
     }
 
     p {

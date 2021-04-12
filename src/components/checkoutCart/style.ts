@@ -92,13 +92,6 @@ export const Name = styled.p`
     font-weight: 700;
     flex: 0 0 50%;
 
-    @media only screen and (max-width: 37.5em) {
-        font-size: 1.4rem;
-    } //600px
-
-    @media only screen and (max-width: 25em) {
-        font-size: 1.2rem;
-    } //400px
 `
 
 export const Price = styled.p`
@@ -106,9 +99,6 @@ export const Price = styled.p`
     color: ${props => props.theme.colors.greyDark1};
     font-family: sans-serif;
 
-    @media only screen and (max-width: 37.5em) {
-        font-size: 1.2rem;
-    } //600px
 `
 
 export const Total = styled.p`
@@ -119,9 +109,4 @@ export const Total = styled.p`
     display: flex;
     justify-content: space-between;
     margin-top: 3rem;
-
-    @media only screen and (max-width: 37.5em) {
-        font-size: 1.6rem;
-        margin-top: 2rem;
-    } //600px
 `

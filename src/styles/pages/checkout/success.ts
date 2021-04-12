@@ -30,10 +30,6 @@ export const Title = styled.h2`
         font-size: 3.4rem;
     } //1800px
 
-    @media only screen and (max-width: 56.25em) {
-        font-size: 2.6rem;
-    } //900px
-
     @media only screen and (max-width: 37.5em) {
         margin-bottom: 0;
     } //600px
@@ -45,9 +41,7 @@ export const SubTitle = styled.h3`
     margin-bottom: 3rem;
     margin-top: 4rem;
 
-    @media only screen and (max-width: 56.25em) {
-        font-size: 1.6rem;
-    } //900px
+
 `
 
 export const Total = styled.p`
@@ -67,9 +61,6 @@ export const Total = styled.p`
         color: ${props => props.theme.colors.primaryDark};
         font-weight: 700;
 
-        @media only screen and (max-width: 37.5em) {
-            font-size: 1.6rem;
-        } //600px
     }
 `
 

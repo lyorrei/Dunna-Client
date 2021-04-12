@@ -61,7 +61,7 @@ const navbar: React.FC = () => {
                 </Li>
                 <Li isClicked={clicked} isActive={router.pathname === '/shop'}>
                     <Link href="/shop">
-                        <a>Shop</a>
+                        <a>Loja</a>
                     </Link>
                 </Li>
                 <Li

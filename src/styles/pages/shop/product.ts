@@ -5,12 +5,32 @@ export const Container = styled(motion.div)`
     background-color: ${props => props.theme.colors.white};
     padding: 4rem 12rem;
     min-height: calc(100vh - 6rem);
+
+    @media only screen and (max-width: 112.5em) {
+        padding: 4rem 8rem;
+    } //1800px
+
+    @media only screen and (max-width: 75em) {
+        padding: 4rem 4rem;
+    } //1200px
+
+    @media only screen and (max-width: 56.25em) {
+        padding: 4rem 8rem;
+    } //900px
+
+    @media only screen and (max-width: 37.5em) {
+        padding: 4rem;
+    } //600px
 `
 
 export const GridContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 2rem;
+
+    @media only screen and (max-width: 56.25em) {
+        grid-template-columns: 1fr;
+    } //900px
 `
 
 export const LeftContainer = styled.div`
@@ -18,10 +38,12 @@ export const LeftContainer = styled.div`
 `
 
 export const BigImageContainer = styled(motion.div)`
-    height: 54rem;
     margin-bottom: 3rem;
-    overflow: hidden;
     border-radius: 2rem;
+
+    @media only screen and (max-width: 112.5em) {
+        margin-bottom: 1.5rem;
+    } //1800px
 `
 
 interface SmallImageContainerProps {
@@ -31,8 +53,11 @@ interface SmallImageContainerProps {
 export const SmallImageContainer = styled(motion.div)<SmallImageContainerProps>`
     display: grid;
     grid-template-columns: repeat(${props => props.imagesNumber}, 1fr);
-    height: 20rem;
     grid-gap: 3rem;
+
+    @media only screen and (max-width: 112.5em) {
+        grid-gap: 1.5rem;
+    } //1800px
 `
 
 export const Img = styled.img`
@@ -47,7 +72,7 @@ interface SelectableImageProps {
 }
 
 export const SelectableImage = styled(Img)<SelectableImageProps>`
-    height: 18rem;
+    height: 100%;
     cursor: pointer;
     ${props =>
         props.active && 'border: .3rem solid ' + props.theme.colors.primary}
@@ -55,6 +80,10 @@ export const SelectableImage = styled(Img)<SelectableImageProps>`
 
 export const RightContainer = styled(motion.div)`
     padding: 2rem;
+
+    @media only screen and (max-width: 56.25em) {
+        grid-row: 1 / 2;
+    } //900px
 `
 
 export const Title = styled.h2`
@@ -63,6 +92,10 @@ export const Title = styled.h2`
     color: ${props => props.theme.colors.greyDark1};
     margin-bottom: 1.5rem;
     transition: all 0.2s;
+
+    @media only screen and (max-width: 75em) {
+        font-size: 3.8rem;
+    } //1200px
 
     &:hover {
         transform: scale(1.05);
@@ -87,6 +120,11 @@ export const Price = styled.span`
     position: relative;
     margin: 4rem 4rem;
     display: inline-block;
+
+    @media only screen and (max-width: 75em) {
+        font-size: 3.4rem;
+        margin: 2rem 4rem;
+    } //1200px
 `
 
 export const PriceSpan = styled(UppercaseText)`

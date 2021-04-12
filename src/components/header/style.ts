@@ -70,7 +70,6 @@ export const Title = styled.h1`
 
         @media only screen and (max-width: 37.5em) {
             position: static;
-
         } //600px
     }
 
@@ -84,19 +83,9 @@ export const Title = styled.h1`
 
     @media only screen and (max-width: 56.25em) {
         font-size: 3.8rem;
-        top: 8%;
-    } //900px
-
-    @media only screen and (max-width: 37.5em) {
-        font-size: 3rem;
         top: 10%;
         text-align: center;
-    } //600px
-
-    @media only screen and (max-width: 25em) {
-        font-size: 2.4rem;
-        top: 15%;
-    } //400px
+    } //900px
 `
 
 export const Subtitle = styled.p`
@@ -123,20 +112,12 @@ export const Subtitle = styled.p`
     } //900px
 
     @media only screen and (max-width: 37.5em) {
-        font-size: 1.6rem;
         padding: 0;
-        top: 110%;
+        top: 120%;
         left: 50%;
         transform: translateX(-50%);
         width: 70%;
     } //600px
-
-    @media only screen and (max-width: 25em) {
-        font-size: 1.2rem;
-        width: 90%;
-        left: 48%;
-
-    } //400px
 `
 
 export const ButtonContainer = styled.div`

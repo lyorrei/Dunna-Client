@@ -8,7 +8,6 @@ interface ContainerProps {
 export const Container = styled(motion.div)<ContainerProps>`
     position: fixed;
     top: 10rem;
-    height: 80vh;
     background-color: ${props => props.theme.colors.white};
     padding: 4rem 1.8rem;
     z-index: 100;
@@ -96,11 +95,6 @@ export const CartBox = styled.div`
     /* box-shadow: 1rem 1.5rem 1rem rgba(0, 0, 0, 0.2); */
     border: 3px solid ${props => props.theme.colors.primary};
 
-    @media only screen and (max-width: 37.5em) {
-        width: 4rem;
-        height: 4rem;
-    } //600px
-
     &:hover {
         transform: translateX(-120%) scale(1.2);
     }
@@ -126,10 +120,6 @@ export const CartBox = styled.div`
         height: 2rem;
         fill: ${props => props.theme.colors.greyDark1};
 
-        @media only screen and (max-width: 37.5em) {
-            width: 1.8rem;
-            height: 1.8rem;
-        } //600px
     }
 `
 
@@ -141,7 +131,6 @@ export const Title = styled(motion.h2)`
 
     @media only screen and (max-width: 75em) {
         margin-bottom: 4rem;
-        font-size: 2.8rem;
     } //1200px
 `
 
@@ -191,6 +180,5 @@ export const Total = styled.p`
     @media only screen and (max-width: 37.5em) {
         margin-top: 4rem;
         margin-bottom: 4rem;
-        font-size: 1.6rem;
     } //600px
 `

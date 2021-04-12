@@ -219,10 +219,13 @@ export const ToogleBox = styled.div<IsClickedProp>`
     @media only screen and (max-width: 43.75em) {
         display: block;
         position: absolute;
+        height: 100%;
 
         top: 50%;
         right: 0;
         transform: translate(-50%, -50%);
+        display: flex;
+        background-color: #fff;
     } //600px
 
     span {

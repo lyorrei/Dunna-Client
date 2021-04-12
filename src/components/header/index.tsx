@@ -204,7 +204,7 @@ const header: React.FC = () => {
             </ImageContainer>
             <ButtonContainer>
                 <Link href="/shop">
-                    <RoundedButton>Shop now</RoundedButton>
+                    <RoundedButton>Comprar agora</RoundedButton>
                 </Link>
             </ButtonContainer>
         </Container>

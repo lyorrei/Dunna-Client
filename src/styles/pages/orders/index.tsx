@@ -27,14 +27,9 @@ export const Title = styled.h2`
     margin-bottom: 5rem;
 
     @media only screen and (max-width: 75em) {
-        font-size: 3.8rem;
+        font-size: 4rem;
         margin-bottom: 4rem;
     } //1200px
-
-    @media only screen and (max-width: 37.5em) {
-        font-size: 3rem;
-        margin-bottom: 3rem;
-    } //600px
 `
 
 export const Obs = styled.p`
@@ -42,13 +37,7 @@ export const Obs = styled.p`
     color: ${props => props.theme.colors.greyDark3};
     margin-bottom: 4rem;
 
-    @media only screen and (max-width: 37.5em) {
-        font-size: 1.4rem;
-        margin-bottom: 3rem;
-
-    } //600px
-
-    span {
+     span {
         color: ${props => props.theme.colors.greyDark2};
         font-weight: 600;
     }
@@ -86,9 +75,6 @@ const HeaderElement = styled.p`
     font-family: sans-serif;
     letter-spacing: 0.1rem;
 
-    @media only screen and (max-width: 75em) {
-        font-size: 1.2rem;
-    } //1200px
 
     @media only screen and (max-width: 56.25em) {
         margin-bottom: 1rem;

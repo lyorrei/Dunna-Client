@@ -34,10 +34,6 @@ export const ModalHeader = styled.div`
         @media only screen and (max-width: 75em) {
             font-size: 3rem;
         } //1200px
-
-        @media only screen and (max-width: 37.5em) {
-            font-size: 2.4rem;
-        } //600px
     }
 
     svg {

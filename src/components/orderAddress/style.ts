@@ -15,10 +15,6 @@ export const AddressDetails = styled.div`
         grid-template-columns: 20% 79%;
         grid-gap: 2rem; */
 
-        @media only screen and (max-width: 37.5em) {
-            font-size: 1.4rem;
-        } //600px
-
         span {
             font-weight: 600;
             margin-right: 1rem;

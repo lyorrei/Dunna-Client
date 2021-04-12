@@ -21,11 +21,6 @@ const Button = styled.button`
     backface-visibility: hidden;
     transition: all 0.2s;
 
-    @media only screen and (max-width: 37.5em) {
-        padding: 1.2rem 0;
-        font-size: 1.6rem;
-    } //600px
-
     &:hover {
         transform: translateY(-0.5rem);
     }
@@ -49,10 +44,6 @@ export const InlineButton = styled(Button)<InlineButtonProps>`
     padding: 1.5rem 2.5rem !important;
     border-radius: 1rem;
     margin-top: 0;
-
-    @media only screen and (max-width: 37.5em) {
-        padding: 1.2rem 2rem !important;
-    } //600px
 
     ${props =>
         props.light &&

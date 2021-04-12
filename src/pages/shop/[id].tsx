@@ -32,6 +32,8 @@ import withCart from '../../HOC/withCart'
 import NoImage from '../../images/noimage.png'
 import { FaWeight } from 'react-icons/fa'
 import { RiVipDiamondLine } from 'react-icons/ri'
+import { useRouter } from 'next/router'
+import { CircleLoader } from 'react-spinners'
 
 interface Props {
     product: ProductInterface
@@ -83,6 +85,21 @@ const RightContainerVariant = {
 }
 
 const product: React.FC<Props> = ({ product }) => {
+    const router = useRouter()
+    if (router.isFallback) {
+        return (
+            <Container
+                variants={containerVariant}
+                initial="hidden"
+                animate="visible"
+            >
+                <div style={{ margin: '0 auto', width: '120px' }}>
+                    <CircleLoader color={'#00c2a8'} size={120} />
+                </div>
+            </Container>
+        )
+    }
+
     const [selectedImage, setSelectedImage] = useState(
         product.images.length > 0 ? product.images[0].url : NoImage
     )
@@ -122,6 +139,7 @@ const product: React.FC<Props> = ({ product }) => {
                                     isFluidWidth: true,
                                     src: selectedImage
                                 }}
+                                imageStyle={{ borderRadius: '2rem' }}
                             />
                         </BigImageContainer>
                         <SmallImageContainer
@@ -173,6 +191,7 @@ const product: React.FC<Props> = ({ product }) => {
                                 ? 'Adicionar ao carrinho'
                                 : 'Produto adicionado'}
                         </InlineButton>
+
                         <CheckList>
                             <li>
                                 <FaWeight />
@@ -220,7 +239,7 @@ export const getStaticPaths: GetStaticPaths = async ctx => {
 
     return {
         paths,
-        fallback: false
+        fallback: true
     }
 }
 
@@ -230,7 +249,8 @@ export const getStaticProps: GetStaticProps = async ctx => {
     return {
         props: {
             product
-        }
+        },
+        revalidate: 20
     }
 }
 

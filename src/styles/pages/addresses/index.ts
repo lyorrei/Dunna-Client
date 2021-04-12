@@ -23,9 +23,6 @@ export const Title = styled.h2`
     color: ${props => props.theme.colors.greyDark1};
     margin-bottom: 4rem;
 
-    @media only screen and (max-width: 37.5em) {
-        font-size: 3rem;
-    } //600px
 `
 
 export const SubContainer = styled.div`

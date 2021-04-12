@@ -128,10 +128,7 @@ const ordersAllPage = ({ orders: ordersFromProps }: Props) => {
                         Header: 'Email',
                         accessor: 'user.email'
                     },
-                    // {
-                    //     Header: 'Celular',
-                    //     accessor: 'shipping.order_address.phone'
-                    // },
+                 
                     {
                         Header: 'Total',
                         accessor: 'totalAmount',
@@ -159,14 +156,7 @@ const ordersAllPage = ({ orders: ordersFromProps }: Props) => {
                                         <AiFillEye />
                                     </a>
                                 </Link>
-                                {/* <FaTrash
-                                    onClick={() =>
-                                        openConfirmModal(
-                                            props.value,
-                                            props.row.index
-                                        )
-                                    }
-                                /> */}
+
                             </ActionsTd>
                         )
                     }
@@ -187,13 +177,7 @@ const ordersAllPage = ({ orders: ordersFromProps }: Props) => {
                 <Container>
                     <Table columns={columns} data={data} />
                 </Container>
-                {/* <ConfirmModal
-                    title="Tem certeza que deseja excluir?"
-                    show={showConfirmModal}
-                    closeModal={closeConfirmModal}
-                    confirmHandler={handleDelete}
-                    error={confirmModalError}
-                /> */}
+
             </PageContainer>
         </>
     )
