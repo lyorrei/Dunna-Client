@@ -10,6 +10,7 @@
   "dependencies": {
     "@stripe/react-stripe-js": "^1.2.0",
     "@stripe/stripe-js": "^1.11.0",
+    "@types/react-alert": "^5.2.0",
     "@types/react-circular-progressbar": "^1.1.0",
     "@types/react-image-magnify": "^2.7.0",
     "@types/react-select": "^3.0.28",
@@ -25,6 +26,8 @@
     "next": "10.0.3",
     "next-images": "^1.6.2",
     "react": "17.0.1",
+    "react-alert": "^7.0.2",
+    "react-alert-template-basic": "^1.0.0",
     "react-circular-progressbar": "^2.0.3",
     "react-cookie": "^4.0.3",
     "react-cookie-consent": "^6.2.3",

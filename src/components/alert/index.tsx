@@ -3,7 +3,8 @@ import React from 'react'
 import Alert from './style'
 
 export enum Types {
-    red = 'red'
+    red = 'red',
+    green = 'green'
 }
 
 export interface Props {

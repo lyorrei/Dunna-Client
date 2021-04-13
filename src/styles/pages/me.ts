@@ -32,8 +32,6 @@ export const Title = styled.h2`
     font-size: 4rem;
     font-weight: 300;
     color: ${props => props.theme.colors.greyDark1};
-
-   
 `
 
 export const SubContainer = styled.div`

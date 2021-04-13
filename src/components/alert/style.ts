@@ -16,6 +16,14 @@ const Alert = styled.div<Props>`
             background-color: #f8d7da;
             border-color: #f5c2c7;
         `}
+
+    ${props =>
+        props.type == 'green' &&
+        css`
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        `}
 `
 
 export default Alert

@@ -15,7 +15,16 @@ import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import CookieConsent from 'react-cookie-consent'
 
+import AlertTemplate from 'react-alert-template-basic'
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+
+const options = {
+    // position: positions.BOTTOM_RIGHT,
+    timeout: 5000,
+    transition: transitions.SCALE
+  }
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps, router }) => {
     return (
@@ -24,13 +33,15 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps, router }) => {
         <CookiesProvider>
             <UserProvider>
                 <CartProvider>
-                    <ThemeProvider theme={theme}>
-                        <Page
-                            Component={Component}
-                            router={router}
-                            pageProps={pageProps}
-                        />
-                    </ThemeProvider>
+                    <AlertProvider template={AlertTemplate} {...options}>
+                        <ThemeProvider theme={theme}>
+                            <Page
+                                Component={Component}
+                                router={router}
+                                pageProps={pageProps}
+                            />
+                        </ThemeProvider>
+                    </AlertProvider>
                 </CartProvider>
             </UserProvider>
         </CookiesProvider>

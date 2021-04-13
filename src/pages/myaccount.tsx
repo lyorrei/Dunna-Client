@@ -17,6 +17,8 @@ import {
 
 import RequireAuthentication from '../HOC/requireAuthentication'
 
+import Box from '../components/box'
+
 const pageContainerVariant = {
     hidden: { opacity: 1, scale: 0 },
     visible: {
@@ -29,6 +31,28 @@ const pageContainerVariant = {
 }
 
 const Home = () => {
+    const [items] = useState([
+        {
+            title: 'Dados pessoais',
+            subTitle: 'Visualizar e alterar seus dados pessoais',
+            link: '/me',
+            icon: MdAccountBox
+        },
+        {
+            title: 'Seus pedidos',
+            subTitle: 'Visualizar seus pedidos',
+            link: '/orders',
+            icon: FaDropbox
+        },
+        {
+            title: 'Endereços',
+            subTitle:
+                'Visualizar, adicionar e alterar seus endereços cadastrados',
+            link: '/addresses',
+            icon: ImLocation
+        }
+    ])
+
     return (
         <>
             <Head>
@@ -41,36 +65,14 @@ const Home = () => {
             >
                 <Container>
                     <Title>Sua conta</Title>
-                    <Link href="/me">
-                        <Item>
-                            <MdAccountBox />
-                            <div>
-                                <h4>Dados pessoais</h4>
-                                <p>Visualizar e alterar seus dados pessoais</p>
-                            </div>
-                        </Item>
-                    </Link>
-                    <Link href="/orders">
-                        <Item>
-                            <FaDropbox />
-                            <div>
-                                <h4>Seus pedidos</h4>
-                                <p>Visualizar seus pedidos</p>
-                            </div>
-                        </Item>
-                    </Link>
-                    <Link href="/addresses">
-                        <Item>
-                            <ImLocation />
-                            <div>
-                                <h4>Endereços</h4>
-                                <p>
-                                    Visualizar, adicionar e alterar seus
-                                    endereços cadastrados
-                                </p>
-                            </div>
-                        </Item>
-                    </Link>
+                    {items.map(item => (
+                        <Box
+                            link={item.link}
+                            Icon={item.icon}
+                            title={item.title}
+                            subTitle={item.subTitle}
+                        />
+                    ))}
                 </Container>
             </PageContainer>
         </>

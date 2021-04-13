@@ -19,6 +19,7 @@ interface Props {
 }
 
 const signupForm: React.FC<Props> = ({ setLoading }) => {
+    const [formSuccess, setFormSuccess] = useState(null)
     const [formError, setFormError] = useState(null)
     const formRef = useRef<FormHandles>(null)
 
@@ -27,6 +28,7 @@ const signupForm: React.FC<Props> = ({ setLoading }) => {
     const handleSubmit: SubmitHandler<FormData> = async data => {
         try {
             // Remove all previous errors
+            setFormSuccess(null)
             setFormError(null)
             formRef.current.setErrors({})
 
@@ -49,8 +51,9 @@ const signupForm: React.FC<Props> = ({ setLoading }) => {
             // Validation passed
             setLoading(true)
             const { data: user } = await axios.post('/users/create', data)
-            setUser(user)
-            Router.replace('/shop')
+            setFormSuccess('Por favor, confirme o seu email')
+            formRef.current.reset()
+            setLoading(false)
         } catch (err) {
             const validationErrors = {}
             if (err instanceof Yup.ValidationError) {
@@ -61,6 +64,7 @@ const signupForm: React.FC<Props> = ({ setLoading }) => {
             } else {
                 setFormError(err.response.data.error)
                 setLoading(false)
+                setFormSuccess(null)
             }
             console.log(err)
         }
@@ -68,6 +72,7 @@ const signupForm: React.FC<Props> = ({ setLoading }) => {
 
     return (
         <Form ref={formRef} onSubmit={handleSubmit}>
+            {formSuccess && <Alert type={Types.green}>{formSuccess}</Alert>}
             {formError && <Alert type={Types.red}>{formError}</Alert>}
 
             <InputGroup>

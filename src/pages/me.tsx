@@ -14,7 +14,7 @@ import {
     IsLoading
 } from '../styles/pages/me'
 
-import Button, { InlineButton } from '../components/button'
+import Button, { EditButton, InlineButton } from '../components/button'
 
 import HashLoader from 'react-spinners/HashLoader'
 import Modal from '../components/modal'
@@ -25,6 +25,8 @@ import { SubmitHandler } from '@unform/core'
 import { useUser } from '../context/User'
 import Alert, { Types } from '../components/alert'
 import CircleLoader from 'react-spinners/CircleLoader'
+import { Item } from '../components/userForm/style'
+import { useRouter } from 'next/router'
 
 const pageContainerVariant = {
     hidden: { opacity: 1, scale: 0 },
@@ -64,20 +66,20 @@ const itemsArray = (user: User) => {
             fieldValue: user.lastName,
             inputType: 'text'
         },
-        {
-            label: 'Email',
-            fieldName: 'email',
-            modalTitle: 'Editar o email',
-            fieldValue: user.email,
-            inputType: 'email'
-        },
-        {
-            label: 'Senha',
-            fieldName: 'password',
-            modalTitle: 'Digite a nova senha',
-            fieldValue: '',
-            inputType: 'password'
-        }
+        // {
+        //     label: 'Email',
+        //     fieldName: 'email',
+        //     modalTitle: 'Editar o email',
+        //     fieldValue: user.email,
+        //     inputType: 'email'
+        // }
+        // {
+        //     label: 'Senha',
+        //     fieldName: 'password',
+        //     modalTitle: 'Digite a nova senha',
+        //     fieldValue: '',
+        //     inputType: 'password'
+        // }
     ]
 }
 
@@ -97,6 +99,13 @@ const me: React.FC<Props> = () => {
     const [formError, setFormError] = useState(null)
 
     const formRef = useRef(null)
+    const router = useRouter()
+
+    const handlePasswordLogout = async () => {
+        await axios.post('/users/logout')
+        setUser(null)
+        router.replace('/recovery/password')
+    }
 
     useEffect(() => {
         const defaultForm = {}
@@ -152,13 +161,7 @@ const me: React.FC<Props> = () => {
                             .required('O e-mail é obrigatório')
                     })
                     break
-                case 'password':
-                    schema = Yup.object().shape({
-                        password: Yup.string()
-                            .min(7, 'No mínimo 7 caracteres')
-                            .required('A senha é obrigatória')
-                    })
-                    break
+
                 case 'firstName':
                     schema = Yup.object().shape({
                         firstName: Yup.string().required(
@@ -212,17 +215,26 @@ const me: React.FC<Props> = () => {
                     <Title>Minhas informações</Title>
                     <SubContainer>
                         {user ? (
-                            items.map(item => (
-                                <UserForm
-                                    key={item.fieldName}
-                                    fieldName={item.fieldName}
-                                    fieldValue={item.fieldValue}
-                                    label={item.label}
-                                    modalTitle={item.modalTitle}
-                                    inputType={item.inputType}
-                                    submitHandler={openModal}
-                                />
-                            ))
+                            <>
+                                {items.map(item => (
+                                    <UserForm
+                                        key={item.fieldName}
+                                        fieldName={item.fieldName}
+                                        fieldValue={item.fieldValue}
+                                        label={item.label}
+                                        modalTitle={item.modalTitle}
+                                        inputType={item.inputType}
+                                        submitHandler={openModal}
+                                    />
+                                ))}
+                                <Item>
+                                    <div>
+                                        <label>Senha</label>
+                                        <p>********</p>
+                                    </div>
+                                    <EditButton onClick={handlePasswordLogout}>Editar</EditButton>
+                                </Item>
+                            </>
                         ) : (
                             <div
                                 style={{ margin: '4rem auto', width: '100px' }}

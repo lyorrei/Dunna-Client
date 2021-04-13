@@ -104,9 +104,10 @@ const orders = ({ myOrders }: Props) => {
                                         </Total>
                                         <UntilDate>
                                             <span>
-                                                {statusHandler(
+                                                {order.shipping.status}
+                                                {/* {statusHandler(
                                                     order.shipping.status
-                                                )}
+                                                )} */}
                                             </span>
                                         </UntilDate>
                                     </OrderHeader>

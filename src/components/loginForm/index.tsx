@@ -11,6 +11,7 @@ import Alert, { Types } from '../alert'
 
 import Router from 'next/router'
 import { useUser } from '../../context/User'
+import Link from 'next/link'
 
 interface Props {
     setLoading(boolean: boolean): void
@@ -56,14 +57,19 @@ const loginForm: React.FC<Props> = ({ setLoading }) => {
     }
 
     return (
-        <Form ref={formRef} onSubmit={handleSubmit}>
-            {formError && <Alert type={Types.red}>{formError}</Alert>}
+        <div>
+            <Form ref={formRef} onSubmit={handleSubmit}>
+                {formError && <Alert type={Types.red}>{formError}</Alert>}
 
-            <Input name="email" label="Email" type="email" />
-            <Input name="password" label="Senha" type="password" />
+                <Input name="email" label="Email" type="email" />
+                <Input name="password" label="Senha" type="password" />
+                <Link href="/recovery">
+                    <a>Problemas com o Login?</a>
+                </Link>
 
-            <Button type="submit">Vamoo</Button>
-        </Form>
+                <Button type="submit">Vamoo</Button>
+            </Form>
+        </div>
     )
 }
 
