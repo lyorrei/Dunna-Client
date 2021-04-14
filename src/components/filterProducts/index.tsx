@@ -16,6 +16,7 @@ import { item } from '../../pages/shop'
 interface Props {
     stones: StonesAndShapes[]
     shapes: StonesAndShapes[]
+    productTypes: StonesAndShapes[]
     formRef: React.MutableRefObject<FormHandles>
     handleFilterChange: (value?: number | Range) => void
     priceValue: { min: number; max: number }
@@ -28,8 +29,10 @@ const filterProducts: React.FC<Props> = ({
     formRef,
     handleFilterChange,
     priceValue,
-    changeHandler
+    changeHandler,
+    productTypes
 }) => {
+    const [productTypeOptions, setProductTypeOptions] = useState(null)
     const [stonesOptions, setStoneOptions] = useState(null)
     const [shapesOptions, setShapeOptions] = useState(null)
 
@@ -46,10 +49,22 @@ const filterProducts: React.FC<Props> = ({
 
         const shapesArray = optionsToArray(shapes)
         setShapeOptions(shapesArray)
+
+        const productTypesArray = optionsToArray(productTypes)
+        setProductTypeOptions(productTypesArray)
     }, [stones, shapes])
 
     return (
         <Form ref={formRef} onSubmit={() => {}}>
+             <motion.div variants={item}>
+                <Select
+                    isMultiple
+                    name="productTypes"
+                    options={productTypeOptions}
+                    placeholder="Escolha um tipo"
+                    onChange={() => handleFilterChange()}
+                />
+            </motion.div>
             <motion.div variants={item}>
                 <Select
                     isMultiple

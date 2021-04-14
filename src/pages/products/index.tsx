@@ -22,6 +22,7 @@ import { BsImageFill } from 'react-icons/bs'
 export interface Product {
     sold: boolean
     _id: string
+    productType: StonesAndShapes
     stock_id: number
     name: string
     description: string
@@ -80,21 +81,12 @@ const productsPage = ({ products: productsFromProps }: Props) => {
                         accessor: 'stock_id'
                     },
                     {
-                        Header: 'Nome',
-                        accessor: 'name'
+                        Header: 'Tipo',
+                        accessor: 'productType'
                     },
                     {
-                        Header: 'Descrição',
-                        accessor: 'description',
-                        Cell: props => {
-                            return (
-                                <span>
-                                    {props.value.length > 15
-                                        ? props.value.substring(0, 15) + '...'
-                                        : props.value}
-                                </span>
-                            )
-                        }
+                        Header: 'Nome',
+                        accessor: 'name'
                     },
                     {
                         Header: 'Preço',
@@ -108,10 +100,7 @@ const productsPage = ({ products: productsFromProps }: Props) => {
                         Header: 'Peso da pedra',
                         accessor: 'stoneWeigth'
                     },
-                    {
-                        Header: 'Peso do diamante',
-                        accessor: 'diamondWeigth'
-                    },
+
                     {
                         Header: 'Formato',
                         accessor: 'shape'
@@ -154,9 +143,9 @@ const productsPage = ({ products: productsFromProps }: Props) => {
             products.map(product => {
                 return {
                     _id: product._id,
+                    productType: product.productType.name,
                     stock_id: product.stock_id,
                     name: product.name,
-                    description: product.description,
                     price: product.price,
                     stone: product.stone ? product.stone.name : product.stone,
                     stoneWeigth: product.stoneWeigth,

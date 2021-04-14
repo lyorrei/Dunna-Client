@@ -20,6 +20,8 @@ interface Props {
     formInitialData?: ProductInterface
     stones: StonesAndShapes[]
     shapes: StonesAndShapes[]
+    types: StonesAndShapes[]
+    metals: StonesAndShapes[]
     setFormData?: (data: FormData) => void
     setStage?: (stage: number) => void
     noLoading?: boolean
@@ -34,16 +36,21 @@ const productForm: React.FC<Props> = ({
     shapes,
     setFormData,
     setStage,
-    noLoading
+    noLoading,
+    types,
+    metals
 }) => {
     const [formError, setFormError] = useState(null)
     const formRef = useRef<FormHandles>(null)
     const [loading, setLoading] = useState(false)
 
     const Router = useRouter()
+    const [selectedType, setSelectedType] = useState(null)
 
     const [stonesOptions, setStoneOptions] = useState(null)
     const [shapesOptions, setShapeOptions] = useState(null)
+    const [typesOptions, setTypesOptions] = useState(null)
+    const [metalsOptions, setMetalsOptions] = useState(null)
 
     const optionsToArray = (options: StonesAndShapes[]) => {
         return options.map(option => ({
@@ -53,36 +60,88 @@ const productForm: React.FC<Props> = ({
     }
 
     useEffect(() => {
+        if (formInitialData) {
+            setSelectedType(formInitialData.productType.label)
+        }
+    }, [formInitialData])
+
+    useEffect(() => {
         const stonesArray = optionsToArray(stones)
         setStoneOptions(stonesArray)
+        console.log(stonesOptions)
 
         const shapesArray = optionsToArray(shapes)
         setShapeOptions(shapesArray)
-    }, [stones, shapes])
+
+        const typesArray = optionsToArray(types)
+        setTypesOptions(typesArray)
+
+        const metalsArray = optionsToArray(metals)
+        setMetalsOptions(metalsArray)
+    }, [stones, shapes, types, metals])
 
     const handleSubmit: SubmitHandler<FormData> = async formData => {
         try {
             // Remove all previous errors
             setFormError(null)
+
+            if (selectedType === null) {
+                return setFormError(
+                    'Por favor, preencha o campo tipo do Produto'
+                )
+            }
+
+            let validationObject = {}
+            if (selectedType === 'Joia') {
+                validationObject = {
+                    productType: Yup.string().required(
+                        'O tipo de produto é obrigatório'
+                    ),
+                    stock_id: Yup.string()
+                        .typeError('Você deve escrever um número')
+                        .required('O id do estoque é obrigatório'),
+                    name: Yup.string().required('O nome é obrigatório'),
+                    description: Yup.string().required(
+                        'A descrição é obrigatória'
+                    ),
+                    price: Yup.number()
+                        .typeError('Você deve escrever um número')
+                        .required('O preço é obrigatório'),
+                    stone: Yup.string().required('A pedra é obrigatória'),
+                    stoneWeigth: Yup.number()
+                        .typeError('Você deve escrever um número')
+                        .required('O peso da pedra é obrigatório'),
+                    diamondWeigth: Yup.number()
+                        .typeError('Você deve escrever um número')
+                        .required('O peso do diamante é obrigatório'),
+                    shape: Yup.string().required('O formato é obrigatório'),
+                    metal: Yup.string().required('O metal é obrigatório')
+                }
+            } else {
+                validationObject = {
+                    productType: Yup.string().required(
+                        'O tipo de produto é obrigatório'
+                    ),
+                    stock_id: Yup.string()
+                        .typeError('Você deve escrever um número')
+                        .required('O id do estoque é obrigatório'),
+                    name: Yup.string().required('O nome é obrigatório'),
+                    description: Yup.string().required(
+                        'A descrição é obrigatória'
+                    ),
+                    price: Yup.number()
+                        .typeError('Você deve escrever um número')
+                        .required('O preço é obrigatório'),
+                    stone: Yup.string().required('A pedra é obrigatória'),
+                    stoneWeigth: Yup.number()
+                        .typeError('Você deve escrever um número')
+                        .required('O peso da pedra é obrigatório'),
+                    shape: Yup.string().required('O formato é obrigatório')
+                }
+            }
+
             formRef.current.setErrors({})
-            const schema = Yup.object().shape({
-                stock_id: Yup.string()
-                    .typeError('Você deve escrever um número')
-                    .required('O id do estoque é obrigatório'),
-                name: Yup.string().required('O nome é obrigatório'),
-                description: Yup.string().required('A descrição é obrigatória'),
-                price: Yup.number()
-                    .typeError('Você deve escrever um número')
-                    .required('O preço é obrigatório'),
-                stone: Yup.string().required('A pedra é obrigatória'),
-                stoneWeigth: Yup.number()
-                    .typeError('Você deve escrever um número')
-                    .required('O peso da pedra é obrigatório'),
-                diamondWeigth: Yup.number()
-                    .typeError('Você deve escrever um número')
-                    .required('O peso do diamante é obrigatório'),
-                shape: Yup.string().required('O formato é obrigatório')
-            })
+            const schema = Yup.object().shape(validationObject)
             await schema.validate(formData, {
                 abortEarly: false
             })
@@ -117,6 +176,7 @@ const productForm: React.FC<Props> = ({
             }
         }
     }
+
     return (
         <>
             <Title>{title}</Title>
@@ -131,17 +191,20 @@ const productForm: React.FC<Props> = ({
                         <Alert type={Types.red}>{formError}</Alert>
                     </div>
                 )}
-                {submitType === 'patch' && (
-                    <p>
-                        <strong>Observação:</strong> Editar este endereço não
-                        editará pedidos pendentes que estejam sendo enviados
-                        para este endereço.
-                    </p>
-                )}
-                <Input name="stock_id" label="Id do estoque" />
-                <Input name="name" label="Nome" />
+                <Select
+                    label="Tipo"
+                    input
+                    name="productType"
+                    options={typesOptions}
+                    placeholder="Escolha um tipo"
+                    onChange={e => setSelectedType(e.label)}
+                />
+                <SideBySide>
+                    <Input name="stock_id" label="Id do estoque" />
+                    <Input name="name" label="Nome" />
+                </SideBySide>
+
                 <Input name="description" label="Descrição" />
-                <Input name="price" type="number" label="Preço em centavos" />
                 <SideBySide>
                     <Select
                         label="Pedra"
@@ -167,12 +230,28 @@ const productForm: React.FC<Props> = ({
                         step=".01"
                     />
                     <Input
-                        name="diamondWeigth"
+                        name="price"
                         type="number"
-                        label="Peso do diamante"
-                        step=".01"
+                        label="Preço em centavos"
                     />
                 </SideBySide>
+                {selectedType === 'Joia' && (
+                    <SideBySide>
+                        <Input
+                            name="diamondWeigth"
+                            type="number"
+                            label="Peso do diamante"
+                            step=".01"
+                        />
+                        <Select
+                            label="Metal"
+                            input
+                            name="metal"
+                            options={metalsOptions}
+                            placeholder="Escolha um metal"
+                        />
+                    </SideBySide>
+                )}
 
                 <InlineButton type="submit">Próximo</InlineButton>
             </Form>

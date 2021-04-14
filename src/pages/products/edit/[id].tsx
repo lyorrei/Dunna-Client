@@ -12,9 +12,11 @@ interface Props {
     product: ProductInterface
     stones: StonesAndShapes[]
     shapes: StonesAndShapes[]
+    types: StonesAndShapes[]
+    metals: StonesAndShapes[]
 }
 
-const editProduct = ({ product, shapes, stones }: Props) => {
+const editProduct = ({ product, shapes, stones, types, metals }: Props) => {
     return (
         <>
             <Head>
@@ -29,6 +31,8 @@ const editProduct = ({ product, shapes, stones }: Props) => {
                             title="Editar Produto"
                             shapes={shapes}
                             stones={stones}
+                            types={types}
+                            metals={metals}
                             formInitialData={product}
                         />
                     )}
@@ -46,17 +50,33 @@ editProduct.getInitialProps = async (ctx: NextPageContext, token: string) => {
     })
 
     const shapeName = (' ' + product.shape.name).slice(1)
-    const stoneName = (' ' + product.stone.name).slice(1)
     const shapeValue = (' ' + product.shape._id).slice(1)
-    const stoneValue = (' ' + product.stone._id).slice(1)
-
     product.shape = {
         label: shapeName,
         value: shapeValue
     }
+
+    const stoneName = (' ' + product.stone.name).slice(1)
+    const stoneValue = (' ' + product.stone._id).slice(1)
     product.stone = {
         label: stoneName,
         value: stoneValue
+    }
+
+    const typeName = (' ' + product.productType.name).slice(1)
+    const typeValue = (' ' + product.productType._id).slice(1)
+    product.productType = {
+        label: typeName,
+        value: typeValue
+    }
+
+    if (product.metal) {
+        const metalName = (' ' + product.metal.name).slice(1)
+        const metalValue = (' ' + product.metal._id).slice(1)
+        product.metal = {
+            label: metalName,
+            value: metalValue
+        }
     }
 
     const { data: stones } = await axios.get('/stones', {
@@ -69,11 +89,23 @@ editProduct.getInitialProps = async (ctx: NextPageContext, token: string) => {
             Cookie: `token=${token};`
         }
     })
+    const { data: types } = await axios.get('/productTypes', {
+        headers: {
+            Cookie: `token=${token};`
+        }
+    })
+    const { data: metals } = await axios.get('/metals', {
+        headers: {
+            Cookie: `token=${token};`
+        }
+    })
 
     return {
         product,
         stones,
-        shapes
+        shapes,
+        types,
+        metals
     }
 }
 

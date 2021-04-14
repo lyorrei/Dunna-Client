@@ -59,12 +59,14 @@ interface Props {
     products: ProductInterface[]
     stones: StonesAndShapes[]
     shapes: StonesAndShapes[]
+    productTypes: StonesAndShapes[]
 }
 
 const shop: React.FC<Props> = ({
     products: productsFromProps,
     stones,
-    shapes
+    shapes,
+    productTypes
 }) => {
     const [products, setProducts] = useState(productsFromProps)
     const [priceValue, setPriceValue] = useState({ min: 0, max: 10000 })
@@ -74,6 +76,12 @@ const shop: React.FC<Props> = ({
         setTimeout(() => {
             const data: any = formRef.current.getData()
             let filteredProducts = [...productsFromProps]
+
+            if (data.productTypes.length > 0) {
+                filteredProducts = filteredProducts.filter(product =>
+                    data.productTypes.includes(product.productType)
+                )
+            }
 
             if (data.stones.length > 0) {
                 filteredProducts = filteredProducts.filter(product =>
@@ -116,6 +124,7 @@ const shop: React.FC<Props> = ({
                 {productsFromProps.length > 0 ? (
                     <>
                         <FilterProducts
+                            productTypes={productTypes}
                             handleFilterChange={handleFilterChange}
                             stones={stones}
                             shapes={shapes}
@@ -148,11 +157,13 @@ export const getStaticProps: GetStaticProps = async context => {
     const { data: products } = await axios.get('/products')
     const { data: stones } = await axios.get('/stones')
     const { data: shapes } = await axios.get('/shapes')
+    const { data: productTypes } = await axios.get('/productTypes')
     return {
         props: {
             products,
             stones,
-            shapes
+            shapes,
+            productTypes
         }, // will be passed to the page component as props
         revalidate: 20
     }

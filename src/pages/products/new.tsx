@@ -26,6 +26,8 @@ import { useRouter } from 'next/router'
 interface Props {
     stones: StonesAndShapes[]
     shapes: StonesAndShapes[]
+    types: StonesAndShapes[]
+    metals: StonesAndShapes[]
 }
 
 const pageContainerVariant = {
@@ -52,7 +54,7 @@ const productFormVariant = {
     }
 }
 
-const newProduct = ({ stones, shapes }: Props) => {
+const newProduct = ({ stones, shapes, types, metals }: Props) => {
     const router = useRouter()
     const [uploadedFiles, setUploadedFiles] = useState([])
     const [stage, setStage] = useState(0)
@@ -109,7 +111,6 @@ const newProduct = ({ stones, shapes }: Props) => {
                     id: createdProduct._id,
                     url: createdProduct.url
                 })
-
             } catch (e) {
                 updateFile(uploadedFiles[i].id, {
                     error: true
@@ -146,6 +147,8 @@ const newProduct = ({ stones, shapes }: Props) => {
                             title="Criar Produto"
                             shapes={shapes}
                             stones={stones}
+                            types={types}
+                            metals={metals}
                             setFormData={setFormData}
                             setStage={setStage}
                         />
@@ -210,9 +213,21 @@ newProduct.getInitialProps = async (
             Cookie: `token=${token};`
         }
     })
+    const { data: types } = await axios.get('/productTypes', {
+        headers: {
+            Cookie: `token=${token};`
+        }
+    })
+    const { data: metals } = await axios.get('/metals', {
+        headers: {
+            Cookie: `token=${token};`
+        }
+    })
     return {
         stones,
-        shapes
+        shapes,
+        types,
+        metals
         // will be passed to the page component as props
     }
 }

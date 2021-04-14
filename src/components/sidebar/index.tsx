@@ -5,7 +5,7 @@ import { BiCart } from 'react-icons/bi'
 import { useRouter } from 'next/router'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { BsFillInboxesFill } from 'react-icons/bs'
-import { GiStoneCrafting } from 'react-icons/gi'
+import { GiMetalBar, GiStoneCrafting } from 'react-icons/gi'
 import { FaShapes } from 'react-icons/fa'
 
 interface Props {}
@@ -59,6 +59,14 @@ const sidebar: React.FC<Props> = props => {
                         <a>
                             <FaShapes />
                             Formatos
+                        </a>
+                    </Link>
+                </Li>
+                <Li isActive={router.pathname === '/metals'}>
+                    <Link href="/metals">
+                        <a>
+                            <GiMetalBar />
+                            Metais
                         </a>
                     </Link>
                 </Li>

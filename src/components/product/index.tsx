@@ -33,6 +33,7 @@ export interface ProductInterface {
     stoneWeigth: number
     diamondWeigth: number
     shape: string & StonesAndShapes & { value: string; label: string }
+    productType: string & StonesAndShapes & { value: string; label: string }
     images?: ImageProduct[]
 }
 

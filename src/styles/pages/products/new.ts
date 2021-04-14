@@ -14,6 +14,6 @@ export const Container = styled(motion.div)`
 
 export const ItemContainer = styled(motion.div)`
     position: absolute;
-    top: 15%;
+    top: 5%;
     width: 40%;
 `

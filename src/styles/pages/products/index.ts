@@ -11,48 +11,6 @@ export const Container = styled(motion.div)`
     width: 100%;
     padding: 0 6rem;
     position: relative;
-
-    table {
-        width: 100%;
-        thead {
-            & > tr {
-                display: flex;
-
-                th {
-                    flex: 1;
-                    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-                    display: flex;
-                    align-items: center;
-                    font-size: 1.8rem;
-                    color: ${props => props.theme.colors.greyDark1};
-                    /* margin-right: 3rem; */
-                    text-align: left;
-                    padding: 2rem 0;
-
-                    span {
-                        display: flex;
-                        align-items: center;
-                        margin-left: 1rem;
-                    }
-                }
-            }
-        }
-        tbody {
-            & > tr {
-                display: flex;
-                td {
-                    display: flex;
-                    align-items: center;
-                    flex: 1;
-                    padding: 1.8rem 0;
-                    font-family: sans-serif;
-                    font-size: 1.5rem;
-                    border-collapse: collapse;
-                    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-                }
-            }
-        }
-    }
 `
 
 export const ActionsTd = styled.p`

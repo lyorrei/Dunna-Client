@@ -10,6 +10,7 @@ interface Props extends SelectProps<OptionTypeBase> {
     label?: string
     isMultiple?: boolean
     input?: boolean
+    clearable? : boolean
 }
 
 const select: React.FC<Props> = ({
@@ -17,6 +18,7 @@ const select: React.FC<Props> = ({
     isMultiple,
     input,
     label,
+    clearable,
     ...rest
 }) => {
     const selectRef = useRef(null)
@@ -54,6 +56,7 @@ const select: React.FC<Props> = ({
                 defaultValue={defaultValue }
                 instanceId={'randomString'}
                 isMulti={isMultiple}
+                isClearable={clearable}
                 {...rest}
 
                 // value={
