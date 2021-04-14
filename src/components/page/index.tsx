@@ -41,7 +41,7 @@ const page: React.FC<AppProps> = ({ Component, pageProps }) => {
                     closeModal={() => setShowCookiesModal(false)}
                     title="Atenção"
                 >
-                    <p style={{ fontSize: '1.8rem', width: '50%' }}>
+                    <p style={{ fontSize: '1.8rem' }}>
                         Caso os cookies no seu navegador não estejam habilitados, por favor habilite-os, se não, partes do site não irão funcionar.
                     </p>
                 </Modal>
