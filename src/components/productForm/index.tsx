@@ -66,9 +66,9 @@ const productForm: React.FC<Props> = ({
             setFormError(null)
             formRef.current.setErrors({})
             const schema = Yup.object().shape({
-                stock_id: Yup.number()
+                stock_id: Yup.string()
                     .typeError('Você deve escrever um número')
-                    .required('O número é obrigatório'),
+                    .required('O id do estoque é obrigatório'),
                 name: Yup.string().required('O nome é obrigatório'),
                 description: Yup.string().required('A descrição é obrigatória'),
                 price: Yup.number()
@@ -138,7 +138,7 @@ const productForm: React.FC<Props> = ({
                         para este endereço.
                     </p>
                 )}
-                <Input name="stock_id" type="number" label="Id do estoque" />
+                <Input name="stock_id" label="Id do estoque" />
                 <Input name="name" label="Nome" />
                 <Input name="description" label="Descrição" />
                 <Input name="price" type="number" label="Preço em centavos" />

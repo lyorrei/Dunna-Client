@@ -32,6 +32,8 @@ import withCart from '../../HOC/withCart'
 import NoImage from '../../images/noimage.png'
 import { FaWeight } from 'react-icons/fa'
 import { RiVipDiamondLine } from 'react-icons/ri'
+import { FaShapes } from 'react-icons/fa'
+
 import { useRouter } from 'next/router'
 import { CircleLoader } from 'react-spinners'
 
@@ -203,14 +205,14 @@ const product: React.FC<Props> = ({ product }) => {
                                 <li>
                                     <RiVipDiamondLine />
                                     <span>
-                                        Peso da diamante:{' '}
+                                        Peso do diamante:{' '}
                                         {product.diamondWeigth} ct
                                     </span>
                                 </li>
                             )}
                             <li>
-                                <FiCheckCircle />
-                                <span>Joia feita à mão</span>
+                                <FaShapes />
+                                <span>Formato: {product.shape.name}</span>
                             </li>
                             <li>
                                 <FiCheckCircle />
