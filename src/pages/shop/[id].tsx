@@ -36,6 +36,7 @@ import { FaShapes } from 'react-icons/fa'
 
 import { useRouter } from 'next/router'
 import { CircleLoader } from 'react-spinners'
+import { GiMetalBar, GiStoneBlock, GiStoneSphere } from 'react-icons/gi'
 
 interface Props {
     product: ProductInterface
@@ -154,24 +155,24 @@ const product: React.FC<Props> = ({ product }) => {
                         >
                             {product.images.length > 0 ? (
                                 product.images.map((image, index) => (
-                                    <SelectableImage
-                                        src={image.url}
-                                        alt={'Image ' + index}
-                                        key={image._id}
-                                        onClick={() =>
-                                            setSelectedImage(image.url)
-                                        }
-                                        active={image.url === selectedImage}
-                                    />
+                                        <SelectableImage
+                                            src={image.url}
+                                            alt={'Image ' + index}
+                                            key={image._id}
+                                            onClick={() =>
+                                                setSelectedImage(image.url)
+                                            }
+                                            active={image.url === selectedImage}
+                                        />
                                 ))
                             ) : (
-                                <SelectableImage
-                                    src={NoImage}
-                                    alt={'noImage'}
-                                    key={'noImage'}
-                                    onClick={() => {}}
-                                    active={true}
-                                />
+                                    <SelectableImage
+                                        src={NoImage}
+                                        alt={'noImage'}
+                                        key={'noImage'}
+                                        onClick={() => {}}
+                                        active={true}
+                                    />
                             )}
                         </SmallImageContainer>
                     </LeftContainer>
@@ -196,32 +197,48 @@ const product: React.FC<Props> = ({ product }) => {
 
                         <CheckList>
                             <li>
+                                <GiStoneSphere />
+                                <span>Tipo: {product.productType.name}</span>
+                            </li>
+                            <li>
+                                <GiStoneBlock />
+                                <span>Pedra: {product.stone.name}</span>
+                            </li>
+                            <li>
                                 <FaWeight />
                                 <span>
                                     Peso da Pedra: {product.stoneWeigth} ct
                                 </span>
                             </li>
-                            {product.diamondWeigth > 0 && (
-                                <li>
-                                    <RiVipDiamondLine />
-                                    <span>
-                                        Peso do diamante:{' '}
-                                        {product.diamondWeigth} ct
-                                    </span>
-                                </li>
-                            )}
+                            {product.diamondWeigth &&
+                                product.diamondWeigth > 0 && (
+                                    <li>
+                                        <RiVipDiamondLine />
+                                        <span>
+                                            Peso do diamante:{' '}
+                                            {product.diamondWeigth} ct
+                                        </span>
+                                    </li>
+                                )}
+
                             <li>
                                 <FaShapes />
                                 <span>Formato: {product.shape.name}</span>
                             </li>
-                            <li>
+                            {product.metal && (
+                                <li>
+                                    <GiMetalBar />
+                                    <span>Metal: {product.metal.name}</span>
+                                </li>
+                            )}
+                            {/* <li>
                                 <FiCheckCircle />
                                 <span>Design único</span>
                             </li>
                             <li>
                                 <FiCheckCircle />
                                 <span>Lapidada por profissionais</span>
-                            </li>
+                            </li> */}
                         </CheckList>
                     </RightContainer>
                 </GridContainer>

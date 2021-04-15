@@ -72,7 +72,6 @@ interface SelectableImageProps {
 }
 
 export const SelectableImage = styled(Img)<SelectableImageProps>`
-    height: 100%;
     cursor: pointer;
     ${props =>
         props.active && 'border: .3rem solid ' + props.theme.colors.primary}

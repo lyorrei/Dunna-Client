@@ -10,7 +10,6 @@ export const Container = styled(motion.div)`
 export const ImageContainer = styled(motion.div)`
     width: 42vw;
     height: 60vh;
-    background-color: orangered;
     position: absolute;
 
     @media only screen and (max-width: 112.5em) {
