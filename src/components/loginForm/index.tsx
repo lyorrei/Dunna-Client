@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import axios from 'axios'
+import axios from '../../../axios'
 import * as Yup from 'yup'
 
 import { SubmitHandler, FormHandles } from '@unform/core'
@@ -39,7 +39,7 @@ const loginForm: React.FC<Props> = ({ setLoading }) => {
 
             // Validation passed
             setLoading(true)
-            const { data: user } = await axios.post('/api/login', formData)
+            const { data: user } = await axios.post('/users/login', formData)
             setUser(user)
             Router.replace('/shop')
         } catch (err) {
