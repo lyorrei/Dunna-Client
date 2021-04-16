@@ -14,7 +14,7 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
                     secure: process.env.NODE_ENV !== 'development',
                     maxAge: 2 * 60 * 60 * 1000,
                     path: '/',
-                    // sameSite: 'strict'
+                    sameSite: 'lax'
                         // process.env.NODE_ENV !== 'development' ? 'none' : 'lax'
                 })
             )
