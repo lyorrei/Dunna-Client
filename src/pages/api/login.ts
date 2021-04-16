@@ -15,7 +15,8 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
                     maxAge: 2 * 60 * 60 * 1000,
                     path: '/',
                     sameSite:
-                        process.env.NODE_ENV !== 'development' ? 'none' : 'lax'
+                        process.env.NODE_ENV !== 'development' ? 'none' : 'lax',
+                    domain: process.env.NODE_ENV !== 'development' ? 'dunna-server.herokuapp.com' : 'localhost',
                 })
             )
 
