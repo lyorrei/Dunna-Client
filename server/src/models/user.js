@@ -8,11 +8,11 @@ const { user: senderEmail } = require('../config/mail.json')
 const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
-        required: true,
+        required: true
     },
     lastName: {
         type: String,
-        required: true,
+        required: true
     },
     email: {
         type: String,
@@ -24,24 +24,25 @@ const userSchema = new mongoose.Schema({
             if (!validator.isEmail(value)) {
                 throw new Error('Email is invalid')
             }
-        },
+        }
     },
     password: {
         type: String,
         trim: true,
         required: true,
         minlength: 7,
+        select: false
     },
     admin: {
         type: Boolean,
         required: true,
-        default: false,
+        default: false
     },
     confirmed: {
         type: Boolean,
         required: true,
-        default: false,
-    },
+        default: false
+    }
     // tokens: [
     //     {
     //         token: {
@@ -55,13 +56,15 @@ const userSchema = new mongoose.Schema({
 userSchema.virtual('orders', {
     ref: 'Order',
     localField: '_id',
-    foreignField: 'user_id',
+    foreignField: 'user_id'
 })
 
 userSchema.methods.generateAuthToken = async function () {
     const user = this
 
-    const token = await jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: 2 * 60 * 60 })
+    const token = await jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+        expiresIn: 2 * 60 * 60
+    })
     // user.tokens = user.tokens.concat({ token })
     await user.save()
 
@@ -71,37 +74,47 @@ userSchema.methods.generateAuthToken = async function () {
 userSchema.methods.generateConfirmEmail = async function () {
     const user = this
 
-    jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: 2 * 60 * 60 }, async (err, emailToken) => {
-        const url = `${process.env.APP_URL}/api/user/confirmation/${emailToken}`
+    jwt.sign(
+        { _id: user._id },
+        process.env.JWT_SECRET,
+        { expiresIn: 2 * 60 * 60 },
+        async (err, emailToken) => {
+            const url = `${process.env.APP_URL}/api/user/confirmation/${emailToken}`
 
-        // send mail with defined transport object
-        const info = await transporter.sendMail({
-            from: `"Dunna Jewelry" <` + senderEmail + `>`, // sender address
-            to: user.email,
-            subject: 'Confirmar Email',
-            html: `Por favor clique no link para confirmar seu email: <a href="${url}">${url}</a>`,
-        })
+            // send mail with defined transport object
+            const info = await transporter.sendMail({
+                from: `"Dunna Jewelry" <` + senderEmail + `>`, // sender address
+                to: user.email,
+                subject: 'Confirmar Email',
+                html: `Por favor clique no link para confirmar seu email: <a href="${url}">${url}</a>`
+            })
 
-        // console.log('Message sent: %s', info.messageId)
-    })
+            // console.log('Message sent: %s', info.messageId)
+        }
+    )
 }
 
 userSchema.methods.generateChangePasswordEmail = async function () {
     const user = this
 
-    jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: 2 * 60 * 60 }, async (err, token) => {
-        const url = `${process.env.CLIENT_URL}/reset/${token}`
+    jwt.sign(
+        { _id: user._id },
+        process.env.JWT_SECRET,
+        { expiresIn: 2 * 60 * 60 },
+        async (err, token) => {
+            const url = `${process.env.CLIENT_URL}/reset/${token}`
 
-        // send mail with defined transport object
-        const info = await transporter.sendMail({
-            from: `"Dunna Jewelry" <` + senderEmail + `>`, // sender address
-            to: user.email,
-            subject: 'Editar senha',
-            html: `Por favor, clique no Link para trocar sua senha: <a href="${url}">${url}</a>`,
-        })
+            // send mail with defined transport object
+            const info = await transporter.sendMail({
+                from: `"Dunna Jewelry" <` + senderEmail + `>`, // sender address
+                to: user.email,
+                subject: 'Editar senha',
+                html: `Por favor, clique no Link para trocar sua senha: <a href="${url}">${url}</a>`
+            })
 
-        // console.log('Message sent: %s', info.messageId)
-    })
+            // console.log('Message sent: %s', info.messageId)
+        }
+    )
 }
 
 userSchema.statics.findByCredentials = async function (email, password) {
