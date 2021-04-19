@@ -16,7 +16,7 @@ router.post('/api/charge', authMiddleware, async (req, res) => {
     const { cart, amount, addressId } = req.body
 
     try {
-        // return res.status(400).send({ message: 'Payment Failed', error: 'Tente novamente mais tarde' })
+        return res.status(400).send({ message: 'Payment Failed', error: 'Tente novamente mais tarde' })
 
         // CHECK IF ADDRESS EXISTS
         const address = await Address.findOne({ _id: addressId, user: req.user._id })
