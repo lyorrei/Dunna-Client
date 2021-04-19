@@ -30,8 +30,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true,
         required: true,
-        minlength: 7,
-        select: false
+        minlength: 7
+        // select: false
     },
     admin: {
         type: Boolean,
