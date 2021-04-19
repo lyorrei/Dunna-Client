@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react'
-import axios from '../../../axios'
 
 import Head from 'next/head'
 import Product from '../../components/product'
@@ -15,6 +14,13 @@ import FilterProducts from '../../components/filterProducts'
 import { FormHandles } from '@unform/core'
 import withCart from '../../HOC/withCart'
 import { GetStaticProps } from 'next'
+
+import {
+    getProducts,
+    getStones,
+    getShapes,
+    getProductTypes
+} from '../../../server/src/common'
 
 const container = {
     hidden: { opacity: 1, scale: 0 },
@@ -153,20 +159,39 @@ const shop: React.FC<Props> = ({
     )
 }
 
-export const getStaticProps: GetStaticProps = async context => {
-    const { data: products } = await axios.get('/products')
-    const { data: stones } = await axios.get('/stones')
-    const { data: shapes } = await axios.get('/shapes')
-    const { data: productTypes } = await axios.get('/productTypes')
+export const getServerSideProps = async ctx => {
+    // GET PRODUCTS
+    const products = JSON.parse(JSON.stringify(await getProducts()))
+    const stones = JSON.parse(JSON.stringify(await getStones()))
+    const shapes = JSON.parse(JSON.stringify(await getShapes()))
+    const productTypes = JSON.parse(JSON.stringify(await getProductTypes()))
+
     return {
         props: {
             products,
             stones,
             shapes,
             productTypes
-        }, // will be passed to the page component as props
-        revalidate: 20
+        } // will be passed to the page component as props
     }
 }
+
+// export const getStaticProps: GetStaticProps = async context => {
+//     // GET PRODUCTS
+//     const products = JSON.parse(JSON.stringify(await getProducts()))
+//     const stones = JSON.parse(JSON.stringify(await getStones()))
+//     const shapes = JSON.parse(JSON.stringify(await getShapes()))
+//     const productTypes = JSON.parse(JSON.stringify(await getProductTypes()))
+
+//     return {
+//         props: {
+//             products,
+//             stones,
+//             shapes,
+//             productTypes
+//         }, // will be passed to the page component as props
+//         revalidate: 20
+//     }
+// }
 
 export default withCart(shop)

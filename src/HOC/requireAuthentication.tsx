@@ -8,27 +8,37 @@ const RequireAuthentication = (WrappedComponent, isAdmin?: boolean) => {
     return class extends React.Component {
         static async getInitialProps(ctx: NextPageContext) {
             let token = null
-            if (ctx.res) {
+            if (ctx.req) {
                 token = ctx.req.headers.cookie?.replace('token=', '')
             }
 
             try {
                 let user = null
                 if (isAdmin) {
-                    let { data } = await axios.get('/users/isadmin', {
-                        headers: {
-                            Cookie: `token=${token};`
-                            // Cookie: `token=${token};`
-                        }
-                    })
-                    user = data
+                    if (ctx.req) {
+                        const { data } = await axios.get('/users/isadmin', {
+                            headers: {
+                                Cookie: `token=${token};`
+                            },
+                        })
+
+                        user = data
+                    } else {
+                        let { data } = await axios.get('/users/isadmin')
+                        user = data
+                    }
                 } else {
-                    let { data } = await axios.get('/users/me', {
-                        headers: {
-                            Cookie: `token=${token};`
-                        }
-                    })
-                    user = data
+                    if (ctx.req) {
+                        let response = await axios.get('/users/me', {
+                            headers: {
+                                Cookie: `token=${token};`
+                            },
+                        })
+                        user = response.data
+                    } else {
+                        let { data } = await axios.get('/users/me')
+                        user = data
+                    }
                 }
 
                 if (WrappedComponent.getInitialProps) {
@@ -41,7 +51,7 @@ const RequireAuthentication = (WrappedComponent, isAdmin?: boolean) => {
 
                 return { user }
             } catch (err) {
-                if (ctx.res) {
+                if (ctx.req) {
                     ctx.res.writeHead(302, {
                         Location: '/auth'
                     })

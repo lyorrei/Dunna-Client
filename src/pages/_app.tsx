@@ -18,13 +18,23 @@ import CookieConsent from 'react-cookie-consent'
 import AlertTemplate from 'react-alert-template-basic'
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 
+import Router from 'next/router'
+import NProgress from 'nprogress' //nprogress module
+import 'nprogress/nprogress.css' //styles of nprogress
+
+
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 const options = {
     // position: positions.BOTTOM_RIGHT,
     timeout: 5000,
     transition: transitions.SCALE
-  }
+}
+
+//Binding events.
+Router.events.on('routeChangeStart', () => NProgress.start())
+Router.events.on('routeChangeComplete', () => NProgress.done())
+Router.events.on('routeChangeError', () => NProgress.done())
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps, router }) => {
     return (

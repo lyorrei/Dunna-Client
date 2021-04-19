@@ -1,4 +1,3 @@
-import { GetStaticPaths, GetStaticProps } from 'next'
 import React, { useEffect, useState } from 'react'
 import axios from '../../../axios'
 
@@ -37,6 +36,11 @@ import { FaShapes } from 'react-icons/fa'
 import { useRouter } from 'next/router'
 import { CircleLoader } from 'react-spinners'
 import { GiMetalBar, GiStoneBlock, GiStoneSphere } from 'react-icons/gi'
+
+import { getProducts, getSingleProduct } from '../../../server/src/common'
+
+import Product from '../../../server/src/models/product'
+import { GetStaticPaths } from 'next'
 
 interface Props {
     product: ProductInterface
@@ -96,7 +100,7 @@ const product: React.FC<Props> = ({ product }) => {
                 initial="hidden"
                 animate="visible"
             >
-                <div style={{ margin: '0 auto', width: '120px' }}>
+                <div style={{ margin: '8rem auto', width: '120px' }}>
                     <CircleLoader color={'#00c2a8'} size={120} />
                 </div>
             </Container>
@@ -155,24 +159,24 @@ const product: React.FC<Props> = ({ product }) => {
                         >
                             {product.images.length > 0 ? (
                                 product.images.map((image, index) => (
-                                        <SelectableImage
-                                            src={image.url}
-                                            alt={'Image ' + index}
-                                            key={image._id}
-                                            onClick={() =>
-                                                setSelectedImage(image.url)
-                                            }
-                                            active={image.url === selectedImage}
-                                        />
+                                    <SelectableImage
+                                        src={image.url}
+                                        alt={'Image ' + index}
+                                        key={image._id}
+                                        onClick={() =>
+                                            setSelectedImage(image.url)
+                                        }
+                                        active={image.url === selectedImage}
+                                    />
                                 ))
                             ) : (
-                                    <SelectableImage
-                                        src={NoImage}
-                                        alt={'noImage'}
-                                        key={'noImage'}
-                                        onClick={() => {}}
-                                        active={true}
-                                    />
+                                <SelectableImage
+                                    src={NoImage}
+                                    alt={'noImage'}
+                                    key={'noImage'}
+                                    onClick={() => {}}
+                                    active={true}
+                                />
                             )}
                         </SmallImageContainer>
                     </LeftContainer>
@@ -231,14 +235,6 @@ const product: React.FC<Props> = ({ product }) => {
                                     <span>Metal: {product.metal.name}</span>
                                 </li>
                             )}
-                            {/* <li>
-                                <FiCheckCircle />
-                                <span>Design único</span>
-                            </li>
-                            <li>
-                                <FiCheckCircle />
-                                <span>Lapidada por profissionais</span>
-                            </li> */}
                         </CheckList>
                     </RightContainer>
                 </GridContainer>
@@ -247,30 +243,39 @@ const product: React.FC<Props> = ({ product }) => {
     )
 }
 
-export const getStaticPaths: GetStaticPaths = async ctx => {
-    const { data: products } = await axios.get('/products')
-
-    const paths = products.map(product => ({
-        params: {
-            id: product._id
-        }
-    }))
-
-    return {
-        paths,
-        fallback: true
-    }
+export const getServerSideProps = async ctx => {
+    const product = JSON.parse(
+        JSON.stringify(await getSingleProduct(ctx.params.id))
+    )
+    return { props: { product } }
 }
 
-export const getStaticProps: GetStaticProps = async ctx => {
-    const { data: product } = await axios.get('/product/' + ctx.params.id)
+// export const getStaticPaths: GetStaticPaths = async ctx => {
+//     // const products = JSON.parse(JSON.stringify(await getProducts()))
+//     const {data: products} = await axios.get('/products')
 
-    return {
-        props: {
-            product
-        },
-        revalidate: 20
-    }
-}
+//     const paths = products.map(product => ({
+//         params: {
+//             id: product._id
+//         }
+//     }))
+//     return {
+//         paths,
+//         fallback: true
+//     }
+// }
+
+// export const getStaticProps = async ctx => {
+//     const product = JSON.parse(
+//         JSON.stringify(await getSingleProduct(ctx.params.id))
+//     )
+
+//     return {
+//         props: {
+//             product
+//         },
+//         revalidate: 20
+//     }
+// }
 
 export default withCart(product)

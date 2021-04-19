@@ -65,8 +65,9 @@ const Home = () => {
             >
                 <Container>
                     <Title>Sua conta</Title>
-                    {items.map(item => (
+                    {items.map((item, index) => (
                         <Box
+                            key={index}
                             link={item.link}
                             Icon={item.icon}
                             title={item.title}

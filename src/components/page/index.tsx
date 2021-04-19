@@ -12,7 +12,7 @@ import Modal from '../modal'
 const page: React.FC<AppProps> = ({ Component, pageProps }) => {
     const { setUser } = useUser()
     const router = useRouter()
-    const [showCookiesModal, setShowCookiesModal] = useState(true)
+    const [showCookiesModal, setShowCookiesModal] = useState(false)
 
     useEffect(() => {
         if (process.env.NODE_ENV !== 'development') {
@@ -27,9 +27,9 @@ const page: React.FC<AppProps> = ({ Component, pageProps }) => {
             .then(res => setUser(res.data))
             .catch(e => {})
 
-        // if (!navigator.cookieEnabled) {
-            // setShowCookiesModal(true)
-        // }
+        if (!navigator.cookieEnabled) {
+            setShowCookiesModal(true)
+        }
     }, [])
 
     return (
@@ -42,7 +42,7 @@ const page: React.FC<AppProps> = ({ Component, pageProps }) => {
                     title="Atenção"
                 >
                     <p style={{ fontSize: '1.8rem' }}>
-                        Caso os cookies no seu navegador não estejam habilitados, por favor habilite-os, se não, partes do site não irão funcionar.
+                        Por favor, habilite seus Cookies!
                     </p>
                 </Modal>
                 <Component {...pageProps} />
