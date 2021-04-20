@@ -21,6 +21,7 @@ interface Props {
     stones: StonesAndShapes[]
     shapes: StonesAndShapes[]
     types: StonesAndShapes[]
+    productTypes: StonesAndShapes[]
     metals: StonesAndShapes[]
     setFormData?: (data: FormData) => void
     setStage?: (stage: number) => void
@@ -38,7 +39,8 @@ const productForm: React.FC<Props> = ({
     setStage,
     noLoading,
     types,
-    metals
+    metals,
+    productTypes
 }) => {
     const [formError, setFormError] = useState(null)
     const formRef = useRef<FormHandles>(null)
@@ -49,7 +51,8 @@ const productForm: React.FC<Props> = ({
 
     const [stonesOptions, setStoneOptions] = useState(null)
     const [shapesOptions, setShapeOptions] = useState(null)
-    const [typesOptions, setTypesOptions] = useState(null)
+    const [productTypesOptions, setProductTypesOption] = useState(null)
+    const [typesOptions, setTypesOption] = useState(null)
     const [metalsOptions, setMetalsOptions] = useState(null)
 
     const optionsToArray = (options: StonesAndShapes[]) => {
@@ -73,8 +76,11 @@ const productForm: React.FC<Props> = ({
         const shapesArray = optionsToArray(shapes)
         setShapeOptions(shapesArray)
 
+        const productTypesArray = optionsToArray(productTypes)
+        setProductTypesOption(productTypesArray)
+
         const typesArray = optionsToArray(types)
-        setTypesOptions(typesArray)
+        setTypesOption(typesArray)
 
         const metalsArray = optionsToArray(metals)
         setMetalsOptions(metalsArray)
@@ -115,7 +121,8 @@ const productForm: React.FC<Props> = ({
                         .typeError('Você deve escrever um número')
                         .required('O peso do diamante é obrigatório'),
                     shape: Yup.string().required('O formato é obrigatório'),
-                    metal: Yup.string().required('O metal é obrigatório')
+                    metal: Yup.string().required('O metal é obrigatório'),
+                    type: Yup.string().required('O tipo é obrigatório')
                 }
             } else {
                 validationObject = {
@@ -192,11 +199,11 @@ const productForm: React.FC<Props> = ({
                     </div>
                 )}
                 <Select
-                    label="Tipo"
+                    label="Tipo do produto"
                     input
                     name="productType"
-                    options={typesOptions}
-                    placeholder="Escolha um tipo"
+                    options={productTypesOptions}
+                    placeholder="Escolha um tipo do produto"
                     onChange={e => setSelectedType(e.label)}
                 />
                 <SideBySide>
@@ -236,21 +243,31 @@ const productForm: React.FC<Props> = ({
                     />
                 </SideBySide>
                 {selectedType === 'Joia' && (
-                    <SideBySide>
+                    <>
+                        <SideBySide>
+                            <Select
+                                label="Tipo"
+                                input
+                                name="type"
+                                options={typesOptions}
+                                placeholder="Escolha um tipo"
+                            />
+
+                            <Select
+                                label="Metal"
+                                input
+                                name="metal"
+                                options={metalsOptions}
+                                placeholder="Escolha um metal"
+                            />
+                        </SideBySide>
                         <Input
                             name="diamondWeigth"
                             type="number"
                             label="Peso do diamante"
                             step=".01"
                         />
-                        <Select
-                            label="Metal"
-                            input
-                            name="metal"
-                            options={metalsOptions}
-                            placeholder="Escolha um metal"
-                        />
-                    </SideBySide>
+                    </>
                 )}
 
                 <InlineButton type="submit">Próximo</InlineButton>

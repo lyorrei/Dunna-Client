@@ -30,8 +30,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true,
         required: true,
-        minlength: 7
-        // select: false
+        minlength: 7,
+        select: false
     },
     admin: {
         type: Boolean,
@@ -118,7 +118,7 @@ userSchema.methods.generateChangePasswordEmail = async function () {
 }
 
 userSchema.statics.findByCredentials = async function (email, password) {
-    const user = await User.findOne({ email })
+    const user = await User.findOne({ email }).select("+password")
 
     if (!user) {
         throw new Error('Não foi possivel entrar')
@@ -133,6 +133,7 @@ userSchema.statics.findByCredentials = async function (email, password) {
     if (!user.confirmed) {
         throw new Error('Confirme seu email')
     }
+
 
     return user
 }

@@ -31,7 +31,7 @@ router.post('/api/users/create', async (req, res) => {
 
         user.generateConfirmEmail()
 
-        res.status(201).send(user)
+        res.status(201).send()
     } catch (e) {
         res.status(400).send({ error: e.message })
     }
@@ -104,6 +104,9 @@ router.post('/api/users/login', async (req, res) => {
         const user = await User.findByCredentials(req.body.email, req.body.password)
         const token = await user.generateAuthToken()
 
+        const userResponse = user.toObject()
+        delete userResponse.password
+
         res.cookie('token', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV !== 'development',
@@ -111,7 +114,7 @@ router.post('/api/users/login', async (req, res) => {
             path: '/',
             sameSite: process.env.NODE_ENV !== 'development' ? 'none' : 'lax',
         })
-        res.send(user)
+        res.send(userResponse)
     } catch (e) {
         res.status(400).send({ error: e.message })
     }

@@ -45,6 +45,11 @@ const productSchema = mongoose.Schema({
         required: false,
         ref: 'Metal'
     },
+    type: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false,
+        ref: 'Type'
+    },
     sold: {
         type: Boolean,
         required: true,

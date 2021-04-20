@@ -26,6 +26,7 @@ import { useRouter } from 'next/router'
 interface Props {
     stones: StonesAndShapes[]
     shapes: StonesAndShapes[]
+    productTypes: StonesAndShapes[]
     types: StonesAndShapes[]
     metals: StonesAndShapes[]
 }
@@ -54,12 +55,13 @@ const productFormVariant = {
     }
 }
 
-const newProduct = ({ stones, shapes, types, metals }: Props) => {
+const newProduct = ({ stones, shapes, productTypes, types, metals }: Props) => {
     const router = useRouter()
     const [uploadedFiles, setUploadedFiles] = useState([])
     const [stage, setStage] = useState(0)
     const [formData, setFormData] = useState(null)
     const [errorMessage, setErrorMessage] = useState(null)
+    const [loading, setLoading] = useState(false)
 
     const handleUpload = (files: File[]) => {
         const uploadedFilesArray = files.map(file => ({
@@ -85,6 +87,7 @@ const newProduct = ({ stones, shapes, types, metals }: Props) => {
     }
 
     const createProduct = async () => {
+        setLoading(true)
         const { data: product } = await axios.post('/product/create', formData)
 
         for (let i = 0; i < uploadedFiles.length; i++) {
@@ -147,6 +150,7 @@ const newProduct = ({ stones, shapes, types, metals }: Props) => {
                             title="Criar Produto"
                             shapes={shapes}
                             stones={stones}
+                            productTypes={productTypes}
                             types={types}
                             metals={metals}
                             setFormData={setFormData}
@@ -175,6 +179,7 @@ const newProduct = ({ stones, shapes, types, metals }: Props) => {
                                         float: 'right',
                                         marginTop: '2rem'
                                     }}
+                                    disabled={loading}
                                 >
                                     Adicionar Produto
                                 </InlineButton>
@@ -189,6 +194,7 @@ const newProduct = ({ stones, shapes, types, metals }: Props) => {
                                 marginRight: '1rem'
                             }}
                             light
+                            disabled={loading}
                         >
                             Voltar
                         </InlineButton>
@@ -213,7 +219,7 @@ newProduct.getInitialProps = async (
             Cookie: `token=${token};`
         }
     })
-    const { data: types } = await axios.get('/productTypes', {
+    const { data: productTypes } = await axios.get('/productTypes', {
         headers: {
             Cookie: `token=${token};`
         }
@@ -223,11 +229,18 @@ newProduct.getInitialProps = async (
             Cookie: `token=${token};`
         }
     })
+
+    const { data: types } = await axios.get('/types', {
+        headers: {
+            Cookie: `token=${token};`
+        }
+    })
     return {
         stones,
         shapes,
-        types,
-        metals
+        productTypes,
+        metals,
+        types
         // will be passed to the page component as props
     }
 }

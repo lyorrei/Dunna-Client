@@ -49,6 +49,9 @@ app.prepare()
         const productTypeRoutes = require('./routers/productType')
         server.use(productTypeRoutes)
 
+        const typeRoutes = require('./routers/type')
+        server.use(typeRoutes)
+
         const metalRoutes = require('./routers/metal')
         server.use(metalRoutes)
 

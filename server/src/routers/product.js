@@ -50,6 +50,7 @@ router.get('/api/product/:id', async (req, res) => {
         await product.populate('productType').execPopulate()
         await product.populate('metal').execPopulate()
         await product.populate('orderItem').execPopulate()
+        await product.populate('type').execPopulate()
 
         res.send(product)
     } catch (e) {
@@ -79,6 +80,7 @@ router.patch('/api/product/edit/:id', adminMiddleware, async (req, res) => {
         'shape',
         'stock_id',
         'productType',
+        'type',
         'metal'
     ]
     const updates = Object.keys(req.body)
@@ -100,6 +102,7 @@ router.patch('/api/product/edit/:id', adminMiddleware, async (req, res) => {
 
         product.diamondWeigth = undefined
         product.metal = undefined
+        product.type = undefined
 
         updates.forEach(update => (product[update] = req.body[update]))
         await product.save()

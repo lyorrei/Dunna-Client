@@ -25,6 +25,7 @@ interface Props {
 const editImage = ({ productImages }: Props) => {
     const router = useRouter()
     const [uploadedFiles, setUploadedFiles] = useState([])
+    const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
 
     useEffect(() => {
@@ -100,6 +101,7 @@ const editImage = ({ productImages }: Props) => {
     }
 
     const editProduct = async () => {
+        setLoading(true)
         uploadedFiles.forEach(file =>
             processUpload(file, router.query.id.toString())
         )
@@ -117,13 +119,12 @@ const editImage = ({ productImages }: Props) => {
             </Head>
             <PageContainer>
                 <Container>
-
                     <Upload
                         title="Editar imagens do produto"
                         onUpload={handleUpload}
                     />
-                     {error && (
-                        <div style={{margin: '2rem 0'}}>
+                    {error && (
+                        <div style={{ margin: '2rem 0' }}>
                             <Alert type={Types.red}>{error}</Alert>
                         </div>
                     )}
@@ -140,6 +141,7 @@ const editImage = ({ productImages }: Props) => {
                                     float: 'right',
                                     marginTop: '2rem'
                                 }}
+                                disabled={loading}
                             >
                                 Editar imagens
                             </InlineButton>

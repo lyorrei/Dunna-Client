@@ -12,11 +12,12 @@ interface Props {
     product: ProductInterface
     stones: StonesAndShapes[]
     shapes: StonesAndShapes[]
-    types: StonesAndShapes[]
+    productTypes: StonesAndShapes[]
     metals: StonesAndShapes[]
+    types: StonesAndShapes[]
 }
 
-const editProduct = ({ product, shapes, stones, types, metals }: Props) => {
+const editProduct = ({ product, shapes, stones, productTypes, types, metals }: Props) => {
     return (
         <>
             <Head>
@@ -31,6 +32,7 @@ const editProduct = ({ product, shapes, stones, types, metals }: Props) => {
                             title="Editar Produto"
                             shapes={shapes}
                             stones={stones}
+                            productTypes={productTypes}
                             types={types}
                             metals={metals}
                             formInitialData={product}
@@ -79,6 +81,15 @@ editProduct.getInitialProps = async (ctx: NextPageContext, token: string) => {
         }
     }
 
+    if (product.type) {
+        const typeName = (' ' + product.type.name).slice(1)
+        const typeValue = (' ' + product.type._id).slice(1)
+        product.type = {
+            label: typeName,
+            value: typeValue
+        }
+    }
+
     const { data: stones } = await axios.get('/stones', {
         headers: {
             Cookie: `token=${token};`
@@ -89,7 +100,7 @@ editProduct.getInitialProps = async (ctx: NextPageContext, token: string) => {
             Cookie: `token=${token};`
         }
     })
-    const { data: types } = await axios.get('/productTypes', {
+    const { data: productTypes } = await axios.get('/productTypes', {
         headers: {
             Cookie: `token=${token};`
         }
@@ -99,13 +110,19 @@ editProduct.getInitialProps = async (ctx: NextPageContext, token: string) => {
             Cookie: `token=${token};`
         }
     })
+    const { data: types } = await axios.get('/types', {
+        headers: {
+            Cookie: `token=${token};`
+        }
+    })
 
     return {
         product,
         stones,
         shapes,
-        types,
-        metals
+        productTypes,
+        metals,
+        types
     }
 }
 

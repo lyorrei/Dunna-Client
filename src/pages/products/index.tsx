@@ -18,6 +18,7 @@ import { MdEdit } from 'react-icons/md'
 import { FaTrash } from 'react-icons/fa'
 import ConfirmModal from '../../components/confirmModal'
 import { BsImageFill } from 'react-icons/bs'
+import { Badge } from '../../components/badge'
 
 export interface Product {
     sold: boolean
@@ -79,6 +80,15 @@ const productsPage = ({ products: productsFromProps }: Props) => {
                     {
                         Header: 'Id do Estoque',
                         accessor: 'stock_id'
+                    },
+                    {
+                        Header: 'Status',
+                        accessor: 'sold',
+                        Cell: props => (
+                            <Badge sold={props.value}>
+                                {props.value ? 'Vendido' : 'Em estoque'}
+                            </Badge>
+                        )
                     },
                     {
                         Header: 'Tipo',
@@ -143,6 +153,7 @@ const productsPage = ({ products: productsFromProps }: Props) => {
             products.map(product => {
                 return {
                     _id: product._id,
+                    sold: product.sold,
                     productType: product.productType.name,
                     stock_id: product.stock_id,
                     name: product.name,
