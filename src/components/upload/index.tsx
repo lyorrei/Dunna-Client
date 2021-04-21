@@ -37,7 +37,7 @@ const upload: React.FC<Props> = ({ title, onUpload }) => {
     return (
         <>
             <Title>{title}</Title>
-            <Dropzone accept="image/*" onDropAccepted={onUpload}>
+            <Dropzone accept="image/*" onDropAccepted={onUpload} maxSize={5242880}>
                 {({
                     getRootProps,
                     getInputProps,
