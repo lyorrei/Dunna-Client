@@ -103,7 +103,7 @@ router.post('/api/charge', authMiddleware, async (req, res) => {
     try {
         return res.status(400).send({
             message: 'Payment Failed',
-            success: false,
+            success: false
         })
 
         const { address, totalAmount } = await check(
@@ -162,8 +162,12 @@ router.post('/api/paypal/create', authMiddleware, async (req, res) => {
     const { cart, amount, addressId } = req.body
 
     try {
+        return res.status(400).send({
+            message: 'Payment Failed',
+            success: false
+        })
         const { address } = await check(addressId, req.user._id, cart, amount)
-            const request = new paypal.orders.OrdersCreateRequest()
+        const request = new paypal.orders.OrdersCreateRequest()
         request.prefer('return=representation')
         request.requestBody({
             intent: 'CAPTURE',
@@ -206,7 +210,7 @@ router.post('/api/paypal/create', authMiddleware, async (req, res) => {
                 }
             ],
             application_context: {
-                shipping_preference: 'SET_PROVIDED_ADDRESS'
+                shipping_preference: 'NO_SHIPPING'
             },
             payer: {
                 email_address: req.user.email,
@@ -237,9 +241,9 @@ router.post('/api/paypal/capture', authMiddleware, async (req, res) => {
     try {
         return res.status(400).send({
             message: 'Payment Failed',
-            success: false,
+            success: false
         })
-        
+
         await check(addressId, req.user._id, cart, amount)
 
         const request = new paypal.orders.OrdersCaptureRequest(orderId)
