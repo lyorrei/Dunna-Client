@@ -51,6 +51,7 @@ interface Props {
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 const checkout = ({ myAddresses, user }: Props) => {
+    const [orderId, setOrderId] = useState(null)
     const [selectedAddress, setSelectedAddress] = useState(null)
     const [stage, setStage] = useState(0)
     const { cart } = useCart()
@@ -72,12 +73,20 @@ const checkout = ({ myAddresses, user }: Props) => {
                     stage={stage}
                     setStage={setStage}
                 />
-                <CheckoutPayment stage={stage} setStage={setStage} />
+                <CheckoutPayment
+                    stage={stage}
+                    setStage={setStage}
+                    orderId={orderId}
+                    setOrderId={setOrderId}
+                    total={total}
+                    selectedAddress={selectedAddress}
+                />
                 <CheckoutConfirm
                     total={total}
                     selectedAddress={selectedAddress}
                     stage={stage}
                     setStage={setStage}
+                    orderId={orderId}
                 />
             </>
         )
@@ -113,6 +122,18 @@ const checkout = ({ myAddresses, user }: Props) => {
 }
 
 checkout.getInitialProps = async (ctx, token) => {
+    if (!ctx.query.method) {
+        ctx.res.writeHead(302, {
+            Location: '/shop'
+        })
+        ctx.res.end()
+    }
+    if (ctx.query.method !== 'stripe' && ctx.query.method !== 'paypal') {
+        ctx.res.writeHead(302, {
+            Location: '/shop'
+        })
+        ctx.res.end()
+    }
     const { data: myAddresses } = await axios.get('/addresses', {
         headers: {
             Cookie: `token=${token};`

@@ -55,10 +55,20 @@ const cart: React.FC<Props> = ({ showCart, setShowCart }) => {
                 <Total>
                     Total: <span>{(total / 100).toFixed(2)}</span>
                 </Total>
-
-                <Link href={"/checkout"}>
-                    <CheckoutButton>Checkout</CheckoutButton>
-                </Link>
+                <div
+                    style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(2, 1fr)',
+                        gridGap: '2rem'
+                    }}
+                >
+                    <Link href={'/checkout?method=stripe'}>
+                        <CheckoutButton>Stripe</CheckoutButton>
+                    </Link>
+                    <Link href={'/checkout?method=paypal'}>
+                        <CheckoutButton>Paypal</CheckoutButton>
+                    </Link>
+                </div>
             </>
         )
     }

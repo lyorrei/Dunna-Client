@@ -23,3 +23,13 @@ export const ButtonsContainer = styled.div`
         margin-right: 2rem;
     }
 `
+
+export const SvgContainer = styled.div`
+    text-align: center;
+    
+    svg {
+        width: 8rem;
+        height: 8rem;
+        fill: ${props => props.theme.colors.primary};
+    }
+`

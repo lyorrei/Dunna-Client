@@ -26,13 +26,15 @@ interface Props {
     setStage(stage: number): void
     total: number
     selectedAddress: string
+    orderId: string
 }
 
 const checkoutConfirm: React.FC<Props> = ({
     setStage,
     stage,
     selectedAddress,
-    total
+    total,
+    orderId
 }) => {
     const [isVisible, setIsVisible] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -50,7 +52,7 @@ const checkoutConfirm: React.FC<Props> = ({
         }
     }, [stage])
 
-    const handleSubmit = async () => {
+    const handleStripeSubmit = async () => {
         setLoading(true)
         setError(null)
         const cardElement = elements.getElement(CardElement)
@@ -69,7 +71,29 @@ const checkoutConfirm: React.FC<Props> = ({
                     card: cardElement
                 }
             })
-            Router.replace('/checkout/success/' + data.orderId)
+            Router.replace('/checkout/success/' + data.createdOrderId)
+        } catch (e) {
+            setLoading(false)
+            setError(
+                'Não foi possível realizar a compra, por favor tente novamente mais tarde. Se o problema persistir, por favor entre em contato conosco.'
+            )
+        }
+    }
+
+    const handlePaypalSubmit = async () => {
+        setLoading(true)
+        setError(null)
+
+        const requestData = {
+            cart,
+            amount: total,
+            addressId: selectedAddress,
+            orderId
+        }
+
+        try {
+            const { data } = await axios.post('/paypal/capture', requestData)
+            Router.replace('/checkout/success/' + data.createdOrderId)
         } catch (e) {
             setLoading(false)
             setError(
@@ -103,7 +127,13 @@ const checkoutConfirm: React.FC<Props> = ({
                             </InlineButton>
                         </div>
 
-                        <InlineButton onClick={handleSubmit}>
+                        <InlineButton
+                            onClick={
+                                Router.query.method === 'stripe'
+                                    ? handleStripeSubmit
+                                    : handlePaypalSubmit
+                            }
+                        >
                             Confirmar
                         </InlineButton>
                     </ButtonsContainer>

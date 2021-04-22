@@ -2,7 +2,11 @@ import { CardElement, useStripe } from '@stripe/react-stripe-js'
 import React, { useEffect, useState } from 'react'
 import { Container, HeaderContainer } from '../../styles/pages/checkout'
 import { InlineButton } from '../button'
-import { ButtonsContainer } from './style'
+import { ButtonsContainer, SvgContainer } from './style'
+import PaypalButton from '../paypalButton'
+import { useRouter } from 'next/router'
+import { useCart } from '../../context/Cart'
+import { BsCheckCircle } from 'react-icons/bs'
 
 const cartElementOptions = {
     style: {
@@ -28,12 +32,25 @@ const containerVariants = {
 interface Props {
     stage: number
     setStage(stage: number): void
+    orderId: string
+    setOrderId(id: string): void
+    total: number
+    selectedAddress: string
 }
 
-const checkoutPayment: React.FC<Props> = ({ setStage, stage }) => {
+const checkoutPayment: React.FC<Props> = ({
+    setStage,
+    stage,
+    orderId,
+    setOrderId,
+    total,
+    selectedAddress
+}) => {
     const stripe = useStripe()
     const [isCompleted, setIsCompleted] = useState(false)
     const [isVisible, setIsVisible] = useState(false)
+    const router = useRouter()
+    const { cart } = useCart()
 
     useEffect(() => {
         if (stage === 1) {
@@ -58,10 +75,26 @@ const checkoutPayment: React.FC<Props> = ({ setStage, stage }) => {
                 <h2>Pagamento</h2>
             </HeaderContainer>
 
-            <CardElement
-                onChange={target => HandleCardChange(target)}
-                options={cartElementOptions}
-            />
+            {router.query.method === 'stripe' ? (
+                <CardElement
+                    onChange={target => HandleCardChange(target)}
+                    options={cartElementOptions}
+                />
+            ) : !isCompleted ? (
+                <PaypalButton
+                    cart={cart}
+                    setIsCompleted={setIsCompleted}
+                    orderId={orderId}
+                    setOrderId={setOrderId}
+                    total={total}
+                    selectedAddress={selectedAddress}
+                />
+            ) : (
+                <SvgContainer>
+                    <BsCheckCircle />
+                </SvgContainer>
+            )}
+
             <ButtonsContainer>
                 <div>
                     <InlineButton onClick={() => setStage(0)} light>
