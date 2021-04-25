@@ -58,6 +58,11 @@ const checkoutPayment: React.FC<Props> = ({
         } else {
             setIsVisible(false)
         }
+
+        if (stage === 0 && router.query.method === 'paypal') {
+            setIsCompleted(false)
+            setOrderId(null)
+        }
     }, [stage])
 
     const HandleCardChange = target => {

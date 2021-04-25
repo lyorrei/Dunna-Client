@@ -17,7 +17,6 @@ export default class Example extends react.Component<MyProps> {
     render() {
         return (
             <PayPalButton
-                shippingPreference="NO_SHIPPING"
                 createOrder={async (data, actions) => {
                     try {
                         const requestData = {

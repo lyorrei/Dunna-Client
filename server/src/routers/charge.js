@@ -171,6 +171,9 @@ router.post('/api/paypal/create', authMiddleware, async (req, res) => {
         request.prefer('return=representation')
         request.requestBody({
             intent: 'CAPTURE',
+            application_context: {
+                shipping_preference: 'SET_PROVIDED_ADDRESS',
+            },
             purchase_units: [
                 {
                     amount: {
@@ -209,9 +212,6 @@ router.post('/api/paypal/create', authMiddleware, async (req, res) => {
                     }))
                 }
             ],
-            application_context: {
-                shipping_preference: 'NO_SHIPPING'
-            },
             payer: {
                 email_address: req.user.email,
                 name: {
