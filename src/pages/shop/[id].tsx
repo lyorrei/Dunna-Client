@@ -124,7 +124,7 @@ const product: React.FC<Props> = ({ product }) => {
     return (
         <>
             <Head>
-                <title>Product - {product.name}</title>
+                <title>Produto - {product.name}</title>
             </Head>
             <Container
                 variants={containerVariant}
@@ -249,33 +249,5 @@ export const getServerSideProps = async ctx => {
     )
     return { props: { product } }
 }
-
-// export const getStaticPaths: GetStaticPaths = async ctx => {
-//     // const products = JSON.parse(JSON.stringify(await getProducts()))
-//     const {data: products} = await axios.get('/products')
-
-//     const paths = products.map(product => ({
-//         params: {
-//             id: product._id
-//         }
-//     }))
-//     return {
-//         paths,
-//         fallback: true
-//     }
-// }
-
-// export const getStaticProps = async ctx => {
-//     const product = JSON.parse(
-//         JSON.stringify(await getSingleProduct(ctx.params.id))
-//     )
-
-//     return {
-//         props: {
-//             product
-//         },
-//         revalidate: 20
-//     }
-// }
 
 export default withCart(product)

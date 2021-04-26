@@ -6,7 +6,7 @@ import RequireAuthentication from '../../HOC/requireAuthentication'
 
 import ProductFields from '../../components/productFields'
 
-import { StonesAndShapes } from '../shop'
+import { StonesAndShapes } from '../shop/products'
 
 
 interface Props {

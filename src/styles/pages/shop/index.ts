@@ -37,10 +37,9 @@ export const Container = styled(motion.div)`
 export const GridContainer = styled(motion.div)`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
-
-    @media only screen and (max-width: 37.5em) {
-        grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-    } //600px
+    grid-gap: 4rem;
+    grid-row-gap: 6rem;
+    margin-bottom: 4rem;
 `
 
 export const NoProducts = styled.p`

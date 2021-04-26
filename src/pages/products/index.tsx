@@ -12,7 +12,7 @@ import {
 import Table from '../../components/table'
 import { NextPageContext } from 'next'
 import product, { ImageProduct } from '../../components/product'
-import { StonesAndShapes } from '../shop'
+import { StonesAndShapes } from '../shop/products'
 import Link from 'next/link'
 import { MdEdit } from 'react-icons/md'
 import { FaTrash } from 'react-icons/fa'

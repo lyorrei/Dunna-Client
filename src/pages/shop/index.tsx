@@ -1,26 +1,16 @@
 import React, { useRef, useState } from 'react'
 
 import Head from 'next/head'
-import Product from '../../components/product'
-import {
-    Container,
-    Title,
-    GridContainer,
-    NoProducts
-} from '../../styles/pages/shop/shop'
-import product, { ProductInterface } from '../../components/product'
+import { Container, Title, GridContainer } from '../../styles/pages/shop'
 
-import FilterProducts from '../../components/filterProducts'
-import { FormHandles } from '@unform/core'
 import withCart from '../../HOC/withCart'
-import { GetStaticProps } from 'next'
+import ShopCard from '../../components/shopCard'
 
-import {
-    getProducts,
-    getStones,
-    getShapes,
-    getProductTypes
-} from '../../../server/src/common'
+import Shop1 from '../../images/shop-1.jpg'
+import Shop2 from '../../images/shop-2.jpg'
+import Shop3 from '../../images/shop-3.jpg'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
 
 const container = {
     hidden: { opacity: 1, scale: 0 },
@@ -56,124 +46,79 @@ export const item = {
     }
 }
 
-export interface StonesAndShapes {
-    _id: string
-    name: string
-}
-
-interface Props {
-    products: ProductInterface[]
-    stones: StonesAndShapes[]
-    shapes: StonesAndShapes[]
-    productTypes: StonesAndShapes[]
-}
-
-const shop: React.FC<Props> = ({
-    products: productsFromProps,
-    stones,
-    shapes,
-    productTypes
-}) => {
-    const [products, setProducts] = useState(productsFromProps)
-    const [priceValue, setPriceValue] = useState({ min: 0, max: 10000 })
-    const formRef = useRef<FormHandles>(null)
-
-    const handleFilterChange = (range?) => {
-        setTimeout(() => {
-            const data: any = formRef.current.getData()
-            let filteredProducts = [...productsFromProps]
-
-            if (data.productTypes.length > 0) {
-                filteredProducts = filteredProducts.filter(product =>
-                    data.productTypes.includes(product.productType)
-                )
-            }
-
-            if (data.stones.length > 0) {
-                filteredProducts = filteredProducts.filter(product =>
-                    data.stones.includes(product.stone)
-                )
-            }
-
-            if (data.shapes.length > 0) {
-                filteredProducts = filteredProducts.filter(product =>
-                    data.shapes.includes(product.shape)
-                )
-            }
-
-            if (range) {
-                filteredProducts = filteredProducts.filter(product => {
-                    const priceFormated = product.price / 100
-
-                    return (
-                        priceFormated >= range.min && priceFormated <= range.max
-                    )
-                })
-            }
-
-            setProducts(filteredProducts)
-        }, 0)
-    }
-
-    const handleFiltering = range => {
-        setPriceValue(range)
-    }
+const shop: React.FC = () => {
+    const [items] = useState([
+        {
+            title: 'Aneis',
+            link: '/shop/products/?type=Anel',
+            imageUrl: Shop1,
+            description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequats.'
+        },
+        {
+            title: 'Brincos',
+            link: '/shop/products/?type=Brinco',
+            imageUrl: Shop2,
+            description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequats.'
+        },
+        {
+            title: 'Colares',
+            link: '/shop/products/?type=Colar',
+            imageUrl: Shop3,
+            description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequats.'
+        },
+        {
+            title: 'Pingentes',
+            link: '/shop/products/?type=Pingente',
+            imageUrl: Shop3,
+            description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequats.'
+        },
+        {
+            title: 'Pulseiras',
+            link: '/shop/products/?type=Pulseira',
+            imageUrl: Shop2,
+            description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequats.'
+        },
+        {
+            title: 'Puras',
+            link: '/shop/products/?type=Pura',
+            imageUrl: Shop1,
+            description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequats.'
+        }
+    ])
 
     return (
         <>
             <Head>
-                <title>Dunna Jewelry - Shop</title>
+                <title>Dunna - Shop</title>
             </Head>
             <Container variants={container} initial="hidden" animate="visible">
-                <Title variants={titleVariant}>Dunna Jewelry Shop</Title>
+                <Title variants={titleVariant}>Dunna - Shop</Title>
 
-                {productsFromProps.length > 0 ? (
-                    <>
-                        <FilterProducts
-                            productTypes={productTypes}
-                            handleFilterChange={handleFilterChange}
-                            stones={stones}
-                            shapes={shapes}
-                            formRef={formRef}
-                            priceValue={priceValue}
-                            changeHandler={handleFiltering}
-                        />
-
-                        <GridContainer>
-                            {products.length > 0 ? (
-                                products.map(product => (
-                                    <Product key={product._id} {...product} />
-                                ))
-                            ) : (
-                                <NoProducts>
-                                    Nenhum produto encontrado
-                                </NoProducts>
-                            )}
-                        </GridContainer>
-                    </>
-                ) : (
-                    <NoProducts>O estoque está esgotado</NoProducts>
-                )}
+                <GridContainer>
+                    {items.map(card => (
+                        <motion.div variants={item}>
+                            <Link href={card.link}>
+                                <a>
+                                    <ShopCard
+                                        title={card.title}
+                                        link={card.link}
+                                        imageUrl={card.imageUrl}
+                                        description={card.description}
+                                    />
+                                </a>
+                            </Link>
+                        </motion.div>
+                    ))}
+                </GridContainer>
             </Container>
         </>
     )
-}
-
-export const getServerSideProps = async ctx => {
-    // GET PRODUCTS AND OPTIONS
-    const products = JSON.parse(JSON.stringify(await getProducts()))
-    const stones = JSON.parse(JSON.stringify(await getStones()))
-    const shapes = JSON.parse(JSON.stringify(await getShapes()))
-    const productTypes = JSON.parse(JSON.stringify(await getProductTypes()))
-
-    return {
-        props: {
-            products,
-            stones,
-            shapes,
-            productTypes
-        } // will be passed to the page component as props
-    }
 }
 
 export default withCart(shop)

@@ -67,7 +67,7 @@ const loginForm: React.FC<Props> = ({ setLoading }) => {
                     <a>Problemas com o Login?</a>
                 </Link>
 
-                <Button type="submit">Vamoo</Button>
+                <Button type="submit">Entrar</Button>
             </Form>
         </div>
     )

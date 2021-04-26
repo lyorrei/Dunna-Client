@@ -83,10 +83,6 @@ const cart: React.FC<Props> = ({ showCart, setShowCart }) => {
 
     return (
         <>
-            <Head>
-                <title>Dunna - Cart</title>
-            </Head>
-
             <Container
                 showCart={showCart}
                 // variants={containerVariants}

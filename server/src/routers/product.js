@@ -6,12 +6,29 @@ const { admin: adminMiddleware } = require('../middleware/auth')
 const Product = require('../models/product')
 const ProductImage = require('../models/productImage')
 const OrderItem = require('../models/orderItem')
+const Type = require('../models/type')
+const ProductType = require('../models/ProductType')
 
 const { getProducts } = require('../common')
 
 router.get('/api/products', async (req, res) => {
     try {
-        const fetchedProducts = await Product.find({ sold: false })
+        const match = {
+            sold: false
+        }
+        if (req.query.type) {
+            if (req.query.type === 'Pura') {
+                const productType = await ProductType.findOne({
+                    name: 'Pedra Lapidada'
+                })
+                match.productType = productType._id
+            } else {
+                const type = await Type.findOne({ name: req.query.type })
+                if (type) match.type = type._id
+            }
+        }
+
+        const fetchedProducts = await Product.find(match)
         const productsPromise = fetchedProducts.map(
             async product => await product.populate('images').execPopulate()
         )

@@ -9,7 +9,7 @@ import Upload from '../../../components/upload'
 import FileList, { uploadedFilesInterface } from '../../../components/fileList'
 
 import { ProductInterface } from '../../../components/product'
-import { StonesAndShapes } from '../../shop'
+import { StonesAndShapes } from '../../shop/products'
 import { PageContainer, Container } from '../../../styles/pages/products/edit'
 import { InlineButton } from '../../../components/button'
 import { useRouter } from 'next/router'

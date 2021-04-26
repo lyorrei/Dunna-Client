@@ -11,7 +11,7 @@ import ProductForm from '../../components/productForm'
 import Upload from '../../components/upload'
 import FileList, { uploadedFilesInterface } from '../../components/fileList'
 
-import { StonesAndShapes } from '../shop'
+import { StonesAndShapes } from '../shop/products'
 import { NextPageContext } from 'next'
 import { motion } from 'framer-motion'
 

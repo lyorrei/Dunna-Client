@@ -5,7 +5,7 @@ import { Container, Content, ImageContainer, Price, Title } from './style'
 
 import Button, { InlineButton } from '../button'
 
-import { item, StonesAndShapes } from '../../pages/shop'
+import { item, StonesAndShapes } from '../../pages/shop/products'
 
 import { useCart, checkIfProductIsInCart } from '../../context/Cart'
 

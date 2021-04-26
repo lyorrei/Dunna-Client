@@ -5,7 +5,7 @@ import RequireAuthentication from '../../../HOC/requireAuthentication'
 import Head from 'next/head'
 import ProductForm from '../../../components/productForm'
 import { ProductInterface } from '../../../components/product'
-import { StonesAndShapes } from '../../shop'
+import { StonesAndShapes } from '../../shop/products'
 import { PageContainer, Container } from '../../../styles/pages/products/edit'
 
 interface Props {

@@ -12,7 +12,7 @@ import {
 
 import Table from '../../components/table'
 
-import { StonesAndShapes } from '../shop'
+import { StonesAndShapes } from '../shop/products'
 import ConfirmModal from '../../components/confirmModal'
 import Modal from '../../components/modal'
 import { Input } from '../../components/input/style'

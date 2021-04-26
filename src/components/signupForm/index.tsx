@@ -83,7 +83,7 @@ const signupForm: React.FC<Props> = ({ setLoading }) => {
             <Input name="email" label="Email" type="email" />
             <Input name="password" label="Senha" type="password" />
 
-            <Button type="submit">Vamoo</Button>
+            <Button type="submit">Criar conta</Button>
         </Form>
     )
 }

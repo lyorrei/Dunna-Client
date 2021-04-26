@@ -1,7 +1,7 @@
 import React from 'react'
 import { PageContainer as PageContainerStyle, Container } from './style'
 
-const pageContainerVariant = {
+export const pageContainerVariant = {
     hidden: { opacity: 1, scale: 0 },
     visible: {
         opacity: 1,

@@ -9,7 +9,7 @@ import Input from '../input'
 import Select from '../select'
 import { Form, SideBySide, Title } from './style'
 import { Address } from '../../pages/addresses'
-import { StonesAndShapes } from '../../pages/shop'
+import { StonesAndShapes } from '../../pages/shop/products'
 import { ProductInterface } from '../product'
 import Alert, { Types } from '../alert'
 
