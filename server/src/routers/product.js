@@ -7,7 +7,7 @@ const Product = require('../models/product')
 const ProductImage = require('../models/productImage')
 const OrderItem = require('../models/orderItem')
 const Type = require('../models/type')
-const ProductType = require('../models/ProductType')
+const ProductType = require('../models/productType')
 
 const { getProducts } = require('../common')
 
