@@ -141,7 +141,7 @@ const shop: React.FC<Props> = ({
             title = 'Pulseiras'
             break
         case 'Pura':
-            title = 'Pedras Puras'
+            title = 'Gemas'
             break
     }
 
