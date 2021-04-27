@@ -10,6 +10,7 @@ import {
     TitleContainer
 } from '../../styles/pages/company'
 import { pageContainerVariant } from '../../components/PageContainers'
+import Image from '../../images/company.jpg'
 
 interface Props {}
 
@@ -25,7 +26,7 @@ const company: React.FC<Props> = props => {
                 animate="visible"
             >
                 <Company>
-                    <Container>
+                    <Container imageUrl={Image}>
                         <Content>
                             <TitleContainer>
                                 <h2>Sobre a empresa</h2>

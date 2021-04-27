@@ -39,7 +39,11 @@ export const Company = styled.div`
     } //600px
 `
 
-export const Container = styled.div`
+interface ContainerProps {
+    imageUrl: string
+}
+
+export const Container = styled.div<ContainerProps>`
     margin: 0 auto;
     max-width: 80vw;
     background-image: linear-gradient(
@@ -48,7 +52,7 @@ export const Container = styled.div`
             rgba(255, 255, 255, 0.8) 50%,
             transparent 50%
         ),
-        url(../img/about-test.jpg);
+        url(${props => props.imageUrl});
     background-position: center;
     background-size: cover;
     box-shadow: 1rem 1rem 2.5rem rgba(0, 0, 0, 0.6);
@@ -60,7 +64,7 @@ export const Container = styled.div`
                 rgba(255, 255, 255, 0.8) 70%,
                 transparent 70%
             ),
-            url(../img/about-test.jpg);
+            url(${props => props.imageUrl});
     } //1200px
 
     @media only screen and (max-width: 56.25em) {
@@ -70,7 +74,7 @@ export const Container = styled.div`
                 rgba(255, 255, 255, 0.8) 80%,
                 transparent 80%
             ),
-            url(../img/about-test.jpg);
+            url(${props => props.imageUrl});
     } //900px
 
     @media only screen and (max-width: 37.5em) {
@@ -80,7 +84,7 @@ export const Container = styled.div`
                 rgba(255, 255, 255, 0.8),
                 rgba(255, 255, 255, 0.8)
             ),
-            url(../img/about-test.jpg);
+            url(${props => props.imageUrl});
     } //600px
 
     @media only screen and (max-width: 25em) {
@@ -112,17 +116,26 @@ export const Content = styled.div`
 export const TitleContainer = styled.div`
     margin-bottom: 5rem;
 
+    @media only screen and (max-width: 96.75em) {
+        margin-bottom: 3rem;
+    } //1500px
+
     h2 {
         font-size: 5rem;
         color: ${props => props.theme.colors.primary};
         font-weight: 300;
         transition: all 0.2s;
+
+        @media only screen and (max-width: 96.75em) {
+            font-size: 4rem;
+        } //1500px
     }
 `
 
 export const TextContainer = styled.div`
     margin-top: 1rem;
     margin-bottom: 6rem;
+
     p {
         color: var(--color-grey-dark-1);
         font-size: 1.8rem;
@@ -131,6 +144,20 @@ export const TextContainer = styled.div`
         column-count: 2;
         -webkit-column-gap: 2rem;
         column-gap: 2rem;
+
+        @media only screen and (max-width: 96.75em) {
+            -webkit-column-count: 1;
+            column-count: 1;
+            -webkit-column-gap: none;
+            column-gap: none;
+        } //1500px
+
+        @media only screen and (max-width: 75em) {
+            -webkit-column-count: 2;
+            column-count: 2;
+            -webkit-column-gap: 2rem;
+            column-gap: 2rem;
+        } //1200px
 
         @media only screen and (max-width: 37.5em) {
             -webkit-column-count: 1;

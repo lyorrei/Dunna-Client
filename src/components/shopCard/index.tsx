@@ -18,7 +18,7 @@ const shopCard: React.FC<Props> = ({ title, imageUrl, link, description }) => {
                 {/* <div>
                     <Link href={link}><a>Comprar</a></Link>
                 </div> */}
-                <figcaption>{description}</figcaption>
+                {/* <figcaption>{description}</figcaption> */}
             </figure>
             <h4>{title}</h4>
         </Card>

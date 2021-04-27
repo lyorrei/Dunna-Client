@@ -28,7 +28,7 @@ export const Card = styled.div`
 
         &:hover img {
             transform: scale(1);
-            filter: blur(0.2rem) brightness(60%);
+            /* filter: blur(0.2rem) brightness(60%); */
         }
 
         &:hover div {

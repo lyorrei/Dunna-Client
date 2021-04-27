@@ -9,6 +9,10 @@ import ShopCard from '../../components/shopCard'
 import Shop1 from '../../images/shop-1.jpg'
 import Shop2 from '../../images/shop-2.jpg'
 import Shop3 from '../../images/shop-3.jpg'
+import Shop4 from '../../images/shop-4.jpg'
+import Shop5 from '../../images/shop-5.jpg'
+import Shop6 from '../../images/shop-6.jpg'
+
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { CenteredTitle } from '../../components/title'
@@ -73,21 +77,21 @@ const shop: React.FC = () => {
         {
             title: 'Pingentes',
             link: '/shop/products/?type=Pingente',
-            imageUrl: Shop3,
+            imageUrl: Shop4,
             description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam'
         },
         {
             title: 'Pulseiras',
             link: '/shop/products/?type=Pulseira',
-            imageUrl: Shop2,
+            imageUrl: Shop5,
             description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam'
         },
         {
             title: 'Gemas',
             link: '/shop/products/?type=Gema',
-            imageUrl: Shop1,
+            imageUrl: Shop6,
             description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam'
         }
