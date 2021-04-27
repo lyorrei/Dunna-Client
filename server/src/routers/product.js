@@ -17,7 +17,7 @@ router.get('/api/products', async (req, res) => {
             sold: false
         }
         if (req.query.type) {
-            if (req.query.type === 'Pura') {
+            if (req.query.type === 'Gema') {
                 const productType = await ProductType.findOne({
                     name: 'Pedra Lapidada'
                 })
@@ -34,6 +34,32 @@ router.get('/api/products', async (req, res) => {
         )
         const products = await Promise.all(productsPromise)
         // const products = await getProducts()
+        res.send(products)
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
+router.get('/api/products/spotlight', async (req, res) => {
+    try {
+        const fetchedProducts = await Product.find( {
+            sold: false,
+            spotlight: true
+        })
+
+        if (fetchedProducts.length === 0) {
+            const lastProducts = await Product.find({sold: false}).limit(3)
+            const lastProductsPromise = lastProducts.map(
+                async product => await product.populate('images').execPopulate()
+            )
+            const products = await Promise.all(lastProductsPromise)
+            return res.send(products)
+        }
+
+        const productsPromise = fetchedProducts.map(
+            async product => await product.populate('images').execPopulate()
+        )
+        const products = await Promise.all(productsPromise)
         res.send(products)
     } catch (e) {
         res.status(500).send()
@@ -98,7 +124,8 @@ router.patch('/api/product/edit/:id', adminMiddleware, async (req, res) => {
         'stock_id',
         'productType',
         'type',
-        'metal'
+        'metal',
+        'spotlight'
     ]
     const updates = Object.keys(req.body)
 

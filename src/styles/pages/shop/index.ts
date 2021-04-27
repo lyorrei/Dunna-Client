@@ -1,21 +1,6 @@
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
-export const Title = styled(motion.h1)`
-    text-transform: uppercase;
-    color: ${props => props.theme.colors.greyDark1};
-    text-align: center;
-    font-size: 4rem;
-    font-weight: 600;
-    padding-top: 2rem;
-    margin-bottom: 6rem;
-
-    @media only screen and (max-width: 56.25em) {
-        font-size: 3rem;
-        margin-bottom: 4rem;
-    } //900px
-`
-
 export const Container = styled(motion.div)`
     padding: 4rem 16rem;
     background-color: ${props => props.theme.colors.white};

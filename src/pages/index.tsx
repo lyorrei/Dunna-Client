@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import axios from '../../axios'
 
 import Head from 'next/head'
 
-import { PageContainer } from '../styles/pages'
+import { HeaderContainer, PageContainer } from '../styles/pages'
 
 import Header from '../components/header'
 import withCart from '../HOC/withCart'
+import Spotlight from '../components/spotlight'
+import { motion } from 'framer-motion'
+import { GetServerSideProps } from 'next'
+import { ProductInterface } from '../components/product'
 
 const pageContainerVariant = {
     hidden: { opacity: 1, scale: 0 },
@@ -18,21 +23,40 @@ const pageContainerVariant = {
     }
 }
 
-const Home = () => {
+interface Props {
+    products: ProductInterface[]
+}
+
+const Home = ({ products }: Props) => {
     return (
         <>
             <Head>
                 <title>Dunna Jewelry</title>
             </Head>
-            <PageContainer
+            <motion.div
                 variants={pageContainerVariant}
                 initial="hidden"
                 animate="visible"
             >
-                <Header />
-            </PageContainer>
+                <HeaderContainer>
+                    <Header />
+                </HeaderContainer>
+                <PageContainer>
+                    <Spotlight products={products} />
+                </PageContainer>
+            </motion.div>
         </>
     )
+}
+
+export const getServerSideProps: GetServerSideProps = async ctx => {
+    const { data: products } = await axios.get('/products/spotlight')
+
+    return {
+        props: {
+            products
+        }
+    }
 }
 
 export default withCart(Home)

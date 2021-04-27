@@ -33,6 +33,7 @@ export interface Product {
     diamondWeigth: number
     shape: StonesAndShapes
     images: ImageProduct[]
+    metal: StonesAndShapes
 }
 
 interface Props {

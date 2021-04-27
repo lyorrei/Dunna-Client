@@ -7,7 +7,7 @@ import { ClipLoader } from 'react-spinners'
 import { InlineButton } from '../button'
 import Input from '../input'
 import Select from '../select'
-import { Form, SideBySide, Title } from './style'
+import { CheckboxContainer, Form, SideBySide, Title } from './style'
 import { Address } from '../../pages/addresses'
 import { StonesAndShapes } from '../../pages/shop/products'
 import { ProductInterface } from '../product'
@@ -55,6 +55,8 @@ const productForm: React.FC<Props> = ({
     const [typesOptions, setTypesOption] = useState(null)
     const [metalsOptions, setMetalsOptions] = useState(null)
 
+    const [spotlight, setSpotlight] = useState(false)
+
     const optionsToArray = (options: StonesAndShapes[]) => {
         return options.map(option => ({
             value: option._id,
@@ -65,6 +67,7 @@ const productForm: React.FC<Props> = ({
     useEffect(() => {
         if (formInitialData) {
             setSelectedType(formInitialData.productType.label)
+            setSpotlight(formInitialData.spotlight)
         }
     }, [formInitialData])
 
@@ -86,7 +89,7 @@ const productForm: React.FC<Props> = ({
         setMetalsOptions(metalsArray)
     }, [stones, shapes, types, metals])
 
-    const handleSubmit: SubmitHandler<FormData> = async formData => {
+    const handleSubmit = async formData => {
         try {
             // Remove all previous errors
             setFormError(null)
@@ -152,6 +155,8 @@ const productForm: React.FC<Props> = ({
             await schema.validate(formData, {
                 abortEarly: false
             })
+
+            formData.spotlight = spotlight
 
             // Validation passed
             if (!noLoading) {
@@ -269,6 +274,15 @@ const productForm: React.FC<Props> = ({
                         />
                     </>
                 )}
+                <CheckboxContainer>
+                    <span>Destaque:</span>
+                    <input
+                        name="spotlight"
+                        type="checkbox"
+                        checked={spotlight}
+                        onChange={e => setSpotlight(e.target.checked)}
+                    />
+                </CheckboxContainer>
 
                 <InlineButton type="submit">Próximo</InlineButton>
             </Form>

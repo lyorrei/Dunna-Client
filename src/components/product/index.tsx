@@ -36,6 +36,7 @@ export interface ProductInterface {
     metal: string & StonesAndShapes & { value: string; label: string }
     productType: string & StonesAndShapes & { value: string; label: string }
     images?: ImageProduct[]
+    spotlight: boolean
 }
 
 const product: React.FC<ProductInterface> = props => {

@@ -2,8 +2,6 @@ import { motion } from 'framer-motion'
 import styled from 'styled-components'
 import { Form as Unform } from '@unform/web'
 
-
-
 export const Title = styled.h2`
     font-size: 4rem;
     font-weight: 300;
@@ -32,4 +30,16 @@ export const Form = styled(Unform)<FormProps>`
     }
 
     ${props => props.loading && 'display: none;'}
+`
+
+export const CheckboxContainer = styled.div`
+    display: flex;
+    align-items: center;
+
+    span {
+        font-size: 1.5rem;
+        display: inline-block;
+        margin-right: 1rem;
+        color: ${props => props.theme.colors.greyDark1};
+    }
 `

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 
 import Head from 'next/head'
-import { Container, Title, GridContainer } from '../../styles/pages/shop'
+import { Container, GridContainer } from '../../styles/pages/shop'
 
 import withCart from '../../HOC/withCart'
 import ShopCard from '../../components/shopCard'
@@ -11,6 +11,7 @@ import Shop2 from '../../images/shop-2.jpg'
 import Shop3 from '../../images/shop-3.jpg'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import { CenteredTitle } from '../../components/title'
 
 const container = {
     hidden: { opacity: 1, scale: 0 },
@@ -85,7 +86,7 @@ const shop: React.FC = () => {
         },
         {
             title: 'Gemas',
-            link: '/shop/products/?type=Pura',
+            link: '/shop/products/?type=Gema',
             imageUrl: Shop1,
             description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequats.'
@@ -98,7 +99,7 @@ const shop: React.FC = () => {
                 <title>Dunna - Shop</title>
             </Head>
             <Container variants={container} initial="hidden" animate="visible">
-                <Title variants={titleVariant}>Dunna - Shop</Title>
+                <CenteredTitle variants={titleVariant}>Dunna - Shop</CenteredTitle>
 
                 <GridContainer>
                     {items.map(card => (
