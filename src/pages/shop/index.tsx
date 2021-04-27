@@ -11,7 +11,7 @@ import Shop1 from '../../images/shop-1.jpg'
 import Shop2 from '../../images/shop-2.jpg'
 import Shop3 from '../../images/shop-3.jpg'
 import Shop4 from '../../images/shop-4.jpg'
-import Shop5 from '../../images/shop-5.jpg'
+import Shop5 from '../../images/shop-7.jpg'
 import Shop6 from '../../images/shop-6.jpg'
 
 import Link from 'next/link'
