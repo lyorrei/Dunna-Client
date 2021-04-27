@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 
 import Head from 'next/head'
+
 import { Container, GridContainer } from '../../styles/pages/shop'
 
 import withCart from '../../HOC/withCart'
