@@ -13,8 +13,12 @@ const moveInTopWithTranslate = keyframes`
 
 export const Card = styled.div`
     position: relative;
-    height: 50rem;
+    height: 40rem;
     box-shadow: 1rem 1rem 4rem rgb(0 0 0 / 40%);
+
+    @media only screen and (max-width: 37.5em) {
+        height: 30rem;
+    } //600px
 
     figure {
         height: 100%;
@@ -85,6 +89,8 @@ export const Card = styled.div`
             transform: translate(-50%, -50%);
             opacity: 0;
             transition: all 0.5s;
+            width: 80%;
+            text-align: center;
 
             @media only screen and (max-width: 56.25em) {
                 display: none;
