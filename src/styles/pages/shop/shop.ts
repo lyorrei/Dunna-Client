@@ -32,11 +32,19 @@ export const Container = styled(motion.div)`
     @media only screen and (max-width: 37.5em) {
         padding: 4rem 2rem;
     } //600px
+
+    @media only screen and (max-width: 25em) {
+        padding: 4rem 1rem;
+    } //400px
 `
 
 export const GridContainer = styled(motion.div)`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
+
+    @media only screen and (max-width: 37.5em) {
+        grid-template-columns: repeat(2, 1fr);
+    } //600px
 
     /* @media only screen and (max-width: 37.5em) {
         grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));

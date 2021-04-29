@@ -11,21 +11,25 @@ export const Container = styled(motion.div)`
     @media only screen and (max-width: 37.5em) {
         padding: 2rem;
     } //600px
+
+    @media only screen and (max-width: 25em) {
+        padding: 1rem;
+    } //400px
 `
 
 export const ImageContainer = styled.div`
     height: 30rem;
 
     border-radius: ${props => props.theme.sizes.borderRadius};
-    transition: all .2s;
+    transition: all 0.2s;
     position: relative;
 
     &:hover {
-        transform: scale(1.05)
+        transform: scale(1.05);
     }
 
     @media only screen and (max-width: 37.5em) {
-        height: 25rem;
+        height: 15rem;
     } //600px
 `
 
@@ -41,6 +45,9 @@ export const Title = styled.h2`
     font-weight: 400;
     transform-origin: 0;
 
+    @media only screen and (max-width: 25em) {
+        font-size: 2rem;
+    } //400px
 `
 
 export const Price = styled.p`
@@ -48,4 +55,8 @@ export const Price = styled.p`
     font-weight: 300;
     margin-top: 1.5rem;
     font-family: sans-serif;
+
+    @media only screen and (max-width: 25em) {
+        font-size: 1.5rem;
+    } //400px
 `

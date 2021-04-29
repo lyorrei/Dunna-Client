@@ -12,6 +12,6 @@ export const Container = styled.div`
     } //600px
 
     @media only screen and (max-width: 25em) {
-        padding: 6rem 4rem;
+        padding: 6rem 2rem;
     } //400px
 `
