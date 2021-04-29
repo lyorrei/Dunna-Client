@@ -10,10 +10,11 @@ export const Container = styled(motion.div)`
     width: 100%;
     padding: 10rem 0;
     position: relative;
+    height: 110rem;
 `
 
 export const ItemContainer = styled(motion.div)`
     position: absolute;
     top: 5%;
-    width: 40%;
+    width: 50%;
 `
