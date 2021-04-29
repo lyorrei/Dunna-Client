@@ -33,23 +33,28 @@ const company: React.FC<Props> = props => {
                             </TitleContainer>
                             <TextContainer>
                                 <p>
-                                    Lorem ipsum dolor, sit amet consectetur
-                                    adipisicing elit. Possimus magni, autem
-                                    aperiam, nobis quaerat quia culpa veritatis
-                                    odit dolores iusto perspiciatis laboriosam
-                                    assumenda asperiores earum ex voluptas
-                                    corrupti, illum quibusdam Lorem ipsum dolor
-                                    sit amet consectetur adipisicing elit.
-                                    Veniam, architecto. Nihil, ad nisi quos
-                                    veniam illum tenetur ullam natus
-                                    exercitationem ducimus nulla accusamus ipsam
-                                    optio perferendis repellendus doloremque
-                                    quisquam aut Lorem ipsum dolor sit amet
-                                    consectetur adipisicing elit. Repellat, eius
-                                    sint blanditiis quae quasi illum accusantium
-                                    ab doloremque doloribus et numquam hic
-                                    ducimus consequatur nesciunt quaerat.
-                                    Possimus aut commodi sapiente.
+                                    A DUNNA jewelry é uma empresa que veio para
+                                    inovar o mercado de jóias finas no Brasil.
+                                    Com foco nas pedras preciosas nacionais e
+                                    padrão de qualidade internacional, buscamos
+                                    valorizar o design e a delicadeza das peças.
+                                    Utilizamos gemas e diamantes selecionados.
+                                    Nossas jóias possuem excelência em
+                                    acabamento e garantia de qualidade. Apesar
+                                    de jovem, esta é uma empresa que conta com
+                                    uma fundadora muito experiente no ramo, que
+                                    atua no mercado de alta joalheria em Tóquio,
+                                    no Japão, há quase 30 anos. DUNNA jewelry is
+                                    a company that came to innovate the fine
+                                    jewelry market in Brazil. Focusing on
+                                    ethically sourced gems and international
+                                    quality standard, we seek to value the
+                                    design and delicacy of the pieces. Our
+                                    jewels have excellence and quality
+                                    assurance. Although young, this is a company
+                                    with a very experienced founder, who has
+                                    been operating in the high jewelry market in
+                                    Tokyo (Japan) for almost 30 years.
                                 </p>
                             </TextContainer>
                         </Content>
