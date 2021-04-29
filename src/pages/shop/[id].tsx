@@ -209,25 +209,25 @@ const product: React.FC<Props> = ({ product }) => {
                                 <span>Pedra: {product.stone.name}</span>
                             </li>
 
-                            {product.stoneWeigth && product.stoneWeigth > 0 && (
+                            {product.stoneWeigth && product.stoneWeigth > 0 ? (
                                 <li>
                                     <FaWeight />
                                     <span>
                                         Peso da Pedra: {product.stoneWeigth} ct
                                     </span>
                                 </li>
-                            )}
+                            ) : null}
 
                             {product.diamondWeigth &&
-                                product.diamondWeigth > 0 && (
-                                    <li>
-                                        <RiVipDiamondLine />
-                                        <span>
-                                            Peso do diamante:{' '}
-                                            {product.diamondWeigth} ct
-                                        </span>
-                                    </li>
-                                )}
+                            product.diamondWeigth > 0 ? (
+                                <li>
+                                    <RiVipDiamondLine />
+                                    <span>
+                                        Peso do diamante:{' '}
+                                        {product.diamondWeigth} ct
+                                    </span>
+                                </li>
+                            ) : null}
 
                             <li>
                                 <FaShapes />
