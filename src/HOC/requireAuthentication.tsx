@@ -19,7 +19,7 @@ const RequireAuthentication = (WrappedComponent, isAdmin?: boolean) => {
                         const { data } = await axios.get('/users/isadmin', {
                             headers: {
                                 Cookie: `token=${token};`
-                            },
+                            }
                         })
 
                         user = data
@@ -32,7 +32,7 @@ const RequireAuthentication = (WrappedComponent, isAdmin?: boolean) => {
                         let response = await axios.get('/users/me', {
                             headers: {
                                 Cookie: `token=${token};`
-                            },
+                            }
                         })
                         user = response.data
                     } else {
@@ -67,18 +67,22 @@ const RequireAuthentication = (WrappedComponent, isAdmin?: boolean) => {
             return (
                 <>
                     {isAdmin ? (
-                        <>
+                        <div
+                            style={{
+                                display: 'flex'
+                            }}
+                        >
                             <Sidebar />
                             <div
                                 style={{
-                                    position: 'absolute',
-                                    left: '18vw',
-                                    width: '82vw'
+                                    // position: 'absolute',
+                                    // marginLeft: '18vw',
+                                    flex: '1 0 82vw'
                                 }}
                             >
                                 <WrappedComponent {...this.props} />
                             </div>
-                        </>
+                        </div>
                     ) : (
                         <WrappedComponent {...this.props} />
                     )}

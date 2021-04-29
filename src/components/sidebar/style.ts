@@ -4,12 +4,13 @@ export const Container = styled.div`
     background-color: ${props => props.theme.colors.greyDark1};
     transition: all 2s;
     min-height: calc(100vh - 6rem);
-    height: 100%;
-    width: 18vw;
+    /* height: 100vh; */
+    /* width: 18vw; */
+    flex: 0 0 18vw;
     transition: all 0.8s ease-out;
-    position: fixed;
+    /* position: fixed;
     top: 6rem;
-    left: 0;
+    left: 0; */
     z-index: 10;
 
     div {

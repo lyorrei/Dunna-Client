@@ -165,5 +165,10 @@ export const TextContainer = styled.div`
             -webkit-column-gap: none;
             column-gap: none;
         } //600px
+
+        span {
+            margin-top: 1.6rem;
+            display: inline-block;
+        }
     }
 `

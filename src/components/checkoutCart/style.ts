@@ -43,7 +43,7 @@ export const Cart = styled(Box)`
 
     @media only screen and (max-width: 75em) {
         top: 5%;
-        left: 13rem;
+        left: 16rem;
         width: 75%;
     } //1200px
 

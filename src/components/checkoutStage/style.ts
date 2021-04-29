@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const Stage = styled.div`
-    position: fixed;
+    position: absolute;
     top: 10rem;
     left: 2%;
 

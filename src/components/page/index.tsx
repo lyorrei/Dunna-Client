@@ -8,6 +8,7 @@ import { Content } from '../../styles/pages/app'
 import { useUser } from '../../context/User'
 import { useRouter } from 'next/router'
 import Modal from '../modal'
+import Footer from '../footer'
 
 const page: React.FC<AppProps> = ({ Component, pageProps }) => {
     const { setUser } = useUser()
@@ -46,6 +47,7 @@ const page: React.FC<AppProps> = ({ Component, pageProps }) => {
                     </p>
                 </Modal>
                 <Component {...pageProps} />
+                <Footer />
             </Content>
             <GlobalStyles />
         </>

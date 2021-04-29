@@ -12,7 +12,7 @@ export const PageContainer = styled(motion.div)<PageContainerProps>`
 
     &::before {
         content: '';
-        position: fixed;
+        position: absolute;
         top: 0;
         left: 0;
         width: 100%;
@@ -60,12 +60,12 @@ export const Container = styled(Box)`
     @media only screen and (max-width: 75em) {
         width: 75%;
         top: 35rem;
-        left: 13rem;
+        left: 16rem;
     } //1200px
 
     @media only screen and (max-width: 37.5em) {
         width: 90%;
-        top: 35rem;
+        top: 40rem;
         left: 5%;
     } //600px
 `

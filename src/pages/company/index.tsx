@@ -44,17 +44,21 @@ const company: React.FC<Props> = props => {
                                     de jovem, esta é uma empresa que conta com
                                     uma fundadora muito experiente no ramo, que
                                     atua no mercado de alta joalheria em Tóquio,
-                                    no Japão, há quase 30 anos. DUNNA jewelry is
-                                    a company that came to innovate the fine
-                                    jewelry market in Brazil. Focusing on
-                                    ethically sourced gems and international
-                                    quality standard, we seek to value the
-                                    design and delicacy of the pieces. Our
-                                    jewels have excellence and quality
-                                    assurance. Although young, this is a company
-                                    with a very experienced founder, who has
-                                    been operating in the high jewelry market in
-                                    Tokyo (Japan) for almost 30 years.
+                                    no Japão, há quase 30 anos.
+                                    <br />
+                                    <span>
+                                        DUNNA jewelry is a company that came to
+                                        innovate the fine jewelry market in
+                                        Brazil. Focusing on ethically sourced
+                                        gems and international quality standard,
+                                        we seek to value the design and delicacy
+                                        of the pieces. Our jewels have
+                                        excellence and quality assurance.
+                                        Although young, this is a company with a
+                                        very experienced founder, who has been
+                                        operating in the high jewelry market in
+                                        Tokyo (Japan) for almost 30 years.
+                                    </span>
                                 </p>
                             </TextContainer>
                         </Content>

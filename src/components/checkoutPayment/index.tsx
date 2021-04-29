@@ -101,11 +101,13 @@ const checkoutPayment: React.FC<Props> = ({
             )}
 
             <ButtonsContainer>
-                <div>
-                    <InlineButton onClick={() => setStage(0)} light>
-                        Voltar
-                    </InlineButton>
-                </div>
+                {router.query.method === 'stripe' && (
+                    <div>
+                        <InlineButton onClick={() => setStage(0)} light>
+                            Voltar
+                        </InlineButton>
+                    </div>
+                )}
 
                 <InlineButton
                     onClick={() => setStage(2)}
