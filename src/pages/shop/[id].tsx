@@ -208,12 +208,16 @@ const product: React.FC<Props> = ({ product }) => {
                                 <GiStoneBlock />
                                 <span>Pedra: {product.stone.name}</span>
                             </li>
-                            <li>
-                                <FaWeight />
-                                <span>
-                                    Peso da Pedra: {product.stoneWeigth} ct
-                                </span>
-                            </li>
+
+                            {product.stoneWeigth && product.stoneWeigth > 0 && (
+                                <li>
+                                    <FaWeight />
+                                    <span>
+                                        Peso da Pedra: {product.stoneWeigth} ct
+                                    </span>
+                                </li>
+                            )}
+
                             {product.diamondWeigth &&
                                 product.diamondWeigth > 0 && (
                                     <li>
