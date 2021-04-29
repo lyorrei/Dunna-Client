@@ -284,7 +284,9 @@ const productForm: React.FC<Props> = ({
                     />
                 </CheckboxContainer>
 
-                <InlineButton type="submit">Próximo</InlineButton>
+                <InlineButton type="submit">
+                    {submitType === 'patch' ? 'Editar' : 'Próximo'}
+                </InlineButton>
             </Form>
 
             {loading && (

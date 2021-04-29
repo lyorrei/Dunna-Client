@@ -64,47 +64,45 @@ const editImage = ({ productImages }: Props) => {
         setUploadedFiles(uploadedFilesUpdated)
     }
 
-    const processUpload = async (
-        uploadedFile: uploadedFilesInterface,
-        productId: string
-    ) => {
-        const data = new FormData()
-        if (uploadedFile.uploaded) {
-            return
-        }
-        data.append('file', uploadedFile.file, uploadedFile.name)
-        data.append('product', productId)
-
-        try {
-            const { data: createdProduct } = await axios.post(
-                '/productImage',
-                data,
-                {
-                    onUploadProgress: e => {
-                        const progress = Math.round((e.loaded * 100) / e.total)
-                        updateFile(uploadedFile.id, { progress })
-                    }
-                }
-            )
-            updateFile(uploadedFile.id, {
-                uploaded: true,
-                id: createdProduct._id,
-                url: createdProduct.url
-            })
-            router.replace('/products')
-        } catch (e) {
-            updateFile(uploadedFile.id, {
-                error: true
-            })
-            setError(e.response.data.error)
-        }
-    }
-
     const editProduct = async () => {
         setLoading(true)
-        uploadedFiles.forEach(file =>
-            processUpload(file, router.query.id.toString())
-        )
+
+        for (let i = 0; i < uploadedFiles.length; i++) {
+            const data = new FormData()
+
+            if (uploadedFiles[i].uploaded) {
+                continue
+            }
+            data.append('file', uploadedFiles[i].file, uploadedFiles[i].name)
+            data.append('product', router.query.id.toString())
+
+            try {
+                const { data: createdProduct } = await axios.post(
+                    '/productImage',
+                    data,
+                    {
+                        onUploadProgress: e => {
+                            const progress = Math.round(
+                                (e.loaded * 100) / e.total
+                            )
+                            updateFile(uploadedFiles[i].id, { progress })
+                        }
+                    }
+                )
+                updateFile(uploadedFiles[i].id, {
+                    uploaded: true,
+                    id: createdProduct._id,
+                    url: createdProduct.url
+                })
+            } catch (e) {
+                updateFile(uploadedFiles[i].id, {
+                    error: true
+                })
+                return setError(e.response.data.error)
+            }
+        }
+
+        router.replace('/products')
     }
 
     const handleDelete = async (id: string) => {

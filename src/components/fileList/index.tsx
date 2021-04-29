@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CircularProgressbar } from 'react-circular-progressbar'
 
 import { Container, FileInfo, Preview } from './style'
@@ -24,6 +24,14 @@ interface Props {
 }
 
 const fileList: React.FC<Props> = ({ files, onDelete }) => {
+    const [enabled, setEnabled] = useState(true)
+    useEffect(() => {
+        const uploadedFiles = files.filter(file => file.uploaded === true)
+        if (uploadedFiles.length === 0 || uploadedFiles.length === 1) {
+            setEnabled(false)
+        }
+    }, [files])
+
     return (
         <Container>
             {files.map(uploadedFile => (
@@ -34,7 +42,7 @@ const fileList: React.FC<Props> = ({ files, onDelete }) => {
                             <strong>{uploadedFile.name}</strong>
                             <span>
                                 {uploadedFile.readableSize}{' '}
-                                {!!uploadedFile.url && files.length > 1 && (
+                                {!!uploadedFile.url && files.length > 1 && enabled && (
                                     <button
                                         onClick={() =>
                                             onDelete(uploadedFile.id)
