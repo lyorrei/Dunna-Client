@@ -78,7 +78,7 @@ const shop: React.FC<Props> = ({
     productTypes
 }) => {
     const [products, setProducts] = useState(productsFromProps)
-    const [priceValue, setPriceValue] = useState({ min: 0, max: 10000 })
+    const [priceValue, setPriceValue] = useState({ min: 0, max: 60000 })
     const formRef = useRef<FormHandles>(null)
     const router = useRouter()
 

@@ -87,12 +87,12 @@ const filterProducts: React.FC<Props> = ({
                 <RangeSliderContainer color="red">
                     <h3>Preço:</h3>
                     <InputRange
-                        maxValue={10000}
+                        maxValue={60000}
                         minValue={0}
                         value={priceValue}
                         onChange={changeHandler}
                         onChangeComplete={value => handleFilterChange(value)}
-                        step={1000}
+                        step={5000}
                         formatLabel={(value, type) => {
                             if (type === 'min' || type === 'max') {
                                 return `${value}`
