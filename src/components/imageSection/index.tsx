@@ -8,14 +8,12 @@ const imageSection: React.FC = () => {
     return (
         <Container imageUrl={Image}>
             <TextContainer>
-                <h2>Uma nova joalheria</h2>
+                <h2>Um novo conceito</h2>
                 <p>
-                    A Dunna é uma nova empresa que veio para introduzir um novo
-                    tipo de lapidação... Lorem, ipsum dolor sit amet consectetur
-                    adipisicing elit. Laborum sequi pariatur soluta excepturi
-                    debitis ut asperiores earum, odio reiciendis in, quaerat
-                    eveniet illo atque. Magnam quidem excepturi incidunt
-                    consequuntur pariatur.
+                    As joias Dunna são leves e versáteis, componhem tanto o look
+                    para o dia a dia quanto para festas, tendo as pedras
+                    coloridas como elemento central e o diamante como
+                    coadjuvante para adornar e enaltecer a gema.
                 </p>
                 <div>
                     <Link href="/company">
