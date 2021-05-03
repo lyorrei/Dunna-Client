@@ -44,7 +44,7 @@ const Home = ({ products }: Props) => {
                 </HeaderContainer>
                 <PageContainer>
                     <Spotlight products={products} />
-                    {/* <ImageSection /> */}
+                    <ImageSection />
                 </PageContainer>
             </motion.div>
         </>

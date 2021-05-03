@@ -12,4 +12,43 @@ export const Container = styled.div<ContainerProps>`
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 70% 20%;
+    position: relative;
+`
+
+export const TextContainer = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+
+    color: ${props => props.theme.colors.white};
+
+    @media only screen and (max-width: 37.5em) {
+        width: 49%;
+        left: 50%;
+        top: 40%;
+    } //600px
+
+    @media only screen and (max-width: 25em) {
+        width: 80%;
+    } //400px
+
+    h2 {
+        margin-bottom: 2rem;
+        font-size: 5rem;
+        font-weight: 300;
+    }
+
+    p {
+        font-size: 2.4rem;
+        margin-bottom: 2.4rem;
+    }
+
+    div {
+        width: 40%;
+
+        @media only screen and (max-width: 25em) {
+            width: 100%;
+        } //400px
+    }
 `

@@ -94,4 +94,14 @@ export const EditButton = styled.button`
     }
 `
 
+export const NoBackgroundButton = styled(Button)`
+    background: none;
+    border: 1px solid ${props => props.theme.colors.white};
+    font-size: 2rem;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+`
+
 export default Button
