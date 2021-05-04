@@ -7,7 +7,8 @@ export const PageContainer = styled(motion.div)`
 `
 
 export const Company = styled.div`
-    padding: 12rem 0;
+    padding: 8rem 0;
+    min-height: calc(100vh - 6rem);
     background-image: linear-gradient(
         105deg,
         ${props => props.theme.colors.primary} 0%,
@@ -94,7 +95,7 @@ export const Container = styled.div<ContainerProps>`
 
 export const Content = styled.div`
     width: 50%;
-    padding: 8rem;
+    padding: 6rem;
     padding-left: 5rem;
 
     @media only screen and (max-width: 75em) {
