@@ -4,6 +4,7 @@ import axios from '../../../axios'
 import { Nav, LogoBox, NavBox, Li, ToogleBox } from './style'
 import Link from 'next/link'
 import Logo from '../../images/logo.jpg'
+
 import { FaUser, FaUserCircle } from 'react-icons/fa'
 
 import AuthDropdown from '../dropdown'
@@ -64,7 +65,10 @@ const navbar: React.FC = () => {
                         <a>Loja</a>
                     </Link>
                 </Li>
-                <Li isClicked={clicked} isActive={router.pathname === '/company'}>
+                <Li
+                    isClicked={clicked}
+                    isActive={router.pathname === '/company'}
+                >
                     <Link href="/company">
                         <a>Empresa</a>
                     </Link>

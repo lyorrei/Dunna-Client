@@ -45,7 +45,7 @@ export const Img = styled(motion.img)`
 `
 
 export const Title = styled.h1`
-    font-size: 12rem;
+    font-size: 8rem;
     font-weight: 600;
     color: ${props => props.theme.colors.white};
     z-index: 100;
@@ -73,15 +73,19 @@ export const Title = styled.h1`
     }
 
     @media only screen and (max-width: 112.5em) {
-        font-size: 8rem;
-    }
+        font-size: 6rem;
+    } //1800px
+
+    @media only screen and (max-width: 84.375em) {
+        font-size: 5rem;
+    } //1350px
 
     @media only screen and (max-width: 75em) {
-        font-size: 6rem;
+        font-size: 4rem;
     } //1200px
 
     @media only screen and (max-width: 56.25em) {
-        font-size: 3.8rem;
+        /* font-size: 3.8rem; */
         top: 10%;
         text-align: center;
     } //900px

@@ -10,7 +10,6 @@ export const Nav = styled.nav`
     height: 6rem;
     display: flex;
     z-index: 15;
-    padding: 0 3rem;
 
     position: fixed;
     top: 0;
@@ -22,10 +21,15 @@ export const Nav = styled.nav`
 `
 
 export const LogoBox = styled.div`
-    margin-left: 1rem;
     display: flex;
     align-items: center;
     height: 100%;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
 
     img {
         height: 100%;
