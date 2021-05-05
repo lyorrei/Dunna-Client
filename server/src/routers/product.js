@@ -14,7 +14,8 @@ const { getProducts } = require('../common')
 router.get('/api/products', async (req, res) => {
     try {
         const match = {
-            sold: false
+            sold: false,
+            visible: true
         }
         if (req.query.type) {
             if (req.query.type === 'Gema') {
@@ -42,13 +43,14 @@ router.get('/api/products', async (req, res) => {
 
 router.get('/api/products/spotlight', async (req, res) => {
     try {
-        const fetchedProducts = await Product.find( {
+        const fetchedProducts = await Product.find({
             sold: false,
+            visible: true,
             spotlight: true
         })
 
         if (fetchedProducts.length === 0) {
-            const lastProducts = await Product.find({sold: false}).limit(3)
+            const lastProducts = await Product.find({ sold: false }).limit(3)
             const lastProductsPromise = lastProducts.map(
                 async product => await product.populate('images').execPopulate()
             )
@@ -74,7 +76,11 @@ router.get('/api/productsall', adminMiddleware, async (req, res) => {
             await fetchedProducts[i].populate('shape').execPopulate()
             await fetchedProducts[i].populate('stone').execPopulate()
             await fetchedProducts[i].populate('orderItem').execPopulate()
-            await fetchedProducts[i].populate('productType').execPopulate()
+            // await fetchedProducts[i].populate('productType').execPopulate()
+
+            if (fetchedProducts[i].type) {
+                await fetchedProducts[i].populate('type').execPopulate()
+            }
         }
 
         res.send(fetchedProducts)
@@ -125,6 +131,7 @@ router.patch('/api/product/edit/:id', adminMiddleware, async (req, res) => {
         'productType',
         'type',
         'metal',
+        'visible',
         'spotlight'
     ]
     const updates = Object.keys(req.body)

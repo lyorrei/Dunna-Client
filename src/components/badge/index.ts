@@ -1,7 +1,9 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 interface BadgeProps {
-    sold: boolean
+    type: string
+    sold?: boolean
+    visible?: boolean
 }
 
 export const Badge = styled.span<BadgeProps>`
@@ -17,7 +19,18 @@ export const Badge = styled.span<BadgeProps>`
     border-radius: 0.25rem;
 
     ${props =>
-        props.sold
-            ? `background-color: #198754!important;`
-            : `background-color: #0d6efd!important;`}
+        props.type === 'sold' &&
+        css`
+            ${props.sold === true
+                ? `background-color: #198754!important;`
+                : `background-color: #0d6efd!important;`}
+        `}
+
+    ${props =>
+        props.type === 'visible' &&
+        css`
+            ${props.visible === true
+                ? `background-color: #17a2b8!important;`
+                : `background-color: #6c757d!important;`}
+        `}
 `

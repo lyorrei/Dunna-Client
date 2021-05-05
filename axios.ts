@@ -7,7 +7,7 @@ interface Axios extends AxiosInstance {
 
 const instance: Axios = axios.create({
     withCredentials: true,
-    baseURL: process.env.NODE_ENV !== 'development' ? 'https://dunna.herokuapp.com/api' : `http://localhost:3000/api`
+    baseURL: process.env.NEXT_PUBLIC_APP_URL + '/api' //process.env.NODE_ENV !== 'development' ? 'https://dunna.herokuapp.com/api' : `http://localhost:3000/api`
 })
 
 instance.defaults.headers.common.Accept = 'application/json'

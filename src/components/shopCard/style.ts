@@ -28,28 +28,27 @@ export const Card = styled.div`
 
         &:hover img {
             transform: scale(1);
-            /* filter: blur(0.2rem) brightness(60%); */
         }
 
-        &:hover div {
+        /* &:hover div {
             animation: ${moveInTopWithTranslate} 0.5s ease-out;
             opacity: 1;
-        }
+        } */
 
         &:hover figcaption {
             opacity: 1;
         }
 
         img {
-            width: 100%;
+            /* width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; */
             transition: all 0.5s;
             transform: scale(1.4);
             object-position: center;
         }
 
-        div {
+        /* div {
             position: absolute;
             top: 14%;
             left: 50%;
@@ -78,9 +77,9 @@ export const Card = styled.div`
                 color: ${props => props.theme.colors.white};
                 text-transform: uppercase;
             }
-        }
+        } */
 
-        figcaption {
+        /* figcaption {
             font-size: 2.2rem;
             color: ${props => props.theme.colors.white};
             position: absolute;
@@ -95,7 +94,7 @@ export const Card = styled.div`
             @media only screen and (max-width: 56.25em) {
                 display: none;
             } //900px
-        }
+        } */
     }
 
     h4 {

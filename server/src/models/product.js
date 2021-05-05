@@ -56,6 +56,11 @@ const productSchema = mongoose.Schema(
             required: true,
             default: false
         },
+        visible: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
         spotlight: {
             type: Boolean,
             required: true,

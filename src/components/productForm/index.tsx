@@ -55,6 +55,7 @@ const productForm: React.FC<Props> = ({
     const [typesOptions, setTypesOption] = useState(null)
     const [metalsOptions, setMetalsOptions] = useState(null)
 
+    const [visible, setVisible] = useState(false)
     const [spotlight, setSpotlight] = useState(false)
 
     const optionsToArray = (options: StonesAndShapes[]) => {
@@ -67,6 +68,7 @@ const productForm: React.FC<Props> = ({
     useEffect(() => {
         if (formInitialData) {
             setSelectedType(formInitialData.productType.label)
+            setVisible(formInitialData.visible)
             setSpotlight(formInitialData.spotlight)
         }
     }, [formInitialData])
@@ -156,6 +158,7 @@ const productForm: React.FC<Props> = ({
                 abortEarly: false
             })
 
+            formData.visible = visible
             formData.spotlight = spotlight
 
             // Validation passed
@@ -274,15 +277,26 @@ const productForm: React.FC<Props> = ({
                         />
                     </>
                 )}
-                <CheckboxContainer>
-                    <span>Destaque:</span>
-                    <input
-                        name="spotlight"
-                        type="checkbox"
-                        checked={spotlight}
-                        onChange={e => setSpotlight(e.target.checked)}
-                    />
-                </CheckboxContainer>
+                <SideBySide>
+                    <CheckboxContainer>
+                        <span>Visível:</span>
+                        <input
+                            name="visible"
+                            type="checkbox"
+                            checked={visible}
+                            onChange={e => setVisible(e.target.checked)}
+                        />
+                    </CheckboxContainer>
+                    <CheckboxContainer>
+                        <span>Destaque:</span>
+                        <input
+                            name="spotlight"
+                            type="checkbox"
+                            checked={spotlight}
+                            onChange={e => setSpotlight(e.target.checked)}
+                        />
+                    </CheckboxContainer>
+                </SideBySide>
 
                 <InlineButton type="submit">
                     {submitType === 'patch' ? 'Editar' : 'Próximo'}

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card } from './style'
+import Image from 'next/image'
 
 import Link from 'next/link'
 
@@ -14,7 +15,8 @@ const shopCard: React.FC<Props> = ({ title, imageUrl, link, description }) => {
     return (
         <Card>
             <figure>
-                <img src={imageUrl} alt="Image" />
+                <Image layout="fill" src={imageUrl} objectFit="cover" quality={100} />
+                {/* <img src={imageUrl} alt="Image" /> */}
                 {/* <div>
                     <Link href={link}><a>Comprar</a></Link>
                 </div> */}

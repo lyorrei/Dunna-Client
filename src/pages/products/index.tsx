@@ -24,6 +24,7 @@ export interface Product {
     sold: boolean
     _id: string
     productType: StonesAndShapes
+    type: StonesAndShapes
     stock_id: number
     name: string
     description: string
@@ -34,6 +35,7 @@ export interface Product {
     shape: StonesAndShapes
     images: ImageProduct[]
     metal: StonesAndShapes
+    visible: boolean
 }
 
 interface Props {
@@ -86,14 +88,26 @@ const productsPage = ({ products: productsFromProps }: Props) => {
                         Header: 'Status',
                         accessor: 'sold',
                         Cell: props => (
-                            <Badge sold={props.value}>
+                            <Badge type="sold" sold={props.value}>
                                 {props.value ? 'Vendido' : 'Em estoque'}
                             </Badge>
                         )
                     },
                     {
+                        Header: 'Visível',
+                        accessor: 'visible',
+                        Cell: props => {
+                            console.log(props)
+                            return (
+                                <Badge type="visible" visible={props.value}>
+                                    {props.value ? 'Visível' : 'Escondido'}
+                                </Badge>
+                            )
+                        }
+                    },
+                    {
                         Header: 'Tipo',
-                        accessor: 'productType'
+                        accessor: 'type'
                     },
                     {
                         Header: 'Nome',
@@ -106,15 +120,6 @@ const productsPage = ({ products: productsFromProps }: Props) => {
                     {
                         Header: 'Pedra',
                         accessor: 'stone'
-                    },
-                    {
-                        Header: 'Peso da pedra',
-                        accessor: 'stoneWeigth'
-                    },
-
-                    {
-                        Header: 'Formato',
-                        accessor: 'shape'
                     },
                     {
                         Header: 'Ações',
@@ -155,14 +160,16 @@ const productsPage = ({ products: productsFromProps }: Props) => {
                 return {
                     _id: product._id,
                     sold: product.sold,
-                    productType: product.productType.name,
+                    visible: product.visible,
+                    // productType: product.productType.name,
+                    type: product.type ? product.type.name : 'Gema',
                     stock_id: product.stock_id,
                     name: product.name,
                     price: product.price,
                     stone: product.stone ? product.stone.name : product.stone,
                     stoneWeigth: product.stoneWeigth,
                     diamondWeigth: product.diamondWeigth,
-                    shape: product.shape.name
+                    shape: product.shape.name,
                 }
             }),
         [products]

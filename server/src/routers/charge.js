@@ -28,7 +28,7 @@ const check = async (addressId, userId, cart, amount) => {
     // CHECK IF ALL PRODUCTS EXISTS
     const products = cart.map(
         async product =>
-            await Product.findOne({ _id: product._id, sold: false })
+            await Product.findOne({ _id: product._id, sold: false, visible: true })
     )
     const resultado = await Promise.all(products).catch(e => {
         throw new Error({
@@ -88,8 +88,10 @@ const create = async (addressId, userId, amount, cart) => {
         // CHANGE PRODUCT FIELD SOLD TO TRUE
         const product = await Product.findOne({
             _id: cart[i]._id,
-            sold: false
+            sold: false,
+            visible: true
         })
+        product.visible = false
         product.sold = true
         await product.save()
     }
