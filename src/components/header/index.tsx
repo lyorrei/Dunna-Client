@@ -174,7 +174,7 @@ const header: React.FC = () => {
     return (
         <Container variants={containerVariant} animate={containerAnimation}>
             <Title>
-                Dunna - A nova marca da alta joalheria <span>brasileira</span>
+                A nova marca da alta joalheria <span>brasileira</span>
                 <Subtitle>
                     Bem vindo a era da nova joalheria artesanal. Estamos aqui
                     para revolucionar o mercado de joias e pedras.

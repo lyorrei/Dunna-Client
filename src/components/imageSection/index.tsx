@@ -10,7 +10,7 @@ const imageSection: React.FC = () => {
             <TextContainer>
                 <h2>Um novo conceito</h2>
                 <p>
-                    As joias Dunna são leves e versáteis, componhem tanto o look
+                    As joias Dunna são leves e versáteis, compõem tanto o look
                     para o dia a dia quanto para festas, tendo as pedras
                     coloridas como elemento central e o diamante como
                     coadjuvante para adornar e enaltecer a gema.
