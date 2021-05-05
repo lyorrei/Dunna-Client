@@ -27,12 +27,14 @@ const footer: React.FC<Props> = props => {
                 </Link>
             </FooterNavigation>
             <SocialNavigation>
-                <Link href="https://www.instagram.com/dunna_jewelry/">
-                    <a>
-                        <RiInstagramFill />
-                        Instagram
-                    </a>
-                </Link>
+                <a
+                    target="_blank"
+                    href="https://www.instagram.com/dunna_jewelry/"
+                    rel="noopener noreferrer"
+                >
+                    <RiInstagramFill />
+                    Instagram
+                </a>
             </SocialNavigation>
         </Footer>
     )
