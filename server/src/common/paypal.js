@@ -25,6 +25,10 @@ function environment() {
     let clientSecret =
         process.env.PAYPAL_SECRET_KEY || 'PAYPAL-SANDBOX-CLIENT-SECRET'
 
+    if (process.env.NODE_ENV === 'production') {
+        return  new checkoutNodeJssdk.core.LiveEnvironment(clientId, clientSecret)
+    }
+
     return new checkoutNodeJssdk.core.SandboxEnvironment(clientId, clientSecret)
 }
 
