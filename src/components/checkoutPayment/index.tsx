@@ -14,8 +14,7 @@ const cartElementOptions = {
             fontSize: '1.4rem',
             color: '#333'
         }
-    },
-    hidePostalCode: true
+    }
 }
 
 const containerVariants = {

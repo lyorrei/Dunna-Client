@@ -57,20 +57,16 @@ const checkoutConfirm: React.FC<Props> = ({
         setError(null)
         const cardElement = elements.getElement(CardElement)
 
-        const requestData = {
-            cart,
-            amount: total,
-            addressId: selectedAddress
-        }
-
         try {
+            const { token } = await stripe.createToken(cardElement)
+            const requestData = {
+                cart,
+                amount: total,
+                addressId: selectedAddress,
+                paymentData: { token: token.id }
+            }
+
             const { data } = await axios.post('/charge', requestData)
-            const clientSecret = data.client_secret
-            const result = await stripe.confirmCardPayment(clientSecret, {
-                payment_method: {
-                    card: cardElement
-                }
-            })
             Router.replace('/checkout/success/' + data.createdOrderId)
         } catch (e) {
             setLoading(false)

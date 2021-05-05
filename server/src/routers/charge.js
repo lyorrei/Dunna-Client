@@ -98,7 +98,7 @@ const create = async (addressId, userId, amount, cart) => {
 }
 
 router.post('/api/charge', authMiddleware, async (req, res) => {
-    const { cart, amount, addressId } = req.body
+    const { cart, amount, addressId, paymentData } = req.body
 
     try {
         return res.status(400).send({
@@ -131,6 +131,11 @@ router.post('/api/charge', authMiddleware, async (req, res) => {
                     state: address.state,
                     postal_code: address.zip
                 }
+            },
+            confirm: true,
+            payment_method_data: {
+                type: 'card',
+                card: { token: paymentData.token }
             }
         })
 
@@ -142,7 +147,6 @@ router.post('/api/charge', authMiddleware, async (req, res) => {
         )
 
         res.send({
-            client_secret: paymentIntent['client_secret'],
             createdOrderId
         })
     } catch (e) {
@@ -172,7 +176,7 @@ router.post('/api/paypal/create', authMiddleware, async (req, res) => {
         request.requestBody({
             intent: 'CAPTURE',
             application_context: {
-                shipping_preference: 'SET_PROVIDED_ADDRESS',
+                shipping_preference: 'SET_PROVIDED_ADDRESS'
             },
             purchase_units: [
                 {
