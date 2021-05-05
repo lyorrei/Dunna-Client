@@ -103,10 +103,10 @@ router.post('/api/charge', authMiddleware, async (req, res) => {
     const { cart, amount, addressId, paymentData } = req.body
 
     try {
-        return res.status(400).send({
-            message: 'Payment Failed',
-            success: false
-        })
+        // return res.status(400).send({
+        //     message: 'Payment Failed',
+        //     success: false
+        // })
 
         const { address, totalAmount } = await check(
             addressId,
@@ -168,10 +168,10 @@ router.post('/api/paypal/create', authMiddleware, async (req, res) => {
     const { cart, amount, addressId } = req.body
 
     try {
-        return res.status(400).send({
-            message: 'Payment Failed',
-            success: false
-        })
+        // return res.status(400).send({
+        //     message: 'Payment Failed',
+        //     success: false
+        // })
         const { address } = await check(addressId, req.user._id, cart, amount)
         const request = new paypal.orders.OrdersCreateRequest()
         request.prefer('return=representation')
@@ -245,10 +245,10 @@ router.post('/api/paypal/capture', authMiddleware, async (req, res) => {
     const { cart, amount, addressId, orderId } = req.body
 
     try {
-        return res.status(400).send({
-            message: 'Payment Failed',
-            success: false
-        })
+        // return res.status(400).send({
+        //     message: 'Payment Failed',
+        //     success: false
+        // })
 
         await check(addressId, req.user._id, cart, amount)
 

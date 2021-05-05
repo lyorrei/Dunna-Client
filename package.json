@@ -59,6 +59,7 @@
         "react-table": "^7.6.3",
         "react-transition-group": "^4.4.1",
         "sass": "^1.29.0",
+        "sharp": "^0.28.1",
         "stripe": "^8.127.0",
         "styled-components": "^5.2.1",
         "typesafe-actions": "^5.1.0",

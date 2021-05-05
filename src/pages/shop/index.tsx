@@ -108,7 +108,7 @@ const shop: React.FC = () => {
 
                 <GridContainer>
                     {items.map(card => (
-                        <motion.div variants={item}>
+                        <motion.div variants={item} key={card.title}>
                             <Link href={card.link}>
                                 <a>
                                     <ShopCard
@@ -120,7 +120,7 @@ const shop: React.FC = () => {
                                 </a>
                             </Link>
                         </motion.div>
-                    ))}
+                    ))} 
                 </GridContainer>
             </Container>
         </>
