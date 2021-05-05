@@ -235,7 +235,7 @@ router.post('/api/paypal/create', authMiddleware, async (req, res) => {
         res.status(400).send({
             message: 'Payment Failed',
             success: false,
-            error: e.message
+            error: err.message
         })
     }
 })
