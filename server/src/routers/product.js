@@ -50,7 +50,10 @@ router.get('/api/products/spotlight', async (req, res) => {
         })
 
         if (fetchedProducts.length === 0) {
-            const lastProducts = await Product.find({ sold: false }).limit(3)
+            const lastProducts = await Product.find({
+                sold: false,
+                visible: true
+            }).limit(3)
             const lastProductsPromise = lastProducts.map(
                 async product => await product.populate('images').execPopulate()
             )
