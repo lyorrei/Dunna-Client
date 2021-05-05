@@ -227,7 +227,7 @@ router.post('/api/paypal/create', authMiddleware, async (req, res) => {
             }
         })
 
-        order = await payPalClient.client().execute(request)
+        const order = await payPalClient.client().execute(request)
         res.status(200).send({
             orderId: order.result.id
         })
