@@ -2,11 +2,12 @@ import { CardElement, useStripe } from '@stripe/react-stripe-js'
 import React, { useEffect, useState } from 'react'
 import { Container, HeaderContainer } from '../../styles/pages/checkout'
 import { InlineButton } from '../button'
-import { ButtonsContainer, SvgContainer } from './style'
+import { ButtonsContainer, SvgContainer, Message } from './style'
 import PaypalButton from '../paypalButton'
 import { useRouter } from 'next/router'
 import { useCart } from '../../context/Cart'
 import { BsCheckCircle } from 'react-icons/bs'
+import Link from 'next/link'
 
 const cartElementOptions = {
     style: {
@@ -80,10 +81,16 @@ const checkoutPayment: React.FC<Props> = ({
             </HeaderContainer>
 
             {router.query.method === 'stripe' ? (
-                <CardElement
-                    onChange={target => HandleCardChange(target)}
-                    options={cartElementOptions}
-                />
+                <>
+                    <Message>
+                        Atualmente aceitamos parcelamento apenas por{' '}
+                        <Link href="/checkout?method=paypal">Paypal</Link>
+                    </Message>
+                    <CardElement
+                        onChange={target => HandleCardChange(target)}
+                        options={cartElementOptions}
+                    />
+                </>
             ) : !isCompleted ? (
                 <PaypalButton
                     cart={cart}

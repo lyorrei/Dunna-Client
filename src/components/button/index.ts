@@ -54,8 +54,18 @@ export const InlineButton = styled(Button)<InlineButtonProps>`
         `}
 `
 
-export const CheckoutButton = styled(Button)`
+interface CheckoutButtonProps {
+    right?: boolean
+}
+
+export const CheckoutButton = styled(Button)<CheckoutButtonProps>`
     border-radius: 3px 2rem 3px 2rem !important;
+
+    ${props =>
+        props.right &&
+        css`
+            border-radius: 2rem 3px 2rem 3px !important;
+        `};
 `
 
 export const RoundedButton = styled.button`

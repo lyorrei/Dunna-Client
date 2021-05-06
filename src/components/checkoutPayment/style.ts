@@ -1,5 +1,18 @@
 import styled from 'styled-components'
 
+export const Message = styled.p`
+    font-size: 1.6rem;
+    margin-top: -2rem;
+    margin-bottom: 4rem;
+    display: block;
+    color: ${props => props.theme.colors.greyDark1};
+
+    a {
+        text-decoration: none;
+        color: ${props => props.theme.colors.primary};
+    }
+`
+
 export const ButtonsContainer = styled.div`
     margin-top: 4rem;
     width: 50%;
@@ -26,7 +39,7 @@ export const ButtonsContainer = styled.div`
 
 export const SvgContainer = styled.div`
     text-align: center;
-    
+
     svg {
         width: 8rem;
         height: 8rem;

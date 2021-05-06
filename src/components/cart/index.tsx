@@ -8,7 +8,8 @@ import {
     Message,
     Total,
     CartItemsContainer,
-    CartBox
+    CartBox,
+    Methods
 } from './style'
 import { ProductInterface } from '../product'
 
@@ -55,6 +56,7 @@ const cart: React.FC<Props> = ({ showCart, setShowCart }) => {
                 <Total>
                     Total: <span>{(total / 100).toFixed(2)}</span>
                 </Total>
+                <Methods>Métodos de pagamento</Methods>
                 <div
                     style={{
                         display: 'grid',
@@ -63,7 +65,7 @@ const cart: React.FC<Props> = ({ showCart, setShowCart }) => {
                     }}
                 >
                     <Link href={'/checkout?method=stripe'}>
-                        <CheckoutButton>Stripe</CheckoutButton>
+                        <CheckoutButton right>Stripe</CheckoutButton>
                     </Link>
                     <Link href={'/checkout?method=paypal'}>
                         <CheckoutButton>Paypal</CheckoutButton>

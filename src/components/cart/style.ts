@@ -119,7 +119,6 @@ export const CartBox = styled.div`
         width: 2rem;
         height: 2rem;
         fill: ${props => props.theme.colors.greyDark1};
-
     }
 `
 
@@ -181,4 +180,10 @@ export const Total = styled.p`
         margin-top: 4rem;
         margin-bottom: 4rem;
     } //600px
+`
+
+export const Methods = styled.span`
+    display: block;
+    text-align: center;
+    font-size: 1.8rem;
 `
