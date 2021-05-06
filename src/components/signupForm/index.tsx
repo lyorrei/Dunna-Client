@@ -83,6 +83,17 @@ const signupForm: React.FC<Props> = ({ setLoading }) => {
             <Input name="email" label="Email" type="email" />
             <Input name="password" label="Senha" type="password" />
 
+            <span>
+                Ao clicar em criar conta você concorda com nossa{' '}
+                <a
+                    href="/pdfs/terms.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    política de privacidade.
+                </a>
+            </span>
+
             <Button type="submit">Criar conta</Button>
         </Form>
     )

@@ -5,13 +5,26 @@ export const Title = styled.h3`
     font-weight: 300;
     color: ${props => props.theme.colors.greyDark1};
     margin-bottom: 2rem;
-
 `
 
 export const Text = styled.p`
     font-size: 1.6rem;
     color: ${props => props.theme.colors.greyDark1};
+`
 
+export const Term = styled.span`
+    font-size: 1.6rem;
+    color: ${props => props.theme.colors.greyDark1};
+    margin-top: 2rem;
+    display: block;
+
+    a,
+    a:link,
+    a:visited {
+        font-size: 1.6rem;
+        color: ${props => props.theme.colors.primary};
+        text-decoration: none;
+    }
 `
 
 export const ButtonsContainer = styled.div`

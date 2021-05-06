@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { useCart } from '../../context/Cart'
 import { Container } from '../../styles/pages/checkout'
 import { InlineButton } from '../button'
-import { ButtonsContainer, Text, Title } from './style'
+import { ButtonsContainer, Term, Text, Title } from './style'
 import { ClipLoader } from 'react-spinners'
 import Alert, { Types } from '../alert'
 
@@ -116,6 +116,16 @@ const checkoutConfirm: React.FC<Props> = ({
                     <Text>
                         Por favor confirme o endereço e os produtos escolhidos.
                     </Text>
+                    <Term>
+                        Ao clicar em confirmar você concorda com nossa{' '}
+                        <a
+                            href="/pdfs/terms.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            política de privacidade.
+                        </a>
+                    </Term>
                     <ButtonsContainer>
                         <div>
                             <InlineButton onClick={() => setStage(1)} light>

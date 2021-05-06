@@ -27,6 +27,10 @@ app.prepare()
             '/files',
             express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
         )
+        server.use(
+            '/pdfs',
+            express.static(path.resolve(__dirname, '..', 'tmp', 'pdfs'))
+        )
 
         var cookieParser = require('cookie-parser')
         server.use(cookieParser())

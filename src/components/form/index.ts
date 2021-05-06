@@ -6,6 +6,11 @@ const Form = styled(Unform)`
     grid-gap: 2rem;
     align-items: center;
 
+    span {
+        font-size: 1.6rem;
+        color: ${props => props.theme.colors.greyDark1};
+    }
+
     a,
     a:link,
     a:visited {
