@@ -1,11 +1,11 @@
 const nodemailer = require('nodemailer')
-const { service, user, pass } = require('./mail.json')
+const { service, user } = require('./mail.json')
 
 const transporter = nodemailer.createTransport({
     service,
     auth: {
         user,
-        pass,
+        pass: process.env.MAIL_PASSWORD,
     },
 })
 
