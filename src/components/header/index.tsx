@@ -19,21 +19,21 @@ import Home3 from '../../images/home-3.jpg'
 
 const containerVariant = {
     animation1: {
-        backgroundColor: '#B3343B',
+        backgroundColor: '#ff8c00',
         transition: {
             duration: 1,
             delay: 2
         }
     },
     animation2: {
-        backgroundColor: '#D6B14C',
+        backgroundColor: '#5de7fc',
         transition: {
             duration: 1,
             delay: 2
         }
     },
     animation3: {
-        backgroundColor: '#27B2BE',
+        backgroundColor: '#57fa7d',
         transition: {
             duration: 1,
             delay: 2
@@ -58,7 +58,7 @@ const imageVariants = {
         left: '50%',
         x: '-50%',
         y: '-50%',
-        rotate: 8,
+        rotate: 9,
         zIndex: 1,
         opacity: 1,
         transition: {
@@ -95,7 +95,7 @@ const imageVariants = {
         left: '50%',
         x: '-50%',
         y: '-50%',
-        rotate: -8,
+        rotate: -9,
         zIndex: 3,
         opacity: 1,
 
@@ -175,10 +175,10 @@ const header: React.FC = () => {
         <Container variants={containerVariant} animate={containerAnimation}>
             <Title>
                 A nova marca da alta joalheria <span>brasileira</span>
-                <Subtitle>
+                {/* <Subtitle>
                     Bem vindo a era da nova joalheria artesanal. Estamos aqui
                     para revolucionar o mercado de joias e pedras.
-                </Subtitle>
+                </Subtitle> */}
             </Title>
 
             <ImageContainer

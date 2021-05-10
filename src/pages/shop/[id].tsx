@@ -110,6 +110,8 @@ const product: React.FC<Props> = ({ product }) => {
     const [selectedImage, setSelectedImage] = useState(
         product.images.length > 0 ? product.images[0].url : NoImage
     )
+    const [selectedWidth, setSelectedWidth] = useState(null)
+    const [selectedHeight, setSelectedHeight] = useState(null)
     const { cart, addProduct } = useCart()
     const [isActive, setIsActive] = useState(true)
 
@@ -120,6 +122,20 @@ const product: React.FC<Props> = ({ product }) => {
             setIsActive(true)
         }
     }, [cart])
+
+    useEffect(() => {
+        const img = new Image()
+        img.onload = function () {
+            if (img.width < 1400) {
+                setSelectedWidth(img.width * 2)
+                setSelectedHeight(img.height * 2)
+            } else {
+                setSelectedWidth(img.width)
+                setSelectedHeight(img.height)
+            }
+        }
+        img.src = selectedImage
+    }, [selectedImage])
 
     return (
         <>
@@ -138,15 +154,21 @@ const product: React.FC<Props> = ({ product }) => {
                                 enlargedImagePosition="over"
                                 largeImage={{
                                     src: selectedImage,
-                                    width: 2400,
-                                    height: 1800
+                                    width: selectedWidth ? selectedWidth : 2400,
+                                    height: selectedHeight
+                                        ? selectedHeight
+                                        : 1800
                                 }}
                                 smallImage={{
                                     alt: 'Image',
                                     isFluidWidth: true,
                                     src: selectedImage
                                 }}
-                                imageStyle={{ borderRadius: '2rem' }}
+                                imageStyle={{
+                                    borderRadius: '2rem',
+                                    maxHeight: '60vh',
+                                    objectFit: 'cover'
+                                }}
                             />
                         </BigImageContainer>
                         <SmallImageContainer

@@ -8,33 +8,39 @@ export const Container = styled(motion.div)`
 `
 
 export const ImageContainer = styled(motion.div)`
-    width: 42vw;
-    height: 60vh;
+    width: 25vw;
+    height: 80vh;
     position: absolute;
+    border-radius: 3px;
+    overflow: hidden;
+
+    /* width: 42vw;
+    height: 60vh; */
 
     @media only screen and (max-width: 112.5em) {
-        width: 50vw;
-        height: 68vh;
+        width: 33vw;
     } //1800px
 
     @media only screen and (max-width: 75em) {
-        width: 50vw;
-        height: 48vh;
+        width: 40vw;
+        /* height: 48vh; */
     } //1200px
 
     @media only screen and (max-width: 56.25em) {
-        width: 62vw;
-        height: 38vh;
+        width: 50vw;
+        height: 60vh;
     } //900px
 
     @media only screen and (max-width: 37.5em) {
-        width: 80vw;
-        height: 35vh;
+        width: 70vw;
+        height: 50vh;
+
+        /* height: 35vh; */
     } //600px
 
     @media only screen and (max-width: 25em) {
-        width: 80vw;
-        height: 25vh;
+        /* width: 80vw;*/
+        height: 40vh;
     } //400px
 `
 
