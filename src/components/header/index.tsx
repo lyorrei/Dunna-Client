@@ -12,6 +12,7 @@ import {
     Subtitle
 } from './style'
 import { RoundedButton } from '../button'
+import NextImage from 'next/image'
 
 import Home1 from '../../images/home-1.jpg'
 import Home2 from '../../images/home-2.jpg'
@@ -186,21 +187,36 @@ const header: React.FC = () => {
                 animate={animation1}
                 initial="initial"
             >
-                <Img src={Home1} />
+                <NextImage
+                    layout="fill"
+                    src={Home1}
+                    objectFit="cover"
+                    quality={100}
+                />
             </ImageContainer>
             <ImageContainer
                 variants={imageVariants}
                 animate={animation2}
                 initial="initial"
             >
-                <Img src={Home2} />
+                <NextImage
+                    layout="fill"
+                    src={Home2}
+                    objectFit="cover"
+                    quality={100}
+                />
             </ImageContainer>
             <ImageContainer
                 variants={imageVariants}
                 animate={animation3}
                 initial="initial"
             >
-                <Img src={Home3} />
+                <NextImage
+                    layout="fill"
+                    src={Home3}
+                    objectFit="cover"
+                    quality={100}
+                />
             </ImageContainer>
             <ButtonContainer>
                 <Link href="/shop">

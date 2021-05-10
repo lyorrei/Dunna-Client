@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
+import NextImage from 'next/image'
 
 export const Container = styled(motion.div)`
     height: calc(100vh - 6rem);
@@ -44,7 +45,7 @@ export const ImageContainer = styled(motion.div)`
     } //400px
 `
 
-export const Img = styled(motion.img)`
+export const Img = styled(NextImage)`
     width: 100%;
     height: 100%;
     object-fit: cover;
