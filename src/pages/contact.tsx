@@ -40,10 +40,10 @@ const contact: React.FC = () => {
                     </Paragraph>
                     <CommunicationContainer>
                         <CommunicationBox>
-                            <span>Email:</span> nilza.quintao@outlook.com
+                            <span>Email:</span> contato.dunnajewelry@gmail.com
                         </CommunicationBox>
                         <CommunicationBox>
-                            <span>Celular:</span> +55 31 99737-5514
+                            <span>Celular e Whatsapp:</span> +55 31 99808-4023
                         </CommunicationBox>
                     </CommunicationContainer>
 
