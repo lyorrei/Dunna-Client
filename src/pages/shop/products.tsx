@@ -126,7 +126,7 @@ const shop: React.FC<Props> = ({
     let title = 'Dunna Jewelry Shop'
     switch (router.query.type) {
         case 'Anel':
-            title = 'Aneis'
+            title = 'Anéis'
             break
         case 'Colar':
             title = 'Colares'

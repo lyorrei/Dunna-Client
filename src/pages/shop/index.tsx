@@ -55,7 +55,7 @@ export const item = {
 const shop: React.FC = () => {
     const [items] = useState([
         {
-            title: 'Aneis',
+            title: 'Anéis',
             link: '/shop/products/?type=Anel',
             imageUrl: Shop1,
             description:
@@ -120,7 +120,7 @@ const shop: React.FC = () => {
                                 </a>
                             </Link>
                         </motion.div>
-                    ))} 
+                    ))}
                 </GridContainer>
             </Container>
         </>
