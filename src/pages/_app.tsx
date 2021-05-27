@@ -21,6 +21,7 @@ import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 import Router from 'next/router'
 import NProgress from 'nprogress' //nprogress module
 import 'nprogress/nprogress.css' //styles of nprogress
+import '../styles/npstyle.css'
 
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
