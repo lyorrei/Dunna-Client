@@ -75,6 +75,14 @@ const navbar: React.FC = () => {
                 </Li>
                 <Li
                     isClicked={clicked}
+                    isActive={router.pathname === '/quality'}
+                >
+                    <Link href="/quality">
+                        <a>Qualidade</a>
+                    </Link>
+                </Li>
+                <Li
+                    isClicked={clicked}
                     isActive={router.pathname === '/contact'}
                     marginRight
                 >

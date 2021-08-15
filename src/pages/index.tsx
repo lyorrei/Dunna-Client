@@ -12,6 +12,7 @@ import { motion } from 'framer-motion'
 import { GetServerSideProps } from 'next'
 import { ProductInterface } from '../components/product'
 import ImageSection from '../components/imageSection'
+import VogueSection from '../components/vogueSection'
 
 const pageContainerVariant = {
     hidden: { opacity: 1, scale: 0 },
@@ -45,6 +46,7 @@ const Home = ({ products }: Props) => {
                 <PageContainer>
                     <Spotlight products={products} />
                     <ImageSection />
+                    <VogueSection />
                 </PageContainer>
             </motion.div>
         </>

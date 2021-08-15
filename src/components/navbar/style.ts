@@ -30,6 +30,13 @@ export const LogoBox = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
 
+    @media only screen and (max-width: 75em) {
+        left: 65%;
+    } //1200px
+
+    @media only screen and (max-width: 43.75em) {
+        left: 50%;
+    }
 
     img {
         height: 100%;
