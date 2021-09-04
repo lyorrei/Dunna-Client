@@ -81,6 +81,14 @@ userSchema.methods.generateConfirmEmail = async function () {
         async (err, emailToken) => {
             const url = `${process.env.APP_URL}/api/user/confirmation/${emailToken}`
 
+            await transporter.verify((error, success) => {
+                if (error) {
+                    console.log(error)
+                } else {
+                    console.log('Server is ready to take our messages')
+                }
+            })
+
             // send mail with defined transport object
             const info = await transporter.sendMail({
                 from: `"Dunna Jewelry" <` + senderEmail + `>`, // sender address
@@ -118,7 +126,7 @@ userSchema.methods.generateChangePasswordEmail = async function () {
 }
 
 userSchema.statics.findByCredentials = async function (email, password) {
-    const user = await User.findOne({ email }).select("+password")
+    const user = await User.findOne({ email }).select('+password')
 
     if (!user) {
         throw new Error('Não foi possivel entrar')
@@ -134,7 +142,7 @@ userSchema.statics.findByCredentials = async function (email, password) {
         throw new Error('Confirme seu email')
     }
 
-
+    
     return user
 }
 

@@ -1,4 +1,5 @@
 {
     "service": "gmail",
-    "user": "contato.dunnajewelry@gmail.com"
+    "user": "contato.dunnajewelry@gmail.com",
+    "port": 587
 }
