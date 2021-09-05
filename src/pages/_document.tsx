@@ -60,7 +60,7 @@ export default class MyDocument extends Document {
                         }
                         gtag('js', new Date());
 
-                        gtag('config', 'G-SZ3PNP14RK');
+                        gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
                     `}}>
 
                     </script>
