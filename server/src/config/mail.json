@@ -1,5 +1,6 @@
 {
-    "service": "gmail",
-    "user": "contato.dunnajewelry@gmail.com",
-    "port": 587
+    "service": "SendGrid",
+    "port": 465,
+    "user": "apikey",
+    "email": "contato.dunnajewelry@gmail.com"
 }

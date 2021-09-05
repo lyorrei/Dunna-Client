@@ -3,7 +3,7 @@ const validator = require('validator')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const transporter = require('../config/mailer')
-const { user: senderEmail } = require('../config/mail.json')
+const { email: senderEmail } = require('../config/mail.json')
 
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -142,7 +142,7 @@ userSchema.statics.findByCredentials = async function (email, password) {
         throw new Error('Confirme seu email')
     }
 
-    
+
     return user
 }
 

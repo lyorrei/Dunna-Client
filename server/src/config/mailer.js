@@ -6,8 +6,8 @@ const transporter = nodemailer.createTransport({
     port,
     auth: {
         user,
-        pass: process.env.MAIL_PASSWORD,
-    },
+        pass: process.env.MAIL_PASSWORD
+    }
 })
 
 module.exports = transporter
