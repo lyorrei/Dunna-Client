@@ -34,27 +34,27 @@ const options = {
 }
 
 //Binding events.
-// Router.events.on('routeChangeStart', () => NProgress.start())
-// Router.events.on('routeChangeComplete', () => NProgress.done())
-// Router.events.on('routeChangeError', () => NProgress.done())
+Router.events.on('routeChangeStart', () => NProgress.start())
+Router.events.on('routeChangeComplete', () => NProgress.done())
+Router.events.on('routeChangeError', () => NProgress.done())
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps, router }) => {
 
-    // Google Analytics
-    const nextRouter = useRouter()
-    const handleRouteChange = url => {
-        window.gtag('config', process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS, {
-            page_path: url
-        })
-    }
+    // // Google Analytics
+    // const nextRouter = useRouter()
+    // const handleRouteChange = url => {
+    //     window.gtag('config', process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS, {
+    //         page_path: url
+    //     })
+    // }
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        nextRouter.events.on('routeChangeComplete', handleRouteChange)
-        return () => {
-            nextRouter.events.off('routeChangeComplete', handleRouteChange)
-        }
-    }, [nextRouter.events])
+    //     nextRouter.events.on('routeChangeComplete', handleRouteChange)
+    //     return () => {
+    //         nextRouter.events.off('routeChangeComplete', handleRouteChange)
+    //     }
+    // }, [nextRouter.events])
 
     return (
         // <Elements stripe={stripePromise}>
