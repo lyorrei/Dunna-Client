@@ -18,11 +18,12 @@ import CookieConsent from 'react-cookie-consent'
 import AlertTemplate from 'react-alert-template-basic'
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 import NProgress from 'nprogress' //nprogress module
 import 'nprogress/nprogress.css' //styles of nprogress
 import '../styles/npstyle.css'
 
+declare const window: any;
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
@@ -38,6 +39,22 @@ Router.events.on('routeChangeComplete', () => NProgress.done())
 Router.events.on('routeChangeError', () => NProgress.done())
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps, router }) => {
+
+    // Google Analytics
+    const nextRouter = useRouter()
+    const handleRouteChange = url => {
+        window.gtag('config', 'G-SZ3PNP14RK', {
+            page_path: url
+        })
+    }
+
+    useEffect(() => {
+        nextRouter.events.on('routeChangeComplete', handleRouteChange)
+        return () => {
+            nextRouter.events.off('routeChangeComplete', handleRouteChange)
+        }
+    }, [nextRouter.events])
+
     return (
         // <Elements stripe={stripePromise}>
         // {/* </Elements> */}
