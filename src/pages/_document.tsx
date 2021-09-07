@@ -52,17 +52,16 @@ export default class MyDocument extends Document {
                     <link rel="icon" href="/favicon.png" />
 
                     {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
-                    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SZ3PNP14RK"></script>
-                    <script dangerouslySetInnerHTML={{__html: `
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag(){
-                            dataLayer.push(arguments)
-                        }
-                        gtag('js', new Date());
+                    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-206765746-1"></script>
+                    <script dangerouslySetInnerHTML={{
+                            __html: `
+                                window.dataLayer = window.dataLayer || [];
+                                function gtag(){dataLayer.push(arguments);}
+                                gtag('js', new Date());
 
-                        gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
-                    `}}>
-
+                                gtag('config', 'UA-206765746-1');
+                            `
+                        }}>
                     </script>
                 </Head>
                 <body>
