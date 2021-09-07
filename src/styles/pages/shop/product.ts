@@ -75,7 +75,7 @@ interface SelectableImageProps {
 export const SelectableImage = styled(Img)<SelectableImageProps>`
     cursor: pointer;
     height: 22vh;
-    
+
     ${props =>
         props.active && 'border: .3rem solid ' + props.theme.colors.primary}
 `
@@ -134,6 +134,12 @@ export const PriceSpan = styled(UppercaseText)`
     top: 0.6rem;
     left: -2.8rem;
     font-size: 1.8rem;
+`
+
+export const SubPrice = styled.p`
+    color: ${props => props.theme.colors.backgroundDark};
+    font-size: 1.6rem;
+    font-weight: 300;
 `
 
 export const Description = styled.p`

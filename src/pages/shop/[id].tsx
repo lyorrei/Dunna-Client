@@ -16,7 +16,8 @@ import {
     PriceSpan,
     SelectableImage,
     GridContainer,
-    CheckList
+    CheckList,
+    SubPrice
 } from '../../styles/pages/shop/product'
 
 import Head from 'next/head'
@@ -210,6 +211,10 @@ const product: React.FC<Props> = ({ product }) => {
                         <Price>
                             <PriceSpan>R$</PriceSpan>
                             {(product.price / 100).toFixed(2)}
+                            <SubPrice>
+                                12x sem juros de R${' '}
+                                {(product.price / 100 / 12).toFixed(2)}
+                            </SubPrice>
                         </Price>
                         <Description>{product.description}</Description>
                         <InlineButton
