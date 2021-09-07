@@ -6,7 +6,7 @@ export const Container = styled(motion.div)`
     border: 1px solid ${props => props.theme.colors.greyLight4};
     overflow: hidden;
     transition: all 0.2s;
-    padding: 4rem;
+    padding: 3rem;
 
     @media only screen and (max-width: 37.5em) {
         padding: 2rem;
@@ -44,6 +44,7 @@ export const Title = styled.h2`
     transition: all 0.2s;
     font-weight: 400;
     transform-origin: 0;
+    text-align: center;
 
     @media only screen and (max-width: 25em) {
         font-size: 2rem;
@@ -55,8 +56,15 @@ export const Price = styled.p`
     font-weight: 300;
     margin-top: 1.5rem;
     font-family: sans-serif;
+    text-align: center;
 
     @media only screen and (max-width: 25em) {
         font-size: 1.5rem;
     } //400px
 `
+
+export const SubPrice = styled(Price)`
+    font-size: 1.6rem;
+    color: ${props => props.theme.colors.greyDark2};
+    margin-top: .4rem;
+`;

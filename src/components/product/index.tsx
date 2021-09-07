@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 
-import { Container, Content, ImageContainer, Price, Title } from './style'
+import { Container, Content, ImageContainer, Price, SubPrice, Title } from './style'
 
 import Button, { InlineButton } from '../button'
 
@@ -87,7 +87,8 @@ const product: React.FC<ProductInterface> = props => {
                 <Link href={'/shop/' + props._id}>
                     <Title>{props.name}</Title>
                 </Link>
-                <Price>R$ {(props.price / 100).toFixed(2)}</Price>
+                <Price>R$ {(props.price / 100).toFixed(2)} </Price>
+                <SubPrice>12x de R$ {((props.price / 100)/ 12).toFixed(2) }</SubPrice>
                 <Button
                     onClick={() => addProduct({ ...props })}
                     disabled={!isActive}
