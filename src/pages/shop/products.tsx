@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import axios from '../../../axios'
 
 import Head from 'next/head'
@@ -15,10 +15,8 @@ import FilterProducts from '../../components/filterProducts'
 import { FormHandles } from '@unform/core'
 import withCart from '../../HOC/withCart'
 import { GetServerSideProps } from 'next'
-import ShopCard from '../../components/shopCard'
 
 import {
-    getProducts,
     getStones,
     getShapes,
     getProductTypes
@@ -69,18 +67,43 @@ interface Props {
     stones: StonesAndShapes[]
     shapes: StonesAndShapes[]
     productTypes: StonesAndShapes[]
+    firstQuery: any
 }
 
 const shop: React.FC<Props> = ({
     products: productsFromProps,
     stones,
     shapes,
-    productTypes
+    productTypes,
+    firstQuery
 }) => {
+    const [currentQuery, setCurrentQuery] = useState(firstQuery)
     const [products, setProducts] = useState(productsFromProps)
     const [priceValue, setPriceValue] = useState({ min: 0, max: 60000 })
     const formRef = useRef<FormHandles>(null)
     const router = useRouter()
+
+    useEffect(() => {
+        setProducts(productsFromProps)
+    }, [productsFromProps])
+
+    useEffect(() => {
+        // Check if it is the first page load
+
+        if (currentQuery !== router.query.type) {
+            if (formRef && formRef.current) {
+                const shapesSelect = formRef.current.getFieldRef('shapes')
+                const stonesSelect = formRef.current.getFieldRef('stones')
+                shapesSelect.select.clearValue()
+                stonesSelect.select.clearValue()
+            }
+
+            setPriceValue({ min: 0, max: 60000 })
+
+            setCurrentQuery(router.query.type)
+
+        }
+    }, [router.query.type])
 
     const handleFilterChange = (range?) => {
         setTimeout(() => {
@@ -140,7 +163,7 @@ const shop: React.FC<Props> = ({
         case 'Pulseira':
             title = 'Pulseiras'
             break
-        case 'Pura':
+        case 'Gema':
             title = 'Gemas'
             break
     }
@@ -152,34 +175,37 @@ const shop: React.FC<Props> = ({
             </Head>
             <Container variants={container} initial="hidden" animate="visible">
                 <Title variants={titleVariant}>{title}</Title>
+                
+                    {productsFromProps.length > 0 ? (
+                        <>
+                            <FilterProducts
+                                productTypes={productTypes}
+                                handleFilterChange={handleFilterChange}
+                                stones={stones}
+                                shapes={shapes}
+                                formRef={formRef}
+                                priceValue={priceValue}
+                                changeHandler={handleFiltering}
+                            />
 
-                {productsFromProps.length > 0 ? (
-                    <>
-                        <FilterProducts
-                            productTypes={productTypes}
-                            handleFilterChange={handleFilterChange}
-                            stones={stones}
-                            shapes={shapes}
-                            formRef={formRef}
-                            priceValue={priceValue}
-                            changeHandler={handleFiltering}
-                        />
-
-                        <GridContainer>
-                            {products.length > 0 ? (
-                                products.map(product => (
-                                    <Product key={product._id} {...product} />
-                                ))
-                            ) : (
-                                <NoProducts>
-                                    Nenhum produto encontrado
-                                </NoProducts>
-                            )}
-                        </GridContainer>
-                    </>
-                ) : (
-                    <NoProducts>O estoque está esgotado</NoProducts>
-                )}
+                            <GridContainer>
+                                {products.length > 0 ? (
+                                    products.map(product => (
+                                        <Product
+                                            key={product._id}
+                                            {...product}
+                                        />
+                                    ))
+                                ) : (
+                                    <NoProducts>
+                                        Nenhum produto encontrado
+                                    </NoProducts>
+                                )}
+                            </GridContainer>
+                        </>
+                    ) : (
+                        <NoProducts>O estoque está esgotado</NoProducts>
+                    )}
             </Container>
         </>
     )
@@ -195,13 +221,15 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
     const stones = JSON.parse(JSON.stringify(await getStones()))
     const shapes = JSON.parse(JSON.stringify(await getShapes()))
     const productTypes = JSON.parse(JSON.stringify(await getProductTypes()))
+    const firstQuery = ctx.query.type
 
     return {
         props: {
             products,
             stones,
             shapes,
-            productTypes
+            productTypes,
+            firstQuery
         } // will be passed to the page component as props
     }
 }

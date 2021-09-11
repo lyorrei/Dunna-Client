@@ -29,7 +29,7 @@ const footer: React.FC<Props> = props => {
             <SocialNavigation>
                 <a
                     target="_blank"
-                    href="https://www.instagram.com/dunna_jewelry/"
+                    href="https://www.instagram.com/dunna.joalheria/"
                     rel="noopener noreferrer"
                 >
                     <RiInstagramFill />

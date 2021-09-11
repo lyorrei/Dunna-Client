@@ -220,7 +220,7 @@ const header: React.FC = () => {
             </ImageContainer>
             <ButtonContainer>
                 <Link href="/shop">
-                    <RoundedButton>Comprar agora</RoundedButton>
+                    <RoundedButton>Ver produtos</RoundedButton>
                 </Link>
             </ButtonContainer>
         </Container>

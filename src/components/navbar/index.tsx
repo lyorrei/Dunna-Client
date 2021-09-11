@@ -7,16 +7,21 @@ import Logo from '../../images/logo.jpg'
 
 import { FaUser, FaUserCircle } from 'react-icons/fa'
 
-import AuthDropdown from '../dropdown'
+import Dropdown from '../dropdown'
 
 import { useRouter } from 'next/router'
 
 import { useUser } from '../../context/User'
-import { RiAdminFill, RiLogoutBoxLine } from 'react-icons/ri'
+import {
+    RiAdminFill,
+    RiArrowDropDownLine,
+    RiLogoutBoxLine
+} from 'react-icons/ri'
 
 const navbar: React.FC = () => {
     const router = useRouter()
     const [clicked, setClicked] = useState(false)
+    const [showShopDropdown, setShowShopDropdown] = useState(false)
     const [showAuthDropdown, setShowAuthDropdown] = useState(false)
     const { user, setUser } = useUser()
 
@@ -32,10 +37,43 @@ const navbar: React.FC = () => {
         router.replace('/auth')
     }
 
+    const [shopDropdownList] = useState([
+        {
+            text: 'Anéis',
+            type: 'link',
+            link: '/shop/products?type=Anel'
+        },
+        {
+            text: 'Brincos',
+            type: 'link',
+            link: '/shop/products?type=Brinco'
+        },
+        {
+            text: 'Colares',
+            type: 'link',
+            link: '/shop/products?type=Colar'
+        },
+        {
+            text: 'Pingentes',
+            type: 'link',
+            link: '/shop/products?type=Pingente'
+        },
+        {
+            text: 'Pulseiras',
+            type: 'link',
+            link: '/shop/products?type=Pulseira'
+        },
+        {
+            text: 'Gemas',
+            type: 'link',
+            link: '/shop/products?type=Gema'
+        }
+    ])
+
     const [authDropdownList] = useState([
         {
             icon: FaUserCircle,
-            text: ' Minha conta',
+            text: 'Minha conta',
             type: 'link',
             link: '/myaccount'
         },
@@ -46,6 +84,11 @@ const navbar: React.FC = () => {
             click: () => handleLogout()
         }
     ])
+
+    let mediaQuerry
+    if (typeof window !== 'undefined') {
+        mediaQuerry = window.matchMedia('(min-width: 43.75em)')
+    }
 
     return (
         <Nav>
@@ -60,10 +103,32 @@ const navbar: React.FC = () => {
                         <a>Home</a>
                     </Link>
                 </Li>
-                <Li isClicked={clicked} isActive={router.pathname === '/shop'}>
+                <Li
+                    isClicked={clicked}
+                    onMouseEnter={() => setShowShopDropdown(true)}
+                    onMouseLeave={() => setShowShopDropdown(false)}
+                    isActive={router.pathname === '/shop'}
+                >
                     <Link href="/shop">
-                        <a>Loja</a>
+                        <a>
+                            Loja
+                            {typeof window !== 'undefined' &&
+                                mediaQuerry.matches && (
+                                    <RiArrowDropDownLine
+                                        style={{ marginRight: '-.8rem' }}
+                                    />
+                                )}
+                        </a>
                     </Link>
+
+                    {showShopDropdown && (
+                        <Dropdown
+                            show={showShopDropdown}
+                            setShow={setShowShopDropdown}
+                            list={shopDropdownList}
+                            horizontal
+                        />
+                    )}
                 </Li>
                 <Li
                     isClicked={clicked}
@@ -113,7 +178,7 @@ const navbar: React.FC = () => {
                         </Link>
                     )}
                     {showAuthDropdown && (
-                        <AuthDropdown
+                        <Dropdown
                             show={showAuthDropdown}
                             setShow={setShowAuthDropdown}
                             list={authDropdownList}
