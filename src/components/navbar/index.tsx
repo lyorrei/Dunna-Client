@@ -87,7 +87,7 @@ const navbar: React.FC = () => {
 
     let mediaQuerry
     if (typeof window !== 'undefined') {
-        mediaQuerry = window.matchMedia('(min-width: 43.75em)')
+        mediaQuerry = window.matchMedia('(min-width: 50em)')
     }
 
     return (
@@ -129,6 +129,16 @@ const navbar: React.FC = () => {
                             horizontal
                         />
                     )}
+                </Li>
+                <Li
+                    isClicked={clicked}
+                    isActive={
+                        router.pathname === '/shop/products?type=Desconto'
+                    }
+                >
+                    <Link href="/shop/products?type=Desconto">
+                        <a style={{ letterSpacing: '0.1rem' }}>% OFF</a>
+                    </Link>
                 </Li>
                 <Li
                     isClicked={clicked}

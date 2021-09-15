@@ -109,6 +109,7 @@ export const UppercaseText = styled.p`
     text-transform: uppercase;
     font-size: 1.6rem;
     font-weight: 700;
+    margin-bottom: 2rem;
 `
 
 export const Span = styled.span`
@@ -120,13 +121,20 @@ export const Price = styled.span`
     color: ${props => props.theme.colors.primary};
     font-size: 4rem;
     position: relative;
-    margin: 4rem 4rem;
+    margin: 0 6rem;
+    margin-bottom: 2rem;
     display: inline-block;
 
     @media only screen and (max-width: 75em) {
         font-size: 3.4rem;
-        margin: 2rem 4rem;
     } //1200px
+`
+
+export const DicountTotalPrice = styled.p`
+    font-weight: 300;
+    font-family: sans-serif;
+    color: ${props => props.theme.colors.backgroundDark};
+    font-size: 1.6rem;
 `
 
 export const PriceSpan = styled(UppercaseText)`

@@ -25,18 +25,21 @@ export const LogoBox = styled.div`
     align-items: center;
     height: 100%;
 
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin-right: auto;
 
-    @media only screen and (max-width: 75em) {
-        left: 65%;
-    } //1200px
-
-    @media only screen and (max-width: 43.75em) {
+    @media only screen and (min-width: 81.25em) {
+        position: absolute;
+        top: 50%;
         left: 50%;
-    }
+        transform: translate(-50%, -50%);
+    } //1300px
+
+    @media only screen and (max-width: 50em) {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    } //800px
 
     img {
         height: 100%;
@@ -57,7 +60,7 @@ export const NavBox = styled.ul<IsClickedProp>`
     justify-content: flex-start;
     list-style: none;
 
-    @media only screen and (max-width: 43.75em) {
+    @media only screen and (max-width: 50em) {
         display: none;
         ${props =>
             props.isClicked &&
@@ -97,7 +100,7 @@ export const Li = styled.li<LiProps>`
     border-radius: ${props => props.theme.sizes.borderRadius};
     ${props => props.marginRight && `margin-right: auto;`}
 
-    @media only screen and (max-width: 43.75em) {
+    @media only screen and (max-width: 50em) {
         ${props =>
             props.isClicked &&
             css`
@@ -142,7 +145,7 @@ export const Li = styled.li<LiProps>`
                 `color: ${props => props.theme.colors.white};`}
         }
 
-        @media only screen and (max-width: 43.75em) {
+        @media only screen and (max-width: 50em) {
             ${props =>
                 props.isClicked &&
                 css`
@@ -196,7 +199,7 @@ export const Li = styled.li<LiProps>`
         padding: 1rem;
         border-radius: ${props => props.theme.sizes.borderRadius};
 
-        @media only screen and (max-width: 43.75em) {
+        @media only screen and (max-width: 50em) {
             ${props =>
                 props.isClicked &&
                 css`
@@ -227,7 +230,7 @@ export const ToogleBox = styled.div<IsClickedProp>`
     align-items: center;
     display: none;
 
-    @media only screen and (max-width: 43.75em) {
+    @media only screen and (max-width: 50em) {
         display: block;
         position: absolute;
         height: 100%;

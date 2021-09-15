@@ -23,6 +23,8 @@ router.get('/api/products', async (req, res) => {
                     name: 'Pedra Lapidada'
                 })
                 match.productType = productType._id
+            } else if (req.query.type === 'Desconto') {
+                match.discount = true
             } else {
                 const type = await Type.findOne({ name: req.query.type })
                 if (type) match.type = type._id
@@ -126,6 +128,8 @@ router.patch('/api/product/edit/:id', adminMiddleware, async (req, res) => {
         'name',
         'description',
         'price',
+        'totalPrice',
+        'discount',
         'stone',
         'stoneWeigth',
         'diamondWeigth',
@@ -152,6 +156,11 @@ router.patch('/api/product/edit/:id', adminMiddleware, async (req, res) => {
         const orderItem = await OrderItem.find({ product: product._id })
         if (orderItem.length > 0) {
             return res.status(400).send({ error: 'Produto foi vendido' })
+        }
+
+        if(!req.body.totalPrice) {
+            product.totalPrice = undefined
+            product.discount = false
         }
 
         product.diamondWeigth = undefined

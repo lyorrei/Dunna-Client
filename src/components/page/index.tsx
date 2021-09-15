@@ -9,11 +9,17 @@ import { useUser } from '../../context/User'
 import { useRouter } from 'next/router'
 import Modal from '../modal'
 import Footer from '../footer'
+import PageAlert from '../pageAlert'
+
+import { useCookies } from 'react-cookie'
 
 const page: React.FC<AppProps> = ({ Component, pageProps }) => {
     const { setUser } = useUser()
     const router = useRouter()
     const [showCookiesModal, setShowCookiesModal] = useState(false)
+
+    const [showPageAlert, setShowPageAlert] = useState(false)
+    const [cookies, setCookie] = useCookies(['pageAlert'])
 
     useEffect(() => {
         if (process.env.NODE_ENV !== 'development') {
@@ -31,7 +37,15 @@ const page: React.FC<AppProps> = ({ Component, pageProps }) => {
         if (!navigator.cookieEnabled) {
             setShowCookiesModal(true)
         }
+        if (!cookies['pageAlert']) {
+            setShowPageAlert(true)
+        }
     }, [])
+
+    const closePageAlert = () => {
+        setShowPageAlert(false)
+        setCookie('pageAlert', 'pageAlert', { path: '/', maxAge: 60 * 60 * 6 }) // 6 horas
+    }
 
     return (
         <>
@@ -50,6 +64,12 @@ const page: React.FC<AppProps> = ({ Component, pageProps }) => {
                 <Footer />
             </Content>
             <GlobalStyles />
+            {showPageAlert && (
+                <PageAlert
+                    closeAlert={closePageAlert}
+                    text="Frete grátis para todo o país e diversos produtos com desconto"
+                />
+            )}
         </>
     )
 }

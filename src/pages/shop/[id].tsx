@@ -17,7 +17,8 @@ import {
     SelectableImage,
     GridContainer,
     CheckList,
-    SubPrice
+    SubPrice,
+    DicountTotalPrice
 } from '../../styles/pages/shop/product'
 
 import Head from 'next/head'
@@ -208,14 +209,34 @@ const product: React.FC<Props> = ({ product }) => {
                         <UppercaseText>
                             By <Span>Dunna Jewelry</Span>
                         </UppercaseText>
-                        <Price>
-                            <PriceSpan>R$</PriceSpan>
-                            {(product.price / 100).toFixed(2)}
-                            <SubPrice>
-                                12x sem juros de R${' '}
-                                {(product.price / 100 / 12).toFixed(2)}
-                            </SubPrice>
-                        </Price>
+                        {product.discount ? (
+                            <>
+                                <DicountTotalPrice>
+                                    De R${' '}
+                                    <Span>
+                                        {(product.totalPrice / 100).toFixed(2)}
+                                    </Span>{' '}
+                                    para
+                                </DicountTotalPrice>
+                                <Price>
+                                    <PriceSpan>R$</PriceSpan>
+                                    {(product.price / 100).toFixed(2)}
+                                    <SubPrice>
+                                        12x sem juros de R${' '}
+                                        {(product.price / 100 / 12).toFixed(2)}
+                                    </SubPrice>
+                                </Price>
+                            </>
+                        ) : (
+                            <Price>
+                                <PriceSpan>R$</PriceSpan>
+                                {(product.price / 100).toFixed(2)}
+                                <SubPrice>
+                                    12x sem juros de R${' '}
+                                    {(product.price / 100 / 12).toFixed(2)}
+                                </SubPrice>
+                            </Price>
+                        )}
                         <Description>{product.description}</Description>
                         <InlineButton
                             onClick={() => addProduct(product)}

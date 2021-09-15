@@ -23,6 +23,15 @@ const productSchema = mongoose.Schema(
             type: Number,
             required: true
         },
+        discount: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        totalPrice: {
+            type: Number,
+            required: false
+        },
         stone: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,

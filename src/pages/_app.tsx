@@ -23,7 +23,7 @@ import NProgress from 'nprogress' //nprogress module
 import 'nprogress/nprogress.css' //styles of nprogress
 import '../styles/npstyle.css'
 
-declare const window: any;
+declare const window: any
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
@@ -39,7 +39,6 @@ Router.events.on('routeChangeComplete', () => NProgress.done())
 Router.events.on('routeChangeError', () => NProgress.done())
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps, router }) => {
-
     // Google Analytics
     const nextRouter = useRouter()
     const handleRouteChange = url => {
@@ -49,10 +48,11 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps, router }) => {
     }
 
     useEffect(() => {
-
-        nextRouter.events.on('routeChangeComplete', handleRouteChange)
-        return () => {
-            nextRouter.events.off('routeChangeComplete', handleRouteChange)
+        if (process.env.NODE_ENV === 'production') {
+            nextRouter.events.on('routeChangeComplete', handleRouteChange)
+            return () => {
+                nextRouter.events.off('routeChangeComplete', handleRouteChange)
+            }
         }
     }, [nextRouter.events])
 

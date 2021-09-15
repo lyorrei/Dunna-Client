@@ -33,6 +33,21 @@ export const ImageContainer = styled.div`
     } //600px
 `
 
+export const DiscountBox = styled.div`
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: ${props => props.theme.colors.primary};
+
+    font-size: 1.8rem;
+    padding: 1.5rem;
+    text-align: center;
+    color: ${props => props.theme.colors.white};
+    text-transform: uppercase;
+    font-family: sans-serif;
+    border-radius: 3px;
+`
+
 export const Content = styled.div`
     color: ${props => props.theme.colors.greyDark1};
     margin-top: 2rem;
@@ -66,5 +81,5 @@ export const Price = styled.p`
 export const SubPrice = styled(Price)`
     font-size: 1.6rem;
     color: ${props => props.theme.colors.greyDark2};
-    margin-top: .4rem;
-`;
+    margin-top: 0.4rem;
+`

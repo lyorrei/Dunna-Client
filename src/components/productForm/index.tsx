@@ -58,6 +58,8 @@ const productForm: React.FC<Props> = ({
     const [visible, setVisible] = useState(false)
     const [spotlight, setSpotlight] = useState(false)
 
+    const [discount, setDiscount] = useState(false)
+
     const optionsToArray = (options: StonesAndShapes[]) => {
         return options.map(option => ({
             value: option._id,
@@ -70,6 +72,7 @@ const productForm: React.FC<Props> = ({
             setSelectedType(formInitialData.productType.label)
             setVisible(formInitialData.visible)
             setSpotlight(formInitialData.spotlight)
+            setDiscount(formInitialData.discount)
         }
     }, [formInitialData])
 
@@ -102,7 +105,7 @@ const productForm: React.FC<Props> = ({
                 )
             }
 
-            let validationObject = {}
+            let validationObject: any = {}
             if (selectedType === 'Joia') {
                 validationObject = {
                     productType: Yup.string().required(
@@ -152,6 +155,19 @@ const productForm: React.FC<Props> = ({
                 }
             }
 
+            if (discount) {
+                validationObject.totalPrice = Yup.number()
+                    .typeError('Você deve escrever um número')
+                    .required('O preço é obrigatório')
+
+
+                if (parseInt(formData.totalPrice) <= parseInt(formData.price)) {
+                    return setFormError(
+                        'O Valor do campo Preço com Desconto deve ser menor que o do campo Preço sem Desconto'
+                    )
+                }
+            }
+
             formRef.current.setErrors({})
             const schema = Yup.object().shape(validationObject)
             await schema.validate(formData, {
@@ -160,6 +176,7 @@ const productForm: React.FC<Props> = ({
 
             formData.visible = visible
             formData.spotlight = spotlight
+            formData.discount = discount
 
             // Validation passed
             if (!noLoading) {
@@ -237,19 +254,13 @@ const productForm: React.FC<Props> = ({
                     />
                 </SideBySide>
 
-                <SideBySide>
-                    <Input
-                        name="stoneWeigth"
-                        type="number"
-                        label="Peso da pedra"
-                        step=".01"
-                    />
-                    <Input
-                        name="price"
-                        type="number"
-                        label="Preço em centavos"
-                    />
-                </SideBySide>
+                <Input
+                    name="stoneWeigth"
+                    type="number"
+                    label="Peso da pedra"
+                    step=".01"
+                />
+
                 {selectedType === 'Joia' && (
                     <>
                         <SideBySide>
@@ -277,6 +288,26 @@ const productForm: React.FC<Props> = ({
                         />
                     </>
                 )}
+
+                <SideBySide>
+                    <Input
+                        name="price"
+                        type="number"
+                        label={
+                            discount
+                                ? 'Preço com desconto em centavos'
+                                : 'Preço em centavos'
+                        }
+                    />
+                    {discount && (
+                        <Input
+                            name="totalPrice"
+                            type="number"
+                            label="Preço sem desconto em centavos"
+                        />
+                    )}
+                </SideBySide>
+
                 <SideBySide>
                     <CheckboxContainer>
                         <span>Visível:</span>
@@ -297,6 +328,16 @@ const productForm: React.FC<Props> = ({
                         />
                     </CheckboxContainer>
                 </SideBySide>
+
+                <CheckboxContainer>
+                    <span>Desconto:</span>
+                    <input
+                        name="discount"
+                        type="checkbox"
+                        checked={discount}
+                        onChange={e => setDiscount(e.target.checked)}
+                    />
+                </CheckboxContainer>
 
                 <InlineButton type="submit">
                     {submitType === 'patch' ? 'Editar' : 'Próximo'}

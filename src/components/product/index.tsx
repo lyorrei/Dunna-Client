@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 
-import { Container, Content, ImageContainer, Price, SubPrice, Title } from './style'
+import {
+    Container,
+    Content,
+    ImageContainer,
+    Price,
+    SubPrice,
+    Title,
+    DiscountBox
+} from './style'
 
 import Button, { InlineButton } from '../button'
 
@@ -29,6 +37,8 @@ export interface ProductInterface {
     name: string
     description: string
     price: number
+    discount: boolean
+    totalPrice: number
     stone: string & StonesAndShapes & { value: string; label: string }
     stoneWeigth: number
     diamondWeigth: number
@@ -55,6 +65,13 @@ const product: React.FC<ProductInterface> = props => {
     return (
         <Container variants={item}>
             <ImageContainer>
+                {props.discount && props.totalPrice && (
+                    <DiscountBox>
+                        {(100 - (props.price / props.totalPrice * 100)).toFixed(0)}%
+                        Off
+                    </DiscountBox>
+                )}
+
                 <Link href={'/shop/' + props._id}>
                     <a>
                         <img
@@ -88,7 +105,9 @@ const product: React.FC<ProductInterface> = props => {
                     <Title>{props.name}</Title>
                 </Link>
                 <Price>R$ {(props.price / 100).toFixed(2)} </Price>
-                <SubPrice>12x de R$ {((props.price / 100)/ 12).toFixed(2) }</SubPrice>
+                <SubPrice>
+                    12x de R$ {(props.price / 100 / 12).toFixed(2)}
+                </SubPrice>
                 <Button
                     onClick={() => addProduct({ ...props })}
                     disabled={!isActive}

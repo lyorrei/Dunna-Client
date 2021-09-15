@@ -143,21 +143,33 @@ const header: React.FC = () => {
     )
 
     useEffect(() => {
-        setTimeout(() => {
+        let timer1 = setTimeout(() => {
             cycleAnimation1()
         }, 3000)
+
+        // return () => {
+        //     clearTimeout(timer1)
+        // }
     }, [animation1])
 
     useEffect(() => {
-        setTimeout(() => {
+        let timer2 = setTimeout(() => {
             cycleAnimation2()
         }, 3000)
+
+        // return () => {
+        //     clearTimeout(timer2)
+        // }
     }, [animation1])
 
     useEffect(() => {
-        setTimeout(() => {
+        let timer3 = setTimeout(() => {
             cycleAnimation3()
         }, 3000)
+
+        // return () => {
+        //     clearTimeout(timer3)
+        // }
     }, [animation1])
 
     useEffect(() => {

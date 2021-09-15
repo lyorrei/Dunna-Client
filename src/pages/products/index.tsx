@@ -97,7 +97,6 @@ const productsPage = ({ products: productsFromProps }: Props) => {
                         Header: 'Visível',
                         accessor: 'visible',
                         Cell: props => {
-                            console.log(props)
                             return (
                                 <Badge type="visible" visible={props.value}>
                                     {props.value ? 'Visível' : 'Escondido'}

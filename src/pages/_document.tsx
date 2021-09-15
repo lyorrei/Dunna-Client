@@ -48,25 +48,39 @@ export default class MyDocument extends Document {
                         href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap"
                         rel="stylesheet"
                     />
-                    <meta name="viewport" content="width=device-width, initial-scale=1" />
+                    <meta
+                        name="viewport"
+                        content="width=device-width, initial-scale=1"
+                    />
                     <link rel="icon" href="/favicon.png" />
 
-                    {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
-                    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-206765746-1"></script>
-                    <script dangerouslySetInnerHTML={{
-                            __html: `
+                    {process.env.NODE_ENV === 'production' && (
+                        <>
+                            {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
+                            <script
+                                async
+                                src="https://www.googletagmanager.com/gtag/js?id=UA-206765746-1"
+                            ></script>
+                            <script
+                                dangerouslySetInnerHTML={{
+                                    __html: `
                                 window.dataLayer = window.dataLayer || [];
                                 function gtag(){dataLayer.push(arguments);}
                                 gtag('js', new Date());
 
                                 gtag('config', 'UA-206765746-1');
                             `
-                        }}>
-                    </script>
+                                }}
+                            ></script>
 
-                    {/* RD Station */}
-                    <script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/31b1baaa-692a-4486-97a9-784d5b4008be-loader.js" ></script>
-
+                            {/* RD Station */}
+                            <script
+                                type="text/javascript"
+                                async
+                                src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/31b1baaa-692a-4486-97a9-784d5b4008be-loader.js"
+                            ></script>
+                        </>
+                    )}
                 </Head>
                 <body>
                     <Main />
