@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import axios from '../../../axios'
 import * as Yup from 'yup'
 
@@ -55,6 +55,17 @@ const loginForm: React.FC<Props> = ({ setLoading }) => {
             }
         }
     }
+
+    useEffect(() => {
+        if (process.env.NODE_ENV === 'production') {
+            const script = document.createElement('script')
+            script.src =
+                'https://d335luupugsy2.cloudfront.net/js/loader-scripts/31b1baaa-692a-4486-97a9-784d5b4008be-loader.js'
+            script.async = true
+            script.type = 'text/javascript'
+            document.body.appendChild(script)
+        }
+    }, [])
 
     return (
         <div>
