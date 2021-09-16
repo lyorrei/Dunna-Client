@@ -25,6 +25,7 @@ const Input: React.FC<InputProps> = ({ name, label, ...rest }) => {
         <div>
             {label && <Label htmlFor={fieldName}>{label}</Label>}
             <InputStyle
+                name={fieldName}
                 id={fieldName}
                 ref={inputRef as any}
                 defaultValue={defaultValue}
