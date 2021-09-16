@@ -51,7 +51,8 @@ const signupForm: React.FC<Props> = ({ setLoading }) => {
             // Validation passed
             setLoading(true)
             const { data: user } = await axios.post('/users/create', data)
-            setFormSuccess('Por favor, confirme o seu email')
+
+            setFormSuccess('Por favor, clique no link enviado ao seu email para confirmar a sua conta')
             formRef.current.reset()
             setLoading(false)
         } catch (err) {
@@ -69,17 +70,6 @@ const signupForm: React.FC<Props> = ({ setLoading }) => {
             console.log(err)
         }
     }
-
-    // useEffect(() => {
-    //     if (process.env.NODE_ENV === 'production') {
-    //         const script = document.createElement('script')
-    //         script.src =
-    //             'https://d335luupugsy2.cloudfront.net/js/loader-scripts/31b1baaa-692a-4486-97a9-784d5b4008be-loader.js'
-    //         script.async = true
-    //         script.type = 'text/javascript'
-    //         document.body.appendChild(script)
-    //     }
-    // }, [])
 
     return (
         <Form ref={formRef} onSubmit={handleSubmit}>

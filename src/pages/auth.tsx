@@ -42,8 +42,6 @@ const auth: React.FC = () => {
     const [login, setLogin] = useState(true)
     const [loading, setLoading] = useState(false)
 
-
-
     return (
         <>
             <Head>
