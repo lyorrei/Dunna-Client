@@ -37,7 +37,7 @@ router.post('/api/users/create', async (req, res) => {
         // Enviar Email de Confirmação
         user.generateConfirmEmail()
 
-        if (process.NODE_ENV === 'production') {
+        if (process.env.NODE_ENV === 'production') {
             // Criar Lead RD Station
             const data = JSON.stringify({
                 event_type: 'CONVERSION',
@@ -155,7 +155,7 @@ router.post('/api/users/login', async (req, res) => {
         })
 
         // Criar Lead RD Station
-        if (process.NODE_ENV === 'production') {
+        if (process.env.NODE_ENV === 'production') {
             const data = JSON.stringify({
                 event_type: 'CONVERSION',
                 event_family: 'CDP',
