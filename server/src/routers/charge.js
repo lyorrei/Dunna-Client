@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 
+const transporter = require('../config/mailer')
+const { email: senderEmail } = require('../config/mail.json')
+
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 const { auth: authMiddleware } = require('../middleware/auth')
@@ -28,7 +31,11 @@ const check = async (addressId, userId, cart, amount) => {
     // CHECK IF ALL PRODUCTS EXISTS
     const products = cart.map(
         async product =>
-            await Product.findOne({ _id: product._id, sold: false, visible: true })
+            await Product.findOne({
+                _id: product._id,
+                sold: false,
+                visible: true
+            })
     )
     const resultado = await Promise.all(products).catch(e => {
         throw new Error({
@@ -99,6 +106,18 @@ const create = async (addressId, userId, amount, cart) => {
     return { createdOrderId: order._id }
 }
 
+const sendEmail = async userName => {
+    // Mandar Email para Matheus
+    await transporter
+        .sendMail({
+            from: `"Dunna Jewelry" <` + senderEmail + `>`, // sender address
+            to: 'matheusqtorres@gmail.com',
+            subject: 'Pedido Criado',
+            html: `Pedido foi criado por ${userName}. Cheque a página de pedidos do Site!`
+        })
+        .catch(err => {})
+}
+
 router.post('/api/charge', authMiddleware, async (req, res) => {
     const { cart, amount, addressId, paymentData } = req.body
 
@@ -148,6 +167,7 @@ router.post('/api/charge', authMiddleware, async (req, res) => {
             cart
         )
 
+        await sendEmail(req.user.firstName + ' ' + req.user.lastName)
         res.send({
             createdOrderId
         })
@@ -262,6 +282,8 @@ router.post('/api/paypal/capture', authMiddleware, async (req, res) => {
             amount,
             cart
         )
+
+        await sendEmail(req.user.firstName + ' ' + req.user.lastName)
         res.send({ createdOrderId })
     } catch (err) {
         res.status(400).send({
