@@ -2,10 +2,7 @@ import React, { useEffect, useRef } from 'react'
 
 import Link from 'next/link'
 
-import { Container, HorizontalContainer } from './style'
-
-import { FaUserCircle } from 'react-icons/fa'
-import { RiLogoutBoxLine } from 'react-icons/ri'
+import { Container, NavDropdownContainer } from './style'
 
 interface List {
     icon?: any
@@ -19,12 +16,17 @@ interface Props {
     show: boolean
     setShow(boolean: boolean): void
     list: List[]
-    horizontal?: boolean
+    navBox?: boolean
 }
 
-const dropdown: React.FC<Props> = ({ show, setShow, list, horizontal }) => {
+const dropdown: React.FC<Props> = ({ show, setShow, list, navBox }) => {
     const node = useRef<HTMLDivElement>()
     const logoutHandler = () => {}
+
+    let mediaQuerry
+    if (typeof window !== 'undefined') {
+        mediaQuerry = window.matchMedia('(min-width: 50em)')
+    }
 
     const handleClickOutside = e => {
         if (node.current.contains(e.target)) {
@@ -36,20 +38,22 @@ const dropdown: React.FC<Props> = ({ show, setShow, list, horizontal }) => {
     }
 
     useEffect(() => {
-        if (show) {
-            document.addEventListener('mousedown', handleClickOutside)
-        } else {
-            document.removeEventListener('mousedown', handleClickOutside)
-        }
+        if (typeof window !== 'undefined' && mediaQuerry.matches) {
+            if (show) {
+                document.addEventListener('mousedown', handleClickOutside)
+            } else {
+                document.removeEventListener('mousedown', handleClickOutside)
+            }
 
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside)
+            return () => {
+                document.removeEventListener('mousedown', handleClickOutside)
+            }
         }
     }, [show])
 
-    if (horizontal) {
+    if (navBox) {
         return (
-            <HorizontalContainer ref={node}>
+            <NavDropdownContainer ref={node}>
                 {list.map(el =>
                     el.link ? (
                         <Link key={el.text} href={el.link}>
@@ -65,7 +69,7 @@ const dropdown: React.FC<Props> = ({ show, setShow, list, horizontal }) => {
                         </button>
                     )
                 )}
-            </HorizontalContainer>
+            </NavDropdownContainer>
         )
     }
 

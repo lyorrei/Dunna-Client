@@ -15,6 +15,19 @@ export const Container = styled.div`
     border-radius: 3px;
     box-shadow: 1rem 1.25rem 2rem rgba(0, 0, 0, 0.2);
 
+    @media only screen and (max-width: 50em) {
+        position: relative;
+        top: 0;
+        left: 0;
+        flex-direction: column;
+        width: 100%;
+        min-width: auto;
+        background-color: transparent;
+        box-shadow: none;
+        margin-top: 1rem;
+        border: 0;
+    } //700px
+
     a,
     button {
         border: none;
@@ -30,6 +43,12 @@ export const Container = styled.div`
         font-family: 'Raleway', sans-serif;
         font-weight: 600;
         transition: all 0.2s;
+        width: 100%;
+
+        @media only screen and (max-width: 50em) {
+            font-size: 2rem !important;
+            padding: 2rem 2.5rem;
+        } //700px
 
         svg {
             width: 2rem;
@@ -43,7 +62,7 @@ export const Container = styled.div`
     }
 `
 
-export const HorizontalContainer = styled.div`
+export const NavDropdownContainer = styled.div`
     position: absolute;
     top: 100%;
     left: 0;
@@ -56,6 +75,18 @@ export const HorizontalContainer = styled.div`
     /* border: 1px solid rgba(0, 0, 0, 0.2);*/
     border-radius: 3px;
     box-shadow: 1rem 1.25rem 2rem rgba(0, 0, 0, 0.2);
+
+    @media only screen and (max-width: 50em) {
+        position: relative;
+        top: 0;
+        left: 0;
+        flex-direction: column;
+        width: 100%;
+        min-width: auto;
+        background-color: transparent;
+        box-shadow: none;
+        margin-top: 1rem;
+    } //700px
 
     a,
     button {
@@ -73,11 +104,9 @@ export const HorizontalContainer = styled.div`
         font-weight: 600;
         transition: all 0.2s;
 
-        svg {
-            width: 2rem;
-            height: 2rem;
-            margin-right: 1rem;
-        }
+        @media only screen and (max-width: 50em) {
+            font-size: 2rem !important;
+        } //700px
 
         &:hover {
             background-color: ${props => props.theme.colors.backgroundLight};
@@ -86,6 +115,11 @@ export const HorizontalContainer = styled.div`
         &:not(:last-child) {
             border-right: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 3px;
+
+            @media only screen and (max-width: 50em) {
+                border-right: none;
+                border-radius: 0;
+            } //700px
         }
     }
 `

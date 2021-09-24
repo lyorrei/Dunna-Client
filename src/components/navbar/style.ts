@@ -1,3 +1,4 @@
+import { RiArrowDropDownLine } from 'react-icons/ri'
 import styled, { css } from 'styled-components'
 
 interface IsClickedProp {
@@ -9,11 +10,11 @@ export const Nav = styled.nav`
     background-color: ${props => props.theme.colors.white};
     height: 6rem;
     display: flex;
-    z-index: 15;
 
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 120;
 
     @media only screen and (max-width: 37.5em) {
         padding: 0;
@@ -61,27 +62,26 @@ export const NavBox = styled.ul<IsClickedProp>`
     list-style: none;
 
     @media only screen and (max-width: 50em) {
-        display: none;
+        position: absolute;
+        top: 100%;
+        left: -80%;
+        width: 80%;
+        height: calc(100vh - 6rem);
+        transition: all 0.4s;
+        background-color: ${props => props.theme.colors.white};
+        overflow: auto;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        margin: 0;
+        z-index: 120;
+        padding: 0;
+
         ${props =>
             props.isClicked &&
             css`
-                display: flex;
-                flex-direction: column;
-                justify-content: start;
-                align-items: center;
-                margin: 0;
-                z-index: 10;
-                background-image: linear-gradient(
-                    to bottom right,
-                    ${props => props.theme.colors.primaryDark},
-                    ${props => props.theme.colors.primaryLight}
-                );
-                position: absolute;
-                top: 100%;
                 left: 0;
-                width: 100%;
-                height: 100vh;
-                padding: 4rem;
             `}
     } //700px
 `
@@ -101,16 +101,13 @@ export const Li = styled.li<LiProps>`
     ${props => props.marginRight && `margin-right: auto;`}
 
     @media only screen and (max-width: 50em) {
-        ${props =>
-            props.isClicked &&
-            css`
-                padding: 2.2rem;
-                margin-bottom: 0.5rem;
-                text-align: center;
-                justify-content: center;
-                display: inline-block;
-                margin-right: 0;
-            `}
+        padding: 2rem 4rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 0;
+        margin-right: 0;
     } //700px
 
     ${props =>
@@ -120,6 +117,11 @@ export const Li = styled.li<LiProps>`
     &:hover {
         background-color: ${props => props.theme.colors.backgroundLight};
         color: ${props => props.theme.colors.greyDark1};
+
+        @media only screen and (max-width: 50em) {
+            background-color: ${props => props.theme.colors.white};
+            color: ${props => props.theme.colors.greyDark1};
+        } //700px
     }
 
     a,
@@ -146,16 +148,13 @@ export const Li = styled.li<LiProps>`
         }
 
         @media only screen and (max-width: 50em) {
-            ${props =>
-                props.isClicked &&
-                css`
-                    text-align: center;
-                    font-size: 2.4rem;
-                `}
+            text-align: start;
+            font-size: 2rem;
+            display: block;
+            height: auto;
+            width: 100%;
+            text-transform: uppercase;
 
-            ${props =>
-                !props.isActive &&
-                `color: ${props => props.theme.colors.white};`}
             &:hover {
                 color: ${props => props.theme.colors.greyDark1};
             }
@@ -168,6 +167,16 @@ export const Li = styled.li<LiProps>`
         fill: ${props => props.theme.colors.greyDark1};
         cursor: pointer;
         transition: all 0.2s;
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @media only screen and (max-width: 50em) {
+            width: 100%;
+        } //700px
     }
 
     span {
@@ -200,13 +209,23 @@ export const Li = styled.li<LiProps>`
         border-radius: ${props => props.theme.sizes.borderRadius};
 
         @media only screen and (max-width: 50em) {
-            ${props =>
-                props.isClicked &&
-                css`
-                    text-align: center;
-                    font-size: 2.4rem;
-                `}
-        }
+            text-align: start;
+            font-size: 2rem;
+            display: block;
+            height: auto;
+            width: 100%;
+            text-transform: uppercase;
+            border: none;
+            text-decoration: none;
+            height: 100%;
+            padding: 0;
+            font-weight: 600;
+            font-family: 'Raleway', sans-serif;
+
+            &:hover {
+                color: ${props => props.theme.colors.greyDark1};
+            }
+        } //700px
 
         ${props =>
             !props.isActive && `color: ${props => props.theme.colors.white};`}
@@ -310,4 +329,25 @@ export const ToogleBox = styled.div<IsClickedProp>`
             }
         }
     }
+`
+
+interface NavArrowProps {
+    isBigScreen: boolean
+    showShopDropdown: boolean
+}
+
+export const NavArrow = styled(RiArrowDropDownLine)<NavArrowProps>`
+    width: 2rem !important;
+    height: 2rem !important;
+    margin-left: 1rem;
+    margin-right: -.8rem;
+    transition: all 0.2s;
+
+    @media only screen and (max-width: 50em) {
+        width: 3rem !important;
+        height: 3rem !important;
+    } //600px
+
+    transform: ${props =>
+        props.showShopDropdown ? 'rotate(0)' : 'rotate(-90deg)'};
 `
