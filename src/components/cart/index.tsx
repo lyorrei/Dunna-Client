@@ -56,7 +56,7 @@ const cart: React.FC<Props> = ({ showCart, setShowCart }) => {
                 <Total>
                     Total: <span>{(total / 100).toFixed(2)}</span>
                 </Total>
-                <Methods>Métodos de pagamento</Methods>
+                <Methods>Pagamento através de todos os cartões via:</Methods>
                 <div
                     style={{
                         display: 'grid',

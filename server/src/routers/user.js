@@ -37,25 +37,6 @@ router.post('/api/users/create', async (req, res) => {
         // Enviar Email de Confirmação
         user.generateConfirmEmail()
 
-        if (process.env.NODE_ENV === 'production') {
-            // Criar Lead RD Station
-            const data = JSON.stringify({
-                event_type: 'CONVERSION',
-                event_family: 'CDP',
-                payload: {
-                    conversion_identifier: 'Criar conta',
-                    name: req.body.firstName + ' ' + req.body.lastName,
-                    email: req.body.email
-                }
-            })
-            await axios.post(
-                'https://api.rd.services/platform/conversions?api_key=' +
-                    process.env.RD_STATION_KEY,
-                data,
-                { headers: { 'Content-Type': 'application/json' } }
-            )
-        }
-
         // Retornar Status
         res.status(201).send()
     } catch (e) {
@@ -90,6 +71,26 @@ router.get('/api/user/confirmation/:token', async (req, res) => {
         }
         emailUser.confirmed = true
         await emailUser.save()
+
+        // RD Station Setup
+        if (process.env.NODE_ENV === 'production') {
+            // Criar Lead RD Station
+            const data = JSON.stringify({
+                event_type: 'CONVERSION',
+                event_family: 'CDP',
+                payload: {
+                    conversion_identifier: 'Criar conta',
+                    name: req.body.firstName + ' ' + req.body.lastName,
+                    email: req.body.email
+                }
+            })
+            await axios.post(
+                'https://api.rd.services/platform/conversions?api_key=' +
+                    process.env.RD_STATION_KEY,
+                data,
+                { headers: { 'Content-Type': 'application/json' } }
+            ).catch(e => {})
+        }
 
         return res.redirect(process.env.CLIENT_URL + '/confirmation/success')
     } catch (e) {
@@ -170,7 +171,7 @@ router.post('/api/users/login', async (req, res) => {
                     process.env.RD_STATION_KEY,
                 data,
                 { headers: { 'Content-Type': 'application/json' } }
-            )
+            ).catch(e => {})
         }
 
         res.send(userResponse)
