@@ -1,15 +1,16 @@
 import React from 'react'
 import axios from '../../axios'
 import Router from 'next/router'
-import { NextPageContext } from 'next'
 import Sidebar from '../components/sidebar'
+import { parseCookies } from 'nookies'
 
 const RequireAuthentication = (WrappedComponent, isAdmin?: boolean) => {
     return class extends React.Component {
-        static async getInitialProps(ctx: NextPageContext) {
+        static async getInitialProps(ctx) {
             let token = null
             if (ctx.req) {
-                token = ctx.req.headers.cookie?.replace('token=', '')
+                const { token: tokenFromCookies } = parseCookies(ctx)
+                token = tokenFromCookies
             }
 
             try {

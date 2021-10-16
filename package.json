@@ -40,6 +40,7 @@
         "next": "10.0.3",
         "next-images": "^1.6.2",
         "nodemailer": "^6.5.0",
+        "nookies": "^2.5.2",
         "nprogress": "^0.2.0",
         "react": "17.0.1",
         "react-alert": "^7.0.2",

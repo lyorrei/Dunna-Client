@@ -44,7 +44,7 @@ const page: React.FC<AppProps> = ({ Component, pageProps }) => {
 
     const closePageAlert = () => {
         setShowPageAlert(false)
-        setCookie('pageAlert', 'pageAlert', { path: '/', maxAge: 60 * 60 * 6 }) // 6 horas
+        setCookie('pageAlert', 'pageAlert', { path: '/', maxAge: 60 * 60 * 48 }) // 48 horas
     }
 
     return (
