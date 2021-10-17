@@ -228,14 +228,14 @@ router.patch('/api/users/me', authMiddleware, async (req, res) => {
     }
 })
 
-router.delete('/api/users/me', authMiddleware, async (req, res) => {
-    try {
-        await req.user.delete()
-        res.send(req.user)
-    } catch (e) {
-        res.status(500).send()
-    }
-})
+// router.delete('/api/users/me', adminMiddleware, async (req, res) => {
+//     try {
+//         await req.user.delete()
+//         res.send(req.user)
+//     } catch (e) {
+//         res.status(500).send()
+//     }
+// })
 
 router.get('/api/users/isadmin', adminMiddleware, async (req, res) => {
     try {
