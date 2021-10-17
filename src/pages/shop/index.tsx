@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 
 import Head from 'next/head'
 
@@ -56,42 +56,42 @@ const shop: React.FC = () => {
     const [items] = useState([
         {
             title: 'Anéis',
-            link: '/shop/products/?type=Anel',
+            link: '/shop/Anel',
             imageUrl: Shop1,
             description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam'
         },
         {
             title: 'Brincos',
-            link: '/shop/products/?type=Brinco',
+            link: '/shop/Brinco',
             imageUrl: Shop2,
             description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam'
         },
         {
             title: 'Colares',
-            link: '/shop/products/?type=Colar',
+            link: '/shop/Colar',
             imageUrl: Shop3,
             description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam'
         },
         {
             title: 'Pingentes',
-            link: '/shop/products/?type=Pingente',
+            link: '/shop/Pingente',
             imageUrl: Shop4,
             description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam'
         },
         {
             title: 'Pulseiras',
-            link: '/shop/products/?type=Pulseira',
+            link: '/shop/Pulseira',
             imageUrl: Shop5,
             description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam'
         },
         {
             title: 'Gemas',
-            link: '/shop/products/?type=Gema',
+            link: '/shop/Gema',
             imageUrl: Shop6,
             description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam'

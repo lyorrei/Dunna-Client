@@ -43,4 +43,4 @@ productImageSchema.pre('remove', function () {
     }
 })
 
-module.exports = mongoose.model('ProductImage', productImageSchema)
+module.exports = mongoose.models.ProductImage || mongoose.model('ProductImage', productImageSchema)

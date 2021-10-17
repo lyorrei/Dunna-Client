@@ -6,37 +6,12 @@ const { admin: adminMiddleware } = require('../middleware/auth')
 const Product = require('../models/product')
 const ProductImage = require('../models/productImage')
 const OrderItem = require('../models/orderItem')
-const Type = require('../models/type')
-const ProductType = require('../models/productType')
 
-const { getProducts } = require('../common')
+const { getProducts, getSpotlightProducts } = require('../../../common')
 
 router.get('/api/products', async (req, res) => {
     try {
-        const match = {
-            sold: false,
-            visible: true
-        }
-        if (req.query.type) {
-            if (req.query.type === 'Gema') {
-                const productType = await ProductType.findOne({
-                    name: 'Pedra Lapidada'
-                })
-                match.productType = productType._id
-            } else if (req.query.type === 'Desconto') {
-                match.discount = true
-            } else {
-                const type = await Type.findOne({ name: req.query.type })
-                if (type) match.type = type._id
-            }
-        }
-
-        const fetchedProducts = await Product.find(match)
-        const productsPromise = fetchedProducts.map(
-            async product => await product.populate('images').execPopulate()
-        )
-        const products = await Promise.all(productsPromise)
-        // const products = await getProducts()
+        const products = await getProducts(req.query.type)
         res.send(products)
     } catch (e) {
         res.status(500).send()
@@ -45,28 +20,7 @@ router.get('/api/products', async (req, res) => {
 
 router.get('/api/products/spotlight', async (req, res) => {
     try {
-        const fetchedProducts = await Product.find({
-            sold: false,
-            visible: true,
-            spotlight: true
-        })
-
-        if (fetchedProducts.length === 0) {
-            const lastProducts = await Product.find({
-                sold: false,
-                visible: true
-            }).limit(3)
-            const lastProductsPromise = lastProducts.map(
-                async product => await product.populate('images').execPopulate()
-            )
-            const products = await Promise.all(lastProductsPromise)
-            return res.send(products)
-        }
-
-        const productsPromise = fetchedProducts.map(
-            async product => await product.populate('images').execPopulate()
-        )
-        const products = await Promise.all(productsPromise)
+        const products = await getSpotlightProducts()
         res.send(products)
     } catch (e) {
         res.status(500).send()
@@ -158,7 +112,7 @@ router.patch('/api/product/edit/:id', adminMiddleware, async (req, res) => {
             return res.status(400).send({ error: 'Produto foi vendido' })
         }
 
-        if(!req.body.totalPrice) {
+        if (!req.body.totalPrice) {
             product.totalPrice = undefined
             product.discount = false
         }

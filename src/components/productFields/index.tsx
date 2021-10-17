@@ -16,7 +16,7 @@ import { Input } from '../../components/input/style'
 import { InlineButton } from '../../components/button'
 
 import { FaTrash } from 'react-icons/fa'
-import { StonesAndShapes } from '../../pages/shop/products'
+import { StonesAndShapes } from '../../pages/shop/[type]'
 
 interface Props {
     options: StonesAndShapes[]

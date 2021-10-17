@@ -11,13 +11,11 @@ import {
     DiscountBox
 } from './style'
 
-import Button, { InlineButton } from '../button'
+import Button from '../button'
 
-import { item, StonesAndShapes } from '../../pages/shop/products'
+import { item, StonesAndShapes } from '../../pages/shop/[type]'
 
 import { useCart, checkIfProductIsInCart } from '../../context/Cart'
-
-import Image from 'next/image'
 
 import NoImage from '../../images/noimage.png'
 
@@ -72,7 +70,7 @@ const product: React.FC<ProductInterface> = props => {
                     </DiscountBox>
                 )}
 
-                <Link href={'/shop/' + props._id}>
+                <Link href={'/shop/product/' + props._id}>
                     <a>
                         <img
                             src={
@@ -101,7 +99,7 @@ const product: React.FC<ProductInterface> = props => {
                 </Link>
             </ImageContainer>
             <Content>
-                <Link href={'/shop/' + props._id}>
+                <Link href={'/shop/product/' + props._id}>
                     <Title>{props.name}</Title>
                 </Link>
                 <Price>R$ {(props.price / 100).toFixed(2)} </Price>

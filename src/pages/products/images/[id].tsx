@@ -4,12 +4,9 @@ import React, { useState, useEffect } from 'react'
 import RequireAuthentication from '../../../HOC/requireAuthentication'
 import Head from 'next/head'
 
-import ProductForm from '../../../components/productForm'
 import Upload from '../../../components/upload'
-import FileList, { uploadedFilesInterface } from '../../../components/fileList'
+import FileList from '../../../components/fileList'
 
-import { ProductInterface } from '../../../components/product'
-import { StonesAndShapes } from '../../shop/products'
 import { PageContainer, Container } from '../../../styles/pages/products/edit'
 import { InlineButton } from '../../../components/button'
 import { useRouter } from 'next/router'

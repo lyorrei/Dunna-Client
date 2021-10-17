@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import axios from '../../../axios'
 
 import {
     Container,
@@ -19,18 +18,18 @@ import {
     CheckList,
     SubPrice,
     DicountTotalPrice
-} from '../../styles/pages/shop/product'
+} from '../../../styles/pages/shop/product'
 
 import Head from 'next/head'
-import { ProductInterface } from '../../components/product'
-import { InlineButton } from '../../components/button'
+import { ProductInterface } from '../../../components/product'
+import { InlineButton } from '../../../components/button'
 import { FiCheckCircle } from 'react-icons/fi'
 
 import ReactImageMagnify from 'react-image-magnify'
-import { checkIfProductIsInCart, useCart } from '../../context/Cart'
-import withCart from '../../HOC/withCart'
+import { checkIfProductIsInCart, useCart } from '../../../context/Cart'
+import withCart from '../../../HOC/withCart'
 
-import NoImage from '../../images/noimage.png'
+import NoImage from '../../../images/noimage.png'
 import { FaWeight } from 'react-icons/fa'
 import { RiVipDiamondLine } from 'react-icons/ri'
 import { FaShapes } from 'react-icons/fa'
@@ -39,10 +38,9 @@ import { useRouter } from 'next/router'
 import { CircleLoader } from 'react-spinners'
 import { GiMetalBar, GiStoneBlock, GiStoneSphere } from 'react-icons/gi'
 
-import { getProducts, getSingleProduct } from '../../../server/src/common'
+import { getAllVisibleProducts, getSingleProduct } from '../../../../common'
 
-import Product from '../../../server/src/models/product'
-import { GetStaticPaths } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
 
 interface Props {
     product: ProductInterface
@@ -295,11 +293,41 @@ const product: React.FC<Props> = ({ product }) => {
     )
 }
 
-export const getServerSideProps = async ctx => {
+export const getStaticPaths: GetStaticPaths = async () => {
+    // Connect to Database
+    await require('../../../../server/src/db/mongoose')()
+
+    // Call an external API endpoint to get products
+    const products = await JSON.parse(
+        JSON.stringify(await getAllVisibleProducts())
+    )
+
+    // Get the paths we want to pre-render based on posts
+    const paths = products.map(product => ({
+        params: { id: product._id }
+    }))
+
+    return {
+        paths,
+        fallback: true
+    }
+}
+
+export const getStaticProps: GetStaticProps = async ctx => {
+    // Connect to Database
+    await require('../../../../server/src/db/mongoose')()
+
+    // Get Data
     const product = JSON.parse(
         JSON.stringify(await getSingleProduct(ctx.params.id))
     )
-    return { props: { product } }
+
+    return {
+        props: {
+            product
+        }, // will be passed to the page component as props
+        revalidate: 20
+    }
 }
 
 export default withCart(product)

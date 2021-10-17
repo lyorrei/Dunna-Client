@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from '../../../axios'
 
 import { Nav, LogoBox, NavBox, Li, ToogleBox, NavArrow } from './style'
@@ -14,7 +14,6 @@ import { useRouter } from 'next/router'
 import { useUser } from '../../context/User'
 import {
     RiAdminFill,
-    RiArrowDropDownLine,
     RiLogoutBoxLine
 } from 'react-icons/ri'
 
@@ -44,32 +43,32 @@ const navbar: React.FC = () => {
         {
             text: 'Anéis',
             type: 'link',
-            link: '/shop/products?type=Anel'
+            link: '/shop/Anel'
         },
         {
             text: 'Brincos',
             type: 'link',
-            link: '/shop/products?type=Brinco'
+            link: '/shop/Brinco'
         },
         {
             text: 'Colares',
             type: 'link',
-            link: '/shop/products?type=Colar'
+            link: '/shop/Colar'
         },
         {
             text: 'Pingentes',
             type: 'link',
-            link: '/shop/products?type=Pingente'
+            link: '/shop/Pingente'
         },
         {
             text: 'Pulseiras',
             type: 'link',
-            link: '/shop/products?type=Pulseira'
+            link: '/shop/Pulseira'
         },
         {
             text: 'Gemas',
             type: 'link',
-            link: '/shop/products?type=Gema'
+            link: '/shop/Gema'
         }
     ])
 
@@ -149,7 +148,7 @@ const navbar: React.FC = () => {
                             router.query.type === 'Desconto'
                         }
                     >
-                        <Link href="/shop/products?type=Desconto">
+                        <Link href="/shop/Desconto">
                             <a style={{ letterSpacing: '0.1rem' }}>% OFF</a>
                         </Link>
                     </Li>

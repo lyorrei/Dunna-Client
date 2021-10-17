@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import axios from '../../../axios'
 import Head from 'next/head'
 import { NextPageContext } from 'next'
@@ -6,8 +6,7 @@ import RequireAuthentication from '../../HOC/requireAuthentication'
 
 import ProductFields from '../../components/productFields'
 
-import { StonesAndShapes } from '../shop/products'
-
+import { StonesAndShapes } from '../shop/[type]'
 
 interface Props {
     stones: StonesAndShapes[]

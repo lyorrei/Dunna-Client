@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from 'react'
-import axios from '../../../axios'
 
 import Head from 'next/head'
 import Product from '../../components/product'
@@ -14,14 +13,16 @@ import { ProductInterface } from '../../components/product'
 import FilterProducts from '../../components/filterProducts'
 import { FormHandles } from '@unform/core'
 import withCart from '../../HOC/withCart'
-import { GetServerSideProps } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
+
+import { useRouter } from 'next/router'
 
 import {
+    getProducts,
     getStones,
     getShapes,
     getProductTypes
-} from '../../../server/src/common'
-import { useRouter } from 'next/router'
+} from '../../../common'
 
 const container = {
     hidden: { opacity: 1, scale: 0 },
@@ -85,11 +86,11 @@ const shop: React.FC<Props> = ({
 
     useEffect(() => {
         setProducts(productsFromProps)
+        console.log(productsFromProps)
     }, [productsFromProps])
 
     useEffect(() => {
         // Check if it is the first page load
-
         if (currentQuery !== router.query.type) {
             if (formRef && formRef.current) {
                 const shapesSelect = formRef.current.getFieldRef('shapes')
@@ -101,7 +102,6 @@ const shop: React.FC<Props> = ({
             setPriceValue({ min: 0, max: 60000 })
 
             setCurrentQuery(router.query.type)
-
         }
     }, [router.query.type])
 
@@ -175,53 +175,71 @@ const shop: React.FC<Props> = ({
             </Head>
             <Container variants={container} initial="hidden" animate="visible">
                 <Title variants={titleVariant}>{title}</Title>
-                
-                    {productsFromProps.length > 0 ? (
-                        <>
-                            <FilterProducts
-                                productTypes={productTypes}
-                                handleFilterChange={handleFilterChange}
-                                stones={stones}
-                                shapes={shapes}
-                                formRef={formRef}
-                                priceValue={priceValue}
-                                changeHandler={handleFiltering}
-                            />
 
-                            <GridContainer>
-                                {products.length > 0 ? (
-                                    products.map(product => (
-                                        <Product
-                                            key={product._id}
-                                            {...product}
-                                        />
-                                    ))
-                                ) : (
-                                    <NoProducts>
-                                        Nenhum produto encontrado
-                                    </NoProducts>
-                                )}
-                            </GridContainer>
-                        </>
-                    ) : (
-                        <NoProducts>O estoque está esgotado</NoProducts>
-                    )}
+                {productsFromProps && productsFromProps.length > 0 ? (
+                    <>
+                        <FilterProducts
+                            productTypes={productTypes}
+                            handleFilterChange={handleFilterChange}
+                            stones={stones}
+                            shapes={shapes}
+                            formRef={formRef}
+                            priceValue={priceValue}
+                            changeHandler={handleFiltering}
+                        />
+
+                        <GridContainer>
+                            {products.length > 0 ? (
+                                products.map(product => (
+                                    <Product key={product._id} {...product} />
+                                ))
+                            ) : (
+                                <NoProducts>
+                                    Nenhum produto encontrado
+                                </NoProducts>
+                            )}
+                        </GridContainer>
+                    </>
+                ) : (
+                    <NoProducts>O estoque está esgotado</NoProducts>
+                )}
             </Container>
         </>
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async ctx => {
-    let url = '/products'
-    if (ctx.query.type) {
-        url = `/products?type=${ctx.query.type}`
+export const getStaticPaths: GetStaticPaths = async () => {
+    const types = [
+        'Anel',
+        'Colar',
+        'Brinco',
+        'Pingente',
+        'Pulseira',
+        'Gema',
+        'Desconto'
+    ]
+    const paths = types.map(type => ({
+        params: { type }
+    }))
+
+    return {
+        paths,
+        fallback: false
     }
-    // GET PRODUCTS AND OPTIONS
-    const { data: products } = await axios.get(url)
-    const stones = JSON.parse(JSON.stringify(await getStones()))
+}
+
+export const getStaticProps: GetStaticProps = async ctx => {
+    // Connect to Database
+    await require('../../../server/src/db/mongoose')()
+
+    // Get Data
+    const products = JSON.parse(
+        JSON.stringify(await getProducts(ctx.params.type))
+    )
     const shapes = JSON.parse(JSON.stringify(await getShapes()))
     const productTypes = JSON.parse(JSON.stringify(await getProductTypes()))
-    const firstQuery = ctx.query.type
+    const stones = JSON.parse(JSON.stringify(await getStones()))
+    const firstQuery = ctx.params.type
 
     return {
         props: {
@@ -230,7 +248,8 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
             shapes,
             productTypes,
             firstQuery
-        } // will be passed to the page component as props
+        }, // will be passed to the page component as props
+        revalidate: 20
     }
 }
 

@@ -1,11 +1,11 @@
 import axios from '../../../../axios'
 import { NextPageContext } from 'next'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import RequireAuthentication from '../../../HOC/requireAuthentication'
 import Head from 'next/head'
 import ProductForm from '../../../components/productForm'
 import { ProductInterface } from '../../../components/product'
-import { StonesAndShapes } from '../../shop/products'
+import { StonesAndShapes } from '../../shop/[type]'
 import { PageContainer, Container } from '../../../styles/pages/products/edit'
 
 interface Props {

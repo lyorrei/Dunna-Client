@@ -4,9 +4,8 @@ import { Form, RangeSliderContainer } from './style'
 
 import Select from '../select'
 
-import { StonesAndShapes } from '../../pages/shop/products'
-import { InlineButton } from '../button'
-import { FormHandles, SubmitHandler } from '@unform/core'
+import { StonesAndShapes } from '../../pages/shop/[type]'
+import { FormHandles } from '@unform/core'
 import InputRange, { Range } from 'react-input-range'
 import 'react-input-range/lib/css/index.css'
 import { motion } from 'framer-motion'
@@ -56,7 +55,7 @@ const filterProducts: React.FC<Props> = ({
 
     return (
         <Form ref={formRef} onSubmit={() => {}}>
-             {/* <motion.div variants={item}>
+            {/* <motion.div variants={item}>
                 <Select
                     isMultiple
                     name="productTypes"
@@ -83,7 +82,7 @@ const filterProducts: React.FC<Props> = ({
                     onChange={() => handleFilterChange()}
                 />
             </motion.div>
-            <motion.div variants={item} >
+            <motion.div variants={item}>
                 <RangeSliderContainer color="red">
                     <h3>Preço:</h3>
                     <InputRange

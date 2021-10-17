@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import axios from '../../../axios'
 
 import { uniqueId } from 'lodash'
@@ -9,11 +9,10 @@ import RequireAuthentication from '../../HOC/requireAuthentication'
 
 import ProductForm from '../../components/productForm'
 import Upload from '../../components/upload'
-import FileList, { uploadedFilesInterface } from '../../components/fileList'
+import FileList from '../../components/fileList'
 
-import { StonesAndShapes } from '../shop/products'
+import { StonesAndShapes } from '../shop/[type]'
 import { NextPageContext } from 'next'
-import { motion } from 'framer-motion'
 
 import {
     PageContainer,

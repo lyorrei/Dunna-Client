@@ -1,6 +1,4 @@
 import React from 'react'
-import axios from '../../axios'
-
 import Head from 'next/head'
 
 import { HeaderContainer, PageContainer } from '../styles/pages'
@@ -9,10 +7,11 @@ import Header from '../components/header'
 import withCart from '../HOC/withCart'
 import Spotlight from '../components/spotlight'
 import { motion } from 'framer-motion'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { ProductInterface } from '../components/product'
 import ImageSection from '../components/imageSection'
 import VogueSection from '../components/vogueSection'
+import { getSpotlightProducts } from '../../common'
 
 const pageContainerVariant = {
     hidden: { opacity: 1, scale: 0 },
@@ -53,13 +52,18 @@ const Home = ({ products }: Props) => {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async ctx => {
-    const { data: products } = await axios.get('/products/spotlight')
+export const getStaticProps: GetStaticProps = async ctx => {
+    // Connect to Database
+    await require('../../server/src/db/mongoose')()
+
+    // Get Data
+    const products = JSON.parse(JSON.stringify(await getSpotlightProducts()))
 
     return {
         props: {
             products
-        }
+        }, // will be passed to the page component as props
+        revalidate: 20
     }
 }
 
