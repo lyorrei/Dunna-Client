@@ -34,6 +34,7 @@ export const Container = styled.div`
 
 export const ImageContainer = styled.div`
     width: 20%;
+    cursor: pointer;
 `
 
 export const Img = styled.img`
@@ -48,6 +49,8 @@ export const Name = styled.p`
     color: ${props => props.theme.colors.greyDark1};
     font-weight: 700;
     flex: 0 0 50%;
+
+    cursor: pointer;
 `
 
 export const Price = styled.p`

@@ -115,6 +115,13 @@ const product: React.FC<Props> = ({ product }) => {
     const { cart, addProduct } = useCart()
     const [isActive, setIsActive] = useState(true)
 
+    // Fix problem when changing page
+    useEffect(() => {
+        setSelectedImage(
+            product.images.length > 0 ? product.images[0].url : NoImage
+        )
+    }, [router.asPath])
+
     useEffect(() => {
         if (checkIfProductIsInCart(cart, product)) {
             setIsActive(false)

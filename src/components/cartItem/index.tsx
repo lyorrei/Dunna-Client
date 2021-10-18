@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import { useCart } from '../../context/Cart'
 
 import { FaTrash } from 'react-icons/fa'
@@ -19,10 +20,14 @@ const cartItem: React.FC<ProductInterface> = props => {
 
     return (
         <Container>
-            <ImageContainer>
-                <Img src={props.images[0].url} alt="Product Image" />
-            </ImageContainer>
-            <Name>{props.name}</Name>
+            <Link href={'/shop/product/' + props._id}>
+                <ImageContainer>
+                    <Img src={props.images[0].url} alt="Product Image" />
+                </ImageContainer>
+            </Link>
+            <Link href={'/shop/product/' + props._id}>
+                <Name>{props.name}</Name>
+            </Link>
             <Price>R$ {(props.price / 100).toFixed(2)}</Price>
             <FaTrash onClick={filterProduct} />
         </Container>
