@@ -4,7 +4,11 @@ import Router from 'next/router'
 import Sidebar from '../components/sidebar'
 import { parseCookies } from 'nookies'
 
-const RequireAuthentication = (WrappedComponent, isAdmin?: boolean) => {
+const RequireAuthentication = (
+    WrappedComponent,
+    isAdmin?: boolean,
+    toCheckout?: boolean
+) => {
     return class extends React.Component {
         static async getInitialProps(ctx) {
             let token = null
@@ -54,11 +58,11 @@ const RequireAuthentication = (WrappedComponent, isAdmin?: boolean) => {
             } catch (err) {
                 if (ctx.req) {
                     ctx.res.writeHead(302, {
-                        Location: '/auth'
+                        Location: toCheckout ? '/auth?checkout=true' : '/auth'
                     })
                     ctx.res.end()
                 } else {
-                    Router.push('/auth')
+                    Router.push(toCheckout ? '/auth?checkout=true' : '/auth')
                 }
             }
             return {}
@@ -76,8 +80,6 @@ const RequireAuthentication = (WrappedComponent, isAdmin?: boolean) => {
                             <Sidebar />
                             <div
                                 style={{
-                                    // position: 'absolute',
-                                    // marginLeft: '18vw',
                                     flex: '1 0 82vw'
                                 }}
                             >

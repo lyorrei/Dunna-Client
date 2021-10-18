@@ -127,7 +127,6 @@ const navbar: React.FC = () => {
                                 onClick={() =>
                                     setShowShopDropdown(!showShopDropdown)
                                 }
-                                isBigScreen={isBigScreen}
                                 showShopDropdown={showShopDropdown}
                             />
                         </div>
@@ -207,7 +206,6 @@ const navbar: React.FC = () => {
                                                 !showAuthDropdown
                                             )
                                         }
-                                        isBigScreen={isBigScreen}
                                         showShopDropdown={showAuthDropdown}
                                     />
                                 )}

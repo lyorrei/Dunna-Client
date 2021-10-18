@@ -1,22 +1,21 @@
 import React, { useEffect } from 'react'
-import axios from '../../axios'
 
 import CartProvider from '../context/Cart'
-import UserProvider, { useUser } from '../context/User'
+import UserProvider from '../context/User'
+import { HistoryProvider } from '../context/History'
+
 import { AppProps } from 'next/app'
 
 import { ThemeProvider } from 'styled-components'
 import theme from '../styles/theme'
 
-import { CookiesProvider, useCookies } from 'react-cookie'
+import { CookiesProvider } from 'react-cookie'
 
 import Page from '../components/page'
 import { loadStripe } from '@stripe/stripe-js'
-import { Elements } from '@stripe/react-stripe-js'
-import CookieConsent from 'react-cookie-consent'
 
 import AlertTemplate from 'react-alert-template-basic'
-import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import { transitions, Provider as AlertProvider } from 'react-alert'
 
 import Router, { useRouter } from 'next/router'
 import NProgress from 'nprogress' //nprogress module
@@ -62,15 +61,17 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps, router }) => {
         <CookiesProvider>
             <UserProvider>
                 <CartProvider>
-                    <AlertProvider template={AlertTemplate} {...options}>
-                        <ThemeProvider theme={theme}>
-                            <Page
-                                Component={Component}
-                                router={router}
-                                pageProps={pageProps}
-                            />
-                        </ThemeProvider>
-                    </AlertProvider>
+                    <HistoryProvider>
+                        <AlertProvider template={AlertTemplate} {...options}>
+                            <ThemeProvider theme={theme}>
+                                <Page
+                                    Component={Component}
+                                    router={router}
+                                    pageProps={pageProps}
+                                />
+                            </ThemeProvider>
+                        </AlertProvider>
+                    </HistoryProvider>
                 </CartProvider>
             </UserProvider>
         </CookiesProvider>

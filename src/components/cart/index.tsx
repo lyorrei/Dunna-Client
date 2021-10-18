@@ -13,35 +13,22 @@ import {
 } from './style'
 import { ProductInterface } from '../product'
 
-import Head from 'next/head'
 import CartItem from '../cartItem'
 import { CheckoutButton } from '../button'
 import { FaShoppingCart } from 'react-icons/fa'
-import { AnimatePresence, motion } from 'framer-motion'
+
+import { useHistory } from '../../context/History'
 
 interface Props {
     showCart: boolean
     setShowCart(boolean: boolean): void
 }
 
-// const containerVariants = {
-//     hidden: {
-//         right: '-25vw',
-//         transition: {
-//             duration: 0.4
-//         }
-//     },
-//     visible: {
-//         right: '2vw',
-//         transition: {
-//             duration: 0.4
-//         }
-//     }
-// }
-
 const cart: React.FC<Props> = ({ showCart, setShowCart }) => {
     const { cart } = useCart()
     const [total, setTotal] = useState(0)
+
+    const { addToHistory } = useHistory()
 
     let cartElements = <Message>O carrinho está vazio</Message>
     if (cart.length !== 0) {
@@ -65,10 +52,23 @@ const cart: React.FC<Props> = ({ showCart, setShowCart }) => {
                     }}
                 >
                     <Link href={'/checkout?method=stripe'}>
-                        <CheckoutButton right>Stripe</CheckoutButton>
+                        <CheckoutButton
+                            onClick={() =>
+                                addToHistory('/checkout?method=stripe')
+                            }
+                            right
+                        >
+                            Stripe
+                        </CheckoutButton>
                     </Link>
                     <Link href={'/checkout?method=paypal'}>
-                        <CheckoutButton>Paypal</CheckoutButton>
+                        <CheckoutButton
+                            onClick={() =>
+                                addToHistory('/checkout?method=paypal')
+                            }
+                        >
+                            Paypal
+                        </CheckoutButton>
                     </Link>
                 </div>
             </>
@@ -85,13 +85,7 @@ const cart: React.FC<Props> = ({ showCart, setShowCart }) => {
 
     return (
         <>
-            <Container
-                showCart={showCart}
-                // variants={containerVariants}
-                // initial="hidden"
-                // animate={showCart ?  "visible" : "hidden"}
-                // exit="hidden"
-            >
+            <Container showCart={showCart}>
                 <CartBox onClick={() => setShowCart(!showCart)}>
                     {cart.length !== 0 && <span>{cart.length}</span>}
                     <FaShoppingCart />

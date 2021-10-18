@@ -142,4 +142,4 @@ checkout.getInitialProps = async (ctx, token) => {
     return { myAddresses }
 }
 
-export default RequireAuthentication(checkout)
+export default RequireAuthentication(checkout, false, true)

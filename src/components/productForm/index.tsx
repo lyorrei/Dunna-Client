@@ -78,7 +78,6 @@ const productForm: React.FC<Props> = ({
     useEffect(() => {
         const stonesArray = optionsToArray(stones)
         setStoneOptions(stonesArray)
-        console.log(stonesOptions)
 
         const shapesArray = optionsToArray(shapes)
         setShapeOptions(shapesArray)

@@ -51,9 +51,6 @@ interface Props {
 }
 
 const orders = ({ myOrders }: Props) => {
-    useEffect(() => {
-        console.log(myOrders)
-    }, [])
     const statusHandler = (status: string) => {
         switch (status) {
             case 'Entregue':

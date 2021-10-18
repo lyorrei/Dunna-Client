@@ -86,7 +86,6 @@ const shop: React.FC<Props> = ({
 
     useEffect(() => {
         setProducts(productsFromProps)
-        console.log(productsFromProps)
     }, [productsFromProps])
 
     useEffect(() => {

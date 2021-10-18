@@ -332,7 +332,6 @@ export const ToogleBox = styled.div<IsClickedProp>`
 `
 
 interface NavArrowProps {
-    isBigScreen: boolean
     showShopDropdown: boolean
 }
 

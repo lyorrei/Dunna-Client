@@ -12,6 +12,8 @@ import Alert, { Types } from '../alert'
 import Router from 'next/router'
 import { useUser } from '../../context/User'
 import Link from 'next/link'
+import { useHistory } from '../../context/History'
+import { useCart } from '../../context/Cart'
 
 interface Props {
     setLoading(boolean: boolean): void
@@ -21,6 +23,8 @@ const loginForm: React.FC<Props> = ({ setLoading }) => {
     const [formError, setFormError] = useState(null)
     const formRef = useRef<FormHandles>(null)
     const { setUser } = useUser()
+    const { cart } = useCart()
+    const { back } = useHistory()
 
     const handleSubmit: SubmitHandler<FormData> = async formData => {
         try {
@@ -41,6 +45,12 @@ const loginForm: React.FC<Props> = ({ setLoading }) => {
             setLoading(true)
             const { data: user } = await axios.post('/users/login', formData)
             setUser(user)
+
+            // Redirect
+            if (Router.query.checkout !== undefined && cart.length > 0) {
+                return back()
+            }
+
             Router.replace('/shop')
         } catch (err) {
             const validationErrors = {}
