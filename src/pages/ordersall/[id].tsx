@@ -24,7 +24,7 @@ import { NextPageContext } from 'next'
 
 import OrderAddress from '../../components/orderAddress'
 import { Order } from '../checkout/success/[orderId]'
-import { EditButton, InlineButton } from '../../components/button'
+import { InlineButton } from '../../components/button'
 import Modal from '../../components/modal'
 import { Input } from '../../components/input/style'
 import { handleInputChange } from 'react-select/src/utils'

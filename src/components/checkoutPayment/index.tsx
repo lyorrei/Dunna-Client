@@ -106,22 +106,15 @@ const checkoutPayment: React.FC<Props> = ({
                 </SvgContainer>
             )}
 
-            <ButtonsContainer>
-                {router.query.method === 'stripe' && (
+            {router.query.method === 'stripe' && (
+                <ButtonsContainer>
                     <div>
                         <InlineButton onClick={() => setStage(0)} light>
                             Voltar
                         </InlineButton>
                     </div>
-                )}
-
-                <InlineButton
-                    onClick={() => setStage(2)}
-                    disabled={!isCompleted}
-                >
-                    Próximo
-                </InlineButton>
-            </ButtonsContainer>
+                </ButtonsContainer>
+            )}
         </Container>
     )
 }

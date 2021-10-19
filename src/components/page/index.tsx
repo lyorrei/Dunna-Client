@@ -23,18 +23,18 @@ const page: React.FC<AppProps> = ({ Component, pageProps }) => {
     const [authCookies, setAuthCookies] = useCookies(['rd_auth_status'])
 
     useEffect(() => {
+        // Check if user is authenticated
+        axios
+            .get('/users/me')
+            .then(res => setUser(res.data))
+            .catch(e => {})
+
         if (process.env.NODE_ENV !== 'development') {
             // Check the URL starts with 'http://xxxxx' protocol, if it does then redirect to 'https://xxxxx' url of same resource
             var httpTokens = /^http:\/\/(.*)$/.exec(window.location.href)
             if (httpTokens) {
                 window.location.replace('https://' + httpTokens[1])
             }
-
-            // Check if user is authenticated
-            axios
-                .get('/users/me')
-                .then(res => setUser(res.data))
-                .catch(e => {})
 
             // Set Cookies for Rd Station
             if (!authCookies.rd_auth_status) {
