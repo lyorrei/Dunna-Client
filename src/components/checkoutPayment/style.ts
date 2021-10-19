@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 export const Message = styled.p`
     font-size: 1.6rem;
-    margin-top: -2rem;
     margin-bottom: 4rem;
     display: block;
     color: ${props => props.theme.colors.greyDark1};

@@ -74,7 +74,7 @@ export const HeaderContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 
     h2 {
         font-size: 4rem;

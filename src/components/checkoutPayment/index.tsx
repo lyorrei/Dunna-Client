@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import { useCart } from '../../context/Cart'
 import { BsCheckCircle } from 'react-icons/bs'
 import Link from 'next/link'
+import { Term, Text } from '../checkoutConfirm/style'
 
 const cartElementOptions = {
     style: {
@@ -53,6 +54,10 @@ const checkoutPayment: React.FC<Props> = ({
     const { cart } = useCart()
 
     useEffect(() => {
+        setIsCompleted(false)
+    }, [router.asPath])
+
+    useEffect(() => {
         if (stage === 1) {
             setIsVisible(true)
         } else {
@@ -92,14 +97,33 @@ const checkoutPayment: React.FC<Props> = ({
                     />
                 </>
             ) : !isCompleted ? (
-                <PaypalButton
-                    cart={cart}
-                    setIsCompleted={setIsCompleted}
-                    orderId={orderId}
-                    setOrderId={setOrderId}
-                    total={total}
-                    selectedAddress={selectedAddress}
-                />
+                <>
+                    <div style={{ marginBottom: '2rem' }}>
+                        <Text>
+                            Por favor confirme o endereço e os produtos
+                            escolhidos.
+                        </Text>
+                        <Term>
+                            Ao finalizar a compra você concorda com nossa{' '}
+                            <a
+                                href="/pdfs/terms.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                política de privacidade.
+                            </a>
+                        </Term>
+                    </div>
+
+                    <PaypalButton
+                        cart={cart}
+                        setIsCompleted={setIsCompleted}
+                        orderId={orderId}
+                        setOrderId={setOrderId}
+                        total={total}
+                        selectedAddress={selectedAddress}
+                    />
+                </>
             ) : (
                 <SvgContainer>
                     <BsCheckCircle />
@@ -113,6 +137,12 @@ const checkoutPayment: React.FC<Props> = ({
                             Voltar
                         </InlineButton>
                     </div>
+                    <InlineButton
+                        onClick={() => setStage(2)}
+                        disabled={!isCompleted}
+                    >
+                        Próximo
+                    </InlineButton>
                 </ButtonsContainer>
             )}
         </Container>
