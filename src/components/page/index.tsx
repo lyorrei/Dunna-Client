@@ -20,6 +20,7 @@ const page: React.FC<AppProps> = ({ Component, pageProps }) => {
 
     const [showPageAlert, setShowPageAlert] = useState(false)
     const [cookies, setCookie] = useCookies(['pageAlert'])
+    const [authCookies, setAuthCookies] = useCookies(['rd_auth_status'])
 
     useEffect(() => {
         if (process.env.NODE_ENV !== 'development') {
@@ -28,12 +29,28 @@ const page: React.FC<AppProps> = ({ Component, pageProps }) => {
             if (httpTokens) {
                 window.location.replace('https://' + httpTokens[1])
             }
-        }
-        axios
-            .get('/users/me')
-            .then(res => setUser(res.data))
-            .catch(e => {})
 
+            // Check if user is authenticated
+            axios
+                .get('/users/me')
+                .then(res => setUser(res.data))
+                .catch(e => {})
+
+            // Set Cookies for Rd Station
+            if (!authCookies.rd_auth_status) {
+                axios
+                    .get('/rdtoken')
+                    .then(res =>
+                        setAuthCookies('rd_auth_status', 'rd_auth_status', {
+                            path: '/',
+                            maxAge: 60 * 60 * 24 // 1 Day
+                        })
+                    )
+                    .catch(err => {})
+            }
+        }
+
+        // Modals
         if (!navigator.cookieEnabled) {
             setShowCookiesModal(true)
         }

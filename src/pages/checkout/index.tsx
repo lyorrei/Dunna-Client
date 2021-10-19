@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import axios from '../../../axios'
 
 import Head from 'next/head'
-import Link from 'next/link'
 
 import {
     PageContainer,
@@ -23,15 +22,11 @@ import CheckoutStage from '../../components/checkoutStage'
 import CheckoutCart from '../../components/checkoutCart'
 import CheckoutAddressInfo from '../../components/checkoutAddressInfo'
 import CheckoutConfirm from '../../components/checkoutConfirm'
-import { InlineButton } from '../../components/button'
 import { User } from '../me'
-import {
-    CardElement,
-    Elements,
-    useElements,
-    useStripe
-} from '@stripe/react-stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
+import { useRouter } from 'next/router'
+import { useCookies } from 'react-cookie'
 
 const pageContainerVariant = {
     hidden: { opacity: 1, scale: 0 },
@@ -56,10 +51,33 @@ const checkout = ({ myAddresses, user }: Props) => {
     const [stage, setStage] = useState(0)
     const { cart } = useCart()
     const [total, setTotal] = useState(0)
+    const Router = useRouter()
+    const [cookies, setCookie] = useCookies(['rdcheckout'])
+
+    useEffect(() => {
+        if (cart.length === 0) {
+            Router.replace('/shop')
+            return
+        }
+
+        if (process.env.NODE_ENV !== 'development' && !cookies.rdcheckout) {
+            axios
+                .get('/rdcheckout')
+                .then(res =>
+                    setCookie('rdcheckout', 'rdcheckout', {
+                        path: '/',
+                        maxAge: 60 * 60 * 24 * 15 // 15 dias
+                    })
+                )
+                .catch(err => {})
+        }
+    }, [])
 
     let pageContent = (
         <Container>
-            <EmptyCart>Seu carrinho está vazio</EmptyCart>
+            <EmptyCart>
+                Seu carrinho está vazio, você será redirecionado para a loja.
+            </EmptyCart>
         </Container>
     )
     if (cart.length > 0) {

@@ -2,6 +2,7 @@
     "name": "client",
     "version": "0.1.0",
     "private": true,
+    "cacheDirectories": [".next/cache"],
     "scripts": {
         "dev": "nodemon --watch server server/src/index.js",
         "build": "next build",

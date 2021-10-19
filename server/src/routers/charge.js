@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const axios = require('axios').default
 
 const transporter = require('../config/mailer')
 const { email: senderEmail } = require('../config/mail.json')
@@ -106,27 +107,74 @@ const create = async (addressId, userId, amount, cart) => {
     return { createdOrderId: order._id }
 }
 
-const sendEmail = async userName => {
-    // Mandar Email para Matheus
-    await transporter
-        .sendMail({
-            from: `"Dunna Jewelry" <` + senderEmail + `>`, // sender address
-            to: 'matheusqtorres@gmail.com',
-            subject: 'Pedido Criado',
-            html: `Pedido foi criado por ${userName}. Cheque a página de pedidos do Site!`
+const sendEmail = async (
+    userName,
+    userEmail,
+    saleValue,
+    address,
+    access_token
+) => {
+    // Checar se está em ambiente de produção
+    if (process.env.NODE_ENV === 'production') {
+        // Mandar Email para Matheus
+        await transporter
+            .sendMail({
+                from: `"Dunna Jewelry" <` + senderEmail + `>`, // sender address
+                to: 'matheusqtorres@gmail.com',
+                subject: 'Pedido Criado',
+                html: `Pedido foi criado por ${userName}. Cheque a página de pedidos do Site!`
+            })
+            .catch(err => {})
+
+        // Mandar requisições para RD Station
+        const options = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + access_token
+            }
+        }
+
+        const conversionData = JSON.stringify({
+            event_type: 'CONVERSION',
+            event_family: 'CDP',
+            payload: {
+                conversion_identifier: 'Venda',
+                name: userName,
+                email: userEmail,
+                country: 'Brasil',
+                city: address.city,
+                state: address.state,
+                personal_phone: address.phone.toString()
+            }
         })
-        .catch(err => {})
+        await axios
+            .post(
+                'https://api.rd.services/platform/events',
+                conversionData,
+                options
+            )
+            .catch(e => {})
+
+        const saleData = JSON.stringify({
+            event_type: 'SALE',
+            event_family: 'CDP',
+            payload: {
+                funnel_name: 'default',
+                email: userEmail,
+                value: saleValue / 100
+            }
+        })
+        await axios
+            .post('https://api.rd.services/platform/events', saleData, options)
+            .catch(e => {})
+    }
 }
 
 router.post('/api/charge', authMiddleware, async (req, res) => {
     const { cart, amount, addressId, paymentData } = req.body
 
     try {
-        // return res.status(400).send({
-        //     message: 'Payment Failed',
-        //     success: false
-        // })
-
+        // Checar se está tudo ok
         const { address, totalAmount } = await check(
             addressId,
             req.user._id,
@@ -160,6 +208,7 @@ router.post('/api/charge', authMiddleware, async (req, res) => {
             }
         })
 
+        // Criar tables no banco de dados
         const { createdOrderId } = await create(
             addressId,
             req.user._id,
@@ -167,7 +216,14 @@ router.post('/api/charge', authMiddleware, async (req, res) => {
             cart
         )
 
-        await sendEmail(req.user.firstName + ' ' + req.user.lastName)
+        // Enviar emails para Matheus e RD Station
+        await sendEmail(
+            req.user.firstName + ' ' + req.user.lastName,
+            req.user.email,
+            amount,
+            address,
+            req.cookies.rd_access_token
+        )
         res.send({
             createdOrderId
         })
@@ -188,11 +244,10 @@ router.post('/api/paypal/create', authMiddleware, async (req, res) => {
     const { cart, amount, addressId } = req.body
 
     try {
-        // return res.status(400).send({
-        //     message: 'Payment Failed',
-        //     success: false
-        // })
+        // Checar se está tudo ok
         const { address } = await check(addressId, req.user._id, cart, amount)
+
+        // Capturar ordem Paypal
         const request = new paypal.orders.OrdersCreateRequest()
         request.prefer('return=representation')
         request.requestBody({
@@ -247,6 +302,7 @@ router.post('/api/paypal/create', authMiddleware, async (req, res) => {
             }
         })
 
+        // Executar captura Paypal
         const order = await payPalClient.client().execute(request)
         res.status(200).send({
             orderId: order.result.id
@@ -265,17 +321,17 @@ router.post('/api/paypal/capture', authMiddleware, async (req, res) => {
     const { cart, amount, addressId, orderId } = req.body
 
     try {
-        // return res.status(400).send({
-        //     message: 'Payment Failed',
-        //     success: false
-        // })
+        // Checar se está tudo ok
+        const { address } = await check(addressId, req.user._id, cart, amount)
 
-        await check(addressId, req.user._id, cart, amount)
-
+        // Captar ordem capturada
         const request = new paypal.orders.OrdersCaptureRequest(orderId)
         request.requestBody({})
+
+        // Executar ordem capturada
         const capture = await payPalClient.client().execute(request)
 
+        // Criar tables no banco de dados
         const { createdOrderId } = await create(
             addressId,
             req.user._id,
@@ -283,7 +339,14 @@ router.post('/api/paypal/capture', authMiddleware, async (req, res) => {
             cart
         )
 
-        await sendEmail(req.user.firstName + ' ' + req.user.lastName)
+        // Enviar emails para Matheus e RD Station
+        await sendEmail(
+            req.user.firstName + ' ' + req.user.lastName,
+            req.user.email,
+            amount,
+            address,
+            req.cookies.rd_access_token
+        )
         res.send({ createdOrderId })
     } catch (err) {
         res.status(400).send({

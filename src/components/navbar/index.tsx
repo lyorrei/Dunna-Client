@@ -127,7 +127,7 @@ const navbar: React.FC = () => {
                                 onClick={() =>
                                     setShowShopDropdown(!showShopDropdown)
                                 }
-                                showShopDropdown={showShopDropdown}
+                                showshopdropdown={showShopDropdown}
                             />
                         </div>
 
@@ -206,7 +206,7 @@ const navbar: React.FC = () => {
                                                 !showAuthDropdown
                                             )
                                         }
-                                        showShopDropdown={showAuthDropdown}
+                                        showshopdropdown={showAuthDropdown}
                                     />
                                 )}
                             </div>

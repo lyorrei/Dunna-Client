@@ -332,7 +332,7 @@ export const ToogleBox = styled.div<IsClickedProp>`
 `
 
 interface NavArrowProps {
-    showShopDropdown: boolean
+    showshopdropdown: boolean
 }
 
 export const NavArrow = styled(RiArrowDropDownLine)<NavArrowProps>`
@@ -348,5 +348,5 @@ export const NavArrow = styled(RiArrowDropDownLine)<NavArrowProps>`
     } //600px
 
     transform: ${props =>
-        props.showShopDropdown ? 'rotate(0)' : 'rotate(-90deg)'};
+        props.showshopdropdown ? 'rotate(0)' : 'rotate(-90deg)'};
 `
