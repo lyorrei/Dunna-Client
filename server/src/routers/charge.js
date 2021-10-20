@@ -107,17 +107,11 @@ const create = async (addressId, userId, amount, cart) => {
     return { createdOrderId: order._id }
 }
 
-const sendEmail = async (
-    userName,
-    userEmail,
-    saleValue,
-    address,
-    access_token
-) => {
+const sendEmail = (userName, userEmail, saleValue, address, access_token) => {
     // Checar se está em ambiente de produção
     if (process.env.NODE_ENV === 'production') {
         // Mandar Email para Matheus
-        await transporter
+        transporter
             .sendMail({
                 from: `"Dunna Jewelry" <` + senderEmail + `>`, // sender address
                 to: 'matheusqtorres@gmail.com',
@@ -147,7 +141,7 @@ const sendEmail = async (
                 personal_phone: address.phone.toString()
             }
         })
-        await axios
+        axios
             .post(
                 'https://api.rd.services/platform/events',
                 conversionData,
@@ -164,7 +158,7 @@ const sendEmail = async (
                 value: saleValue / 100
             }
         })
-        await axios
+        axios
             .post('https://api.rd.services/platform/events', saleData, options)
             .catch(e => {})
     }
@@ -217,7 +211,7 @@ router.post('/api/charge', authMiddleware, async (req, res) => {
         )
 
         // Enviar emails para Matheus e RD Station
-        await sendEmail(
+        sendEmail(
             req.user.firstName + ' ' + req.user.lastName,
             req.user.email,
             amount,
@@ -340,7 +334,7 @@ router.post('/api/paypal/capture', authMiddleware, async (req, res) => {
         )
 
         // Enviar emails para Matheus e RD Station
-        await sendEmail(
+        sendEmail(
             req.user.firstName + ' ' + req.user.lastName,
             req.user.email,
             amount,

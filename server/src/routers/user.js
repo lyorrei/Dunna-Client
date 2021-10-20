@@ -84,7 +84,7 @@ router.get('/api/user/confirmation/:token', async (req, res) => {
                     email: emailUser.email
                 }
             })
-            await axios
+            axios
                 .post('https://api.rd.services/platform/events', data, {
                     headers: {
                         'Content-Type': 'application/json',
@@ -168,7 +168,7 @@ router.post('/api/users/login', async (req, res) => {
                     email: user.email
                 }
             })
-            await axios
+            axios
                 .post('https://api.rd.services/platform/events', data, {
                     headers: {
                         'Content-Type': 'application/json',
