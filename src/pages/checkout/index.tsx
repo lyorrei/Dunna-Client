@@ -65,8 +65,8 @@ const checkout = ({ myAddresses, user }: Props) => {
                 .get('/rdcheckout')
                 .then(res =>
                     setCookie('rdcheckout', 'rdcheckout', {
-                        path: '/',
-                        maxAge: 60 * 60 * 24 * 15 // 15 dias
+                        path: '/'
+                        // Session
                     })
                 )
                 .catch(err => {})

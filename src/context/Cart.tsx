@@ -1,5 +1,8 @@
 import React, { createContext, useState, useContext, useEffect } from 'react'
 import { ProductInterface } from '../components/product'
+import { useCookies } from 'react-cookie'
+import { useUser } from './User'
+import axios from '../../axios'
 
 const CartContext = createContext(null)
 
@@ -16,6 +19,27 @@ export const checkIfProductIsInCart = (
 
 export default function CountProvider({ children }) {
     const [cart, setCart] = useState([])
+    const { user } = useUser()
+    const [cookies, setCookies] = useCookies(['rdcart'])
+
+    useEffect(() => {
+        if (
+            user &&
+            !cookies.rdcart &&
+            cart.length > 0 &&
+            process.env.NODE_ENV !== 'development'
+        ) {
+            axios
+                .get('/rdcart')
+                .then(res => {
+                    setCookies('rdcart', 'rdcart', {
+                        path: '/',
+                        maxAge: 60 * 60 * 24 * 15 // 15 dias
+                    })
+                })
+                .catch(err => {})
+        }
+    }, [cart, user])
 
     const addProduct = (product: ProductInterface) => {
         const cartCopy = [...cart]

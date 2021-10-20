@@ -38,6 +38,9 @@ app.prepare()
         const userRoutes = require('./routers/user')
         server.use(userRoutes)
 
+        const rdStationRouter = require('./routers/rdstation')
+        server.use(rdStationRouter)
+
         const productRoutes = require('./routers/product')
         server.use(productRoutes)
 
