@@ -12,12 +12,11 @@ import Dropdown from '../dropdown'
 import { useRouter } from 'next/router'
 
 import { useUser } from '../../context/User'
-import {
-    RiAdminFill,
-    RiLogoutBoxLine
-} from 'react-icons/ri'
+import { RiAdminFill, RiLogoutBoxLine } from 'react-icons/ri'
 
 import Backdrop from '../backdrop'
+import { useCart } from '../../context/Cart'
+import { useCookies } from 'react-cookie'
 
 const navbar: React.FC = () => {
     const router = useRouter()
@@ -25,6 +24,10 @@ const navbar: React.FC = () => {
     const [showShopDropdown, setShowShopDropdown] = useState(false)
     const [showAuthDropdown, setShowAuthDropdown] = useState(false)
     const { user, setUser } = useUser()
+    const { setCart, setTempProduct } = useCart()
+    const [cartCookie, setCartCookie, removeCartCookie] = useCookies(['rdcart'])
+    const [checkoutCookie, setCheckoutCookie, removeCheckoutCookie] =
+        useCookies(['rdcheckout'])
 
     useEffect(() => {
         setClicked(false)
@@ -34,8 +37,21 @@ const navbar: React.FC = () => {
 
     const handleLogout = async () => {
         await axios.post('/users/logout')
+
+        setCart([])
+        setTempProduct(null)
         setUser(null)
         setShowAuthDropdown(false)
+
+        removeCartCookie('rdcart', {
+            path: '/',
+            maxAge: 60 * 60 * 24 * 11 // 11 dias
+        })
+        removeCheckoutCookie('rdcheckout', {
+            path: '/'
+            // Session
+        })
+
         router.replace('/auth')
     }
 

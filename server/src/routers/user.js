@@ -80,8 +80,8 @@ router.get('/api/user/confirmation/:token', async (req, res) => {
                 event_family: 'CDP',
                 payload: {
                     conversion_identifier: 'Criar conta',
-                    name: req.body.firstName + ' ' + req.body.lastName,
-                    email: req.body.email
+                    name: emailUser.firstName + ' ' + emailUser.lastName,
+                    email: emailUser.email
                 }
             })
             await axios

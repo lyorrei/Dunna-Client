@@ -50,7 +50,7 @@ const signupForm: React.FC<Props> = ({ setLoading }) => {
 
             // Validation passed
             setLoading(true)
-            const { data: user } = await axios.post('/users/create', data)
+            await axios.post('/users/create', data)
 
             setFormSuccess('Por favor, clique no link enviado ao seu email para confirmar a sua conta')
             formRef.current.reset()
@@ -67,7 +67,6 @@ const signupForm: React.FC<Props> = ({ setLoading }) => {
                 setLoading(false)
                 setFormSuccess(null)
             }
-            console.log(err)
         }
     }
 

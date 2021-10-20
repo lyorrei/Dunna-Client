@@ -37,30 +37,28 @@ router.get('/api/rdtoken', async (req, res) => {
 // Send conversion event when cart changes
 router.get('/api/rdcart', authMiddleware, async (req, res) => {
     try {
-        if (process.env.NODE_ENV === 'production') {
-            const options = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: 'Bearer ' + req.cookies.rd_access_token
-                }
+        const options = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + req.cookies.rd_access_token
             }
-
-            const conversionData = JSON.stringify({
-                event_type: 'CONVERSION',
-                event_family: 'CDP',
-                payload: {
-                    conversion_identifier: 'Carrinho',
-                    name: req.user.firstName + ' ' + req.user.lastName,
-                    email: req.user.email
-                }
-            })
-
-            await axios.post(
-                'https://api.rd.services/platform/events',
-                conversionData,
-                options
-            )
         }
+
+        const conversionData = JSON.stringify({
+            event_type: 'CONVERSION',
+            event_family: 'CDP',
+            payload: {
+                conversion_identifier: 'Carrinho',
+                name: req.user.firstName + ' ' + req.user.lastName,
+                email: req.user.email
+            }
+        })
+
+        await axios.post(
+            'https://api.rd.services/platform/events',
+            conversionData,
+            options
+        )
 
         res.send()
     } catch (e) {
@@ -71,45 +69,43 @@ router.get('/api/rdcart', authMiddleware, async (req, res) => {
 // Send conversion event when enter checkout page
 router.get('/api/rdcheckout', authMiddleware, async (req, res) => {
     try {
-        if (process.env.NODE_ENV === 'production') {
-            const options = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: 'Bearer ' + req.cookies.rd_access_token
-                }
+        const options = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + req.cookies.rd_access_token
             }
-
-            const conversionData = JSON.stringify({
-                event_type: 'CONVERSION',
-                event_family: 'CDP',
-                payload: {
-                    conversion_identifier: 'Checkout',
-                    name: req.user.firstName + ' ' + req.user.lastName,
-                    email: req.user.email
-                }
-            })
-
-            await axios.post(
-                'https://api.rd.services/platform/events',
-                conversionData,
-                options
-            )
-
-            const oportunityData = JSON.stringify({
-                event_type: 'OPPORTUNITY',
-                event_family: 'CDP',
-                payload: {
-                    funnel_name: 'default',
-                    email: req.user.email
-                }
-            })
-
-            await axios.post(
-                'https://api.rd.services/platform/events',
-                oportunityData,
-                options
-            )
         }
+
+        const conversionData = JSON.stringify({
+            event_type: 'CONVERSION',
+            event_family: 'CDP',
+            payload: {
+                conversion_identifier: 'Checkout',
+                name: req.user.firstName + ' ' + req.user.lastName,
+                email: req.user.email
+            }
+        })
+
+        await axios.post(
+            'https://api.rd.services/platform/events',
+            conversionData,
+            options
+        )
+
+        const oportunityData = JSON.stringify({
+            event_type: 'OPPORTUNITY',
+            event_family: 'CDP',
+            payload: {
+                funnel_name: 'default',
+                email: req.user.email
+            }
+        })
+
+        await axios.post(
+            'https://api.rd.services/platform/events',
+            oportunityData,
+            options
+        )
 
         res.send()
     } catch (e) {

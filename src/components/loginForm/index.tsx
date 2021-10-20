@@ -22,8 +22,8 @@ interface Props {
 const loginForm: React.FC<Props> = ({ setLoading }) => {
     const [formError, setFormError] = useState(null)
     const formRef = useRef<FormHandles>(null)
-    const { setUser } = useUser()
-    const { cart } = useCart()
+    const { user, setUser } = useUser()
+    const { tempProduct, addProduct } = useCart()
     const { back } = useHistory()
 
     const handleSubmit: SubmitHandler<FormData> = async formData => {
@@ -43,15 +43,8 @@ const loginForm: React.FC<Props> = ({ setLoading }) => {
 
             // Validation passed
             setLoading(true)
-            const { data: user } = await axios.post('/users/login', formData)
-            setUser(user)
-
-            // Redirect
-            if (Router.query.checkout !== undefined && cart.length > 0) {
-                return back()
-            }
-
-            Router.replace('/shop')
+            const { data } = await axios.post('/users/login', formData)
+            setUser(data)
         } catch (err) {
             const validationErrors = {}
             if (err instanceof Yup.ValidationError) {
@@ -65,6 +58,16 @@ const loginForm: React.FC<Props> = ({ setLoading }) => {
             }
         }
     }
+
+    useEffect(() => {
+        if (user) {
+            if (tempProduct) {
+                addProduct(tempProduct)
+                return Router.back()
+            }
+            Router.replace('/shop')
+        }
+    }, [user])
 
     return (
         <div>

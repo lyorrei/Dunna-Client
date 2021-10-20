@@ -3,6 +3,7 @@ import { ProductInterface } from '../components/product'
 import { useCookies } from 'react-cookie'
 import { useUser } from './User'
 import axios from '../../axios'
+import { useRouter } from 'next/router'
 
 const CartContext = createContext(null)
 
@@ -19,8 +20,11 @@ export const checkIfProductIsInCart = (
 
 export default function CountProvider({ children }) {
     const [cart, setCart] = useState([])
+    const [tempProduct, setTempProduct] = useState(null)
+
     const { user } = useUser()
     const [cookies, setCookies] = useCookies(['rdcart'])
+    const Router = useRouter()
 
     useEffect(() => {
         if (
@@ -34,7 +38,7 @@ export default function CountProvider({ children }) {
                 .then(res => {
                     setCookies('rdcart', 'rdcart', {
                         path: '/',
-                        maxAge: 60 * 60 * 24 * 15 // 15 dias
+                        maxAge: 60 * 60 * 24 * 11 // 11 dias
                     })
                 })
                 .catch(err => {})
@@ -44,9 +48,14 @@ export default function CountProvider({ children }) {
     const addProduct = (product: ProductInterface) => {
         const cartCopy = [...cart]
 
-        if (!checkIfProductIsInCart(cartCopy, product)) {
-            cartCopy.push(product)
-            setCart(cartCopy)
+        if (user) {
+            if (!checkIfProductIsInCart(cartCopy, product)) {
+                cartCopy.push(product)
+                setCart(cartCopy)
+            }
+        } else {
+            setTempProduct(product)
+            Router.push('/auth')
         }
     }
 
@@ -54,6 +63,8 @@ export default function CountProvider({ children }) {
         <CartContext.Provider
             value={{
                 cart,
+                tempProduct,
+                setTempProduct,
                 setCart,
                 addProduct
             }}
@@ -66,6 +77,6 @@ export default function CountProvider({ children }) {
 export function useCart() {
     const context = useContext(CartContext)
     if (!context) throw new Error('useCart must be used within a CountProvider')
-    const { cart, setCart, addProduct } = context
-    return { cart, setCart, addProduct }
+    const { cart, tempProduct, setTempProduct, setCart, addProduct } = context
+    return { cart, tempProduct, setTempProduct, setCart, addProduct }
 }
