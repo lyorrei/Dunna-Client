@@ -32,7 +32,7 @@ const Home = ({ products }: Props) => {
     return (
         <>
             <Head>
-                <title>Dunna Jewelry</title>
+                <title>Dunna Joalheria</title>
             </Head>
             <motion.div
                 variants={pageContainerVariant}

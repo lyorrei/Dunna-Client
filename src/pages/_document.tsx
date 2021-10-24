@@ -53,6 +53,10 @@ export default class MyDocument extends Document {
                         content="width=device-width, initial-scale=1"
                     />
                     <link rel="icon" href="/favicon.png" />
+                    <meta
+                        name="description"
+                        content="A DUNNA Alta Joalheria é uma marca inovadora, autêntica e audaciosa. Viemos com o propósito de inovar o ramo da joalheria brasileira, investindo no conceito de Brasilidade. Nossa inspiração vem das cores e formas da natureza."
+                    />
 
                     {process.env.NODE_ENV === 'production' && (
                         <>
