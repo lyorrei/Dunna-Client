@@ -20,14 +20,38 @@ export const Footer = styled.footer`
 export const LogoBox = styled.div`
     grid-column: 1 / -1;
 
-    img {
-        fill: ${props => props.theme.colors.white};
-        width: 16rem;
-        /* height: 8rem; */
-        transition: all 0.2s;
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-        &:hover {
-            transform: scale(1.1);
+        img {
+            fill: ${props => props.theme.colors.white};
+            width: 16rem;
+            /* height: 8rem; */
+            transition: all 0.2s;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+        p {
+            color: ${props => props.theme.colors.white};
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            margin-bottom: 1rem;
+        }
+        span {
+            color: ${props => props.theme.colors.primary};
+            transition: all 0.2s;
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+
+            &:hover {
+                transform: scale(1.1);
+            }
         }
     }
 `

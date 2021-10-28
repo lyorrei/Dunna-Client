@@ -10,7 +10,11 @@ const footer: React.FC<Props> = props => {
     return (
         <Footer>
             <LogoBox>
-                <img src={Logo}></img>
+                <div>
+                    <img src={Logo}></img>
+                    <p>Made by</p>
+                    <span>Lyorrei Quintão</span>
+                </div>
             </LogoBox>
             <FooterNavigation>
                 <Link href="/">
