@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 import {
     Container,
@@ -72,7 +73,7 @@ const product: React.FC<ProductInterface> = props => {
 
                 <Link href={'/shop/product/' + props._id}>
                     <a>
-                        <img
+                        {/* <img
                             src={
                                 props.images.length > 0
                                     ? props.images[0]?.url
@@ -84,17 +85,17 @@ const product: React.FC<ProductInterface> = props => {
                                 width: '100%',
                                 height: '100%'
                             }}
-                        />
-                        {/* <Image
-                            src={
-                                props.images.length > 0
-                                    ? props.images[0]?.url
-                                    : NoImage
-                            }
-                            layout="fill"
-                            objectFit="cover"
-                            quality={100}
                         /> */}
+                            <Image
+                                src={
+                                    props.images.length > 0
+                                        ? props.images[0]?.url
+                                        : NoImage
+                                }
+                                layout="fill"
+                                objectFit="cover"
+                                quality={100}
+                            />
                     </a>
                 </Link>
             </ImageContainer>

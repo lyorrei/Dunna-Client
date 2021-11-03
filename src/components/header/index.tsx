@@ -204,6 +204,7 @@ const header: React.FC = () => {
                     src={Home1}
                     objectFit="cover"
                     quality={100}
+                    priority
                 />
             </ImageContainer>
             <ImageContainer
@@ -216,6 +217,7 @@ const header: React.FC = () => {
                     src={Home2}
                     objectFit="cover"
                     quality={100}
+                    priority
                 />
             </ImageContainer>
             <ImageContainer
@@ -228,6 +230,7 @@ const header: React.FC = () => {
                     src={Home3}
                     objectFit="cover"
                     quality={100}
+                    priority
                 />
             </ImageContainer>
             <ButtonContainer>
