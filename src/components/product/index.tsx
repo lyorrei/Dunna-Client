@@ -73,7 +73,7 @@ const product: React.FC<ProductInterface> = props => {
 
                 <Link href={'/shop/product/' + props._id}>
                     <a>
-                        {/* <img
+                        <img
                             src={
                                 props.images.length > 0
                                     ? props.images[0]?.url
@@ -85,8 +85,8 @@ const product: React.FC<ProductInterface> = props => {
                                 width: '100%',
                                 height: '100%'
                             }}
-                        /> */}
-                            <Image
+                        />
+                            {/* <Image
                                 src={
                                     props.images.length > 0
                                         ? props.images[0]?.url
@@ -95,7 +95,7 @@ const product: React.FC<ProductInterface> = props => {
                                 layout="fill"
                                 objectFit="cover"
                                 quality={100}
-                            />
+                            /> */}
                     </a>
                 </Link>
             </ImageContainer>
