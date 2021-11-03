@@ -3,7 +3,7 @@ module.exports = withImages({
     esModule: true,
     inlineImageLimit: false,
     images: {
-        domains: ['localhost', 'https://dunna.herokuapp.com', 'https://www.dunnajoalheria.com.br', 'https://dunna-upload.s3.amazonaws.com']
+        domains: ['localhost', 'https://dunna.herokuapp.com', 'https://www.dunnajoalheria.com.br', 'dunna-upload.s3.amazonaws.com']
     }
 })
 
