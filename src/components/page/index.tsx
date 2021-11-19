@@ -61,7 +61,7 @@ const page: React.FC<AppProps> = ({ Component, pageProps }) => {
 
     const closePageAlert = () => {
         setShowPageAlert(false)
-        setCookie('pageAlert', 'pageAlert', { path: '/', maxAge: 60 * 60 * 48 }) // 48 horas
+        setCookie('pageAlert', 'pageAlert', { path: '/', maxAge: 60 * 60 * 24 * 7 }) // 7 Days
     }
 
     return (
@@ -84,7 +84,7 @@ const page: React.FC<AppProps> = ({ Component, pageProps }) => {
             {showPageAlert && (
                 <PageAlert
                     closeAlert={closePageAlert}
-                    text="Frete grátis para todo o país e diversos produtos com desconto"
+                    text="Frete grátis para todo o país"
                 />
             )}
         </>
