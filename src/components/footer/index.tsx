@@ -12,7 +12,7 @@ const footer: React.FC<Props> = props => {
             <LogoBox>
                 <div>
                     <img src={Logo}></img>
-                    <p>Made by</p>
+                    <p>Website made by</p>
                     <span>Lyorrei Quintão</span>
                 </div>
             </LogoBox>
