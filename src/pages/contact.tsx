@@ -43,7 +43,7 @@ const contact: React.FC = () => {
                             <span>Email:</span> contato.dunnajewelry@gmail.com
                         </CommunicationBox>
                         <CommunicationBox>
-                            <span>Celular e Whatsapp:</span> +55 31 99808-4023
+                            <span>Celular e Whatsapp:</span> +55 31 97214-0660
                         </CommunicationBox>
                     </CommunicationContainer>
 
