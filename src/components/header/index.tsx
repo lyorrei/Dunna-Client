@@ -187,10 +187,9 @@ const header: React.FC = () => {
     return (
         <Container variants={containerVariant} animate={containerAnimation}>
             <Title>
-                A nova marca da alta joalheria <span>brasileira</span>
+                A joalheria moldada com a arte <span>do Japão</span>
                 {/* <Subtitle>
-                    Bem vindo a era da nova joalheria artesanal. Estamos aqui
-                    para revolucionar o mercado de joias e pedras.
+                    Agora no Brasil trazendo conceitos exclusivos da arte de jóias japonesas
                 </Subtitle> */}
             </Title>
 

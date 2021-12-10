@@ -39,21 +39,25 @@ export const Content = styled(motion.div)`
     overflow: hidden;
 
     @media only screen and (max-width: 112.5em) {
-        width: 45vw;
+        width: 40vw;
     } //1800px
 
     @media only screen and (max-width: 75em) {
-        width: 55vw;
+        width: 50vw;
     } //1200px
 
     @media only screen and (max-width: 56.25em) {
-        width: 70vw;
+        width: 65vw;
     } //900px
 
     @media only screen and (max-width: 37.5em) {
+        width: 85vw;
+    } //600px
+
+    @media only screen and (max-width: 25em) {
         width: 90vw;
         padding: 4rem 2rem;
-    } //600px
+    } //400px
 `
 
 interface ButttonContainerProps {

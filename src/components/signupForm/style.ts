@@ -11,8 +11,14 @@ export const InputGroup = styled.div`
 `
 
 export const SignupTitle = styled.h4`
-  font-size: 2.4rem;
+    font-size: 2.4rem;
     margin: 1rem 0;
     font-weight: 300;
+    color: ${props => props.theme.colors.primary};
     text-align: center;
+    transition: all .2s;
+
+    &:hover {
+        transform: scale(1.05);
+    }
 `;
