@@ -34,7 +34,7 @@ export const Content = styled(motion.div)`
     background-color: ${props => props.theme.colors.white};
 
     border-radius: ${props => props.theme.sizes.borderRadius};
-    padding: 8rem 4rem;
+    padding: 6rem 4rem;
     padding-bottom: 6rem;
     overflow: hidden;
 
@@ -62,7 +62,7 @@ interface ButttonContainerProps {
 
 export const ButttonContainer = styled.div<ButttonContainerProps>`
     display: flex;
-    margin-bottom: 6rem;
+    margin-bottom: 3rem;
 
     ${props =>
         props.loading &&

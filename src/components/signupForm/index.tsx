@@ -6,7 +6,7 @@ import { SubmitHandler, FormHandles } from '@unform/core'
 import Input from '../input'
 
 import Button from '../button'
-import { InputGroup } from './style'
+import { InputGroup, SignupTitle } from './style'
 import Form from '../form'
 
 import Router from 'next/router'
@@ -52,7 +52,7 @@ const signupForm: React.FC<Props> = ({ setLoading }) => {
             setLoading(true)
             await axios.post('/users/create', data)
 
-            setFormSuccess('Por favor, clique no link enviado ao seu email para confirmar a sua conta')
+            setFormSuccess('Por favor, clique no link enviado ao seu email para confirmar a sua conta (favor checar sua caixa de Spam)')
             formRef.current.reset()
             setLoading(false)
         } catch (err) {
@@ -72,6 +72,8 @@ const signupForm: React.FC<Props> = ({ setLoading }) => {
 
     return (
         <Form ref={formRef} onSubmit={handleSubmit}>
+            <SignupTitle>Cadastre-se e conheça a sutileza sofisticada da Coleção Dunna 2022!</SignupTitle>
+
             {formSuccess && <Alert type={Types.green}>{formSuccess}</Alert>}
             {formError && <Alert type={Types.red}>{formError}</Alert>}
 

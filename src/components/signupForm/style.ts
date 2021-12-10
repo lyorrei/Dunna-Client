@@ -9,3 +9,10 @@ export const InputGroup = styled.div`
         grid-template-columns: 1fr;
     } //600px
 `
+
+export const SignupTitle = styled.h4`
+  font-size: 2.4rem;
+    margin: 1rem 0;
+    font-weight: 300;
+    text-align: center;
+`;

@@ -14,6 +14,7 @@ import { useUser } from '../../context/User'
 import Link from 'next/link'
 import { useHistory } from '../../context/History'
 import { useCart } from '../../context/Cart'
+import { LoginTitle } from './style'
 
 interface Props {
     setLoading(boolean: boolean): void
@@ -72,6 +73,10 @@ const loginForm: React.FC<Props> = ({ setLoading }) => {
     return (
         <div>
             <Form ref={formRef} onSubmit={handleSubmit}>
+                <LoginTitle>
+                    Faça Login na sua conta!
+                </LoginTitle>
+
                 {formError && <Alert type={Types.red}>{formError}</Alert>}
 
                 <Input name="email" label="Email" type="email" />

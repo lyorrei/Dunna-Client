@@ -15,7 +15,7 @@ import Page from '../components/page'
 import { loadStripe } from '@stripe/stripe-js'
 
 import AlertTemplate from 'react-alert-template-basic'
-import { transitions, Provider as AlertProvider } from 'react-alert'
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 
 import Router, { useRouter } from 'next/router'
 import NProgress from 'nprogress' //nprogress module
@@ -27,7 +27,7 @@ declare const window: any
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 const options = {
-    // position: positions.BOTTOM_RIGHT,
+    position: positions.BOTTOM_RIGHT,
     timeout: 5000,
     transition: transitions.SCALE
 }
