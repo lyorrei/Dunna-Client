@@ -46,7 +46,7 @@ const auth: React.FC = () => {
         <>
             <Head>
                 <title>
-                    {login ? 'Dunna - Entrar' : 'Dunna - Criar conta'}
+                    {login ? 'DUNNA® | Entrar' : 'DUNNA® | Criar conta'}
                 </title>
             </Head>
             <Container

@@ -65,7 +65,7 @@ const orders = ({ myOrders }: Props) => {
     return (
         <>
             <Head>
-                <title>Dunna - Meus pedidos</title>
+                <title>DUNNA® | Meus pedidos</title>
             </Head>
             <PageContainer
                 variants={pageContainerVariant}

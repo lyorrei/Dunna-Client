@@ -25,7 +25,7 @@ const contact: React.FC = () => {
     return (
         <>
             <Head>
-                <title>Dunna - Contato</title>
+                <title>DUNNA® | Contato</title>
             </Head>
             <PageContainer
                 variants={pageContainerVariant}

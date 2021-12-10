@@ -56,7 +56,7 @@ const Home = () => {
     return (
         <>
             <Head>
-                <title>Dunna - Minha conta</title>
+                <title>DUNNA® | Minha conta</title>
             </Head>
             <PageContainer
                 variants={pageContainerVariant}

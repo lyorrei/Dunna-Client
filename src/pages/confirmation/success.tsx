@@ -14,7 +14,7 @@ const confirmationSuccess = () => {
     return (
         <>
             <Head>
-                <title>Dunna - Confirmation Success</title>
+                <title>DUNNA® | Confirmation Success</title>
             </Head>
 
             <Confirmation

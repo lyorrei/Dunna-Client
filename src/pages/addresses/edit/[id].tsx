@@ -16,7 +16,7 @@ const editAddress = ({ address }: Props) => {
     return (
         <>
             <Head>
-                <title>Dunna - Editar endereço</title>
+                <title>DUNNA® | Editar endereço</title>
             </Head>
             <AddressForm
                 title="Editar Endereço"

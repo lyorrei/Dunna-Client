@@ -18,7 +18,7 @@ const company: React.FC<Props> = props => {
     return (
         <>
             <Head>
-                <title>Dunna - Empresa</title>
+                <title>DUNNA® | Empresa</title>
             </Head>
             <PageContainer
                 variants={pageContainerVariant}

@@ -7,7 +7,7 @@ const newAddress = () => {
     return (
         <>
             <Head>
-                <title>Dunna - Novo endereço</title>
+                <title>DUNNA® | Novo endereço</title>
             </Head>
             <AddressForm
                 title="Novo Endereço"

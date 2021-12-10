@@ -22,7 +22,7 @@ const quality: React.FC = () => {
     return (
         <>
             <Head>
-                <title>Dunna - Qualidade</title>
+                <title>DUNNA® | Qualidade</title>
             </Head>
             <PageContainer
                 variants={pageContainerVariant}

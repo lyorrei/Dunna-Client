@@ -7,7 +7,7 @@ const confirmationFail = () => {
     return (
         <>
             <Head>
-                <title>Dunna - Confirmation Fail</title>
+                <title>DUNNA® | Confirmation Fail</title>
             </Head>
 
             <Confirmation

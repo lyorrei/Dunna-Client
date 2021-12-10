@@ -113,7 +113,7 @@ const checkout = ({ myAddresses, user }: Props) => {
     return (
         <>
             <Head>
-                <title>Dunna - Checkout</title>
+                <title>DUNNA® | Checkout</title>
             </Head>
             <Elements stripe={stripePromise}>
                 <PageContainer

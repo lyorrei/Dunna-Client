@@ -101,7 +101,7 @@ const shop: React.FC = () => {
     return (
         <>
             <Head>
-                <title>Dunna - Shop</title>
+                <title>DUNNA® | Shop</title>
             </Head>
             <Container variants={container} initial="hidden" animate="visible">
                 <CenteredTitle variants={titleVariant}>Dunna - Shop</CenteredTitle>

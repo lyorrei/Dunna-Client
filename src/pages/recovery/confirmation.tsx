@@ -36,7 +36,7 @@ const confirmationResend = () => {
     return (
         <>
             <Head>
-                <title>Dunna - Confirmation</title>
+                <title>DUNNA® | Confirmation</title>
             </Head>
 
             <PageContainers>

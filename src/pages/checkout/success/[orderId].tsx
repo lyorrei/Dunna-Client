@@ -88,7 +88,7 @@ const checkoutSuccess = ({ order, user }: Props) => {
     return (
         <>
             <Head>
-                <title>Dunna - Checkout</title>
+                <title>DUNNA® | Checkout</title>
             </Head>
             <PageContainer
                 variants={pageContainerVariant}

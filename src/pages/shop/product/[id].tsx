@@ -147,7 +147,7 @@ const product: React.FC<Props> = ({ product }) => {
     return (
         <>
             <Head>
-                <title>Produto - {product.name}</title>
+                <title>DUNNA® | {product.name}</title>
             </Head>
             <Container
                 variants={containerVariant}

@@ -36,7 +36,7 @@ const passwordRecovery = () => {
     return (
         <>
             <Head>
-                <title>Dunna - Password</title>
+                <title>DUNNA® | Password</title>
             </Head>
 
             <PageContainers>

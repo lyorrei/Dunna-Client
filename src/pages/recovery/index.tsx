@@ -28,7 +28,7 @@ const confirmationResend = () => {
     return (
         <>
             <Head>
-                <title>Dunna - Recovery</title>
+                <title>DUNNA® | Recovery</title>
             </Head>
 
             <PageContainers>

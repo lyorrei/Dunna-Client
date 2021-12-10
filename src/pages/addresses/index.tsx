@@ -76,7 +76,7 @@ const addresses = ({ myAddresses: addressFromServer, user }: Props) => {
     return (
         <>
             <Head>
-                <title>Dunna - Meus endereços</title>
+                <title>DUNNA® | Meus endereços</title>
             </Head>
             <PageContainer
                 variants={pageContainerVariant}

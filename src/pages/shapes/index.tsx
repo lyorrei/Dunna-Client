@@ -15,7 +15,7 @@ const shapesPage = ({ shapes }: Props) => {
     return (
         <>
             <Head>
-                <title>Dunna - Shapes</title>
+                <title>DUNNA® | Shapes</title>
             </Head>
             <ProductFields
                 createLink="/shapes/create"

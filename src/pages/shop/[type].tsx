@@ -170,7 +170,7 @@ const shop: React.FC<Props> = ({
     return (
         <>
             <Head>
-                <title>Dunna - Shop</title>
+                <title>DUNNA® | Shop</title>
             </Head>
             <Container variants={container} initial="hidden" animate="visible">
                 <Title variants={titleVariant}>{title}</Title>

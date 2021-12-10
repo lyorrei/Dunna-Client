@@ -212,7 +212,7 @@ const me: React.FC<Props> = () => {
                 animate="visible"
             >
                 <Container>
-                    <Title>Minhas informações</Title>
+                    <Title>DUNNA® | Minhas informações</Title>
                     <SubContainer>
                         {user ? (
                             <>
