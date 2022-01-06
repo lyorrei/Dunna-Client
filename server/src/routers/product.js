@@ -62,7 +62,6 @@ router.get('/api/product/:id', async (req, res) => {
 
         res.send(product)
     } catch (e) {
-        console.log(e)
         res.status(500).send()
     }
 })
@@ -93,7 +92,10 @@ router.patch('/api/product/edit/:id', adminMiddleware, async (req, res) => {
         'type',
         'metal',
         'visible',
-        'spotlight'
+        'notBuyable',
+        'spotlight',
+        'forMen',
+        'forWedding'
     ]
     const updates = Object.keys(req.body)
 

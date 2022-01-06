@@ -17,7 +17,8 @@ import {
     GridContainer,
     CheckList,
     SubPrice,
-    DicountTotalPrice
+    DicountTotalPrice,
+    NotBuyableText
 } from '../../../styles/pages/shop/product'
 
 import Head from 'next/head'
@@ -113,7 +114,13 @@ const product: React.FC<Props> = ({ product }) => {
     const [selectedWidth, setSelectedWidth] = useState(null)
     const [selectedHeight, setSelectedHeight] = useState(null)
     const { cart, addProduct } = useCart()
-    const [isActive, setIsActive] = useState(true)
+
+    const [isActive, setIsActive] = useState(!product.notBuyable)
+    const [message] = useState(
+        product.notBuyable
+            ? 'Vendido apenas sob consulta'
+            : 'Produto adicionado'
+    )
 
     // Fix problem when changing page
     useEffect(() => {
@@ -126,10 +133,12 @@ const product: React.FC<Props> = ({ product }) => {
         if (checkIfProductIsInCart(cart, product)) {
             setIsActive(false)
         } else {
-            setIsActive(true)
+            if (!product.notBuyable) {
+                setIsActive(true)
+            }
         }
     }, [cart])
-    
+
     useEffect(() => {
         const img = new Image()
         img.onload = function () {
@@ -243,13 +252,19 @@ const product: React.FC<Props> = ({ product }) => {
                             </Price>
                         )}
                         <Description>{product.description}</Description>
+
+                        {product.notBuyable && (
+                            <NotBuyableText>
+                                Entre em contato por Whatsapp se tiver interesse
+                                neste produto!
+                            </NotBuyableText>
+                        )}
+
                         <InlineButton
                             onClick={() => addProduct(product)}
                             disabled={!isActive}
                         >
-                            {isActive
-                                ? 'Adicionar ao carrinho'
-                                : 'Produto adicionado'}
+                            {isActive ? 'Adicionar ao carrinho' : message}
                         </InlineButton>
 
                         <CheckList>

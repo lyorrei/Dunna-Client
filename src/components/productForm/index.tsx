@@ -55,9 +55,11 @@ const productForm: React.FC<Props> = ({
     const [metalsOptions, setMetalsOptions] = useState(null)
 
     const [visible, setVisible] = useState(false)
+    const [notBuyable, setNotBuyable] = useState(false)
     const [spotlight, setSpotlight] = useState(false)
-
     const [discount, setDiscount] = useState(false)
+    const [forMen, setForMen] = useState(false)
+    const [forWedding, setForWedding] = useState(false)
 
     const optionsToArray = (options: StonesAndShapes[]) => {
         return options.map(option => ({
@@ -70,8 +72,11 @@ const productForm: React.FC<Props> = ({
         if (formInitialData) {
             setSelectedType(formInitialData.productType.label)
             setVisible(formInitialData.visible)
+            setNotBuyable(formInitialData.notBuyable)
             setSpotlight(formInitialData.spotlight)
             setDiscount(formInitialData.discount)
+            setForMen(formInitialData.forMen)
+            setForWedding(formInitialData.forWedding)
         }
     }, [formInitialData])
 
@@ -158,7 +163,6 @@ const productForm: React.FC<Props> = ({
                     .typeError('Você deve escrever um número')
                     .required('O preço é obrigatório')
 
-
                 if (parseInt(formData.totalPrice) <= parseInt(formData.price)) {
                     return setFormError(
                         'O Valor do campo Preço com Desconto deve ser menor que o do campo Preço sem Desconto'
@@ -173,8 +177,11 @@ const productForm: React.FC<Props> = ({
             })
 
             formData.visible = visible
+            formData.notBuyable = notBuyable
             formData.spotlight = spotlight
             formData.discount = discount
+            formData.forMen = forMen
+            formData.forWedding = forWedding
 
             // Validation passed
             if (!noLoading) {
@@ -317,6 +324,18 @@ const productForm: React.FC<Props> = ({
                         />
                     </CheckboxContainer>
                     <CheckboxContainer>
+                        <span>Não comprável:</span>
+                        <input
+                            name="notBuyable"
+                            type="checkbox"
+                            checked={notBuyable}
+                            onChange={e => setNotBuyable(e.target.checked)}
+                        />
+                    </CheckboxContainer>
+                </SideBySide>
+
+                <SideBySide>
+                    <CheckboxContainer>
                         <span>Destaque:</span>
                         <input
                             name="spotlight"
@@ -325,18 +344,36 @@ const productForm: React.FC<Props> = ({
                             onChange={e => setSpotlight(e.target.checked)}
                         />
                     </CheckboxContainer>
+                    <CheckboxContainer>
+                        <span>Desconto:</span>
+                        <input
+                            name="discount"
+                            type="checkbox"
+                            checked={discount}
+                            onChange={e => setDiscount(e.target.checked)}
+                        />
+                    </CheckboxContainer>
                 </SideBySide>
-
-                <CheckboxContainer>
-                    <span>Desconto:</span>
-                    <input
-                        name="discount"
-                        type="checkbox"
-                        checked={discount}
-                        onChange={e => setDiscount(e.target.checked)}
-                    />
-                </CheckboxContainer>
-
+                <SideBySide>
+                    <CheckboxContainer>
+                        <span>Masculina:</span>
+                        <input
+                            name="forMen"
+                            type="checkbox"
+                            checked={forMen}
+                            onChange={e => setForMen(e.target.checked)}
+                        />
+                    </CheckboxContainer>
+                    <CheckboxContainer>
+                        <span>Casamento:</span>
+                        <input
+                            name="forWedding"
+                            type="checkbox"
+                            checked={forWedding}
+                            onChange={e => setForWedding(e.target.checked)}
+                        />
+                    </CheckboxContainer>
+                </SideBySide>
                 <InlineButton type="submit">
                     {submitType === 'patch' ? 'Editar' : 'Próximo'}
                 </InlineButton>

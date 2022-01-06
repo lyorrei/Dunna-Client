@@ -35,7 +35,7 @@ const check = async (addressId, userId, cart, amount) => {
             await Product.findOne({
                 _id: product._id,
                 sold: false,
-                visible: true
+                notBuyable: false
             })
     )
     const resultado = await Promise.all(products).catch(e => {
@@ -97,9 +97,10 @@ const create = async (addressId, userId, amount, cart) => {
         const product = await Product.findOne({
             _id: cart[i]._id,
             sold: false,
-            visible: true
+            notBuyable: false
         })
         product.visible = false
+        product.notBuyable = true
         product.sold = true
         await product.save()
     }

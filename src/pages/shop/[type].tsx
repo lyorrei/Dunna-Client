@@ -165,6 +165,12 @@ const shop: React.FC<Props> = ({
         case 'Gema':
             title = 'Gemas'
             break
+        case 'Men':
+            title = 'Men'
+            break
+        case 'Wedding':
+            title = 'Casamento'
+            break
     }
 
     return (
@@ -215,7 +221,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
         'Pingente',
         'Pulseira',
         'Gema',
-        'Desconto'
+        'Desconto',
+        'Men',
+        'Wedding'
     ]
     const paths = types.map(type => ({
         params: { type }

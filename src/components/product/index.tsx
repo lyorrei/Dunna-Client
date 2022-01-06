@@ -48,17 +48,23 @@ export interface ProductInterface {
     images?: ImageProduct[]
     spotlight: boolean
     visible: boolean
+    notBuyable: boolean
+    forMen: boolean
+    forWedding: boolean
 }
 
 const product: React.FC<ProductInterface> = props => {
-    const [isActive, setIsActive] = useState(true)
+    const [isActive, setIsActive] = useState(!props.notBuyable) // False
     const { cart, addProduct } = useCart()
+    const [message] = useState(props.notBuyable ? 'Vendido apenas sob consulta' : 'Produto adicionado')
 
     useEffect(() => {
         if (checkIfProductIsInCart(cart, props)) {
             setIsActive(false)
         } else {
-            setIsActive(true)
+            if (!props.notBuyable) {
+                setIsActive(true)
+            }
         }
     }, [cart])
 
@@ -67,8 +73,10 @@ const product: React.FC<ProductInterface> = props => {
             <ImageContainer>
                 {props.discount && props.totalPrice && (
                     <DiscountBox>
-                        {(100 - (props.price / props.totalPrice * 100)).toFixed(0)}%
-                        Off
+                        {(100 - (props.price / props.totalPrice) * 100).toFixed(
+                            0
+                        )}
+                        % Off
                     </DiscountBox>
                 )}
 
@@ -87,7 +95,7 @@ const product: React.FC<ProductInterface> = props => {
                                 height: '100%'
                             }}
                         />
-                            {/* <Image
+                        {/* <Image
                                 src={
                                     props.images.length > 0
                                         ? props.images[0]?.url
@@ -112,7 +120,7 @@ const product: React.FC<ProductInterface> = props => {
                     onClick={() => addProduct({ ...props })}
                     disabled={!isActive}
                 >
-                    {isActive ? 'Adicionar ao carrinho' : 'Produto adicionado'}
+                    {isActive  ? 'Adicionar ao carrinho' : message}
                 </Button>
             </Content>
         </Container>

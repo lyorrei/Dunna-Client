@@ -119,11 +119,11 @@ const navbar: React.FC = () => {
                     </Link>
                 </LogoBox>
                 <NavBox isClicked={clicked}>
-                    <Li isClicked={clicked} isActive={router.pathname === '/'}>
+                    {/* <Li isClicked={clicked} isActive={router.pathname === '/'}>
                         <Link href="/">
                             <a>Home</a>
                         </Link>
-                    </Li>
+                    </Li> */}.
                     <Li
                         isClicked={clicked}
                         onMouseEnter={() =>
@@ -155,6 +155,17 @@ const navbar: React.FC = () => {
                                 navBox
                             />
                         )}
+                    </Li>
+                    <Li
+                        isClicked={clicked}
+                        isActive={
+                            router.pathname === '/shop/products' &&
+                            router.query.type === 'Men'
+                        }
+                    >
+                        <Link href="/shop/Men">
+                            <a style={{ letterSpacing: '0.1rem' }}>Men</a>
+                        </Link>
                     </Li>
                     <Li
                         isClicked={clicked}

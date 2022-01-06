@@ -11,11 +11,10 @@ export const checkIfProductIsInCart = (
     cart: ProductInterface[],
     product: ProductInterface
 ) => {
-    const value = cart.some(
+    const isInCart = cart.some(
         productFromCart => productFromCart._id === product._id
     )
-
-    return value
+    return isInCart
 }
 
 export default function CountProvider({ children }) {
@@ -49,7 +48,7 @@ export default function CountProvider({ children }) {
         const cartCopy = [...cart]
 
         if (user) {
-            if (!checkIfProductIsInCart(cartCopy, product)) {
+            if (!checkIfProductIsInCart(cartCopy, product) && !product.notBuyable) {
                 cartCopy.push(product)
                 setCart(cartCopy)
             }

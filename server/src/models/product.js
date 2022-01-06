@@ -70,7 +70,22 @@ const productSchema = mongoose.Schema(
             required: true,
             default: false
         },
+        notBuyable: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
         spotlight: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        forMen: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        forWedding: {
             type: Boolean,
             required: true,
             default: false

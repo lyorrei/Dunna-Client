@@ -156,6 +156,12 @@ export const Description = styled.p`
     margin-bottom: 4rem;
 `
 
+export const NotBuyableText = styled.p`
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+`;
+
 export const CheckList = styled.ul`
     margin-top: 3.4rem;
     list-style-type: none;

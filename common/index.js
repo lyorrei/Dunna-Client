@@ -20,6 +20,10 @@ const getProducts = async queryType => {
             match.productType = productType._id
         } else if (queryType === 'Desconto') {
             match.discount = true
+        } else if (queryType === 'Men') {
+            match.forMen = true
+        } else if (queryType === 'Wedding') {
+            match.forWedding = true
         } else {
             const type = await Type.findOne({ name: queryType })
             if (type) match.type = type._id
