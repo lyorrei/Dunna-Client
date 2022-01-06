@@ -129,7 +129,7 @@ const product: React.FC<Props> = ({ product }) => {
             setIsActive(true)
         }
     }, [cart])
-
+    
     useEffect(() => {
         const img = new Image()
         img.onload = function () {
@@ -227,8 +227,8 @@ const product: React.FC<Props> = ({ product }) => {
                                     <PriceSpan>R$</PriceSpan>
                                     {(product.price / 100).toFixed(2)}
                                     <SubPrice>
-                                        12x sem juros de R${' '}
-                                        {(product.price / 100 / 12).toFixed(2)}
+                                        10x sem juros de R${' '}
+                                        {(product.price / 100 / 10).toFixed(2)}
                                     </SubPrice>
                                 </Price>
                             </>
@@ -237,8 +237,8 @@ const product: React.FC<Props> = ({ product }) => {
                                 <PriceSpan>R$</PriceSpan>
                                 {(product.price / 100).toFixed(2)}
                                 <SubPrice>
-                                    12x sem juros de R${' '}
-                                    {(product.price / 100 / 12).toFixed(2)}
+                                    10x sem juros de R${' '}
+                                    {(product.price / 100 / 10).toFixed(2)}
                                 </SubPrice>
                             </Price>
                         )}
@@ -290,6 +290,12 @@ const product: React.FC<Props> = ({ product }) => {
                                 <li>
                                     <GiMetalBar />
                                     <span>Metal: {product.metal.name}</span>
+                                </li>
+                            )}
+                            {product.type && product.type.name === 'Anel' && (
+                                <li>
+                                    <GiMetalBar />
+                                    <span>Tamanho: Ajustável</span>
                                 </li>
                             )}
                         </CheckList>

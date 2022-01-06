@@ -44,6 +44,7 @@ export interface ProductInterface {
     shape: string & StonesAndShapes & { value: string; label: string }
     metal: string & StonesAndShapes & { value: string; label: string }
     productType: string & StonesAndShapes & { value: string; label: string }
+    type?: string & StonesAndShapes & { value: string; label: string }
     images?: ImageProduct[]
     spotlight: boolean
     visible: boolean
@@ -105,7 +106,7 @@ const product: React.FC<ProductInterface> = props => {
                 </Link>
                 <Price>R$ {(props.price / 100).toFixed(2)} </Price>
                 <SubPrice>
-                    12x de R$ {(props.price / 100 / 12).toFixed(2)}
+                    10x de R$ {(props.price / 100 / 10).toFixed(2)} sem juros
                 </SubPrice>
                 <Button
                     onClick={() => addProduct({ ...props })}
