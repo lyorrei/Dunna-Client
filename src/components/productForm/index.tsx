@@ -324,7 +324,7 @@ const productForm: React.FC<Props> = ({
                         />
                     </CheckboxContainer>
                     <CheckboxContainer>
-                        <span>Não comprável:</span>
+                        <span>Sob Consulta:</span>
                         <input
                             name="notBuyable"
                             type="checkbox"
