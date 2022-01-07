@@ -106,7 +106,7 @@ const productsPage = ({ products: productsFromProps }: Props) => {
                         }
                     },
                     {
-                        Header: 'Comprável',
+                        Header: 'Sob Consulta',
                         accessor: 'notBuyable',
                         Cell: props => {
                             return (
@@ -115,8 +115,8 @@ const productsPage = ({ products: productsFromProps }: Props) => {
                                     notBuyable={props.value}
                                 >
                                     {props.value
-                                        ? 'Não comprável'
-                                        : 'Comprável'}
+                                        ? 'Sob consulta'
+                                        : 'Sem consulta'}
                                 </Badge>
                             )
                         }
