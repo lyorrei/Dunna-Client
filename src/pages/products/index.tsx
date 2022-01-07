@@ -15,7 +15,7 @@ import { ImageProduct } from '../../components/product'
 import { StonesAndShapes } from '../shop/[type]'
 import Link from 'next/link'
 import { MdEdit } from 'react-icons/md'
-import { FaTrash } from 'react-icons/fa'
+import { FaRegEye, FaTrash } from 'react-icons/fa'
 import ConfirmModal from '../../components/confirmModal'
 import { BsImageFill } from 'react-icons/bs'
 import { Badge } from '../../components/badge'
@@ -36,6 +36,7 @@ export interface Product {
     images: ImageProduct[]
     metal: StonesAndShapes
     visible: boolean
+    notBuyable: boolean
 }
 
 interface Props {
@@ -105,6 +106,22 @@ const productsPage = ({ products: productsFromProps }: Props) => {
                         }
                     },
                     {
+                        Header: 'Comprável',
+                        accessor: 'notBuyable',
+                        Cell: props => {
+                            return (
+                                <Badge
+                                    type="notBuyable"
+                                    notBuyable={props.value}
+                                >
+                                    {props.value
+                                        ? 'Não comprável'
+                                        : 'Comprável'}
+                                </Badge>
+                            )
+                        }
+                    },
+                    {
                         Header: 'Tipo',
                         accessor: 'type'
                     },
@@ -125,6 +142,11 @@ const productsPage = ({ products: productsFromProps }: Props) => {
                         accessor: '_id',
                         Cell: props => (
                             <ActionsTd>
+                                <Link href={'/shop/product/' + props.value}>
+                                    <a className="blue">
+                                        <FaRegEye fill="blue" />
+                                    </a>
+                                </Link>
                                 <Link href={'/products/images/' + props.value}>
                                     <a className="imgg">
                                         <BsImageFill fill="green" />
@@ -169,6 +191,7 @@ const productsPage = ({ products: productsFromProps }: Props) => {
                     stoneWeigth: product.stoneWeigth,
                     diamondWeigth: product.diamondWeigth,
                     shape: product.shape.name,
+                    notBuyable: product.notBuyable
                 }
             }),
         [products]

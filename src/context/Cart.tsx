@@ -48,7 +48,7 @@ export default function CountProvider({ children }) {
         const cartCopy = [...cart]
 
         if (user) {
-            if (!checkIfProductIsInCart(cartCopy, product) && !product.notBuyable) {
+            if (!checkIfProductIsInCart(cartCopy, product) && !product.notBuyable && !product.sold) {
                 cartCopy.push(product)
                 setCart(cartCopy)
             }

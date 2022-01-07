@@ -51,22 +51,32 @@ export interface ProductInterface {
     notBuyable: boolean
     forMen: boolean
     forWedding: boolean
+    sold: boolean
 }
 
 const product: React.FC<ProductInterface> = props => {
-    const [isActive, setIsActive] = useState(!props.notBuyable) // False
+    const [isActive, setIsActive] = useState(!props.notBuyable && !props.sold)
     const { cart, addProduct } = useCart()
-    const [message] = useState(props.notBuyable ? 'Vendido apenas sob consulta' : 'Produto adicionado')
 
     useEffect(() => {
         if (checkIfProductIsInCart(cart, props)) {
             setIsActive(false)
         } else {
-            if (!props.notBuyable) {
+            if (!props.notBuyable && !props.sold) {
                 setIsActive(true)
             }
         }
     }, [cart])
+
+    let message = ''
+    if (props.notBuyable) {
+        message = 'Vendido apenas sob consulta'
+    } else {
+        message = 'Produto adicionado'
+    }
+    if (props.sold) {
+        message = 'Produto vendido'
+    }
 
     return (
         <Container variants={item}>
@@ -120,7 +130,7 @@ const product: React.FC<ProductInterface> = props => {
                     onClick={() => addProduct({ ...props })}
                     disabled={!isActive}
                 >
-                    {isActive  ? 'Adicionar ao carrinho' : message}
+                    {isActive ? 'Adicionar ao carrinho' : message}
                 </Button>
             </Content>
         </Container>

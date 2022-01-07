@@ -14,6 +14,12 @@ export const Container = styled(motion.div)`
 `
 
 export const ActionsTd = styled.p`
+    .blue {
+        svg {
+            fill: cyan;
+        }
+    }
+
     .imgg {
         svg {
             fill: green;

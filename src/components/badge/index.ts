@@ -4,6 +4,7 @@ interface BadgeProps {
     type: string
     sold?: boolean
     visible?: boolean
+    notBuyable?: boolean
 }
 
 export const Badge = styled.span<BadgeProps>`
@@ -33,4 +34,12 @@ export const Badge = styled.span<BadgeProps>`
                 ? `background-color: #17a2b8!important;`
                 : `background-color: #6c757d!important;`}
         `}
+
+    ${props =>
+    props.type === 'notBuyable' &&
+    css`
+        ${!props.notBuyable === true
+            ? `background-color: #17a2b8!important;`
+            : `background-color: #6c757d!important;`}
+    `}
 `

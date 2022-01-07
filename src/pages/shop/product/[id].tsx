@@ -115,12 +115,7 @@ const product: React.FC<Props> = ({ product }) => {
     const [selectedHeight, setSelectedHeight] = useState(null)
     const { cart, addProduct } = useCart()
 
-    const [isActive, setIsActive] = useState(!product.notBuyable)
-    const [message] = useState(
-        product.notBuyable
-            ? 'Vendido apenas sob consulta'
-            : 'Produto adicionado'
-    )
+    const [isActive, setIsActive] = useState(!product.notBuyable && !product.sold)
 
     // Fix problem when changing page
     useEffect(() => {
@@ -133,7 +128,7 @@ const product: React.FC<Props> = ({ product }) => {
         if (checkIfProductIsInCart(cart, product)) {
             setIsActive(false)
         } else {
-            if (!product.notBuyable) {
+            if (!product.notBuyable && !product.sold) {
                 setIsActive(true)
             }
         }
@@ -152,6 +147,16 @@ const product: React.FC<Props> = ({ product }) => {
         }
         img.src = selectedImage
     }, [selectedImage])
+
+    let message = ''
+    if(product.notBuyable) {
+        message = 'Vendido apenas sob consulta'
+    } else {
+        message = 'Produto adicionado'
+    }
+    if(product.sold) {
+        message = 'Produto vendido'
+    }
 
     return (
         <>
