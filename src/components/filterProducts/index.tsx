@@ -34,6 +34,18 @@ const filterProducts: React.FC<Props> = ({
     const [productTypeOptions, setProductTypeOptions] = useState(null)
     const [stonesOptions, setStoneOptions] = useState(null)
     const [shapesOptions, setShapeOptions] = useState(null)
+    const [orderOptions, setOrderOptions] = useState([
+        {
+            value: 'nameasc',
+            label: 'Nome A-Z'
+        },{
+            value: 'namedsc',
+            label: 'Nome Z-A'
+        },
+        { value: 'priceasc', label: 'Menor preço' },
+        { value: 'pricedsc', label: 'Maior preço' },
+        { value: 'new', label: 'Lançamentos' }
+    ])
 
     const optionsToArray = (options: StonesAndShapes[]) => {
         return options.map(option => ({
@@ -101,6 +113,15 @@ const filterProducts: React.FC<Props> = ({
                         }}
                     />
                 </RangeSliderContainer>
+            </motion.div>
+            <motion.div variants={item}>
+                <Select
+                    clearable
+                    name="order"
+                    options={orderOptions}
+                    placeholder="Ordenar produtos"
+                    onChange={() => handleFilterChange()}
+                />
             </motion.div>
         </Form>
     )

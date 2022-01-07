@@ -24,6 +24,8 @@ import {
     getProductTypes
 } from '../../../common'
 
+import arraySort from 'array-sort'
+
 const container = {
     hidden: { opacity: 1, scale: 0 },
     visible: {
@@ -94,8 +96,10 @@ const shop: React.FC<Props> = ({
             if (formRef && formRef.current) {
                 const shapesSelect = formRef.current.getFieldRef('shapes')
                 const stonesSelect = formRef.current.getFieldRef('stones')
+                const orderSelect = formRef.current.getFieldRef('order')
                 shapesSelect.select.clearValue()
                 stonesSelect.select.clearValue()
+                orderSelect.select.clearValue()
             }
 
             setPriceValue({ min: 0, max: 60000 })
@@ -135,6 +139,34 @@ const shop: React.FC<Props> = ({
                         priceFormated >= range.min && priceFormated <= range.max
                     )
                 })
+            }
+
+            switch (data.order) {
+                case 'nameasc':
+                    filteredProducts = arraySort(filteredProducts, 'name')
+                    break
+                case 'namedsc':
+                    filteredProducts = arraySort(filteredProducts, 'name', {
+                        reverse: true
+                    })
+                    break
+                case 'priceasc':
+                    filteredProducts = arraySort(filteredProducts, 'price')
+                    break
+                case 'pricedsc':
+                    filteredProducts = arraySort(filteredProducts, 'price', {
+                        reverse: true
+                    })
+                    break
+                case 'new':
+                    filteredProducts = arraySort(
+                        filteredProducts,
+                        'createdAt',
+                        {
+                            reverse: true
+                        }
+                    )
+                    break
             }
 
             setProducts(filteredProducts)
