@@ -185,3 +185,30 @@ export const CheckList = styled.ul`
         }
     }
 `
+
+export const EditDiv = styled.div`
+    a {
+        margin-top: 2rem;
+        display: inline-block;
+        width: 40%;
+        padding: 1.5rem 0;
+        border: none;
+        outline: none;
+        background-color: ${props => props.theme.colors.blue};
+        color: ${props => props.theme.colors.white};
+        font-size: 1.8rem;
+        border-radius: ${({ theme }) => theme.sizes.borderRadius};
+        cursor: pointer;
+        transition: all 1s;
+        --webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transition: all 0.2s;
+        text-align: center;
+        float: right;
+        text-decoration: none;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+`;

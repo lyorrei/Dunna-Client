@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 import {
     Container,
@@ -18,7 +19,8 @@ import {
     CheckList,
     SubPrice,
     DicountTotalPrice,
-    NotBuyableText
+    NotBuyableText,
+    EditDiv
 } from '../../../styles/pages/shop/product'
 
 import Head from 'next/head'
@@ -42,6 +44,7 @@ import { GiMetalBar, GiStoneBlock, GiStoneSphere } from 'react-icons/gi'
 import { getAllVisibleProducts, getSingleProduct } from '../../../../common'
 
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { useUser } from '../../../context/User'
 
 interface Props {
     product: ProductInterface
@@ -94,6 +97,8 @@ const RightContainerVariant = {
 
 const product: React.FC<Props> = ({ product }) => {
     const router = useRouter()
+    const { user } = useUser()
+
     if (router.isFallback) {
         return (
             <Container
@@ -115,7 +120,9 @@ const product: React.FC<Props> = ({ product }) => {
     const [selectedHeight, setSelectedHeight] = useState(null)
     const { cart, addProduct } = useCart()
 
-    const [isActive, setIsActive] = useState(!product.notBuyable && !product.sold)
+    const [isActive, setIsActive] = useState(
+        !product.notBuyable && !product.sold
+    )
 
     // Fix problem when changing page
     useEffect(() => {
@@ -149,12 +156,12 @@ const product: React.FC<Props> = ({ product }) => {
     }, [selectedImage])
 
     let message = ''
-    if(product.notBuyable) {
+    if (product.notBuyable) {
         message = 'Vendido apenas sob consulta'
     } else {
         message = 'Produto adicionado'
     }
-    if(product.sold) {
+    if (product.sold) {
         message = 'Produto vendido'
     }
 
@@ -319,6 +326,14 @@ const product: React.FC<Props> = ({ product }) => {
                                 </li>
                             )}
                         </CheckList>
+
+                        {user && user.admin && (
+                            <EditDiv>
+                                <Link href={'/products/edit/' + product._id}>
+                                    <a>Editar Produto</a>
+                                </Link>
+                            </EditDiv>
+                        )}
                     </RightContainer>
                 </GridContainer>
             </Container>

@@ -16,7 +16,9 @@ const theme = {
 
         background: '#cad0db',
         backgroundLight: '#e4e7ed',
-        backgroundDark: '#a2a9b8'
+        backgroundDark: '#a2a9b8',
+
+        blue: '#0398fc'
     },
 
     sizes: {
