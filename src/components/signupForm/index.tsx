@@ -9,8 +9,7 @@ import Button from '../button'
 import { InputGroup, SignupTitle } from './style'
 import Form from '../form'
 
-import Alert from '../alert'
-import { Types } from '../alert'
+import Alert, { Types } from '../alert'
 
 interface Props {
     setLoading(boolean: boolean): void
@@ -48,7 +47,9 @@ const signupForm: React.FC<Props> = ({ setLoading }) => {
             setLoading(true)
             await axios.post('/users/create', data)
 
-            setFormSuccess('Por favor, clique no link enviado ao seu email para confirmar a sua conta (favor checar sua caixa de Spam)')
+            setFormSuccess(
+                'Por favor, clique no link enviado ao seu email para confirmar a sua conta (favor checar sua caixa de Spam)'
+            )
             formRef.current.reset()
             setLoading(false)
         } catch (err) {
@@ -68,7 +69,10 @@ const signupForm: React.FC<Props> = ({ setLoading }) => {
 
     return (
         <Form ref={formRef} onSubmit={handleSubmit}>
-            <SignupTitle>Cadastre-se e conheça a sutileza sofisticada da Coleção Dunna 2022!</SignupTitle>
+            <SignupTitle>
+                Cadastre-se e conheça a sutileza sofisticada da Coleção Dunna
+                2022!
+            </SignupTitle>
 
             {formSuccess && <Alert type={Types.green}>{formSuccess}</Alert>}
             {formError && <Alert type={Types.red}>{formError}</Alert>}
