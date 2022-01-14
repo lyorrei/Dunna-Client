@@ -10,7 +10,7 @@ export enum Types {
 
 export interface Props {
     type: Types
-    close?(): void
+    close?: () => void
 }
 
 const name: React.FC<Props> = ({ type, close, ...props }) => {

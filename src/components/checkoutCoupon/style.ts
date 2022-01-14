@@ -8,6 +8,7 @@ export const Coupon = styled.div`
 export const CouponContainer = styled.div`
     display: flex;
     align-items: center;
+    margin-top: 1rem;
 `;
 
 

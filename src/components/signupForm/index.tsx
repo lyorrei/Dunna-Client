@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import axios from '../../../axios'
 import * as Yup from 'yup'
 
@@ -9,10 +9,8 @@ import Button from '../button'
 import { InputGroup, SignupTitle } from './style'
 import Form from '../form'
 
-import Router from 'next/router'
-import Alert from '../alert/style'
+import Alert from '../alert'
 import { Types } from '../alert'
-import { useUser } from '../../context/User'
 
 interface Props {
     setLoading(boolean: boolean): void
@@ -22,8 +20,6 @@ const signupForm: React.FC<Props> = ({ setLoading }) => {
     const [formSuccess, setFormSuccess] = useState(null)
     const [formError, setFormError] = useState(null)
     const formRef = useRef<FormHandles>(null)
-
-    const { setUser } = useUser()
 
     const handleSubmit: SubmitHandler<FormData> = async data => {
         try {

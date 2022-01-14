@@ -13,11 +13,12 @@ const Alert = styled.div<AlertInterface>`
     p {
         display: block;
         padding: 2rem 1.5rem;
-        margin-bottom: 1rem;
         border-radius: 3px;
         font-size: 1.4rem;
         font-weight: 600;
-        width: 90%;
+
+        ${props => props.close && `width: 90%;`}
+
     }
 
     span {
