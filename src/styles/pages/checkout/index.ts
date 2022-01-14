@@ -59,13 +59,13 @@ export const Container = styled(Box)`
 
     @media only screen and (max-width: 75em) {
         width: 75%;
-        top: 35rem;
+        top: 48rem;
         left: 16rem;
     } //1200px
 
     @media only screen and (max-width: 37.5em) {
         width: 90%;
-        top: 40rem;
+        /* top: 40rem; */
         left: 5%;
     } //600px
 `

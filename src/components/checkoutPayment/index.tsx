@@ -9,6 +9,7 @@ import { useCart } from '../../context/Cart'
 import { BsCheckCircle } from 'react-icons/bs'
 import Link from 'next/link'
 import { Term, Text } from '../checkoutConfirm/style'
+import { BoxContainerVariants } from '../../pages/checkout'
 
 const cartElementOptions = {
     style: {
@@ -19,39 +20,22 @@ const cartElementOptions = {
     }
 }
 
-const containerVariants = {
-    hidden: {
-        opacity: 0,
-        y: '-120%'
-    },
-    visible: {
-        opacity: 1,
-        y: '0%'
-    }
-}
-
 interface Props {
     stage: number
     setStage(stage: number): void
-    orderId: string
-    setOrderId(id: string): void
-    total: number
     selectedAddress: string
 }
 
 const checkoutPayment: React.FC<Props> = ({
     setStage,
     stage,
-    orderId,
-    setOrderId,
-    total,
     selectedAddress
 }) => {
     const stripe = useStripe()
     const [isCompleted, setIsCompleted] = useState(false)
     const [isVisible, setIsVisible] = useState(false)
     const router = useRouter()
-    const { cart } = useCart()
+    const { cart, cartPrice, coupon, setCoupon } = useCart()
 
     useEffect(() => {
         setIsCompleted(false)
@@ -66,7 +50,6 @@ const checkoutPayment: React.FC<Props> = ({
 
         if (stage === 0 && router.query.method === 'paypal') {
             setIsCompleted(false)
-            setOrderId(null)
         }
     }, [stage])
 
@@ -76,7 +59,7 @@ const checkoutPayment: React.FC<Props> = ({
 
     return (
         <Container
-            variants={containerVariants}
+            variants={BoxContainerVariants}
             initial="hidden"
             animate={isVisible ? 'visible' : 'hidden'}
             exit="hidden"
@@ -118,10 +101,10 @@ const checkoutPayment: React.FC<Props> = ({
                     <PaypalButton
                         cart={cart}
                         setIsCompleted={setIsCompleted}
-                        orderId={orderId}
-                        setOrderId={setOrderId}
-                        total={total}
+                        total={cartPrice}
                         selectedAddress={selectedAddress}
+                        couponName={coupon ? coupon.name : null}
+                        setCoupon={setCoupon}
                     />
                 </>
             ) : (
@@ -130,21 +113,21 @@ const checkoutPayment: React.FC<Props> = ({
                 </SvgContainer>
             )}
 
-            {router.query.method === 'stripe' && (
-                <ButtonsContainer>
-                    <div>
-                        <InlineButton onClick={() => setStage(0)} light>
-                            Voltar
-                        </InlineButton>
-                    </div>
+            <ButtonsContainer>
+                <div>
+                    <InlineButton onClick={() => setStage(0)} light>
+                        Voltar
+                    </InlineButton>
+                </div>
+                {router.query.method === 'stripe' && (
                     <InlineButton
                         onClick={() => setStage(2)}
                         disabled={!isCompleted}
                     >
                         Próximo
                     </InlineButton>
-                </ButtonsContainer>
-            )}
+                )}
+            </ButtonsContainer>
         </Container>
     )
 }

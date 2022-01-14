@@ -1,50 +1,39 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useCart } from '../../context/Cart'
-import {
-    CartItemContainer,
-    CartItem,
-    Cart,
-    ImageContainer,
-    Img,
-    Name,
-    Price,
-    Total
-} from './style'
+import { CartItemContainer, Cart } from './style'
 
-interface Props {
-    total: number
-    setTotal(number: number): void
-}
+import CartItem from '../cartItem'
 
-const checkoutCart: React.FC<Props> = ({total, setTotal}) => {
-    const { cart } = useCart()
+import CheckoutCoupon from '../checkoutCoupon'
 
-    useEffect(() => {
-        let totalPrice = 0
-        for (let i = 0; i < cart.length; i++) {
-            totalPrice += cart[i].price
-        }
-        setTotal(totalPrice)
-    }, [cart])
+import OrderPrice from '../orderPrice'
+
+interface Props {}
+
+const checkoutCart: React.FC<Props> = () => {
+    const { cart, cartPrice, coupon, cartNoDiscountPrice } = useCart()
+
+    let cartPriceWithCoupon = cartPrice
+
+    if (coupon) {
+        cartPriceWithCoupon = cartPrice - coupon.value
+    }
 
     return (
         <Cart>
             <CartItemContainer>
-                {cart.map(item => (
-                    <CartItem key={item._id}>
-                        <ImageContainer>
-                            <Img src={item.images[0].url} alt="Product Image" />
-                        </ImageContainer>
-                        <Name>{item.name}</Name>
-                        <Price>R$ {(item.price / 100).toFixed(2)}</Price>
-                    </CartItem>
+                {cart.map(product => (
+                    <CartItem product={product} key={product._id} />
                 ))}
             </CartItemContainer>
 
-            <Total>
-                <span>Total</span>
-                <span>R$ {(total / 100).toFixed(2)}</span>
-            </Total>
+            <CheckoutCoupon />
+
+            <OrderPrice
+                discount={coupon ? true : false}
+                noDiscountPrice={cartPrice}
+                discountPrice={cartPriceWithCoupon}
+            />
         </Cart>
     )
 }

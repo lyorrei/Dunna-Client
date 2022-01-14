@@ -21,7 +21,8 @@ import {
     ItensContainer,
     UntilDate,
     Obs,
-    NoOrders
+    NoOrders,
+    Coupon
 } from '../../styles/pages/orders'
 
 import RequireAuthentication from '../../HOC/requireAuthentication'
@@ -77,7 +78,7 @@ const orders = ({ myOrders }: Props) => {
                     <Obs>
                         <span>Observação:</span> Se tiver qualquer dúvida ou
                         problema, por favor entre em contato conosco no email
-                        nilza.quintao@outlook.com
+                        matheus@dunnajw.com
                     </Obs>
                     <OrdersContainer>
                         {myOrders.length > 0 ? (
@@ -93,12 +94,23 @@ const orders = ({ myOrders }: Props) => {
                                                 {order.createdAt}
                                             </Moment>
                                         </DateParagraph>
-                                        <Total>
-                                            <span>Total</span>{' '}
+                                        <Total
+                                            coupon={order.coupon ? true : false}
+                                        >
+                                            <span>Total</span> R${' '}
                                             {(order.totalAmount / 100).toFixed(
                                                 2
                                             )}
                                         </Total>
+
+                                        {order.coupon && (
+                                            <Coupon>
+                                                <span>Cupom</span> R${' '}
+                                                {(
+                                                    order.coupon.value / 100
+                                                ).toFixed(2)}
+                                            </Coupon>
+                                        )}
                                         <UntilDate>
                                             <span>
                                                 {order.shipping.status}

@@ -276,7 +276,7 @@ const product: React.FC<Props> = ({ product }) => {
                             onClick={() => addProduct(product)}
                             disabled={!isActive}
                         >
-                            {isActive ? 'Adicionar ao carrinho' : message}
+                            {isActive ? 'Adicionar à sacola' : message}
                         </InlineButton>
 
                         <CheckList>

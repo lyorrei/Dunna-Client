@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import React from 'react'
 import Backdrop from '../components/backdrop'
 import Cart from '../components/cart'

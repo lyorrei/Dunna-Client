@@ -77,8 +77,14 @@ app.prepare()
         const orderAddressRoutes = require('./routers/orderAddress')
         server.use(orderAddressRoutes)
 
-        const chargeRoutes = require('./routers/charge')
-        server.use(chargeRoutes)
+        const paypalRoutes = require('./routers/payment/paypal')
+        server.use(paypalRoutes)
+
+        const stripeRoutes = require('./routers/payment/stripe')
+        server.use(stripeRoutes)
+
+        const couponRoutes = require('./routers/coupon')
+        server.use(couponRoutes)
 
         server.get('*', (req, res) => {
             return handle(req, res)

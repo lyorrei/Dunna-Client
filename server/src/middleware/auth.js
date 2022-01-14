@@ -19,7 +19,7 @@ exports.auth = async (req, res, next) => {
 
         next()
     } catch (e) {
-        res.status(401).send({ error: 'Please authenticate.' })
+        res.status(401).send({ error: 'Por favor, faça login ou crie uma conta.' })
     }
 }
 
@@ -40,6 +40,6 @@ exports.admin = async (req, res, next) => {
 
         next()
     } catch (e) {
-        res.status(401).send({ error: 'Please authenticate.' })
+        res.status(401).send({ error: 'Por favor, faça Login.' })
     }
 }

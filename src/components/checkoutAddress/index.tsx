@@ -2,6 +2,7 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { BsPlusSquare } from 'react-icons/bs'
 import { Address } from '../../pages/addresses'
+import { BoxContainerVariants } from '../../pages/checkout'
 import { Container, HeaderContainer } from '../../styles/pages/checkout'
 import { InlineButton } from '../button'
 import {
@@ -19,17 +20,6 @@ interface Props {
     setSelectedAddress(address: string): void
     stage: number
     setStage(stage: number): void
-}
-
-const containerVariants = {
-    hidden: {
-        opacity: 0,
-        y: '-120%'
-    },
-    visible: {
-        opacity: 1,
-        y: '0%'
-    }
 }
 
 const checkoutAddress: React.FC<Props> = ({
@@ -51,7 +41,7 @@ const checkoutAddress: React.FC<Props> = ({
 
     return (
         <Container
-            variants={containerVariants}
+            variants={BoxContainerVariants}
             initial="hidden"
             animate={isVisible ? 'visible' : 'hidden'}
             exit="hidden"

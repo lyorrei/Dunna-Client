@@ -16,7 +16,7 @@ export const ButtonsContainer = styled.div`
     margin-top: 4rem;
     width: 50%;
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     float: right;
 
     @media only screen and (max-width: 112.5em) {

@@ -32,14 +32,3 @@ export const Form = styled(Unform)<FormProps>`
     ${props => props.loading && 'display: none;'}
 `
 
-export const CheckboxContainer = styled.div`
-    display: flex;
-    align-items: center;
-
-    span {
-        font-size: 1.5rem;
-        display: inline-block;
-        margin-right: 1rem;
-        color: ${props => props.theme.colors.greyDark1};
-    }
-`

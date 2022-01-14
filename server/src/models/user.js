@@ -5,58 +5,67 @@ const bcrypt = require('bcryptjs')
 const transporter = require('../config/mailer')
 const { email: senderEmail } = require('../config/mail.json')
 
-const userSchema = new mongoose.Schema({
-    firstName: {
-        type: String,
-        required: true
-    },
-    lastName: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        trim: true,
-        required: true,
-        unique: true,
-        lowercase: true,
-        validate(value) {
-            if (!validator.isEmail(value)) {
-                throw new Error('Email is invalid')
+const userSchema = new mongoose.Schema(
+    {
+        firstName: {
+            type: String,
+            required: true
+        },
+        lastName: {
+            type: String,
+            required: true
+        },
+        email: {
+            type: String,
+            trim: true,
+            required: true,
+            unique: true,
+            lowercase: true,
+            validate(value) {
+                if (!validator.isEmail(value)) {
+                    throw new Error('Email is invalid')
+                }
             }
+        },
+        password: {
+            type: String,
+            trim: true,
+            required: true,
+            minlength: 7,
+            select: false
+        },
+        admin: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        confirmed: {
+            type: Boolean,
+            required: true,
+            default: false
         }
+        // tokens: [
+        //     {
+        //         token: {
+        //             type: String,
+        //             required: true,
+        //         },
+        //     },
+        // ],
     },
-    password: {
-        type: String,
-        trim: true,
-        required: true,
-        minlength: 7,
-        select: false
-    },
-    admin: {
-        type: Boolean,
-        required: true,
-        default: false
-    },
-    confirmed: {
-        type: Boolean,
-        required: true,
-        default: false
-    }
-    // tokens: [
-    //     {
-    //         token: {
-    //             type: String,
-    //             required: true,
-    //         },
-    //     },
-    // ],
-})
+    { timestamps: true }
+)
 
 userSchema.virtual('orders', {
     ref: 'Order',
     localField: '_id',
     foreignField: 'user_id'
+})
+
+userSchema.virtual('usedCoupons', {
+    ref: 'UsedCoupon',
+    localField: '_id',
+    foreignField: 'user',
 })
 
 userSchema.methods.generateAuthToken = async function () {

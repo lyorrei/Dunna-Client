@@ -53,8 +53,21 @@ export const Name = styled.p`
     cursor: pointer;
 `
 
+export const PriceContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    grid-gap: .5rem;
+    align-items: center;
+`;
+
 export const Price = styled.p`
     font-size: 1.5rem;
-    color: ${props => props.theme.colors.greyDark3};
+    color: ${props => props.theme.colors.greyDark1};
     font-family: sans-serif;
+`
+
+export const TotalPrice = styled(Price)`
+    text-decoration: line-through;
+    color: ${props => props.theme.colors.greyDark3};
+
 `

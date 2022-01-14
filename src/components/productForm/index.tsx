@@ -7,10 +7,11 @@ import { ClipLoader } from 'react-spinners'
 import { InlineButton } from '../button'
 import Input from '../input'
 import Select from '../select'
-import { CheckboxContainer, Form, SideBySide, Title } from './style'
+import { Form, SideBySide, Title } from './style'
 import { StonesAndShapes } from '../../pages/shop/[type]'
 import { ProductInterface } from '../product'
 import Alert, { Types } from '../alert'
+import { CheckboxContainer } from '../checkboxContainer'
 
 interface Props {
     submitLink: string
@@ -122,13 +123,16 @@ const productForm: React.FC<Props> = ({
                         'A descrição é obrigatória'
                     ),
                     price: Yup.number()
+                        .positive('Você deve escrever um número positivo')
                         .typeError('Você deve escrever um número')
                         .required('O preço é obrigatório'),
                     stone: Yup.string().required('A pedra é obrigatória'),
                     stoneWeigth: Yup.number()
+                        .positive('Você deve escrever um número positivo')
                         .typeError('Você deve escrever um número')
                         .required('O peso da pedra é obrigatório'),
                     diamondWeigth: Yup.number()
+                        .positive('Você deve escrever um número positivo')
                         .typeError('Você deve escrever um número')
                         .required('O peso do diamante é obrigatório'),
                     shape: Yup.string().required('O formato é obrigatório'),
@@ -148,10 +152,12 @@ const productForm: React.FC<Props> = ({
                         'A descrição é obrigatória'
                     ),
                     price: Yup.number()
+                        .positive('Você deve escrever um número positivo')
                         .typeError('Você deve escrever um número')
                         .required('O preço é obrigatório'),
                     stone: Yup.string().required('A pedra é obrigatória'),
                     stoneWeigth: Yup.number()
+                        .positive('Você deve escrever um número positivo')
                         .typeError('Você deve escrever um número')
                         .required('O peso da pedra é obrigatório'),
                     shape: Yup.string().required('O formato é obrigatório')
@@ -160,6 +166,7 @@ const productForm: React.FC<Props> = ({
 
             if (discount) {
                 validationObject.totalPrice = Yup.number()
+                    .positive('Você deve escrever um número positivo')
                     .typeError('Você deve escrever um número')
                     .required('O preço é obrigatório')
 

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { Box } from '../../styles/pages/checkout'
 
 const Scroll = css`
-    padding-right: 3rem;
+    padding-right: 2rem;
 
     @media only screen and (max-width: 37.5em) {
         padding-right: 2rem;
@@ -10,7 +10,6 @@ const Scroll = css`
 
     @media only screen and (max-width: 25em) {
         padding-right: 1rem;
-
     } //400px
 
     /* width */
@@ -42,7 +41,7 @@ export const Cart = styled(Box)`
     } //1800px
 
     @media only screen and (max-width: 75em) {
-        top: 5%;
+        top: 2rem;
         left: 16rem;
         width: 75%;
     } //1200px
@@ -91,22 +90,11 @@ export const Name = styled.p`
     color: ${props => props.theme.colors.greyDark1};
     font-weight: 700;
     flex: 0 0 50%;
-
 `
 
 export const Price = styled.p`
     font-size: 1.5rem;
     color: ${props => props.theme.colors.greyDark1};
     font-family: sans-serif;
-
 `
 
-export const Total = styled.p`
-    font-size: 2rem;
-    font-weight: 600;
-    font-family: sans-serif;
-    color: ${props => props.theme.colors.greyDark1};
-    display: flex;
-    justify-content: space-between;
-    margin-top: 3rem;
-`

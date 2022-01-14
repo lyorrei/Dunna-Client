@@ -37,7 +37,7 @@ export interface ProductInterface {
     description: string
     price: number
     discount: boolean
-    totalPrice: number
+    totalPrice?: number
     stone: string & StonesAndShapes & { value: string; label: string }
     stoneWeigth: number
     diamondWeigth: number
@@ -130,7 +130,7 @@ const product: React.FC<ProductInterface> = props => {
                     onClick={() => addProduct({ ...props })}
                     disabled={!isActive}
                 >
-                    {isActive ? 'Adicionar ao carrinho' : message}
+                    {isActive ? 'Adicionar à sacola' : message}
                 </Button>
             </Content>
         </Container>

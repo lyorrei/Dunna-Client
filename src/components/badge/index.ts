@@ -5,6 +5,7 @@ interface BadgeProps {
     sold?: boolean
     visible?: boolean
     notBuyable?: boolean
+    boolean?: boolean
 }
 
 export const Badge = styled.span<BadgeProps>`
@@ -18,6 +19,18 @@ export const Badge = styled.span<BadgeProps>`
     white-space: nowrap;
     vertical-align: baseline;
     border-radius: 0.25rem;
+
+    ${props => props.type === 'boolean' &&   css`
+        ${props.boolean === true
+            ? `background-color: #17a2b8!important;`
+            : `background-color: #6c757d!important;`}
+    `}
+
+    ${props => props.type === 'blueGreen' &&   css`
+        ${props.boolean === true
+            ? `background-color: #198754!important;`
+            : `background-color: #0d6efd!important;`}
+    `}
 
     ${props =>
         props.type === 'sold' &&

@@ -8,15 +8,16 @@ import {
     ActionsTd
 } from '../../styles/pages/products'
 
-import Table from '../../components/table'
+import Table from '../table'
 
-import ConfirmModal from '../../components/confirmModal'
-import Modal from '../../components/modal'
-import { Input } from '../../components/input/style'
-import { InlineButton } from '../../components/button'
+import ConfirmModal from '../confirmModal'
+import Modal from '../modal'
+import { Input } from '../input/style'
+import { InlineButton } from '../button'
 
 import { FaTrash } from 'react-icons/fa'
 import { StonesAndShapes } from '../../pages/shop/[type]'
+import { CreateButtonContainer } from './style'
 
 interface Props {
     options: StonesAndShapes[]
@@ -25,7 +26,12 @@ interface Props {
     title: string
 }
 
-const productFields = ({ options: optionsFromProps,createLink,deleteLink,title }: Props) => {
+const productFields = ({
+    options: optionsFromProps,
+    createLink,
+    deleteLink,
+    title
+}: Props) => {
     const [options, setOptions] = useState(optionsFromProps)
     const [showCreateModal, setShowCreateModal] = useState(false)
     const [optionName, setOptionName] = useState(null)
@@ -61,7 +67,7 @@ const productFields = ({ options: optionsFromProps,createLink,deleteLink,title }
         }
     }
 
-    const createShape = async () => {
+    const createOption = async () => {
         const { data: createdShape } = await axios.post(createLink, {
             name: optionName
         })
@@ -114,17 +120,11 @@ const productFields = ({ options: optionsFromProps,createLink,deleteLink,title }
             </Head>
             <PageContainer>
                 <Container>
-                    <div
-                        style={{
-                            margin: '2rem 0',
-                            width: '15%',
-                            float: 'right'
-                        }}
-                    >
+                    <CreateButtonContainer>
                         <InlineButton onClick={() => setShowCreateModal(true)}>
                             {title}
                         </InlineButton>
-                    </div>
+                    </CreateButtonContainer>
                     <Table columns={columns} data={data} />
                 </Container>
                 <Modal
@@ -144,7 +144,7 @@ const productFields = ({ options: optionsFromProps,createLink,deleteLink,title }
                             style={{
                                 width: '50%'
                             }}
-                            onClick={createShape}
+                            onClick={createOption}
                         >
                             {title}
                         </InlineButton>

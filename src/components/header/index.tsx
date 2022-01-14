@@ -187,7 +187,7 @@ const header: React.FC = () => {
     return (
         <Container variants={containerVariant} animate={containerAnimation}>
             <Title>
-                A joalheria moldada com a arte <span>do Japão</span>
+                Joalheria moldada com a arte <span>do Japão</span>
                 {/* <Subtitle>
                     Agora no Brasil trazendo conceitos exclusivos da arte de jóias japonesas
                 </Subtitle> */}

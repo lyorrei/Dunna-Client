@@ -6,6 +6,7 @@
         ".next/cache"
     ],
     "scripts": {
+        "seed": "node server/src/seed/product.js",
         "dev": "nodemon --watch server server/src/index.js",
         "build": "next build",
         "start": "node server/src/index.js -p $PORT",
@@ -19,10 +20,12 @@
         "@types/nprogress": "^0.2.0",
         "@types/react-alert": "^5.2.0",
         "@types/react-circular-progressbar": "^1.1.0",
+        "@types/react-datepicker": "^4.3.4",
         "@types/react-image-magnify": "^2.7.0",
         "@types/react-select": "^3.0.28",
         "@types/react-table": "^7.0.29",
         "@types/react-transition-group": "^4.4.0",
+        "@types/voucher-code-generator": "^1.1.1",
         "@unform/core": "^2.1.3",
         "@unform/web": "^2.1.3",
         "array-sort": "^1.0.0",
@@ -40,6 +43,7 @@
         "lodash": "^4.17.20",
         "moment": "^2.29.1",
         "mongoose": "^5.10.18",
+        "mongoose-seed": "^0.6.0",
         "multer": "^1.4.2",
         "multer-s3": "^2.9.0",
         "next": "10.0.3",
@@ -53,6 +57,7 @@
         "react-circular-progressbar": "^2.0.3",
         "react-cookie": "^4.0.3",
         "react-cookie-consent": "^6.2.3",
+        "react-datepicker": "^4.6.0",
         "react-dom": "17.0.1",
         "react-dropzone": "^11.3.0",
         "react-icons": "^4.1.0",
@@ -70,6 +75,7 @@
         "styled-components": "^5.2.1",
         "typesafe-actions": "^5.1.0",
         "validator": "^13.5.1",
+        "voucher-code-generator": "^1.1.1",
         "yup": "^0.32.8"
     },
     "devDependencies": {

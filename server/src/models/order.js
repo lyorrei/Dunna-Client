@@ -5,31 +5,40 @@ const orderSchema = mongoose.Schema(
         user: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
-            ref: 'User',
+            ref: 'User'
         },
         shipping: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
-            ref: 'Shipping',
+            ref: 'Shipping'
+        },
+        totalAmountWithoutCoupon: {
+            type: Number,
+            required: false
         },
         totalAmount: {
             type: Number,
-            required: true,
+            required: true
         },
+        coupon: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: false,
+            ref: 'OrderCoupon'
+        }
     },
     {
-        timestamps: true,
+        timestamps: true
     }
 )
 
 orderSchema.virtual('orderItems', {
     ref: 'OrderItem',
     localField: '_id',
-    foreignField: 'order',
+    foreignField: 'order'
 })
 
-orderSchema.set('toObject', { virtuals: true });
-orderSchema.set('toJSON', { virtuals: true });
+orderSchema.set('toObject', { virtuals: true })
+orderSchema.set('toJSON', { virtuals: true })
 
 const Order = mongoose.model('Order', orderSchema)
 

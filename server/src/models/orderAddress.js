@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const orderAddresSchema = mongoose.Schema(
+const orderAddressSchema = mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId,
@@ -38,6 +38,6 @@ const orderAddresSchema = mongoose.Schema(
     }
 )
 
-const OrderAddress = mongoose.model('OrderAddress', orderAddresSchema)
+const OrderAddress = mongoose.model('OrderAddress', orderAddressSchema)
 
 module.exports = OrderAddress

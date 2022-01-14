@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { BsFillInboxesFill } from 'react-icons/bs'
 import { GiMetalBar, GiStoneCrafting } from 'react-icons/gi'
-import { FaShapes } from 'react-icons/fa'
+import { FaRegMoneyBillAlt, FaShapes } from 'react-icons/fa'
 
 interface Props {}
 
@@ -67,6 +67,18 @@ const sidebar: React.FC<Props> = props => {
                         <a>
                             <GiMetalBar />
                             Metais
+                        </a>
+                    </Link>
+                </Li>
+            </ul>
+            <div>Extra</div>
+            <ul>
+
+                <Li isActive={router.pathname === '/coupons'}>
+                    <Link href="/coupons">
+                        <a>
+                            <FaRegMoneyBillAlt />
+                            Cupons
                         </a>
                     </Link>
                 </Li>

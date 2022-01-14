@@ -26,8 +26,8 @@ export const Label = styled.label`
 `
 
 export const Error = styled.span`
-    display: block;
-    color: red;
-    margin-top: 1rem;
-    font-size: 1.4rem;
+    display: block !important;
+    color: red !important;
+    margin-top: 1rem !important;
+    font-size: 1.4rem !important;
 `

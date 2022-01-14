@@ -39,6 +39,17 @@ const pageContainerVariant = {
     }
 }
 
+export const BoxContainerVariants = {
+    hidden: {
+        opacity: 0,
+        y: '-120%'
+    },
+    visible: {
+        opacity: 1,
+        y: '0%'
+    }
+}
+
 interface Props {
     myAddresses: Address[]
     user: User
@@ -46,11 +57,9 @@ interface Props {
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 const checkout = ({ myAddresses, user }: Props) => {
-    const [orderId, setOrderId] = useState(null)
     const [selectedAddress, setSelectedAddress] = useState(null)
     const [stage, setStage] = useState(0)
-    const { cart } = useCart()
-    const [total, setTotal] = useState(0)
+    const { cart, setCoupon } = useCart()
     const Router = useRouter()
     const [cookies, setCookie] = useCookies(['rdcheckout'])
 
@@ -71,12 +80,16 @@ const checkout = ({ myAddresses, user }: Props) => {
                 )
                 .catch(err => {})
         }
+
+        return () => {
+            setCoupon(null)
+        }
     }, [])
 
     let pageContent = (
         <Container>
             <EmptyCart>
-                Seu carrinho está vazio, você será redirecionado para a loja.
+                Sua sacola está vazia, você será redirecionado para a loja.
             </EmptyCart>
         </Container>
     )
@@ -94,18 +107,17 @@ const checkout = ({ myAddresses, user }: Props) => {
                 <CheckoutPayment
                     stage={stage}
                     setStage={setStage}
-                    orderId={orderId}
-                    setOrderId={setOrderId}
-                    total={total}
                     selectedAddress={selectedAddress}
                 />
-                <CheckoutConfirm
-                    total={total}
-                    selectedAddress={selectedAddress}
-                    stage={stage}
-                    setStage={setStage}
-                    orderId={orderId}
-                />
+                {Router.query.method === 'stripe' && (
+                    <CheckoutConfirm
+                        selectedAddress={selectedAddress}
+                        stage={stage}
+                        setStage={setStage}
+                    />
+                )}
+
+                {cart.length > 0 && <CheckoutCart />}
             </>
         )
     }
@@ -123,9 +135,7 @@ const checkout = ({ myAddresses, user }: Props) => {
                     imageUrl={CheckoutBackground}
                 >
                     {pageContent}
-                    {cart.length > 0 && (
-                        <CheckoutCart total={total} setTotal={setTotal} />
-                    )}
+
                     {selectedAddress && stage !== 0 && (
                         <CheckoutAddressInfo
                             selectedAddress={selectedAddress}

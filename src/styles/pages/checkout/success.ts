@@ -41,7 +41,12 @@ export const SubTitle = styled.h3`
     margin-bottom: 3rem;
     margin-top: 4rem;
 
-
+    span {
+        color: ${props => props.theme.colors.greyDark1};
+        font-family: sans-serif;
+        font-weight: 300;
+        margin-left: 2rem;
+    }
 `
 
 export const Total = styled.p`
@@ -60,7 +65,6 @@ export const Total = styled.p`
         font-family: 'Raleway', sans-serif;
         color: ${props => props.theme.colors.primaryDark};
         font-weight: 700;
-
     }
 `
 

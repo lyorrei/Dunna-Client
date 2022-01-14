@@ -37,7 +37,7 @@ export const Obs = styled.p`
     color: ${props => props.theme.colors.greyDark3};
     margin-bottom: 4rem;
 
-     span {
+    span {
         color: ${props => props.theme.colors.greyDark2};
         font-weight: 600;
     }
@@ -75,7 +75,6 @@ const HeaderElement = styled.p`
     font-family: sans-serif;
     letter-spacing: 0.1rem;
 
-
     @media only screen and (max-width: 56.25em) {
         margin-bottom: 1rem;
     } //900px
@@ -96,7 +95,17 @@ export const DateParagraph = styled(HeaderElement)`
     flex: 0 0 14%;
 `
 
-export const Total = styled(HeaderElement)`
+interface TotalInterface {
+    coupon?: boolean
+}
+
+export const Total = styled(HeaderElement)<TotalInterface>`
+    margin-right: auto;
+
+    ${props => props.coupon && 'margin-right: 6rem;'}
+`
+
+export const Coupon = styled(HeaderElement)`
     margin-right: auto;
 `
 

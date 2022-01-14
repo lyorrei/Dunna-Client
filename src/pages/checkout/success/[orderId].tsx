@@ -15,6 +15,7 @@ import { NextPageContext } from 'next'
 import { ProductInterface } from '../../../components/product'
 
 import OrderAddress from '../../../components/orderAddress'
+import OrderPrice from '../../../components/orderPrice'
 
 import {
     PageContainer,
@@ -33,6 +34,7 @@ import {
     CartItem
 } from '../../../components/checkoutCart/style'
 import { InlineButton } from '../../../components/button'
+import { Coupon } from '../../coupons'
 
 const pageContainerVariant = {
     hidden: { opacity: 1, scale: 0 },
@@ -61,8 +63,10 @@ interface Shipping {
 export interface Order {
     _id: string
     totalAmount: number
+    totalAmountWithoutCoupon: number
     orderItems: OrderItems[]
     shipping: Shipping
+    coupon?: Coupon
     createdAt: string
     user: {
         admin: boolean
@@ -117,10 +121,24 @@ const checkoutSuccess = ({ order, user }: Props) => {
                     <SubTitle>Detalhes do endereço:</SubTitle>
                     <OrderAddress order={order} />
 
-                    <Total>
-                        <span>Total:</span>R${' '}
-                        {(order.totalAmount / 100).toFixed(2)}
-                    </Total>
+                    {order.coupon && (
+                        <SubTitle>
+                            Cupom:
+                            <span>
+                                R$ {(order.coupon.value / 100).toFixed(2)}
+                            </span>
+                        </SubTitle>
+                    )}
+
+                    <OrderPrice
+                        discount={order.coupon ? true : false}
+                        noDiscountPrice={
+                            order.coupon ? order.totalAmountWithoutCoupon : null
+                        }
+                        discountPrice={order.totalAmount}
+                        primaryColor
+                        next
+                    />
 
                     <ButtonContainer>
                         <Link href="/orders">

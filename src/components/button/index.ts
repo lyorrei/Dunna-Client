@@ -8,7 +8,7 @@ const Button = styled.button`
     margin-top: 2rem;
     display: block;
     width: 100%;
-    padding: 1.5rem 0;
+    padding: 1.5rem;
     border: none;
     outline: none;
     background-color: ${({ theme }) => theme.colors.primary};
@@ -112,6 +112,18 @@ export const NoBackgroundButton = styled(Button)`
     &:hover {
         transform: scale(1.05);
     }
+`
+
+export const CouponButton = styled(Button)`
+    display: inline-block;
+    flex: 0;
+    padding: 1rem 1.4rem;
+    background-color: ${({ theme }) => theme.colors.greyDark3};
+    color: ${props => props.theme.colors.white};
+    border-radius: ${({ theme }) => theme.sizes.borderRadius};
+    margin-top: 0;
+    margin-left: 2rem;
+    font-size: 1.6rem;
 `
 
 export default Button

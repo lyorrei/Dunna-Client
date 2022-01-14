@@ -46,6 +46,13 @@ export const SubTitle = styled.h3`
     color: ${props => props.theme.colors.primaryDark};
     margin-bottom: 3rem;
     margin-top: 4rem;
+
+    span {
+        color: ${props => props.theme.colors.greyDark1};
+        font-family: sans-serif;
+        font-weight: 300;
+        margin-left: 2rem;
+    }
 `
 
 export const UserContainer = styled.div`

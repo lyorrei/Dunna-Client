@@ -116,8 +116,8 @@ export const CartBox = styled.div`
     }
 
     svg {
-        width: 2rem;
-        height: 2rem;
+        width: 2.4rem;
+        height: 2.4rem;
         fill: ${props => props.theme.colors.greyDark1};
     }
 `
@@ -126,7 +126,7 @@ export const Title = styled(motion.h2)`
     color: ${props => props.theme.colors.greyDark1};
     font-weight: 700;
     font-size: 3.4rem;
-    margin-bottom: 8rem;
+    margin-bottom: 4rem;
 
     @media only screen and (max-width: 75em) {
         margin-bottom: 4rem;
@@ -140,7 +140,7 @@ export const Message = styled.p`
 `
 
 export const CartItemsContainer = styled.div`
-    height: 38vh;
+    max-height: 38vh;
     overflow-y: auto;
     padding-right: 2rem;
 
@@ -160,30 +160,4 @@ export const CartItemsContainer = styled.div`
         background: ${props => props.theme.colors.primary};
         border-radius: 1rem;
     }
-`
-
-export const Total = styled.p`
-    margin-top: 6rem;
-    margin-bottom: 6rem;
-    font-size: 2rem;
-    font-weight: 700;
-    display: flex;
-    justify-content: space-between;
-    text-transform: uppercase;
-    color: ${props => props.theme.colors.greyDark2};
-
-    span {
-        font-family: sans-serif;
-    }
-
-    @media only screen and (max-width: 37.5em) {
-        margin-top: 4rem;
-        margin-bottom: 4rem;
-    } //600px
-`
-
-export const Methods = styled.span`
-    display: block;
-    text-align: center;
-    font-size: 1.8rem;
 `

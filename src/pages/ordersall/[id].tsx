@@ -14,7 +14,6 @@ import {
     Name,
     Price,
     SubTitle,
-    Total,
     Paragraph,
     UserContainer,
     ButtonContainer
@@ -27,8 +26,8 @@ import { Order } from '../checkout/success/[orderId]'
 import { InlineButton } from '../../components/button'
 import Modal from '../../components/modal'
 import { Input } from '../../components/input/style'
-import { handleInputChange } from 'react-select/src/utils'
 import { ClipLoader } from 'react-spinners'
+import OrderPrice from '../../components/orderPrice'
 
 interface Props {
     order: Order
@@ -89,10 +88,23 @@ const orderPage = ({ order: orderFromProps }: Props) => {
                             </CartItem>
                         ))}
                     </CartItemContainer>
-                    <Total>
-                        <span>Total:</span>R${' '}
-                        {(order.totalAmount / 100).toFixed(2)}
-                    </Total>
+
+                    {order.coupon && (
+                        <SubTitle>
+                            Cupom:
+                            <span>
+                                R$ {(order.coupon.value / 100).toFixed(2)}
+                            </span>
+                        </SubTitle>
+                    )}
+                    <OrderPrice
+                        discountPrice={order.totalAmount}
+                        noDiscountPrice={order.totalAmountWithoutCoupon}
+                        discount={order.coupon ? true : false}
+                        primaryColor
+                        next
+                    />
+
                     <SubTitle>Detalhes do endereço:</SubTitle>
                     <OrderAddress additional status order={order} />
                     <ButtonContainer>
