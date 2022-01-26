@@ -2,6 +2,7 @@ import React from 'react'
 
 import Head from 'next/head'
 
+import PageContainers from '../../components/pageContainers'
 import Confirmation from '../../components/confirmationPage'
 
 const confirmationSuccess = () => {
@@ -10,13 +11,14 @@ const confirmationSuccess = () => {
             <Head>
                 <title>DUNNA® | Confirmation Success</title>
             </Head>
-
-            <Confirmation
-                title="Seu email foi confirmado com sucesso!"
-                subTitle=" Agora você já pode fazer Login na sua conta."
-                link="/auth"
-                linkName="Login"
-            />
+            <PageContainers>
+                <Confirmation
+                    title="Seu email foi confirmado com sucesso!"
+                    subTitle=" Agora você já pode fazer Login na sua conta."
+                    link="/auth"
+                    linkName="Login"
+                />
+            </PageContainers>
         </>
     )
 }
