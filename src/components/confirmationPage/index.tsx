@@ -2,9 +2,9 @@ import React from 'react'
 
 import Link from 'next/link'
 
-import Title from '../title'
-import PageContainers from '../pageContainers/index'
-import { InlineButton } from '../button'
+import Title from '../../components/title'
+import PageContainers from '../../components/pageContainers'
+import { InlineButton } from '../../components/button'
 
 import ButtonContainer from '../buttonContainer'
 
