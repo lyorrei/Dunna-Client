@@ -2,9 +2,10 @@ import React from 'react'
 
 import Link from 'next/link'
 
-import PageContainers from '../pageContainers'
 import Title from '../title'
+import PageContainers from '../pageContainers'
 import { InlineButton } from '../button'
+
 import ButtonContainer from '../buttonContainer'
 
 interface Props {

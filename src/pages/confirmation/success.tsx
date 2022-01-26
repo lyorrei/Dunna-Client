@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import axios from '../../../axios'
+import React from 'react'
 
 import Head from 'next/head'
-import Link from 'next/link'
-import Confirmation from '../../components/confirmationPage'
 
-import PageContainers from '../../components/pageContainers'
-import Title from '../../components/title'
-import { InlineButton } from '../../components/button'
-import ButtonContainer from '../../components/buttonContainer'
+import Confirmation from '../../components/confirmationPage'
 
 const confirmationSuccess = () => {
     return (
