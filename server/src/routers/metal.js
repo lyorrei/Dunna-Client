@@ -17,9 +17,16 @@ router.get('/api/metals', async (req, res) => {
 
 router.post('/api/metals/create', adminMiddleware, async (req, res) => {
     try {
-        const metal = new Metal(req.body)
+        const searchMetal = await Metal.findOne({ name: req.body.name })
+        if (searchMetal) {
+            return res
+                .status(400)
+                .send({ error: 'Um metal com este nome já existe!' })
+        }
 
+        const metal = new Metal(req.body)
         await metal.save()
+
         res.status(201).send(metal)
     } catch (e) {
         res.status(400).send(e)
@@ -35,7 +42,7 @@ router.delete('/api/metal/:id', adminMiddleware, async (req, res) => {
 
         const products = await Product.find({ metal: metal._id })
         if (products.length > 0) {
-            return res.status(400).send({ error: 'Formato utilizado em um produto' })
+            return res.status(400).send({ error: 'Metal utilizado em um produto' })
         }
 
         await metal.remove()

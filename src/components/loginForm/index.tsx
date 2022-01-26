@@ -12,7 +12,6 @@ import Alert, { Types } from '../alert'
 import Router from 'next/router'
 import { useUser } from '../../context/User'
 import Link from 'next/link'
-import { useHistory } from '../../context/History'
 import { useCart } from '../../context/Cart'
 import { LoginTitle } from './style'
 
@@ -25,7 +24,6 @@ const loginForm: React.FC<Props> = ({ setLoading }) => {
     const formRef = useRef<FormHandles>(null)
     const { user, setUser } = useUser()
     const { tempProduct, addProduct } = useCart()
-    const { back } = useHistory()
 
     const handleSubmit: SubmitHandler<FormData> = async formData => {
         try {

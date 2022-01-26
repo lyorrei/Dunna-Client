@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import Head from 'next/head'
 
-import PageContainers from '../../components/PageContainers'
+import PageContainers from '../../components/pageContainers'
 import Title from '../../components/title'
 
 import Box from '../../components/box'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { PageContainer as PageContainerStyle, Container } from './style'
+import { PageContainerStyle, Container } from './style'
 
 export const pageContainerVariant = {
     hidden: { opacity: 1, scale: 0 },
@@ -12,7 +12,7 @@ export const pageContainerVariant = {
     }
 }
 
-const PageContainer: React.FC = props => {
+const PageContainers: React.FC = props => {
     return (
         <PageContainerStyle
             variants={pageContainerVariant}
@@ -24,4 +24,4 @@ const PageContainer: React.FC = props => {
     )
 }
 
-export default PageContainer
+export default PageContainers

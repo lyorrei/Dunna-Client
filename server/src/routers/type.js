@@ -17,9 +17,16 @@ router.get('/api/types', async (req, res) => {
 
 router.post('/api/types/create', adminMiddleware, async (req, res) => {
     try {
-        const type = new Type(req.body)
+        const searchType = await Type.findOne({ name: req.body.name })
+        if (searchType) {
+            return res
+                .status(400)
+                .send({ error: 'Um tipo com este nome já existe!' })
+        }
 
+        const type = new Type(req.body)
         await type.save()
+
         res.status(201).send(type)
     } catch (e) {
         res.status(400).send(e)
@@ -35,7 +42,9 @@ router.delete('/api/type/:id', adminMiddleware, async (req, res) => {
 
         const products = await Product.find({ type: type._id })
         if (products.length > 0) {
-            return res.status(400).send({ error: 'Formato utilizado em um produto' })
+            return res
+                .status(400)
+                .send({ error: 'Tipo utilizado em um produto' })
         }
 
         await type.remove()
@@ -44,6 +53,5 @@ router.delete('/api/type/:id', adminMiddleware, async (req, res) => {
         res.status(400).send(e)
     }
 })
-
 
 module.exports = router

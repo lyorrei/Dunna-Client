@@ -3,7 +3,7 @@ import axios from '../../../axios'
 
 import Head from 'next/head'
 
-import PageContainers from '../../components/PageContainers'
+import PageContainers from '../../components/pageContainers'
 import Title from '../../components/title'
 import { Label, Input } from '../../components/input/style'
 

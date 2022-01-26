@@ -13,32 +13,3 @@ export const Container = styled(motion.div)`
     position: relative;
 `
 
-export const ActionsTd = styled.p`
-    .blue {
-        svg {
-            fill: cyan;
-        }
-    }
-
-    .imgg {
-        svg {
-            fill: green;
-        }
-    }
-    a {
-        svg {
-            fill: #c4bf29;
-            margin-right: 1rem;
-        }
-    }
-    svg {
-        width: 2rem;
-        height: 2rem;
-        cursor: pointer;
-        transition: all 0.2s;
-        fill: red;
-        &:hover {
-            transform: scale(1.1);
-        }
-    }
-`

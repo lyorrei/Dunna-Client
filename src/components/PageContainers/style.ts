@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-export const PageContainer = styled(motion.div)`
+export const PageContainerStyle = styled(motion.div)`
     background-color: ${props => props.theme.colors.white};
     min-height: calc(100vh - 6rem);
 `

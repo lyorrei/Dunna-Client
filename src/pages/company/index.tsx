@@ -9,7 +9,7 @@ import {
     TextContainer,
     TitleContainer
 } from '../../styles/pages/company'
-import { pageContainerVariant } from '../../components/PageContainers'
+import { pageContainerVariant } from '../../components/pageContainers'
 import Image from '../../images/company.jpg'
 
 interface Props {}

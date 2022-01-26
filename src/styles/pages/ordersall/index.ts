@@ -12,18 +12,3 @@ export const Container = styled(motion.div)`
     padding: 0 6rem;
     position: relative;
 `
-
-export const ActionsTd = styled.p`
-    svg {
-        width: 2rem;
-        height: 2rem;
-        cursor: pointer;
-        transition: all 0.2s;
-        fill: #00c0b7;
-        margin-left: 2rem;
-
-        &:hover {
-            transform: scale(1.1);
-        }
-    }
-`

@@ -1,27 +1,22 @@
 import React, { useState } from 'react'
-import axios from '../../../axios'
+import { NextPageContext } from 'next'
 import Head from 'next/head'
 
-import CouponCreateModal from '../../components/couponCreateModal'
+import axios from '../../../axios'
+import RequireAuthentication from '../../HOC/requireAuthentication'
 
-import {
-    PageContainer,
-    Container,
-    ActionsTd
-} from '../../styles/pages/products'
+import { PageContainer, Container } from '../../styles/pages/products'
 
 import Table from '../../components/table'
-
+import ActionsTd from '../../components/actionsTd'
 import ConfirmModal from '../../components/confirmModal'
+import CouponCreateModal from '../../components/couponCreateModal'
+import Moment from 'react-moment'
 import { InlineButton } from '../../components/button'
-
 import { FaTrash } from 'react-icons/fa'
-import RequireAuthentication from '../../HOC/requireAuthentication'
-import { NextPageContext } from 'next'
+
 import { CreatePageButtonContainer } from '../../styles/pages/coupons'
 import { Badge } from '../../components/badge'
-
-import Moment from 'react-moment'
 
 export interface Coupon {
     name: String
@@ -38,11 +33,11 @@ interface Props {
 const couponsPage = ({ coupons: couponsFromProps }: Props) => {
     const [coupons, setCoupons] = useState(couponsFromProps)
     const [showCreateModal, setShowCreateModal] = useState(false)
-    console.log(coupons)
     const [showConfirmModal, setShowConfirmModal] = useState(false)
     const [confirmModalId, setConfirmModalId] = useState(null)
     const [confirmModalRow, setConfirmModalRow] = useState(null)
     const [confirmModalError, setConfirmModalError] = useState(null)
+    const [confirmModalLoading, setConfirmModalLoading] = useState(null)
 
     const openConfirmModal = (id: string, row) => {
         setConfirmModalId(id)
@@ -54,19 +49,21 @@ const couponsPage = ({ coupons: couponsFromProps }: Props) => {
         setConfirmModalId(null)
         setShowConfirmModal(false)
         setConfirmModalError(null)
+        setConfirmModalLoading(false)
     }
 
     const handleDelete = async () => {
         try {
+            setConfirmModalLoading(true)
             const response = await axios.delete('/coupon/' + confirmModalId)
             const couponsCopy = [...coupons]
             couponsCopy.splice(confirmModalRow, 1)
             setCoupons(couponsCopy)
 
-            setConfirmModalId(null)
-            setShowConfirmModal(false)
+            closeConfirmModal()
         } catch (e) {
             setConfirmModalError(e.response.data.error)
+            setConfirmModalLoading(false)
         }
     }
 
@@ -171,18 +168,20 @@ const couponsPage = ({ coupons: couponsFromProps }: Props) => {
                     {
                         Header: 'Ações',
                         accessor: '_id',
-                        Cell: props => (
-                            <ActionsTd>
-                                <FaTrash
-                                    onClick={() =>
+                        Cell: props => {
+                            const actions = [
+                                {
+                                    handler: () =>
                                         openConfirmModal(
                                             props.value,
                                             props.row.index
-                                        )
-                                    }
-                                />
-                            </ActionsTd>
-                        )
+                                        ),
+                                    icon: FaTrash,
+                                    color: 'red'
+                                }
+                            ]
+                            return <ActionsTd actions={actions} />
+                        }
                     }
                 ]
             }
@@ -220,6 +219,7 @@ const couponsPage = ({ coupons: couponsFromProps }: Props) => {
                     closeModal={closeConfirmModal}
                     confirmHandler={handleDelete}
                     error={confirmModalError}
+                    loading={confirmModalLoading}
                 />
             </PageContainer>
         </>

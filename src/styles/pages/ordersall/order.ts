@@ -55,64 +55,6 @@ export const SubTitle = styled.h3`
     }
 `
 
-export const UserContainer = styled.div`
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    justify-content: stretch;
-    grid-gap: 2rem;
-    justify-items: stretch;
-`
-
-export const Paragraph = styled.p`
-    font-size: 1.6rem;
-    font-family: sans-serif;
-    span {
-        font-weight: 600;
-        margin-right: 1rem;
-        display: inline-block;
-    }
-`
-
-export const CartItemContainer = styled.div`
-    max-height: 20rem;
-    overflow-y: auto;
-    display: grid;
-    grid-gap: 2rem;
-    align-items: center;
-    justify-items: center;
-
-    ${Scroll}
-`
-
-export const CartItem = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-`
-
-export const ImageContainer = styled.div`
-    width: 20%;
-`
-
-export const Img = styled.img`
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 0.5rem;
-`
-
-export const Name = styled.p`
-    font-size: 1.6rem;
-    color: ${props => props.theme.colors.greyDark1};
-    font-weight: 700;
-    flex: 0 0 50%;
-`
-
-export const Price = styled.p`
-    font-size: 1.5rem;
-    color: ${props => props.theme.colors.greyDark1};
-    font-family: sans-serif;
-`
 
 export const Total = styled.p`
     font-size: 1.8rem;

@@ -1,17 +1,21 @@
-import { FormHandles, SubmitHandler } from '@unform/core'
-import * as Yup from 'yup'
+import React, { useEffect, useRef, useState } from 'react'
 import axios from '../../../axios'
 import { useRouter } from 'next/router'
-import React, { useEffect, useRef, useState } from 'react'
-import { ClipLoader } from 'react-spinners'
+
+import { FormHandles, SubmitHandler } from '@unform/core'
+import * as Yup from 'yup'
 import { InlineButton } from '../button'
+
+import { Form, SideBySide, Title } from './style'
+
 import Input from '../input'
 import Select from '../select'
-import { Form, SideBySide, Title } from './style'
-import { StonesAndShapes } from '../../pages/shop/[type]'
-import { ProductInterface } from '../product'
+import Loader from '../loader'
 import Alert, { Types } from '../alert'
 import { CheckboxContainer } from '../checkboxContainer'
+
+import { StonesAndShapes } from '../../pages/shop/[type]'
+import { ProductInterface } from '../product'
 
 interface Props {
     submitLink: string
@@ -387,9 +391,7 @@ const productForm: React.FC<Props> = ({
             </Form>
 
             {loading && (
-                <div style={{ margin: '12rem auto', width: '120px' }}>
-                    <ClipLoader color={'#00c2a8'} size={120} />
-                </div>
+                <Loader />
             )}
         </>
     )

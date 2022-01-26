@@ -3,22 +3,19 @@ import axios from '../../../axios'
 import Head from 'next/head'
 import RequireAuthentication from '../../HOC/requireAuthentication'
 
-import {
-    PageContainer,
-    Container,
-    ActionsTd
-} from '../../styles/pages/products'
+import { PageContainer, Container } from '../../styles/pages/products'
 
 import Table from '../../components/table'
 import { NextPageContext } from 'next'
 import { ImageProduct } from '../../components/product'
 import { StonesAndShapes } from '../shop/[type]'
-import Link from 'next/link'
 import { MdEdit } from 'react-icons/md'
 import { FaRegEye, FaTrash } from 'react-icons/fa'
 import ConfirmModal from '../../components/confirmModal'
 import { BsImageFill } from 'react-icons/bs'
 import { Badge } from '../../components/badge'
+
+import ActionsTd from '../../components/actionsTd'
 
 export interface Product {
     sold: boolean
@@ -49,6 +46,8 @@ const productsPage = ({ products: productsFromProps }: Props) => {
     const [confirmModalId, setConfirmModalId] = useState(null)
     const [confirmModalRow, setConfirmModalRow] = useState(null)
     const [confirmModalError, setConfirmModalError] = useState(null)
+    const [confirmModalLoading, setConfirmModalLoading] = useState(null)
+
 
     const openConfirmModal = (id: string, row) => {
         setConfirmModalId(id)
@@ -60,19 +59,21 @@ const productsPage = ({ products: productsFromProps }: Props) => {
         setConfirmModalId(null)
         setShowConfirmModal(false)
         setConfirmModalError(null)
+        setConfirmModalLoading(false)
     }
 
     const handleDelete = async () => {
         try {
+            setConfirmModalLoading(true)
             const response = await axios.delete('/product/' + confirmModalId)
             const productsCopy = [...products]
             productsCopy.splice(confirmModalRow, 1)
             setProducts(productsCopy)
 
-            setConfirmModalId(null)
-            setShowConfirmModal(false)
+            closeConfirmModal()
         } catch (e) {
             setConfirmModalError(e.response.data.error)
+            setConfirmModalLoading(false)
         }
     }
 
@@ -108,22 +109,15 @@ const productsPage = ({ products: productsFromProps }: Props) => {
                     {
                         Header: 'Sob Consulta',
                         accessor: 'notBuyable',
-                        Cell: props => {
-                            return (
-                                <Badge
-                                    type="notBuyable"
-                                    notBuyable={props.value}
-                                >
-                                    {props.value
-                                        ? 'Sob consulta'
-                                        : 'Sem consulta'}
-                                </Badge>
-                            )
-                        }
+                        Cell: props => (
+                            <Badge type="notBuyable" notBuyable={props.value}>
+                                {props.value ? 'Sob consulta' : 'Sem consulta'}
+                            </Badge>
+                        )
                     },
                     {
                         Header: 'Tipo',
-                        accessor: 'type'
+                        accessor: 'type.name'
                     },
                     {
                         Header: 'Nome',
@@ -131,43 +125,48 @@ const productsPage = ({ products: productsFromProps }: Props) => {
                     },
                     {
                         Header: 'Preço',
-                        accessor: 'price'
+                        accessor: 'price',
+                        Cell: props => (
+                            <span>R$ {(props.value / 100).toFixed(2)}</span>
+                        )
                     },
                     {
                         Header: 'Pedra',
-                        accessor: 'stone'
+                        accessor: 'stone.name'
                     },
                     {
                         Header: 'Ações',
                         accessor: '_id',
-                        Cell: props => (
-                            <ActionsTd>
-                                <Link href={'/shop/product/' + props.value}>
-                                    <a className="blue">
-                                        <FaRegEye fill="blue" />
-                                    </a>
-                                </Link>
-                                <Link href={'/products/images/' + props.value}>
-                                    <a className="imgg">
-                                        <BsImageFill fill="green" />
-                                    </a>
-                                </Link>
-                                <Link href={'/products/edit/' + props.value}>
-                                    <a>
-                                        <MdEdit />
-                                    </a>
-                                </Link>
-
-                                <FaTrash
-                                    onClick={() =>
+                        Cell: props => {
+                            const actions = [
+                                {
+                                    link: '/shop/product/' + props.value,
+                                    icon: FaRegEye,
+                                    color: 'cyan'
+                                },
+                                {
+                                    link: '/products/images/' + props.value,
+                                    icon: BsImageFill,
+                                    color: 'green'
+                                },
+                                {
+                                    link: '/products/edit/' + props.value,
+                                    icon: MdEdit,
+                                    color: '#c4bf29'
+                                },
+                                {
+                                    handler: () =>
                                         openConfirmModal(
                                             props.value,
                                             props.row.index
-                                        )
-                                    }
-                                />
-                            </ActionsTd>
-                        )
+                                        ),
+                                    icon: FaTrash,
+                                    color: 'red'
+                                }
+                            ]
+
+                            return <ActionsTd actions={actions} />
+                        }
                     }
                 ]
             }
@@ -175,27 +174,7 @@ const productsPage = ({ products: productsFromProps }: Props) => {
         [products]
     )
 
-    const data = React.useMemo(
-        () =>
-            products.map(product => {
-                return {
-                    _id: product._id,
-                    sold: product.sold,
-                    visible: product.visible,
-                    // productType: product.productType.name,
-                    type: product.type ? product.type.name : 'Gema',
-                    stock_id: product.stock_id,
-                    name: product.name,
-                    price: product.price,
-                    stone: product.stone ? product.stone.name : product.stone,
-                    stoneWeigth: product.stoneWeigth,
-                    diamondWeigth: product.diamondWeigth,
-                    shape: product.shape.name,
-                    notBuyable: product.notBuyable
-                }
-            }),
-        [products]
-    )
+    const data = React.useMemo(() => [...products], [products])
 
     return (
         <>
@@ -212,6 +191,7 @@ const productsPage = ({ products: productsFromProps }: Props) => {
                     closeModal={closeConfirmModal}
                     confirmHandler={handleDelete}
                     error={confirmModalError}
+                    loading={confirmModalLoading}
                 />
             </PageContainer>
         </>
@@ -230,8 +210,6 @@ productsPage.getInitialProps = async (
 
     return {
         products
-
-        // will be passed to the page component as props
     }
 }
 

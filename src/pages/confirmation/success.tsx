@@ -5,7 +5,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Confirmation from '../../components/confirmationPage'
 
-import PageContainers from '../../components/PageContainers'
+import PageContainers from '../../components/pageContainers'
 import Title from '../../components/title'
 import { InlineButton } from '../../components/button'
 import ButtonContainer from '../../components/buttonContainer'

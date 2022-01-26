@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import axios from '../../../axios'
 
 import Head from 'next/head'
-import Link from 'next/link'
 
-import PageContainers from '../../components/PageContainers'
+import PageContainers from '../../components/pageContainers'
 import Title from '../../components/title'
 import { Label, Input } from '../../components/input/style'
 

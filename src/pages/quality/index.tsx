@@ -12,7 +12,7 @@ import {
     Img2,
     Img3
 } from '../../styles/pages/quality'
-import { pageContainerVariant } from '../../components/PageContainers'
+import { pageContainerVariant } from '../../components/pageContainers'
 
 import Image1 from '../../images/quality-1.jpg'
 import Image2 from '../../images/quality-2.jpg'

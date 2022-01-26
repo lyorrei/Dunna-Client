@@ -3,7 +3,7 @@ import * as Yup from 'yup'
 import axios from '../../../axios'
 import { useRouter } from 'next/router'
 import React, { useRef, useState } from 'react'
-import { ClipLoader } from 'react-spinners'
+import Loader from '../loader'
 import { InlineButton } from '../button'
 import Input from '../input'
 import { Container, Form, PageContainer, SideBySide, Title } from './style'
@@ -120,9 +120,7 @@ const addressForm: React.FC<Props> = ({
                 </Form>
 
                 {loading && (
-                    <div style={{ margin: '12rem auto', width: '120px' }}>
-                        <ClipLoader color={'#00c2a8'} size={120} />
-                    </div>
+                   <Loader />
                 )}
             </Container>
         </PageContainer>

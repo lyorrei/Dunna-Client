@@ -21,7 +21,6 @@ interface Props {
 
 const dropdown: React.FC<Props> = ({ show, setShow, list, navBox }) => {
     const node = useRef<HTMLDivElement>()
-    const logoutHandler = () => {}
 
     let mediaQuerry
     if (typeof window !== 'undefined') {

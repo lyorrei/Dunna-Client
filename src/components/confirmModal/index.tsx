@@ -1,10 +1,11 @@
 import React from 'react'
-import axios from '../../../axios'
+
 import { Types } from '../alert'
-import Alert from '../alert'
-import { InlineButton } from '../button'
 
 import Modal from '../modal'
+import Loader from '../loader'
+import Alert from '../alert'
+import { InlineButton } from '../button'
 
 import { ButtonContainer, Paragraph } from './style'
 
@@ -13,6 +14,7 @@ interface Props {
     show: boolean
     closeModal(): void
     confirmHandler(): void
+    loading: boolean
     obs?: string
     error?: string
 }
@@ -23,24 +25,36 @@ const confirmModal: React.FC<Props> = ({
     closeModal,
     confirmHandler,
     obs,
-    error
+    error,
+    loading
 }) => {
-    return (
-        <Modal title={title} show={show} closeModal={closeModal}>
-            {obs && <Paragraph>
-                <strong>Observação:</strong> {obs}
-            </Paragraph>}
+    let modalContent = (
+        <>
+            {obs && (
+                <Paragraph>
+                    <strong>Observação:</strong> {obs}
+                </Paragraph>
+            )}
             {error && (
-                    <div style={{marginBottom: '2rem'}}>
-                        <Alert type={Types.red}>{error}</Alert>
-                    </div>
-                )}
+                <div style={{ marginBottom: '2rem' }}>
+                    <Alert type={Types.red}>{error}</Alert>
+                </div>
+            )}
             <ButtonContainer>
                 <InlineButton light onClick={closeModal}>
                     Cancelar
                 </InlineButton>
                 <InlineButton onClick={confirmHandler}>Confirmar</InlineButton>
             </ButtonContainer>
+        </>
+    )
+    if (loading) {
+        modalContent = <Loader />
+    }
+
+    return (
+        <Modal title={title} show={show} closeModal={closeModal}>
+            {modalContent}
         </Modal>
     )
 }

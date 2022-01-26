@@ -1,33 +1,28 @@
 import React, { useState } from 'react'
-import axios from '../../../axios'
+import { NextPageContext } from 'next'
 import Head from 'next/head'
+import axios from '../../../axios'
 import RequireAuthentication from '../../HOC/requireAuthentication'
 
 import {
     PageContainer,
     Container,
     Title,
-    CartItem,
-    CartItemContainer,
-    ImageContainer,
-    Img,
-    Name,
-    Price,
     SubTitle,
-    Paragraph,
-    UserContainer,
     ButtonContainer
 } from '../../styles/pages/ordersall/order'
+import { CartItemContainer } from '../../components/checkoutCart/style'
 
-import { NextPageContext } from 'next'
+import { Order } from '../checkout/success/[orderId]'
 
 import OrderAddress from '../../components/orderAddress'
-import { Order } from '../checkout/success/[orderId]'
-import { InlineButton } from '../../components/button'
-import Modal from '../../components/modal'
-import { Input } from '../../components/input/style'
-import { ClipLoader } from 'react-spinners'
 import OrderPrice from '../../components/orderPrice'
+import Modal from '../../components/modal'
+import CartItem from '../../components/cartItem'
+import OrderUser from '../../components/orderUser'
+import Loader from '../../components/loader'
+import OrderStatusModal from '../../components/orderStatusModal'
+import { InlineButton } from '../../components/button'
 
 interface Props {
     order: Order
@@ -59,33 +54,14 @@ const orderPage = ({ order: orderFromProps }: Props) => {
             <PageContainer>
                 <Container>
                     <Title>Pedido</Title>
+
                     <SubTitle>Cliente:</SubTitle>
-                    <UserContainer>
-                        <Paragraph>
-                            <span>Nome:</span>
-                            {order.user.firstName} {order.user.lastName}
-                        </Paragraph>
-                        <Paragraph>
-                            <span>Email:</span>
-                            {order.user.email}
-                        </Paragraph>
-                    </UserContainer>
+                    <OrderUser user={order.user} />
 
                     <SubTitle>Itens do pedido:</SubTitle>
                     <CartItemContainer>
                         {order.orderItems.map(({ product: item }) => (
-                            <CartItem key={item._id}>
-                                <ImageContainer>
-                                    <Img
-                                        src={item.images[0].url}
-                                        alt="Product Image"
-                                    />
-                                </ImageContainer>
-                                <Name>{item.name}</Name>
-                                <Price>
-                                    R$ {(item.price / 100).toFixed(2)}
-                                </Price>
-                            </CartItem>
+                            <CartItem product={item} />
                         ))}
                     </CartItemContainer>
 
@@ -97,6 +73,7 @@ const orderPage = ({ order: orderFromProps }: Props) => {
                             </span>
                         </SubTitle>
                     )}
+
                     <OrderPrice
                         discountPrice={order.totalAmount}
                         noDiscountPrice={order.totalAmountWithoutCoupon}
@@ -107,6 +84,7 @@ const orderPage = ({ order: orderFromProps }: Props) => {
 
                     <SubTitle>Detalhes do endereço:</SubTitle>
                     <OrderAddress additional status order={order} />
+
                     <ButtonContainer>
                         <InlineButton onClick={() => setShowModal(true)}>
                             Mudar Status
@@ -120,27 +98,13 @@ const orderPage = ({ order: orderFromProps }: Props) => {
                 closeModal={() => setShowModal(false)}
             >
                 {!loading ? (
-                    <>
-                        <Input
-                            defaultValue={order.shipping.status}
-                            onChange={e => setStatus(e.target.value)}
-                        />
-                        <div
-                            style={{
-                                marginTop: '2rem',
-                                width: '40%',
-                                float: 'right'
-                            }}
-                        >
-                            <InlineButton onClick={() => changeStatus()}>
-                                Mudar
-                            </InlineButton>
-                        </div>
-                    </>
+                    <OrderStatusModal
+                        status={order.shipping.status}
+                        changeStatus={changeStatus}
+                        setStatus={setStatus}
+                    />
                 ) : (
-                    <div style={{ margin: '12rem auto', width: '120px' }}>
-                        <ClipLoader color={'#00c2a8'} size={120} />
-                    </div>
+                    <Loader />
                 )}
             </Modal>
         </>

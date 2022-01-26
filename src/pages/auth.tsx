@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import {
     Content,
     Container,
@@ -7,13 +7,13 @@ import {
     ButtonSignup,
     AuthContainer
 } from '../styles/pages/auth'
+
 import ContainerBg from '../images/nature.jpg'
 import LoginForm from '../components/loginForm'
 import SignupForm from '../components/signupForm'
-import CircleLoader from 'react-spinners/CircleLoader'
 
 import Head from 'next/head'
-import { useUser } from '../context/User'
+import Loader from '../components/loader'
 
 const containerVariant = {
     hidden: { opacity: 1, scale: 0 },
@@ -74,11 +74,7 @@ const auth: React.FC = () => {
                         <LoginForm setLoading={setLoading} />
                         <SignupForm setLoading={setLoading} />
                     </AuthContainer>
-                    {loading && (
-                        <div style={{ margin: '0 auto', width: '120px' }}>
-                            <CircleLoader color={'#00c2a8'} size={120} />
-                        </div>
-                    )}
+                    {loading && <Loader />}
                 </Content>
             </Container>
         </>

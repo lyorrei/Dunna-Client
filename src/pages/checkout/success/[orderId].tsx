@@ -16,24 +16,18 @@ import { ProductInterface } from '../../../components/product'
 
 import OrderAddress from '../../../components/orderAddress'
 import OrderPrice from '../../../components/orderPrice'
+import CartItem from '../../../components/cartItem'
+import { InlineButton } from '../../../components/button'
 
 import {
     PageContainer,
     Container,
     Title,
     SubTitle,
-    Total,
     ButtonContainer
 } from '../../../styles/pages/checkout/success'
-import {
-    CartItemContainer,
-    ImageContainer,
-    Img,
-    Name,
-    Price,
-    CartItem
-} from '../../../components/checkoutCart/style'
-import { InlineButton } from '../../../components/button'
+import { CartItemContainer } from '../../../components/checkoutCart/style'
+
 import { Coupon } from '../../coupons'
 
 const pageContainerVariant = {
@@ -104,18 +98,7 @@ const checkoutSuccess = ({ order, user }: Props) => {
                     <SubTitle>Itens do pedido:</SubTitle>
                     <CartItemContainer>
                         {order.orderItems.map(({ product: item }) => (
-                            <CartItem key={item._id}>
-                                <ImageContainer>
-                                    <Img
-                                        src={item.images[0].url}
-                                        alt="Product Image"
-                                    />
-                                </ImageContainer>
-                                <Name>{item.name}</Name>
-                                <Price>
-                                    R$ {(item.price / 100).toFixed(2)}
-                                </Price>
-                            </CartItem>
+                            <CartItem product={item} key={item._id} />
                         ))}
                     </CartItemContainer>
                     <SubTitle>Detalhes do endereço:</SubTitle>

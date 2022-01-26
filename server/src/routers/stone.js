@@ -17,6 +17,13 @@ router.get('/api/stones', async (req, res) => {
 
 router.post('/api/stones/create', adminMiddleware, async (req, res) => {
     try {
+        const searchStone = await Stone.findOne({ name: req.body.name })
+        if (searchStone) {
+            return res
+                .status(400)
+                .send({ error: 'Uma pedra com este nome já existe!' })
+        }
+
         const stone = new Stone(req.body)
         await stone.save()
         res.status(201).send(stone)
@@ -34,7 +41,9 @@ router.delete('/api/stone/:id', adminMiddleware, async (req, res) => {
 
         const products = await Product.find({ stone: stone._id })
         if (products.length > 0) {
-            return res.status(400).send({ error: 'Pedra utilizada em um produto' })
+            return res
+                .status(400)
+                .send({ error: 'Pedra utilizada em um produto' })
         }
 
         await stone.remove()

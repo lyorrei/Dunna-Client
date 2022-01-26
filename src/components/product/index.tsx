@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 
 import {
     Container,
@@ -12,11 +11,9 @@ import {
     DiscountBox
 } from './style'
 
-import Button from '../button'
+import ProductButton from '../productButton'
 
 import { item, StonesAndShapes } from '../../pages/shop/[type]'
-
-import { useCart, checkIfProductIsInCart } from '../../context/Cart'
 
 import NoImage from '../../images/noimage.png'
 
@@ -55,29 +52,6 @@ export interface ProductInterface {
 }
 
 const product: React.FC<ProductInterface> = props => {
-    const [isActive, setIsActive] = useState(!props.notBuyable && !props.sold)
-    const { cart, addProduct } = useCart()
-
-    useEffect(() => {
-        if (checkIfProductIsInCart(cart, props)) {
-            setIsActive(false)
-        } else {
-            if (!props.notBuyable && !props.sold) {
-                setIsActive(true)
-            }
-        }
-    }, [cart])
-
-    let message = ''
-    if (props.notBuyable) {
-        message = 'Vendido apenas sob consulta'
-    } else {
-        message = 'Produto adicionado'
-    }
-    if (props.sold) {
-        message = 'Produto vendido'
-    }
-
     return (
         <Container variants={item}>
             <ImageContainer>
@@ -105,16 +79,6 @@ const product: React.FC<ProductInterface> = props => {
                                 height: '100%'
                             }}
                         />
-                        {/* <Image
-                                src={
-                                    props.images.length > 0
-                                        ? props.images[0]?.url
-                                        : NoImage
-                                }
-                                layout="fill"
-                                objectFit="cover"
-                                quality={100}
-                            /> */}
                     </a>
                 </Link>
             </ImageContainer>
@@ -126,12 +90,7 @@ const product: React.FC<ProductInterface> = props => {
                 <SubPrice>
                     10x de R$ {(props.price / 100 / 10).toFixed(2)} sem juros
                 </SubPrice>
-                <Button
-                    onClick={() => addProduct({ ...props })}
-                    disabled={!isActive}
-                >
-                    {isActive ? 'Adicionar à sacola' : message}
-                </Button>
+                <ProductButton product={props} />
             </Content>
         </Container>
     )

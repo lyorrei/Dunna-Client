@@ -1,21 +1,20 @@
 import React, { useState } from 'react'
-import axios from '../../../axios'
 import Head from 'next/head'
+import { NextPageContext } from 'next'
+
+import axios from '../../../axios'
 import RequireAuthentication from '../../HOC/requireAuthentication'
 
-import {
-    PageContainer,
-    Container,
-    ActionsTd
-} from '../../styles/pages/ordersall'
+
+import { PageContainer, Container } from '../../styles/pages/ordersall'
 
 import Table from '../../components/table'
-import { NextPageContext } from 'next'
-import Link from 'next/link'
+import Moment from 'react-moment'
+import { AiFillEye } from 'react-icons/ai'
 
 import { Product } from '../products'
 import { Address } from '../addresses'
-import { AiFillEye } from 'react-icons/ai'
+import ActionsTd from '../../components/actionsTd'
 
 export interface Order {
     _id: string
@@ -48,37 +47,7 @@ interface Props {
 }
 
 const ordersAllPage = ({ orders: ordersFromProps }: Props) => {
-    const [orders, setOrders] = useState(ordersFromProps)
-    const [showConfirmModal, setShowConfirmModal] = useState(false)
-    const [confirmModalId, setConfirmModalId] = useState(null)
-    const [confirmModalRow, setConfirmModalRow] = useState(null)
-    const [confirmModalError, setConfirmModalError] = useState(null)
-
-    const openConfirmModal = (id: string, row) => {
-        setConfirmModalId(id)
-        setShowConfirmModal(true)
-        setConfirmModalRow(row)
-    }
-
-    const closeConfirmModal = () => {
-        setConfirmModalId(null)
-        setShowConfirmModal(false)
-        setConfirmModalError(null)
-    }
-
-    const handleDelete = async () => {
-        try {
-            const response = await axios.delete('/product/' + confirmModalId)
-            const ordersCopy = [...orders]
-            ordersCopy.splice(confirmModalRow, 1)
-            setOrders(ordersCopy)
-
-            setConfirmModalId(null)
-            setShowConfirmModal(false)
-        } catch (e) {
-            setConfirmModalError(e.response.data.error)
-        }
-    }
+    const [orders] = useState(ordersFromProps)
 
     const columns = React.useMemo(
         () => [
@@ -88,25 +57,11 @@ const ordersAllPage = ({ orders: ordersFromProps }: Props) => {
                     {
                         Header: 'Data do pedido',
                         accessor: 'createdAt',
-                        Cell: props => {
-                            const date = new Date(props.value)
-                            const year = date.getFullYear()
-                            let month: number | string = date.getMonth() + 1
-                            let dt: number | string = date.getDate()
-
-                            if (dt < 10) {
-                                dt = '0' + dt
-                            }
-                            if (month < 10) {
-                                month = '0' + month
-                            }
-
-                            return (
-                                <span>
-                                    {dt}/{month}/{year}
-                                </span>
-                            )
-                        }
+                        Cell: props => (
+                            <Moment local={true} format="DD/MM/YYYY">
+                                {props.value}
+                            </Moment>
+                        )
                     },
                     {
                         Header: 'Cliente',
@@ -143,16 +98,16 @@ const ordersAllPage = ({ orders: ordersFromProps }: Props) => {
                     {
                         Header: 'Ações',
                         accessor: '_id',
-                        Cell: props => (
-                            <ActionsTd>
-                                <Link href={'/ordersall/' + props.value}>
-                                    <a>
-                                        <AiFillEye />
-                                    </a>
-                                </Link>
-
-                            </ActionsTd>
-                        )
+                        Cell: props => {
+                            const actions = [
+                                {
+                                    link: '/ordersall/' + props.value,
+                                    icon: AiFillEye,
+                                    color: 'cyan'
+                                }
+                            ]
+                            return <ActionsTd actions={actions} />
+                        }
                     }
                 ]
             }
@@ -171,7 +126,6 @@ const ordersAllPage = ({ orders: ordersFromProps }: Props) => {
                 <Container>
                     <Table columns={columns} data={data} />
                 </Container>
-
             </PageContainer>
         </>
     )
@@ -189,7 +143,6 @@ ordersAllPage.getInitialProps = async (
 
     return {
         orders
-
         // will be passed to the page component as props
     }
 }

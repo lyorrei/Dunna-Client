@@ -3,34 +3,25 @@ import React from 'react'
 import { Item } from './style'
 import { EditButton } from '../button'
 
-interface Props {
+interface Item {
     label: string
-    fieldValue: string
-    fieldName: string
-    modalTitle: string
-    inputType: string
-    submitHandler(label: string, field: string, modalTitle: string, defaultValue: string, inputType: string): void
+    fieldValue: any
+    handler: () => void
+
 }
 
-const userForm: React.FC<Props> = ({
-    label,
-    fieldValue,
-    fieldName,
-    modalTitle,
-    inputType,
-    submitHandler
-}) => {
+interface Props {
+    item: Item
+}
+
+const userForm: React.FC<Props> = ({ item }) => {
     return (
         <Item>
             <div>
-                <label>{label}</label>
-                <p>{fieldValue}</p>
+                <label>{item.label}</label>
+                <p>{item.fieldValue}</p>
             </div>
-            <EditButton
-                onClick={() => submitHandler(label, fieldName, modalTitle, fieldValue, inputType)}
-            >
-                Editar
-            </EditButton>
+            <EditButton onClick={item.handler}>Editar</EditButton>
         </Item>
     )
 }

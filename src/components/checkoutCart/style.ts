@@ -97,4 +97,3 @@ export const Price = styled.p`
     color: ${props => props.theme.colors.greyDark1};
     font-family: sans-serif;
 `
-

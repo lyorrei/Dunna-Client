@@ -16,17 +16,13 @@ import { useCart } from '../../context/Cart'
 import CheckoutBackground from '../../images/checkout2.jpg'
 
 import { Address } from '../addresses'
-import CheckoutAddress from '../../components/checkoutAddress'
-import CheckoutPayment from '../../components/checkoutPayment'
-import CheckoutStage from '../../components/checkoutStage'
-import CheckoutCart from '../../components/checkoutCart'
-import CheckoutAddressInfo from '../../components/checkoutAddressInfo'
-import CheckoutConfirm from '../../components/checkoutConfirm'
 import { User } from '../me'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import { useRouter } from 'next/router'
 import { useCookies } from 'react-cookie'
+
+import CheckoutBoxes from '../../components/checkoutBoxes'
 
 const pageContainerVariant = {
     hidden: { opacity: 1, scale: 0 },
@@ -57,8 +53,6 @@ interface Props {
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 const checkout = ({ myAddresses, user }: Props) => {
-    const [selectedAddress, setSelectedAddress] = useState(null)
-    const [stage, setStage] = useState(0)
     const { cart, setCoupon } = useCart()
     const Router = useRouter()
     const [cookies, setCookie] = useCookies(['rdcheckout'])
@@ -94,32 +88,7 @@ const checkout = ({ myAddresses, user }: Props) => {
         </Container>
     )
     if (cart.length > 0) {
-        pageContent = (
-            <>
-                <CheckoutStage stage={stage} />
-                <CheckoutAddress
-                    myAddresses={myAddresses}
-                    selectedAddress={selectedAddress}
-                    setSelectedAddress={setSelectedAddress}
-                    stage={stage}
-                    setStage={setStage}
-                />
-                <CheckoutPayment
-                    stage={stage}
-                    setStage={setStage}
-                    selectedAddress={selectedAddress}
-                />
-                {Router.query.method === 'stripe' && (
-                    <CheckoutConfirm
-                        selectedAddress={selectedAddress}
-                        stage={stage}
-                        setStage={setStage}
-                    />
-                )}
-
-                {cart.length > 0 && <CheckoutCart />}
-            </>
-        )
+        pageContent = <CheckoutBoxes myAddresses={myAddresses} user={user} />
     }
 
     return (
@@ -135,14 +104,6 @@ const checkout = ({ myAddresses, user }: Props) => {
                     imageUrl={CheckoutBackground}
                 >
                     {pageContent}
-
-                    {selectedAddress && stage !== 0 && (
-                        <CheckoutAddressInfo
-                            selectedAddress={selectedAddress}
-                            myAddresses={myAddresses}
-                            user={user}
-                        />
-                    )}
                 </PageContainer>
             </Elements>
         </>
