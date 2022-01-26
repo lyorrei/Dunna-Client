@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { User } from '../me'
 
 import ConfirmModal from '../../components/confirmModal'
-import PageContainer from '../../components/pageContainers'
+import PageContainer from '../../components/pageWrapper'
 import AddressBox from '../../components/addressBox'
 
 import {
