@@ -2,7 +2,7 @@ import React from 'react'
 
 import Head from 'next/head'
 
-import PageContainers from '../../components/pageContainers'
+import PageContainers from '../../components/pageWrapper'
 import Confirmation from '../../components/confirmationPage'
 
 const confirmationSuccess = () => {

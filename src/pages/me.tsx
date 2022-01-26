@@ -10,7 +10,7 @@ import { InlineButton } from '../components/button'
 
 import UserForm from '../components/userForm'
 
-import PageContainers from '../components/pageContainers'
+import PageContainers from '../components/pageWrapper'
 import Loader from '../components/loader'
 import MeModal from '../components/meModal'
 

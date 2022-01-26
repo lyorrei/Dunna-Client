@@ -12,7 +12,7 @@ export const pageContainerVariant = {
     }
 }
 
-const PageContainers: React.FC = props => {
+const pageWrapper: React.FC = props => {
     return (
         <PageContainerStyle
             variants={pageContainerVariant}
@@ -24,4 +24,4 @@ const PageContainers: React.FC = props => {
     )
 }
 
-export default PageContainers
+export default pageWrapper
