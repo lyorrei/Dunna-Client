@@ -3,7 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 
 import Title from '../title'
-import PageContainers from '../pageContainers'
+import PageContainers from '../pageContainers/index'
 import { InlineButton } from '../button'
 
 import ButtonContainer from '../buttonContainer'
