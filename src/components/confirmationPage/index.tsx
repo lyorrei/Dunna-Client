@@ -2,10 +2,10 @@ import React from 'react'
 
 import Link from 'next/link'
 
-import PageContainers from '../../components/pageContainers'
-import Title from '../../components/title'
-import { InlineButton } from '../../components/button'
-import ButtonContainer from '../../components/buttonContainer'
+import PageContainers from '../pageContainers'
+import Title from '../title'
+import { InlineButton } from '../button'
+import ButtonContainer from '../buttonContainer'
 
 interface Props {
     title: string
