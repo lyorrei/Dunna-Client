@@ -136,7 +136,6 @@ const productForm: React.FC<Props> = ({
                         .typeError('Você deve escrever um número')
                         .required('O peso da pedra é obrigatório'),
                     diamondWeigth: Yup.number()
-                        .positive('Você deve escrever um número positivo')
                         .typeError('Você deve escrever um número')
                         .required('O peso do diamante é obrigatório'),
                     shape: Yup.string().required('O formato é obrigatório'),
@@ -390,9 +389,7 @@ const productForm: React.FC<Props> = ({
                 </InlineButton>
             </Form>
 
-            {loading && (
-                <Loader />
-            )}
+            {loading && <Loader />}
         </>
     )
 }
