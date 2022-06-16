@@ -51,7 +51,7 @@ const page: React.FC<AppProps> = ({ Component, pageProps }) => {
         }
 
         // Modals
-        if (!navigator.cookieEnabled) {
+        if (!cookies['cookiesModal']) {
             setShowCookiesModal(true)
         }
         if (!cookies['pageAlert']) {
@@ -59,9 +59,20 @@ const page: React.FC<AppProps> = ({ Component, pageProps }) => {
         }
     }, [])
 
+    const closeCookiesModal = () => {
+        setShowCookiesModal(false)
+        setCookie('cookiesModal', 'cookiesModal', {
+            path: '/',
+            maxAge: 60 * 60 * 24 * 90
+        }) // 90 Days
+    }
+
     const closePageAlert = () => {
         setShowPageAlert(false)
-        setCookie('pageAlert', 'pageAlert', { path: '/', maxAge: 60 * 60 * 24 * 7 }) // 7 Days
+        setCookie('pageAlert', 'pageAlert', {
+            path: '/',
+            maxAge: 60 * 60 * 24 * 7
+        }) // 7 Days
     }
 
     return (
@@ -70,11 +81,26 @@ const page: React.FC<AppProps> = ({ Component, pageProps }) => {
             <Content>
                 <Modal
                     show={showCookiesModal}
-                    closeModal={() => setShowCookiesModal(false)}
-                    title="Atenção"
+                    closeModal={closeCookiesModal}
+                    title="Nós usamos cookies"
                 >
                     <p style={{ fontSize: '1.8rem' }}>
-                        Por favor, habilite seus Cookies!
+                        Este website está em conformidade com a Lei Geral de
+                        Proteção de Dados (LGPD) e utiliza cookies para oferecer
+                        uma melhor experiência ao visitante.
+                        <br />
+                        Ao navegar em nosso site, você consente com a nossa{' '}
+                        <a
+                            href="/pdfs/terms.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                                color: '#00c2a8',
+                                textDecoration: 'none'
+                            }}
+                        >
+                            política de privacidade.
+                        </a>
                     </p>
                 </Modal>
                 <Component {...pageProps} />
