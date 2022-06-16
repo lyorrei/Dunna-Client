@@ -43,7 +43,7 @@ const contact: React.FC = () => {
                             <span>Email:</span> matheus@dunnajw.com
                         </CommunicationBox>
                         <CommunicationBox>
-                            <span>Celular e Whatsapp:</span> +55 31 97214-0660
+                            <span>Celular e Whatsapp:</span> +55 31 99630-5514
                         </CommunicationBox>
                     </CommunicationContainer>
 
