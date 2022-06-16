@@ -14,6 +14,9 @@ router.post('/api/paypal/create', authMiddleware, async (req, res) => {
     const { cart, couponName, amount, addressId } = req.body
 
     try {
+        throw new Error("Pagamento desabilitado!")
+
+
         // Checar se está tudo ok
         const { address, verifiedAmount, amountWithoutCoupon, verifiedCoupon } =
             await check(addressId, req.user._id, cart, amount, couponName)

@@ -11,6 +11,9 @@ router.post('/api/charge', authMiddleware, async (req, res) => {
     const { cart, couponName, amount, addressId, paymentData } = req.body
 
     try {
+        throw new Error("Pagamento desabilitado!")
+
+
         // Checar se está tudo ok
         const { address, verifiedAmount, amountWithoutCoupon, verifiedCoupon } = await check(
             addressId,
