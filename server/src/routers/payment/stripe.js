@@ -36,7 +36,7 @@ router.post('/api/charge', authMiddleware, async (req, res) => {
             verifiedCoupon
         )
 
-        // Enviar emails para Matheus e RD Station
+        // Enviar emails para Dunna e RD Station
         sendEmail(
             req.user.firstName + ' ' + req.user.lastName,
             req.user.email,

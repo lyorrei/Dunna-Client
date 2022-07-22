@@ -153,11 +153,11 @@ const create = async (
 const sendEmail = (userName, userEmail, saleValue, address, access_token) => {
     // Checar se está em ambiente de produção
     if (process.env.NODE_ENV === 'production') {
-        // Mandar Email para Matheus
+        // Mandar Email para Dunna
         transporter
             .sendMail({
                 from: `"Dunna Jewelry" <` + senderEmail + `>`, // sender address
-                to: 'matheusqtorres@gmail.com',
+                to: 'dunna.joalheria@gmail.com',
                 subject: 'Pedido Criado',
                 html: `Pedido foi criado por ${userName}. Cheque a página de pedidos do Site!`
             })
