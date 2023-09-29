@@ -70,8 +70,7 @@ const signupForm: React.FC<Props> = ({ setLoading }) => {
     return (
         <Form ref={formRef} onSubmit={handleSubmit}>
             <SignupTitle>
-                Cadastre-se e conheça a sutileza sofisticada da Coleção Dunna
-                2022!
+                Cadastre-se e conheça a sutileza sofisticada da Coleção Dunna!
             </SignupTitle>
 
             {formSuccess && <Alert type={Types.green}>{formSuccess}</Alert>}
