@@ -58,7 +58,7 @@ const orders = ({ myOrders }: Props) => {
                     <Obs>
                         <span>Observação:</span> Se tiver qualquer dúvida ou
                         problema, por favor entre em contato conosco no email
-                        matheus@dunnajw.com
+                        dunna.joalheria@gmail.com
                     </Obs>
                     <OrdersContainer>{orders}</OrdersContainer>
                 </Container>
