@@ -5,6 +5,10 @@
     "cacheDirectories": [
         ".next/cache"
     ],
+    "engines": {
+        "node": "14.17.1",
+        "npm": "6.14.13"
+    },
     "scripts": {
         "seed": "node server/src/seed/product.js",
         "dev": "nodemon --watch server server/src/index.js",
